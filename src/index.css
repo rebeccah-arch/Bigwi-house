@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-bg text-ink font-body antialiased;
+    background:
+      radial-gradient(1200px 500px at 85% -10%, rgba(45, 212, 191, 0.08), transparent 60%),
+      radial-gradient(900px 500px at -10% 10%, rgba(232, 163, 61, 0.1), transparent 55%),
+      #0f1b2d;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display font-semibold tracking-tight;
+  }
+
+  :focus-visible {
+    outline: 2px solid #2dd4bf;
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+@layer components {
+  .skip-link {
+    @apply sr-only focus:not-sr-only focus:absolute focus:left-0 focus:top-0 focus:z-[200] focus:rounded-br-lg focus:bg-gold focus:px-4 focus:py-2 focus:font-semibold focus:text-[#1a1206];
+  }
+
+  .eyebrow {
+    @apply mb-3 block font-mono text-xs uppercase tracking-[0.12em] text-teal;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-[18px] py-[10px] text-sm font-semibold transition;
+  }
+  .btn-primary {
+    @apply bg-gold text-[#1a1206] hover:shadow-[0_6px_20px_rgba(232,163,61,0.35)];
+  }
+  .btn-ghost {
+    @apply border border-line bg-transparent text-ink hover:border-teal hover:text-teal;
+  }
+
+  .card {
+    @apply rounded border border-line bg-bgRaised p-6 transition hover:-translate-y-1 hover:border-teal;
+  }
+
+  .section-head {
+    @apply mb-9 max-w-[62ch];
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
