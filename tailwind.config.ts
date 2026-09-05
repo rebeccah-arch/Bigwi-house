@@ -9,34 +9,36 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        bg: '#0A0F1D',
-        bgSubtle: '#0F172A',
-        bgRaised: '#131F37',
-        bgRaised2: '#182744',
-        card: '#111C31',
-        cardHover: '#16233B',
-        line: '#1E2E4A',
-        lineLight: '#2B4063',
-        ink: '#F8FAFC',
-        muted: '#94A3B8',
+        bg: '#FFFFFF',
+        bgSubtle: '#F8FAFC',
+        bgRaised: '#F1F5F9',
+        bgRaised2: '#E2E8F0',
+        card: '#FFFFFF',
+        cardHover: '#FFFFFF',
+        line: '#E2E8F0',
+        lineLight: '#CBD5E1',
+        ink: '#0F172A',
+        muted: '#475569',
         subtle: '#64748B',
         brand: {
-          50: '#E0F7F6',
-          100: '#B2ECE9',
-          200: '#80DFDC',
-          300: '#4DD3CE',
-          400: '#26C9C4',
-          500: '#00A896', // DataSphere Primary Teal
-          600: '#028090',
-          700: '#026773',
-          800: '#014F59',
-          900: '#013A40',
+          50: '#F0FDFA',
+          100: '#CCFBF1',
+          200: '#99F6E4',
+          300: '#00A896',
+          400: '#028090',
+          500: '#0A2540', // DataSphere Enterprise Navy
+          600: '#003875',
+          700: '#002752',
+          800: '#001C3D',
+          900: '#001229',
         },
-        cyanAccent: '#06B6D4',
-        blueAccent: '#0EA5E9',
-        indigoAccent: '#3B82F6',
-        gold: '#F59E0B',
-        goldAccent: '#E8A33D',
+        navyAccent: '#0A2540',
+        tealAccent: '#00A896',
+        cyanAccent: '#028090',
+        blueAccent: '#0284C7',
+        indigoAccent: '#2563EB',
+        gold: '#D97706',
+        goldAccent: '#F59E0B',
       },
       fontFamily: {
         sans: ['var(--font-sans)', 'system-ui', '-apple-system', 'sans-serif'],
@@ -55,10 +57,12 @@ const config: Config = {
         wide: '1360px',
       },
       boxShadow: {
-        'glow-teal': '0 0 35px -5px rgba(0, 168, 150, 0.3)',
-        'glow-cyan': '0 0 35px -5px rgba(6, 182, 212, 0.3)',
-        'glow-gold': '0 0 30px -5px rgba(245, 158, 11, 0.25)',
-        'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.37)',
+        'card': '0 1px 3px 0 rgba(15, 23, 42, 0.06), 0 1px 2px -1px rgba(15, 23, 42, 0.04)',
+        'card-hover': '0 12px 28px -4px rgba(15, 23, 42, 0.1), 0 4px 8px -2px rgba(15, 23, 42, 0.04)',
+        'glow-teal': '0 4px 20px -2px rgba(0, 168, 150, 0.2)',
+        'glow-cyan': '0 4px 20px -2px rgba(2, 128, 144, 0.2)',
+        'glow-gold': '0 4px 20px -2px rgba(217, 119, 6, 0.15)',
+        'glass': '0 4px 24px 0 rgba(15, 23, 42, 0.06)',
       },
       animation: {
         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
@@ -68,7 +72,7 @@ const config: Config = {
       keyframes: {
         float: {
           '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-10px)' },
+          '50%': { transform: 'translateY(-6px)' },
         },
       },
     },
@@ -77,3 +81,4 @@ const config: Config = {
 }
 
 export default config
+

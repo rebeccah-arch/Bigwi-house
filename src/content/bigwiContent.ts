@@ -1,5 +1,4 @@
-// Single source of truth for copy pulled from the BIGWI HOUSE
-// Corporate & Capability Profile (Aug 1, 2026) and expanded platform solutions.
+// Single source of truth for DataSphere Consulting Ltd Corporate & Capability Profile
 
 export interface Service {
   id: string
@@ -16,7 +15,7 @@ export const services: Service[] = [
   {
     id: 'enterprise-software',
     title: 'Enterprise Software Development',
-    shortDesc: 'Custom systems that automate operations and scale with the organization.',
+    shortDesc: 'Custom systems that automate operations and scale with your organization.',
     description: 'We architect and build fault-tolerant, high-concurrency enterprise platforms designed around complex business workflows, multi-tenant architectures, and strict compliance standards.',
     category: 'Engineering',
     deliverables: ['Custom ERP & CRM systems', 'Workflow automation engines', 'Role-based access & auditing', 'Legacy system modernization'],
@@ -37,7 +36,7 @@ export const services: Service[] = [
     id: 'ai-ml-solutions',
     title: 'AI & Machine Learning Solutions',
     shortDesc: 'Applied models tuned to local data, not generic global datasets.',
-    description: 'Production-ready artificial intelligence and machine learning pipelines tailored to specific operational contexts, predictive modeling, and intelligent automation.',
+    description: 'Production-ready machine learning pipelines tailored to specific operational contexts, predictive modeling, and intelligent automation.',
     category: 'Intelligence',
     deliverables: ['Custom predictive algorithms', 'Natural Language Processing (NLP)', 'Document intelligence & OCR', 'Recommendation engines'],
     techHighlights: ['Python / PyTorch', 'Scikit-Learn', 'FastAPI', 'Vector Databases', 'LLM Fine-Tuning'],
@@ -46,7 +45,7 @@ export const services: Service[] = [
   {
     id: 'data-analytics-bi',
     title: 'Data Analytics & Business Intelligence',
-    shortDesc: 'Dashboards and pipelines that turn raw data into decisions.',
+    shortDesc: 'Dashboards and pipelines that turn raw data into actionable decisions.',
     description: 'End-to-end data engineering, modern data warehouses, ETL pipelines, and interactive executive dashboards delivering real-time clarity across organizational KPIs.',
     category: 'Intelligence',
     deliverables: ['Executive BI dashboards', 'Automated ETL/ELT pipelines', 'Data warehouse architecture', 'Real-time telemetry & alerts'],
@@ -106,7 +105,7 @@ export const services: Service[] = [
   {
     id: 'technical-support-maintenance',
     title: 'Technical Support & Maintenance',
-    shortDesc: 'Long-term reliability after the initial launch.',
+    shortDesc: 'Long-term reliability and SLA support after initial launch.',
     description: 'Dedicated post-launch SLA support, 24/7 uptime monitoring, security patching, and ongoing feature enhancements to protect tech investments.',
     category: 'Strategy',
     deliverables: ['24/7 system health monitoring', 'Security patching & vulnerability audits', 'Performance optimization SLAs', 'Continuous feature delivery'],
@@ -116,22 +115,20 @@ export const services: Service[] = [
 ]
 
 export const problems: string[] = [
-  'Poor or outdated websites',
-  'Weak brand identity',
-  'Low online visibility',
-  'Limited digital marketing knowledge',
-  'Poor customer engagement online',
-  'Inconsistent social media presence',
-  'Lack of professional content',
-  'Difficulty adopting modern digital technologies',
+  'Legacy, fragmented databases with slow manual reporting',
+  'Inadequate operational software that cannot scale with business volume',
+  'Low digital customer engagement and outdated web platforms',
+  'Security and compliance risks in unmanaged IT infrastructure',
+  'Lack of data-driven insights to make executive decisions',
+  'High engineering cost without clear business ROI',
 ]
 
 export const competitiveAdvantage: string[] = [
-  'Business-first consulting backed by in-house engineering',
-  'End-to-end delivery, from strategy through implementation',
-  'Multidisciplinary teams under one roof',
-  'Focus on measurable outcomes, not just software',
-  'Long-term client support after launch',
+  'Data-first consulting backed by experienced senior software engineers',
+  'End-to-end delivery: from strategy and data pipelines through cloud deployment',
+  'Rigorous human-crafted engineering without generic AI shortcuts',
+  'Focus on measurable business metrics, speed, and reliability',
+  'Dedicated long-term SLA support and infrastructure maintenance',
 ]
 
 export interface TargetClientSector {
@@ -201,10 +198,10 @@ export const targetClientsDetailed: TargetClientSector[] = [
 export const targetClients: string[] = targetClientsDetailed.map(t => t.name)
 
 export const vision =
-  "To become East Africa's leading innovation and engineering division, delivering technology solutions that create measurable business value."
+  "To be the premier data engineering, enterprise software, and digital consulting partner across East Africa, empowering organizations with reliable technology."
 
 export const mission =
-  'To transform business challenges into scalable digital solutions through innovation, engineering excellence, data-driven decision making, and long-term partnerships.'
+  'To turn complex business challenges and raw organizational data into resilient software systems, actionable intelligence, and long-term digital value.'
 
 export interface OrgTier {
   label: string
@@ -214,32 +211,28 @@ export interface OrgTier {
 
 export const orgStructure: { parent: OrgTier; child: OrgTier } = {
   parent: {
-    label: 'DataSphere Consulting Ltd.',
-    tagline: 'Parent Advisory, Research & Analytics Firm',
+    label: 'DataSphere Consulting Ltd',
+    tagline: 'Enterprise Advisory, Data & Software Engineering Firm',
     items: [
-      'Business Strategy & Management Consulting',
-      'Data Analytics & Business Intelligence',
-      'Artificial Intelligence & Machine Learning',
-      'Research, Monitoring & Evaluation',
-      'Digital Transformation Advisory',
-      'Capacity Building & Professional Training',
+      'Business Strategy & Enterprise Architecture',
+      'Data Engineering & Business Intelligence',
+      'Artificial Intelligence & Predictive Analytics',
+      'Cloud Architecture & DevOps Governance',
+      'Digital Transformation & Legacy Modernization',
+      'Capacity Building & Engineering Training',
     ],
   },
   child: {
-    label: 'BIGWI HOUSE — Digital Innovation & Product Development Division',
-    tagline: 'Engineering, Cloud, Software & Product Delivery Arm',
+    label: 'DataSphere Digital Solutions',
+    tagline: 'Custom Software & Product Engineering Unit',
     items: [
-      'Enterprise Software Development',
-      'Mobile Application Development',
-      'Web Platforms & Portals',
-      'Cloud Solutions & DevOps',
-      'AI & Machine Learning Products',
-      'UI/UX & Product Design',
-      'Branding & Creative Design',
-      'Digital Marketing & Growth',
-      'Product Engineering',
-      'SaaS Platform Incubation',
-      'Technical Support & SLA Maintenance',
+      'Enterprise Software & Core ERPs',
+      'Mobile Applications (iOS & Android)',
+      'Web Platforms & Client Portals',
+      'Cloud Solutions & CI/CD Pipelines',
+      'Data Warehousing & Real-Time Dashboards',
+      'Human-Centered UI/UX Design',
+      'Technical Support & 24/7 SLA Maintenance',
     ],
   },
 }
@@ -254,35 +247,35 @@ export interface Phase {
 export const growthPhases: Phase[] = [
   {
     step: 'Phase 01',
-    name: 'Foundation',
-    subtitle: 'Institutional Engineering & Core Delivery',
+    name: 'Foundation & Rigor',
+    subtitle: 'Core Enterprise Delivery & Architecture',
     items: [
-      'Build robust reference enterprise portfolios and proof-of-concepts',
-      'Acquire and partner with key local enterprises, public bodies, and SMEs',
-      'Establish strategic technology and cloud vendor partnerships',
-      'Standardize development pipelines, security protocols, and SLA packages',
+      'Build robust reference enterprise systems and verified case studies',
+      'Partner with leading regional financial institutions, public bodies, and enterprises',
+      'Establish enterprise cloud, database, and security standards',
+      'Standardize development pipelines, code review protocols, and SLA packages',
     ],
   },
   {
     step: 'Phase 02',
     name: 'Expansion',
-    subtitle: 'Market Penetration & Specialized Tech Units',
+    subtitle: 'Regional Penetration & Advanced Data Units',
     items: [
-      'Expand cross-sector footprint across Rwanda and regional commercial hubs',
-      'Scale specialized engineering, AI/ML, and data intelligence units',
-      'Deploy enterprise data analytics platforms & advanced digital marketing',
-      'Accelerate recurring SaaS product revenues and maintenance partnerships',
+      'Expand cross-sector footprint across Rwanda and East African commercial hubs',
+      'Scale specialized engineering, data engineering, and BI analytics units',
+      'Deploy mission-critical data pipelines and executive monitoring dashboards',
+      'Accelerate long-term maintenance and technical partnership agreements',
     ],
   },
   {
     step: 'Phase 03',
-    name: 'Regional Growth',
-    subtitle: 'Pan-African & Global Digital Product Hub',
+    name: 'Regional Hub',
+    subtitle: 'Pan-African & Global Engineering Excellence',
     items: [
-      'Scale engineering presence across East Africa and international markets',
-      'Deliver remote distributed engineering for global technology companies',
-      'Introduce proprietary AI-powered digital products and multi-tenant SaaS',
-      'Lead high-impact regional digital transformation initiatives and consortiums',
+      'Scale engineering presence across East Africa and international clients',
+      'Deliver distributed engineering for global technology organizations',
+      'Introduce high-performance SaaS products and multi-tenant architectures',
+      'Lead high-impact regional digital transformation initiatives',
     ],
   },
 ]
@@ -422,7 +415,7 @@ export const featuredCaseStudies: CaseStudy[] = [
 export const techCapabilities = [
   {
     category: 'Modern Web & Frontend',
-    items: ['Next.js (App Router)', 'React 18 / 19', 'TypeScript', 'Tailwind CSS', 'WebGL / Three.js', 'PWA / Service Workers'],
+    items: ['Next.js (App Router)', 'React 18 / 19', 'TypeScript', 'Tailwind CSS', 'Accessible UI', 'PWA / Offline Workers'],
     icon: 'Layout'
   },
   {
@@ -436,12 +429,12 @@ export const techCapabilities = [
     icon: 'Smartphone'
   },
   {
-    category: 'AI & Data Engineering',
-    items: ['PyTorch / TensorFlow', 'Pandas & NumPy', 'dbt & Airflow', 'Vector Databases', 'NLP & LLM Tuning', 'Computer Vision'],
+    category: 'Data Engineering & Analytics',
+    items: ['PostgreSQL & ClickHouse', 'dbt & Airflow', 'Pandas & NumPy', 'PowerBI & Superset', 'Data Pipelines', 'Predictive Modeling'],
     icon: 'Brain'
   },
   {
-    category: 'Databases & Storage',
+    category: 'Databases & Cache',
     items: ['PostgreSQL', 'Supabase', 'Redis', 'ClickHouse', 'MongoDB', 'Elasticsearch'],
     icon: 'Database'
   },

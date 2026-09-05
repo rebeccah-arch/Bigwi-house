@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
+import Image from 'next/image'
 import { 
   BarChart3, 
   TrendingUp, 
@@ -9,230 +10,186 @@ import {
   Cpu, 
   Zap, 
   ShieldCheck, 
-  Server, 
-  RefreshCw,
+  Server,
   Layers,
-  ArrowUpRight
+  ArrowUpRight,
+  CheckCircle2
 } from '@/components/Icons'
 
 export default function DataAnalyticsDemo() {
-  const [activeTab, setActiveTab] = useState<'realtime' | 'pipeline' | 'models'>('realtime')
-  const [selectedMetric, setSelectedMetric] = useState(0)
+  const [activeTab, setActiveTab] = useState<'architecture' | 'pipelines' | 'governance'>('architecture')
 
   return (
-    <div className="relative overflow-hidden rounded-2xl border border-lineLight/80 bg-gradient-to-b from-bgRaised/90 via-card/90 to-bgSubtle/90 p-6 md:p-8 backdrop-blur-xl shadow-glass">
-      {/* Header with Live simulation badge */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-line/60 pb-6">
-        <div>
-          <div className="flex items-center gap-2">
-            <span className="flex h-2.5 w-2.5 rounded-full bg-brand-400 animate-pulse" />
-            <span className="font-mono text-xs font-semibold uppercase tracking-wider text-brand-300">
-              DataSphere Intelligence Engine &bull; Live Telemetry
+    <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+      <div className="grid grid-cols-1 lg:grid-cols-12">
+        {/* Left Column: Human Data Engineer Photo */}
+        <div className="lg:col-span-5 relative min-h-[300px] lg:min-h-full overflow-hidden border-b lg:border-b-0 lg:border-r border-slate-200 bg-slate-100">
+          <Image
+            src="/images/data-engineer.jpg"
+            alt="DataSphere Data Engineer configuring modern data warehousing and analytics models"
+            fill
+            className="object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent" />
+          
+          <div className="absolute bottom-6 left-6 right-6 text-white space-y-1">
+            <span className="inline-block rounded bg-teal-600 px-2.5 py-0.5 text-xs font-semibold">
+              Data Engineering Team
             </span>
-          </div>
-          <h3 className="mt-1 font-display text-xl md:text-2xl font-bold text-ink">
-            Interactive Data &amp; Business Intelligence Architecture
-          </h3>
-        </div>
-
-        {/* Tab Controls */}
-        <div className="flex rounded-xl border border-line bg-card/80 p-1 backdrop-blur-md">
-          <button
-            type="button"
-            onClick={() => setActiveTab('realtime')}
-            className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 font-mono text-xs font-medium transition-all ${
-              activeTab === 'realtime'
-                ? 'bg-brand-500/20 text-brand-300 border border-brand-500/30 shadow-sm'
-                : 'text-muted hover:text-ink'
-            }`}
-          >
-            <Activity className="h-3.5 w-3.5" />
-            <span>Real-Time Stream</span>
-          </button>
-          <button
-            type="button"
-            onClick={() => setActiveTab('pipeline')}
-            className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 font-mono text-xs font-medium transition-all ${
-              activeTab === 'pipeline'
-                ? 'bg-brand-500/20 text-brand-300 border border-brand-500/30 shadow-sm'
-                : 'text-muted hover:text-ink'
-            }`}
-          >
-            <Database className="h-3.5 w-3.5" />
-            <span>ETL Pipeline</span>
-          </button>
-          <button
-            type="button"
-            onClick={() => setActiveTab('models')}
-            className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 font-mono text-xs font-medium transition-all ${
-              activeTab === 'models'
-                ? 'bg-brand-500/20 text-brand-300 border border-brand-500/30 shadow-sm'
-                : 'text-muted hover:text-ink'
-            }`}
-          >
-            <Cpu className="h-3.5 w-3.5" />
-            <span>AI Models</span>
-          </button>
-        </div>
-      </div>
-
-      {/* KPI Cards Grid */}
-      <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4 md:gap-4">
-        {[
-          { label: 'Event Throughput', val: '48.2k msg/s', sub: '+18.4% vs peak', icon: Zap, color: 'text-brand-300' },
-          { label: 'Pipeline Latency', val: '12.4 ms', sub: 'p99 sub-20ms SLA', icon: Activity, color: 'text-cyanAccent' },
-          { label: 'Data Ingestion Sync', val: '99.99%', sub: 'Zero packet loss', icon: ShieldCheck, color: 'text-gold' },
-          { label: 'Active Clusters', val: '16 Nodes', sub: 'Multi-region replica', icon: Server, color: 'text-indigo-400' },
-        ].map((kpi, idx) => {
-          const Icon = kpi.icon
-          const isSelected = selectedMetric === idx
-          return (
-            <div
-              key={kpi.label}
-              onClick={() => setSelectedMetric(idx)}
-              className={`cursor-pointer rounded-xl border p-4 transition-all duration-200 ${
-                isSelected
-                  ? 'border-brand-500 bg-brand-500/10 shadow-glow-teal'
-                  : 'border-line/70 bg-card/50 hover:border-lineLight hover:bg-card'
-              }`}
-            >
-              <div className="flex items-center justify-between">
-                <span className="font-mono text-[11px] text-muted">{kpi.label}</span>
-                <Icon className={`h-4 w-4 ${kpi.color}`} />
-              </div>
-              <p className="mt-2 font-display text-lg sm:text-xl font-bold text-ink">{kpi.val}</p>
-              <span className="font-mono text-[10px] text-muted">{kpi.sub}</span>
-            </div>
-          )
-        })}
-      </div>
-
-      {/* Interactive Visualization Body */}
-      <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-12">
-        {/* Main Chart / Telemetry View */}
-        <div className="lg:col-span-8 rounded-xl border border-line bg-card/60 p-5 backdrop-blur-md">
-          <div className="flex items-center justify-between border-b border-line/60 pb-3">
-            <div className="flex items-center gap-2">
-              <BarChart3 className="h-4 w-4 text-brand-300" />
-              <span className="font-mono text-xs font-semibold text-ink">
-                {activeTab === 'realtime' && 'Live Ingestion Throughput & Query Response Curves'}
-                {activeTab === 'pipeline' && 'End-to-End Data Transformation & Warehouse Sync'}
-                {activeTab === 'models' && 'Predictive Inference Accuracy & Model Convergence'}
-              </span>
-            </div>
-            <span className="flex items-center gap-1 font-mono text-[11px] text-muted">
-              <RefreshCw className="h-3 w-3 animate-spin text-brand-400" />
-              Simulated 500ms Feed
-            </span>
-          </div>
-
-          {/* Abstract SVG Data Chart */}
-          <div className="mt-4 h-56 w-full">
-            <svg viewBox="0 0 600 200" className="h-full w-full overflow-visible">
-              <defs>
-                <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#00A896" stopOpacity="0.4" />
-                  <stop offset="100%" stopColor="#00A896" stopOpacity="0.0" />
-                </linearGradient>
-                <linearGradient id="cyanGradient" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#06B6D4" stopOpacity="0.3" />
-                  <stop offset="100%" stopColor="#06B6D4" stopOpacity="0.0" />
-                </linearGradient>
-              </defs>
-
-              {/* Grid Lines */}
-              <line x1="0" y1="40" x2="600" y2="40" stroke="#1E2E4A" strokeDasharray="4 4" />
-              <line x1="0" y1="90" x2="600" y2="90" stroke="#1E2E4A" strokeDasharray="4 4" />
-              <line x1="0" y1="140" x2="600" y2="140" stroke="#1E2E4A" strokeDasharray="4 4" />
-              <line x1="0" y1="190" x2="600" y2="190" stroke="#1E2E4A" />
-
-              {/* Area 1: Primary Stream */}
-              <path
-                d="M0,160 C50,140 100,80 160,110 C220,140 280,50 340,70 C400,90 460,30 520,60 C560,80 580,45 600,50 L600,190 L0,190 Z"
-                fill="url(#chartGradient)"
-              />
-              <path
-                d="M0,160 C50,140 100,80 160,110 C220,140 280,50 340,70 C400,90 460,30 520,60 C560,80 580,45 600,50"
-                fill="none"
-                stroke="#00A896"
-                strokeWidth="2.5"
-              />
-
-              {/* Area 2: Secondary Stream */}
-              <path
-                d="M0,180 C60,160 120,130 180,140 C240,150 300,100 360,120 C420,140 480,80 540,95 L600,90 L600,190 L0,190 Z"
-                fill="url(#cyanGradient)"
-              />
-              <path
-                d="M0,180 C60,160 120,130 180,140 C240,150 300,100 360,120 C420,140 480,80 540,95 L600,90"
-                fill="none"
-                stroke="#06B6D4"
-                strokeWidth="1.8"
-                strokeDasharray="2 2"
-              />
-
-              {/* Interactive Data Markers */}
-              <circle cx="340" cy="70" r="5" fill="#F59E0B" />
-              <circle cx="340" cy="70" r="10" fill="#F59E0B" fillOpacity="0.2" className="animate-ping" />
-
-              <circle cx="520" cy="60" r="5" fill="#00A896" />
-              <circle cx="520" cy="60" r="9" fill="#00A896" fillOpacity="0.3" />
-            </svg>
-          </div>
-
-          <div className="mt-3 flex items-center justify-between font-mono text-[11px] text-muted">
-            <span>T-60s Ingestion Window</span>
-            <div className="flex items-center gap-4">
-              <span className="flex items-center gap-1.5">
-                <span className="h-2 w-2 rounded-full bg-brand-400" />
-                Raw Data Streams
-              </span>
-              <span className="flex items-center gap-1.5">
-                <span className="h-2 w-2 rounded-full bg-cyanAccent" />
-                Aggregated Analytics
-              </span>
-              <span className="flex items-center gap-1.5">
-                <span className="h-2 w-2 rounded-full bg-gold" />
-                Anomaly Trigger
-              </span>
-            </div>
-          </div>
-        </div>
-
-        {/* Pipeline Nodes & Status Stream */}
-        <div className="lg:col-span-4 flex flex-col justify-between rounded-xl border border-line bg-card/60 p-5 backdrop-blur-md">
-          <div>
-            <h4 className="font-mono text-xs font-semibold uppercase tracking-wider text-muted mb-3">
-              Active Data Pipeline Nodes
-            </h4>
-            <div className="space-y-2.5">
-              {[
-                { name: 'Core Ingestion Broker', status: 'Healthy', load: '32%', icon: 'Kafka / Redis' },
-                { name: 'Transformation Workers', status: 'Optimal', load: '45%', icon: 'dbt / Spark' },
-                { name: 'Warehouse Storage', status: 'Syncing', load: '18%', icon: 'PostgreSQL / ClickHouse' },
-                { name: 'BI Semantic Layer', status: 'Active', load: '24%', icon: 'GraphQL / REST' },
-              ].map((node) => (
-                <div key={node.name} className="flex items-center justify-between rounded-lg border border-line/60 bg-bgRaised/70 p-2.5">
-                  <div>
-                    <p className="text-xs font-semibold text-ink">{node.name}</p>
-                    <span className="font-mono text-[10px] text-muted">{node.icon}</span>
-                  </div>
-                  <div className="text-right">
-                    <span className="inline-block rounded bg-brand-500/15 px-1.5 py-0.5 font-mono text-[10px] font-semibold text-brand-300">
-                      {node.status}
-                    </span>
-                    <p className="font-mono text-[10px] text-muted mt-0.5">{node.load}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="mt-4 pt-3 border-t border-line/60">
-            <p className="text-xs text-muted leading-relaxed">
-              We design enterprise data warehouses and telemetry engines that turn complex disparate systems into actionable business intelligence.
+            <h4 className="font-display text-lg font-bold">Custom Analytics Architectures</h4>
+            <p className="text-xs text-slate-200">
+              Transforming unstructured databases into real-time executive decision marts.
             </p>
           </div>
+        </div>
+
+        {/* Right Column: Structured Capabilities & Tab Views */}
+        <div className="lg:col-span-7 p-6 sm:p-8 space-y-6">
+          {/* Header & Mode Switcher */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
+            <div>
+              <span className="font-mono text-xs font-semibold text-teal-800 uppercase tracking-wider">
+                Enterprise Data Engine
+              </span>
+              <h3 className="font-display text-xl font-bold text-slate-900">
+                Business Intelligence &amp; Data Pipeline Architecture
+              </h3>
+            </div>
+
+            <div className="flex rounded-xl border border-slate-200 bg-slate-50 p-1">
+              <button
+                type="button"
+                onClick={() => setActiveTab('architecture')}
+                className={`rounded-lg px-3 py-1.5 text-xs font-sans font-medium transition-all ${
+                  activeTab === 'architecture'
+                    ? 'bg-white text-slate-900 shadow-sm font-semibold'
+                    : 'text-slate-600 hover:text-slate-900'
+                }`}
+              >
+                Overview
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveTab('pipelines')}
+                className={`rounded-lg px-3 py-1.5 text-xs font-sans font-medium transition-all ${
+                  activeTab === 'pipelines'
+                    ? 'bg-white text-slate-900 shadow-sm font-semibold'
+                    : 'text-slate-600 hover:text-slate-900'
+                }`}
+              >
+                ETL Pipelines
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveTab('governance')}
+                className={`rounded-lg px-3 py-1.5 text-xs font-sans font-medium transition-all ${
+                  activeTab === 'governance'
+                    ? 'bg-white text-slate-900 shadow-sm font-semibold'
+                    : 'text-slate-600 hover:text-slate-900'
+                }`}
+              >
+                Security &amp; SLA
+              </button>
+            </div>
+          </div>
+
+          {/* Tab Content */}
+          {activeTab === 'architecture' && (
+            <div className="space-y-4 animate-in fade-in duration-200">
+              <p className="text-sm text-slate-600 leading-relaxed">
+                We engineer scalable data infrastructures that consolidate dispersed branch databases, third-party payment gateways, and core operational records into automated business intelligence marts.
+              </p>
+
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2">
+                <div className="rounded-xl border border-slate-200 bg-slate-50 p-3.5">
+                  <span className="text-xs font-medium text-slate-500">Processing SLA</span>
+                  <p className="font-display text-lg font-bold text-slate-900 mt-1">Sub-Second</p>
+                  <span className="text-[11px] text-teal-700 font-medium">Real-time reporting</span>
+                </div>
+                <div className="rounded-xl border border-slate-200 bg-slate-50 p-3.5">
+                  <span className="text-xs font-medium text-slate-500">Accuracy Standard</span>
+                  <p className="font-display text-lg font-bold text-teal-700 mt-1">99.99%</p>
+                  <span className="text-[11px] text-slate-600 font-medium">Validated checksums</span>
+                </div>
+                <div className="rounded-xl border border-slate-200 bg-slate-50 p-3.5 col-span-2 sm:col-span-1">
+                  <span className="text-xs font-medium text-slate-500">Supported Warehouses</span>
+                  <p className="font-display text-lg font-bold text-slate-900 mt-1">Multi-Cloud</p>
+                  <span className="text-[11px] text-slate-600 font-medium">Postgres, ClickHouse, dbt</span>
+                </div>
+              </div>
+
+              <div className="rounded-xl border border-slate-200 bg-slate-50/70 p-4 space-y-2">
+                <h5 className="text-xs font-bold text-slate-900 uppercase tracking-wider">Enterprise Deliverables</h5>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-700">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-teal-600 flex-shrink-0" />
+                    <span>Executive KPI Dashboards</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-teal-600 flex-shrink-0" />
+                    <span>Automated Monthly Audit Reports</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-teal-600 flex-shrink-0" />
+                    <span>Cross-Branch Data Reconciliation</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-teal-600 flex-shrink-0" />
+                    <span>Predictive Inventory &amp; Revenue Models</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'pipelines' && (
+            <div className="space-y-4 animate-in fade-in duration-200">
+              <div className="space-y-3">
+                <div className="rounded-xl border border-slate-200 bg-slate-50 p-3.5">
+                  <div className="flex items-center justify-between text-xs font-bold text-slate-900 mb-1">
+                    <span>1. Ingestion &amp; Extract</span>
+                    <span className="text-teal-700 font-mono">REST / Webhooks / CDC</span>
+                  </div>
+                  <p className="text-xs text-slate-600">Connects directly to operational ERPs, banking switches, and field mobile apps.</p>
+                </div>
+
+                <div className="rounded-xl border border-slate-200 bg-slate-50 p-3.5">
+                  <div className="flex items-center justify-between text-xs font-bold text-slate-900 mb-1">
+                    <span>2. Cleanse &amp; Transform</span>
+                    <span className="text-slate-700 font-mono">dbt &amp; Python</span>
+                  </div>
+                  <p className="text-xs text-slate-600">Deduplication, schema normalization, and currency/date standardization.</p>
+                </div>
+
+                <div className="rounded-xl border border-slate-200 bg-slate-50 p-3.5">
+                  <div className="flex items-center justify-between text-xs font-bold text-slate-900 mb-1">
+                    <span>3. Executive Serving</span>
+                    <span className="text-teal-700 font-mono">PowerBI &amp; Web Apps</span>
+                  </div>
+                  <p className="text-xs text-slate-600">Sub-second query performance for board-level reporting and daily operations.</p>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'governance' && (
+            <div className="space-y-4 animate-in fade-in duration-200">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+                  <ShieldCheck className="h-5 w-5 text-teal-600 mb-2" />
+                  <h5 className="text-sm font-bold text-slate-900">Data Privacy &amp; Compliance</h5>
+                  <p className="text-xs text-slate-600 mt-1">Role-based access control (RBAC), end-to-end encryption at rest (AES-256), and regional regulatory compliance.</p>
+                </div>
+
+                <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+                  <Server className="h-5 w-5 text-slate-800 mb-2" />
+                  <h5 className="text-sm font-bold text-slate-900">Continuous Monitoring</h5>
+                  <p className="text-xs text-slate-600 mt-1">Automated health checks, anomaly detection alerts, and 24/7 dedicated engineering support.</p>
+                </div>
+              </div>
+            </div>
+          )}
+
         </div>
       </div>
     </div>

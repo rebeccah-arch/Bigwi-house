@@ -21,7 +21,6 @@ export async function POST(request: Request) {
       )
     }
 
-    // In a production deployment, this forwards to Supabase, CRM, Resend/SendGrid, or internal webhook.
     const inquiryPayload = {
       id: `inq_${Date.now()}`,
       timestamp: new Date().toISOString(),
@@ -29,11 +28,11 @@ export async function POST(request: Request) {
       email,
       organization: organization || 'Not specified',
       sector: sector || 'General Enterprise',
-      service: service || 'General Digital Transformation',
+      service: service || 'Enterprise Software Development',
       budget: budget || 'To be determined',
       message,
-      source: 'BIGWI HOUSE Web Portal',
-      division: 'Digital Innovation & Product Development (DataSphere Consulting Ltd.)'
+      source: 'DataSphere Web Portal',
+      division: 'DataSphere Consulting Ltd'
     }
 
     console.log('[API: /api/contact] New Project Inquiry Received:', inquiryPayload)
@@ -41,7 +40,7 @@ export async function POST(request: Request) {
     return NextResponse.json(
       {
         success: true,
-        message: 'Your project inquiry has been logged with BIGWI HOUSE solutions architects. We will follow up shortly.',
+        message: 'Your project inquiry has been logged with DataSphere Consulting solutions architects. We will follow up shortly.',
         inquiryId: inquiryPayload.id
       },
       { status: 200 }

@@ -1,64 +1,42 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
-import dynamic from 'next/dynamic'
-import { 
-  ArrowRight, 
-  Sparkles, 
-  CheckCircle2, 
-  Layers, 
-  Smartphone, 
-  Cpu, 
-  BarChart3, 
-  Workflow, 
-  Cloud, 
-  Palette, 
-  Rocket, 
-  ShieldCheck, 
-  Building2, 
-  Landmark, 
-  HeartPulse, 
-  Globe2, 
-  Sprout, 
-  Truck, 
-  Briefcase, 
-  TrendingUp, 
-  ArrowUpRight, 
-  ChevronRight, 
-  Send, 
-  Loader2, 
-  AlertCircle 
+import Image from 'next/image'
+import {
+  ArrowRight,
+  Sparkles,
+  CheckCircle2,
+  Layers,
+  Smartphone,
+  Cpu,
+  BarChart3,
+  Workflow,
+  Cloud,
+  Palette,
+  Rocket,
+  ShieldCheck,
+  Building2,
+  Landmark,
+  HeartPulse,
+  Globe2,
+  Sprout,
+  Truck,
+  Briefcase,
+  TrendingUp,
+  ChevronRight,
+  Send,
+  Loader2,
+  AlertCircle,
 } from '@/components/Icons'
 
-import { 
-  services, 
-  problems, 
-  competitiveAdvantage, 
-  targetClientsDetailed, 
-  vision, 
-  mission, 
-  orgStructure, 
-  featuredCaseStudies,
-  Service
+import {
+  services,
 } from '@/content/bigwiContent'
 
 import ProcessTimeline from '@/components/ProcessTimeline'
 import TechRadar from '@/components/TechRadar'
 import DataAnalyticsDemo from '@/components/DataAnalyticsDemo'
-
-// Dynamically import 3D Hero to avoid SSR overhead and keep initial load blazing fast
-const Hero3DCanvas = dynamic(() => import('@/components/Hero3DCanvas'), {
-  ssr: false,
-  loading: () => (
-    <div className="flex h-[450px] w-full items-center justify-center rounded-2xl border border-line bg-bgRaised/40">
-      <div className="flex items-center gap-2 font-mono text-xs text-muted">
-        <span className="h-2 w-2 rounded-full bg-brand-400 animate-ping" />
-        Initializing 3D DataSphere...
-      </div>
-    </div>
-  ),
-})
 
 const SERVICE_ICONS: Record<string, React.ElementType> = {
   Layers,
@@ -85,8 +63,92 @@ const SECTOR_ICONS: Record<string, React.ElementType> = {
   TrendingUp,
 }
 
+// Case Gallery Items matching the TikTok video grid style
+const CASE_GALLERY = [
+  {
+    id: '001',
+    code: '001 &bull; KIGALI',
+    title: 'Core Banking & Credit Analytics Engine',
+    sector: 'Financial Services',
+    image: '/images/hero-team.jpg',
+    metric: '12x Faster Underwriting',
+  },
+  {
+    id: '002',
+    code: '002 &bull; REGIONAL',
+    title: 'Mobile Commerce & Payment Switches',
+    sector: 'FinTech & Consumer',
+    image: '/images/mobile-banking.jpg',
+    metric: '99.99% Transaction Sync',
+  },
+  {
+    id: '003',
+    code: '003 &bull; EAST AFRICA',
+    title: 'Real-Time Logistics & Freight Telematics',
+    sector: 'Supply Chain',
+    image: '/images/logistics-terminal.jpg',
+    metric: '+28% Fleet Efficiency',
+  },
+  {
+    id: '004',
+    code: '004 &bull; NATIONAL',
+    title: 'Field Data & Community Monitoring Platform',
+    sector: 'NGOs & Development',
+    image: '/images/data-engineer.jpg',
+    metric: '45,000+ Verified Surveys',
+  },
+  {
+    id: '005',
+    code: '005 &bull; ENTERPRISE',
+    title: 'Executive Digital Transformation Advisory',
+    sector: 'Corporate Governance',
+    image: '/images/executive-strategy.jpg',
+    metric: '100% On-Time Delivery',
+  },
+  {
+    id: '006',
+    code: '006 &bull; HUB',
+    title: 'Cloud Infrastructure & API Gateway',
+    sector: 'Cloud & DevOps',
+    image: '/images/kigali-skyline.jpg',
+    metric: '<12ms API Latency',
+  },
+]
+
+const LOCATION_HUBS = [
+  {
+    id: 'kigali-hub',
+    tag: 'HEADQUARTERS &bull; KIGALI',
+    title: 'Engineering Hub in Kigali Heights',
+    description: 'Our primary software engineering center, data science laboratory, and executive solutions advisory team.',
+    image: '/images/hero-team.jpg',
+    latLng: '-1.9441° S, 30.0619° E',
+    activeTeam: '24 Senior Engineers & Data Scientists',
+  },
+  {
+    id: 'strategy-center',
+    tag: 'STRATEGY &bull; BUSINESS DISTRICT',
+    title: 'Executive Strategy & Architecture Center',
+    description: 'Dedicated board-level digital modernization consulting and enterprise system blueprint design.',
+    image: '/images/executive-strategy.jpg',
+    latLng: '-1.9536° S, 30.0605° E',
+    activeTeam: 'Advisory & Enterprise Architecture Team',
+  },
+  {
+    id: 'regional-network',
+    tag: 'REGIONAL &bull; EAST AFRICA',
+    title: 'Distributed Cloud & Data Network',
+    description: 'Multi-region cloud infrastructure serving high-concurrency enterprise workloads across East Africa.',
+    image: '/images/kigali-skyline.jpg',
+    latLng: 'East African Cross-Border Cluster',
+    activeTeam: '24/7 SLA Operations & SRE Support',
+  },
+]
+
 export default function HomePage() {
   const [selectedCategory, setSelectedCategory] = useState<string>('All')
+  const [activeHubIndex, setActiveHubIndex] = useState<number>(0)
+  const [scrollProgress, setScrollProgress] = useState<number>(0)
   const [contactStatus, setContactStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [contactForm, setContactForm] = useState({
     name: '',
@@ -96,6 +158,17 @@ export default function HomePage() {
     service: 'Enterprise Software Development',
     message: '',
   })
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const totalScroll = document.documentElement.scrollHeight - window.innerHeight
+      if (totalScroll > 0) {
+        setScrollProgress(Math.min(window.scrollY / 400, 1))
+      }
+    }
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   const filteredServices = selectedCategory === 'All'
     ? services
@@ -131,199 +204,423 @@ export default function HomePage() {
   }
 
   return (
-    <div className="space-y-24 md:space-y-32">
-      {/* 1. HERO SECTION */}
-      <section className="relative pt-6 md:pt-12 overflow-hidden">
-        {/* Subtle grid and background lights */}
-        <div className="absolute inset-0 bg-grid-pattern opacity-15 pointer-events-none" />
-        
-        <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12">
-            {/* Left Column: Hero Content */}
-            <div className="lg:col-span-6 space-y-6">
-              <div className="inline-flex items-center gap-2 rounded-full border border-brand-500/30 bg-brand-500/10 px-3.5 py-1.5 font-mono text-xs text-brand-300 backdrop-blur-md">
-                <Sparkles className="h-3.5 w-3.5 text-brand-400" />
-                <span>Digital Innovation &bull; DataSphere Division</span>
-              </div>
+    <div className="space-y-24 md:space-y-36 pb-16">
+      {/* 1. HERO SECTION WITH EXPANDING SCROLL DYNAMICS */}
+      <section className="relative min-h-[620px] lg:min-h-[720px] flex items-center justify-center overflow-hidden border-b border-slate-200">
+        {/* Full Cover Background Image with Scroll Scale */}
+        <div
+          className="absolute inset-0 z-0 transition-transform duration-700 ease-out"
+          style={{
+            transform: `scale(${1 + scrollProgress * 0.08})`,
+          }}
+        >
+          <Image
+            src="/images/hero-team.jpg"
+            alt="DataSphere Senior Software Engineers & Data Consultants collaborating in Kigali"
+            fill
+            className="object-cover object-center"
+            priority
+          />
+          {/* Refined gradient overlays for maximum contrast and legibility */}
+          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 sm:via-white/90 to-white/30 lg:via-white/90 lg:to-white/20" />
+          <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-white/40" />
+        </div>
 
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-extrabold tracking-tight text-ink leading-[1.1]">
-                We Turn Ideas Into{' '}
-                <span className="bg-gradient-to-r from-brand-300 via-cyanAccent to-brand-400 bg-clip-text text-transparent">
-                  Digital Businesses.
+        {/* Hero Content */}
+        <div className="relative z-10 mx-auto max-w-wide w-full px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+          <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12">
+            {/* Left Content */}
+            <div className="lg:col-span-7 space-y-6 max-w-2xl">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-extrabold tracking-tight text-slate-900 leading-[1.1]">
+                Enterprise Software &amp;{' '}
+                <span className="text-teal-700">
+                  Data Engineering.
                 </span>
               </h1>
 
-              <p className="text-base sm:text-lg text-muted leading-relaxed max-w-xl">
-                BIGWI HOUSE is the engineering, software, and product innovation division of <strong>DataSphere Consulting Ltd.</strong> We partner with startups, SMEs, and institutions across East Africa and globally to transform business strategy into resilient, market-ready digital products.
+              <p className="text-base sm:text-lg text-slate-700 leading-relaxed font-normal bg-white/50 backdrop-blur-xs p-1 rounded-lg">
+                We partner with leading enterprises, financial institutions, and public organizations across East Africa to architect mission-critical software, modern data pipelines, and intelligent executive dashboards.
               </p>
 
               {/* Action Buttons */}
-              <div className="flex flex-wrap items-center gap-4 pt-2">
-                <Link href="/contact" className="btn btn-primary text-sm sm:text-base py-3 px-6">
-                  <span>Start a Project</span>
+              <div className="flex flex-wrap items-center gap-3.5 pt-2">
+                <Link href="/contact" className="btn btn-primary text-sm sm:text-base py-3.5 px-7 shadow-md">
+                  <span>Start an Engagement</span>
                   <ArrowRight className="h-4 w-4" />
                 </Link>
 
-                <Link href="/services" className="btn btn-ghost text-sm sm:text-base py-3 px-6">
+                <Link href="/services" className="btn btn-ghost text-sm sm:text-base py-3.5 px-7 shadow-sm">
                   <span>Explore Solutions</span>
-                  <ChevronRight className="h-4 w-4" />
+                  <ChevronRight className="h-4 w-4 text-slate-500" />
                 </Link>
               </div>
 
               {/* Trust Metric Highlights */}
-              <div className="grid grid-cols-3 gap-4 border-t border-line/80 pt-6 mt-8">
+              <div className="grid grid-cols-3 gap-4 border-t border-slate-300/80 pt-6 mt-6 bg-white/80 backdrop-blur-md p-4 rounded-2xl border shadow-sm">
                 <div>
-                  <div className="font-display text-2xl sm:text-3xl font-extrabold text-gold">10+</div>
-                  <p className="font-mono text-xs text-muted mt-0.5">Core Service Lines</p>
+                  <div className="font-display text-2xl sm:text-3xl font-extrabold text-slate-900">10+</div>
+                  <p className="font-sans text-xs text-slate-600 mt-0.5 font-semibold">Core Capabilities</p>
                 </div>
                 <div>
-                  <div className="font-display text-2xl sm:text-3xl font-extrabold text-brand-300">9</div>
-                  <p className="font-mono text-xs text-muted mt-0.5">Target Sectors</p>
+                  <div className="font-display text-2xl sm:text-3xl font-extrabold text-teal-700">99.9%</div>
+                  <p className="font-sans text-xs text-slate-600 mt-0.5 font-semibold">Uptime SLA</p>
                 </div>
                 <div>
-                  <div className="font-display text-2xl sm:text-3xl font-extrabold text-cyanAccent">100%</div>
-                  <p className="font-mono text-xs text-muted mt-0.5">Tailored Delivery</p>
+                  <div className="font-display text-2xl sm:text-3xl font-extrabold text-slate-900">100%</div>
+                  <p className="font-sans text-xs text-slate-600 mt-0.5 font-semibold">Custom Codebase</p>
                 </div>
               </div>
             </div>
 
-            {/* Right Column: 3D Dimensional Experience */}
-            <div className="lg:col-span-6 relative">
-              <div className="relative rounded-3xl border border-lineLight bg-gradient-to-b from-bgRaised/80 via-card/70 to-bgSubtle/90 p-2 md:p-4 backdrop-blur-2xl shadow-glass">
-                <Hero3DCanvas />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 2. POSITIONING & STRATEGIC ADVANTAGES */}
-      <section className="relative">
-        <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8">
-          <div className="rounded-2xl border border-lineLight bg-gradient-to-r from-bgRaised/90 via-card/90 to-bgRaised/90 p-6 sm:p-8 backdrop-blur-xl shadow-glass">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-              <div className="lg:col-span-4">
-                <span className="eyebrow-gold mb-2">Competitive Edge</span>
-                <h2 className="font-display text-xl sm:text-2xl font-bold text-ink">
-                  Where business strategy and in-house engineering converge.
-                </h2>
-                <p className="mt-2 text-xs sm:text-sm text-muted">
-                  Unlike traditional dev agencies or abstract consultancies, BIGWI HOUSE houses strategy, engineering, and data under one roof.
-                </p>
-              </div>
-
-              <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {competitiveAdvantage.map((item, idx) => (
-                  <div
-                    key={item}
-                    className="flex items-start gap-3 rounded-xl border border-line/60 bg-bgRaised/50 p-3.5 transition-colors hover:border-brand-500/40"
-                  >
-                    <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-lg bg-brand-500/20 font-mono text-xs font-bold text-brand-300">
-                      0{idx + 1}
-                    </span>
-                    <span className="text-xs sm:text-sm text-ink/90 font-medium leading-snug">{item}</span>
+            {/* Right Feature Card */}
+            <div className="lg:col-span-5 flex flex-col justify-end items-start lg:items-end space-y-3">
+              <div className="rounded-2xl border border-white/60 bg-white/95 p-5 shadow-xl backdrop-blur-md max-w-sm space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <span className="h-2.5 w-2.5 rounded-full bg-emerald-500 animate-pulse" />
+                    <span className="font-mono text-xs font-bold text-slate-900">Kigali Engineering Hub</span>
                   </div>
-                ))}
+                  <span className="font-mono text-[10px] text-teal-800 bg-teal-50 px-2 py-0.5 rounded font-bold">ACTIVE</span>
+                </div>
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  Full-stack engineering &amp; enterprise data science team delivering across East Africa &amp; international markets.
+                </p>
+                <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] font-semibold text-slate-700">
+                  <span>ISO 27001 Standards</span>
+                  <span className="text-teal-700">Zero-Downtime Deployments</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 3. BUSINESS PROBLEM → DIGITAL SOLUTION STORY */}
+      {/* 2. EDITORIAL NARRATIVE & METRIC TICKERS (TikTok Video Style 0:06-0:09) */}
       <section className="relative">
         <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8 space-y-12">
-          <div className="max-w-2xl">
-            <span className="eyebrow mb-2">Transformation Journey</span>
-            <h2 className="text-3xl sm:text-4xl font-display font-bold text-ink">
-              From business friction to market-ready digital execution.
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            {/* Left Editorial Text */}
+            <div className="lg:col-span-6 space-y-4">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold text-slate-900 leading-tight">
+                Your enterprise is scaling. Don&apos;t just collect data — <span className="text-teal-700">find what&apos;s next.</span>
+              </h2>
+              <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
+                We help you move forward with clarity, confidence, and top-tier African engineering talent by your side.
+              </p>
+            </div>
+
+            {/* Right Metric Highlights Tickers */}
+            <div className="lg:col-span-6 grid grid-cols-2 sm:grid-cols-3 gap-4">
+              <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm hover:shadow-md transition-shadow">
+                <div className="font-display text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+                  12<span className="text-teal-600">+</span>
+                </div>
+                <div className="mt-2 font-mono text-xs font-bold text-slate-900 uppercase">Enterprise Deployments</div>
+                <p className="mt-1 text-[11px] text-slate-500">Live production systems across East Africa</p>
+              </div>
+
+              <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm hover:shadow-md transition-shadow">
+                <div className="font-display text-3xl sm:text-4xl font-extrabold text-teal-700 tracking-tight">
+                  560<span className="text-teal-500">M+</span>
+                </div>
+                <div className="mt-2 font-mono text-xs font-bold text-slate-900 uppercase">Records Processed</div>
+                <p className="mt-1 text-[11px] text-slate-500">High-throughput streaming ETL pipelines</p>
+              </div>
+
+              <div className="col-span-2 sm:col-span-1 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm hover:shadow-md transition-shadow">
+                <div className="font-display text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+                  99.9<span className="text-teal-600">%</span>
+                </div>
+                <div className="mt-2 font-mono text-xs font-bold text-slate-900 uppercase">System Uptime SLA</div>
+                <p className="mt-1 text-[11px] text-slate-500">Zero-downtime containerized clusters</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Large Visual Feature Banner with Subtitle (TikTok Style) */}
+          <div className="relative h-72 sm:h-96 w-full rounded-3xl overflow-hidden border border-slate-200 shadow-md">
+            <Image
+              src="/images/executive-strategy.jpg"
+              alt="DataSphere Executive Strategy and System Architecture"
+              fill
+              className="object-cover object-center hover:scale-105 transition-transform duration-700"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/30 to-transparent" />
+            <div className="absolute bottom-6 left-6 right-6 flex flex-col sm:flex-row sm:items-end justify-between gap-4 text-white">
+              <div>
+                <span className="font-mono text-xs uppercase tracking-widest text-teal-300 font-bold">Kigali Strategy &amp; Innovation Labs</span>
+                <h3 className="text-xl sm:text-2xl font-display font-bold text-white mt-1">
+                  Where strategic business acumen meets resilient systems engineering.
+                </h3>
+              </div>
+              <Link href="/approach" className="btn btn-teal text-xs py-2.5 px-5 flex-shrink-0">
+                <span>Our Methodology</span>
+                <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. "OUR CASES" VISUAL GALLERY (TikTok Style Grid) */}
+      <section className="relative">
+        <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8 space-y-8">
+          <div className="text-center max-w-2xl mx-auto space-y-2">
+            <h2 className="text-3xl sm:text-5xl font-display font-extrabold text-slate-900 tracking-tight">
+              OUR CASES
             </h2>
-            <p className="mt-3 text-sm sm:text-base text-muted">
-              You have an idea and commercial ambitions. We build the architecture, connect your data pipelines, and scale your digital operations.
+            <p className="text-sm sm:text-base text-slate-600">
+              High-concurrency systems engineered for leading African enterprises.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Common Problems */}
-            <div className="rounded-2xl border border-line bg-card/60 p-6 sm:p-8 backdrop-blur-md">
-              <div className="flex items-center gap-2 mb-6">
-                <span className="h-3 w-3 rounded-full bg-red-400" />
-                <h3 className="font-mono text-sm font-semibold uppercase tracking-wider text-red-300">
-                  Frictions Organizations Face
-                </h3>
-              </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {CASE_GALLERY.map((item) => (
+              <Link
+                key={item.id}
+                href="/work"
+                className="group relative block overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm hover:shadow-xl hover:border-teal-500/50 transition-all duration-300"
+              >
+                {/* Image Container */}
+                <div className="relative h-56 w-full overflow-hidden bg-slate-100">
+                  <Image
+                    src={item.image}
+                    alt={item.title}
+                    fill
+                    className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/25 to-transparent" />
 
-              <ul className="space-y-3">
-                {problems.map((prob) => (
-                  <li key={prob} className="flex items-start gap-3 text-sm text-muted">
-                    <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-red-400/80 flex-shrink-0" />
-                    <span>{prob}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+                  {/* Code Badge */}
+                  <div className="absolute top-3 left-3 z-10 rounded-md bg-white/95 px-2.5 py-1 font-mono text-[10px] font-bold text-slate-900 backdrop-blur-sm shadow-sm">
+                    {item.code}
+                  </div>
 
-            {/* BIGWI HOUSE Digital Solutions */}
-            <div className="rounded-2xl border border-brand-500/40 bg-gradient-to-b from-brand-500/10 via-card/70 to-bgRaised p-6 sm:p-8 backdrop-blur-md shadow-glow-teal">
-              <div className="flex items-center gap-2 mb-6">
-                <span className="h-3 w-3 rounded-full bg-brand-400 animate-pulse" />
-                <h3 className="font-mono text-sm font-semibold uppercase tracking-wider text-brand-300">
-                  The BIGWI HOUSE Resolution
-                </h3>
-              </div>
+                  {/* Sector Tag */}
+                  <div className="absolute top-3 right-3 z-10 rounded-md bg-slate-900/80 px-2.5 py-1 font-sans text-[10px] font-semibold text-white backdrop-blur-sm">
+                    {item.sector}
+                  </div>
 
-              <ul className="space-y-3.5">
-                {[
-                  'Enterprise-grade web & mobile platforms engineered for scale',
-                  'Modern brand systems & data-driven digital marketing assets',
-                  'Actionable executive dashboards turning raw telemetry into revenue decisions',
-                  'AI & ML models tuned specifically to African & emerging market dynamics',
-                  'Continuous SLA monitoring, security audits, and product engineering iterations',
-                ].map((sol) => (
-                  <li key={sol} className="flex items-start gap-3 text-sm text-ink font-medium">
-                    <CheckCircle2 className="h-4 w-4 text-brand-400 mt-0.5 flex-shrink-0" />
-                    <span>{sol}</span>
-                  </li>
-                ))}
-              </ul>
+                  {/* Impact Metric Floating on Image */}
+                  <div className="absolute bottom-3 left-3 right-3 z-10 text-white">
+                    <p className="font-sans text-xs text-teal-300 font-semibold">{item.metric}</p>
+                  </div>
+                </div>
 
-              <div className="mt-8 pt-6 border-t border-brand-500/20">
-                <Link href="/contact" className="btn btn-primary w-full justify-center">
-                  <span>Transform Your Digital Presence</span>
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </div>
-            </div>
+                {/* Card Title & Link */}
+                <div className="p-4 flex items-center justify-between">
+                  <h3 className="font-display text-sm font-bold text-slate-900 group-hover:text-teal-700 transition-colors line-clamp-1">
+                    {item.title}
+                  </h3>
+                  <ArrowRight className="h-4 w-4 text-slate-400 group-hover:text-teal-600 group-hover:translate-x-1 transition-all flex-shrink-0 ml-2" />
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* 4. CORE SERVICES & DIGITAL SOLUTIONS */}
-      <section id="services" className="relative">
+      {/* 4. BOLD EDITORIAL STATEMENT & IMPACT BANNER (TikTok Video Style 0:14) */}
+      <section className="relative">
+        <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8">
+          <div className="relative overflow-hidden rounded-3xl bg-teal-800 text-white p-8 sm:p-14 shadow-2xl">
+            {/* Subtle background image */}
+            <div className="absolute inset-0 opacity-15">
+              <Image
+                src="/images/kigali-skyline.jpg"
+                alt="Kigali Skyline"
+                fill
+                className="object-cover"
+              />
+            </div>
+
+            <div className="relative z-10 space-y-4 max-w-3xl">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold text-white leading-tight uppercase">
+                WE ARCHITECT INTELLIGENCE THAT POWERS SUSTAINED GROWTH.
+              </h2>
+              <p className="text-sm sm:text-base text-teal-100 max-w-2xl leading-relaxed">
+                Combining rigorous software engineering, localized market intelligence, and unyielding focus on customer ROI.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section >
+
+      {/* 5. VISIONARY LEADERSHIP & ENTERPRISE STABILITY (TikTok Video Style 0:15) */}
+      < section className="relative" >
+        <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8 space-y-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            <div className="lg:col-span-7 space-y-6">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold text-slate-900 tracking-tight leading-tight">
+                VISIONARY ARCHITECTURE, GOVERNANCE AND STABILITY.
+              </h2>
+              <p className="text-base text-slate-600 leading-relaxed font-normal">
+                Ranked among the premier bespoke engineering consultancies with strict zero-tolerance for data leaks, unauthorized access, or fragile legacy dependencies.
+              </p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+                  <div className="font-display text-3xl font-extrabold text-slate-900">0 Cases</div>
+                  <p className="font-sans text-xs text-slate-600 mt-1 font-medium">Of unmanaged security breaches or critical SLA disruptions</p>
+                </div>
+
+                <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+                  <div className="font-display text-3xl font-extrabold text-teal-700">100%</div>
+                  <p className="font-sans text-xs text-slate-600 mt-1 font-medium">Verified automated test coverage across core pipeline modules</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Card: Guaranteed Compliance Card */}
+            <div className="lg:col-span-5 rounded-3xl border border-slate-200 bg-white p-6 sm:p-8 shadow-lg space-y-6">
+              <div className="relative h-44 w-full rounded-2xl overflow-hidden bg-slate-100">
+                <Image
+                  src="/images/data-engineer.jpg"
+                  alt="Senior Data Architect"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <span className="inline-block font-mono text-[10px] font-bold uppercase tracking-widest text-teal-800 bg-teal-50 px-2.5 py-1 rounded">
+                  GUARANTEED QUALITY
+                </span>
+                <h4 className="font-display text-lg font-bold text-slate-900">
+                  Senior Architect Peer-Reviewed Delivery
+                </h4>
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                  All systems undergo dual code review, threat modeling, and load validation before deployment to your production environment.
+                </p>
+              </div>
+
+              <div className="pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500 font-mono">
+                <span>ISO 27001 Ready</span>
+                <span>GDPR &amp; Rwanda DPPA Compliant</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section >
+
+      {/* 6. INTERACTIVE LOCATION & DEPLOYMENT HUB SHOWCASE (TikTok Video Style 0:19-0:23) */}
+      < section className="relative" >
+        <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8 space-y-8">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+            <div>
+              <span className="eyebrow-navy mb-2">Regional Footprint</span>
+              <h2 className="text-3xl sm:text-4xl font-display font-extrabold text-slate-900 tracking-tight">
+                Kigali Hub &amp; Operations
+              </h2>
+            </div>
+
+            {/* Hub Tabs */}
+            <div className="flex rounded-xl border border-slate-200 bg-slate-50 p-1">
+              {LOCATION_HUBS.map((hub, idx) => (
+                <button
+                  key={hub.id}
+                  onClick={() => setActiveHubIndex(idx)}
+                  className={`rounded-lg px-3 py-1.5 text-xs font-sans font-medium transition-all ${activeHubIndex === idx
+                    ? 'bg-slate-900 text-white font-semibold shadow-sm'
+                    : 'text-slate-600 hover:text-slate-900'
+                    }`}
+                >
+                  {hub.id === 'kigali-hub' ? 'Engineering' : hub.id === 'strategy-center' ? 'Strategy' : 'Cloud Network'}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Active Hub Spotlight Card */}
+          <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+            <div className="grid grid-cols-1 lg:grid-cols-12">
+              <div className="lg:col-span-7 p-8 md:p-12 space-y-6 flex flex-col justify-between">
+                <div className="space-y-4">
+
+                  <h3 className="text-2xl sm:text-3xl font-display font-bold text-slate-900">
+                    {LOCATION_HUBS[activeHubIndex].title}
+                  </h3>
+
+                  <p className="text-sm sm:text-base text-slate-600 leading-relaxed font-normal">
+                    {LOCATION_HUBS[activeHubIndex].description}
+                  </p>
+
+                  <div className="pt-2 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                    <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
+                      <span className="text-slate-500 font-medium block">Coordinates</span>
+                      <span className="font-mono font-bold text-slate-900">{LOCATION_HUBS[activeHubIndex].latLng}</span>
+                    </div>
+                    <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
+                      <span className="text-slate-500 font-medium block">Active Unit</span>
+                      <span className="font-bold text-teal-800">{LOCATION_HUBS[activeHubIndex].activeTeam}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
+                  <Link href="/about" className="btn btn-primary text-xs sm:text-sm py-2.5 px-5">
+                    <span>Learn More About DataSphere</span>
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </div>
+              </div>
+
+              {/* Photo Showcase */}
+              <div className="lg:col-span-5 relative min-h-[280px] lg:min-h-full overflow-hidden bg-slate-100">
+                <Image
+                  src={LOCATION_HUBS[activeHubIndex].image}
+                  alt={LOCATION_HUBS[activeHubIndex].title}
+                  fill
+                  className="object-cover object-center transition-all duration-500"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section >
+
+      {/* 5. DATA & ANALYTICS VISUAL SHOWCASE */}
+      < section className="relative" >
+        <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8 space-y-10">
+          <div className="max-w-2xl">
+
+            <h2 className="text-3xl sm:text-4xl font-display font-bold text-slate-900">
+              Enterprise Data &amp; BI Architecture
+            </h2>
+            <p className="mt-2 text-sm sm:text-base text-slate-600">
+              Transforming raw, disparate organizational records into real-time executive decision systems and predictive intelligence pipelines.
+            </p>
+          </div>
+
+          <DataAnalyticsDemo />
+        </div>
+      </section >
+
+      {/* 6. CORE SERVICES & DIGITAL SOLUTIONS */}
+      < section id="services" className="relative" >
         <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8 space-y-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
             <div>
-              <span className="eyebrow mb-2">Comprehensive Capabilities</span>
-              <h2 className="text-3xl sm:text-4xl font-display font-bold text-ink">
-                Ten disciplined service lines, one cohesive team.
+              <span className="eyebrow mb-2">Capabilities</span>
+              <h2 className="text-3xl sm:text-4xl font-display font-bold text-slate-900">
+                Disciplined engineering and data solutions.
               </h2>
-              <p className="mt-2 text-sm sm:text-base text-muted max-w-2xl">
-                From initial strategic diagnosis to custom cloud infrastructure and data telemetry, we deliver end-to-end technology solutions.
+              <p className="mt-2 text-sm sm:text-base text-slate-600 max-w-2xl">
+                From data pipelines and cloud infrastructure to web and mobile apps, our multidisciplinary team delivers end-to-end reliability.
               </p>
             </div>
 
             {/* Category Filter Pills */}
-            <div className="flex flex-wrap gap-1.5 rounded-xl border border-line bg-card/80 p-1 backdrop-blur-md">
+            <div className="flex flex-wrap gap-1 rounded-xl border border-slate-200 bg-slate-50 p-1">
               {['All', 'Engineering', 'Intelligence', 'Strategy', 'Design'].map((cat) => (
                 <button
                   key={cat}
                   type="button"
                   onClick={() => setSelectedCategory(cat)}
-                  className={`rounded-lg px-3 py-1.5 text-xs font-mono font-medium transition-all ${
-                    selectedCategory === cat
-                      ? 'bg-brand-500 text-bg font-bold shadow-sm'
-                      : 'text-muted hover:text-ink'
-                  }`}
+                  className={`rounded-lg px-3 py-1.5 text-xs font-sans font-medium transition-all ${selectedCategory === cat
+                    ? 'bg-slate-900 text-white font-semibold shadow-sm'
+                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/60'
+                    }`}
                 >
                   {cat}
                 </button>
@@ -342,27 +639,27 @@ export default function HomePage() {
                 >
                   <div>
                     <div className="flex items-center justify-between mb-4">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-500/15 text-brand-300 group-hover:bg-brand-500 group-hover:text-bg transition-colors">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-teal-50 text-teal-700 border border-teal-200 group-hover:bg-slate-900 group-hover:text-white group-hover:border-slate-900 transition-colors">
                         <Icon className="h-5 w-5" />
                       </div>
-                      <span className="font-mono text-[11px] text-muted border border-line px-2 py-0.5 rounded-full">
+                      <span className="font-mono text-[11px] text-slate-600 bg-slate-100 border border-slate-200 px-2 py-0.5 rounded-full font-medium">
                         {service.category}
                       </span>
                     </div>
 
-                    <h3 className="font-display text-lg font-bold text-ink group-hover:text-brand-300 transition-colors">
+                    <h3 className="font-display text-lg font-bold text-slate-900 group-hover:text-teal-700 transition-colors">
                       {service.title}
                     </h3>
-                    <p className="mt-2 text-xs sm:text-sm text-muted leading-relaxed">
+                    <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
                       {service.shortDesc}
                     </p>
 
-                    <div className="mt-4 pt-4 border-t border-line/60">
-                      <p className="font-mono text-[11px] text-muted mb-2">Key Deliverables:</p>
+                    <div className="mt-4 pt-4 border-t border-slate-100">
+                      <p className="font-mono text-[11px] text-slate-500 font-semibold mb-2">Key Deliverables:</p>
                       <ul className="space-y-1.5">
                         {service.deliverables.slice(0, 3).map((del) => (
-                          <li key={del} className="flex items-center gap-2 text-xs text-ink/80">
-                            <span className="h-1.5 w-1.5 rounded-full bg-brand-400" />
+                          <li key={del} className="flex items-center gap-2 text-xs text-slate-700">
+                            <span className="h-1.5 w-1.5 rounded-full bg-teal-600" />
                             <span>{del}</span>
                           </li>
                         ))}
@@ -370,11 +667,11 @@ export default function HomePage() {
                     </div>
                   </div>
 
-                  <div className="mt-6 pt-4 border-t border-line/60 flex items-center justify-between">
-                    <span className="font-mono text-[10px] text-muted">Enterprise Certified</span>
+                  <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                    <span className="font-mono text-[10px] text-slate-400">Enterprise Ready</span>
                     <Link
                       href={`/services#${service.id}`}
-                      className="font-mono text-xs text-brand-300 hover:text-brand-200 flex items-center gap-1 font-semibold group-hover:translate-x-0.5 transition-transform"
+                      className="font-sans text-xs text-teal-700 hover:text-teal-900 flex items-center gap-1 font-semibold group-hover:translate-x-0.5 transition-transform"
                     >
                       <span>Explore</span>
                       <ArrowRight className="h-3 w-3" />
@@ -385,308 +682,116 @@ export default function HomePage() {
             })}
           </div>
         </div>
-      </section>
+      </section >
 
-      {/* 5. 6-STAGE DIGITAL TRANSFORMATION PROCESS */}
-      <section className="relative">
+      {/* 7. 6-STAGE ENGINEERING METHODOLOGY */}
+      < section className="relative" >
         <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8 space-y-10">
           <div className="text-center max-w-2xl mx-auto">
             <span className="eyebrow mb-2">Methodology</span>
-            <h2 className="text-3xl sm:text-4xl font-display font-bold text-ink">
+            <h2 className="text-3xl sm:text-4xl font-display font-bold text-slate-900">
               The 6-Stage Engineering Lifecycle
             </h2>
-            <p className="mt-3 text-sm sm:text-base text-muted">
+            <p className="mt-2 text-sm sm:text-base text-slate-600">
               Structured sprints, transparent milestone reviews, and automated verification ensure predictable delivery from day one.
             </p>
           </div>
 
           <ProcessTimeline />
         </div>
-      </section>
+      </section >
 
-      {/* 6. TECHNOLOGY STACK & CAPABILITIES */}
-      <section className="relative">
+      {/* 8. TECHNOLOGY STACK */}
+      < section className="relative" >
         <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8 space-y-10">
           <div className="max-w-2xl">
-            <span className="eyebrow mb-2">Technical Rigor</span>
-            <h2 className="text-3xl sm:text-4xl font-display font-bold text-ink">
-              Production-Grade Technology Architecture
+            <h2 className="text-3xl sm:text-4xl font-display font-bold text-slate-900">
+              Production-Grade Architecture
             </h2>
-            <p className="mt-3 text-sm sm:text-base text-muted">
-              We engineer with cutting-edge languages, frameworks, cloud native orchestration, and machine learning toolchains built for enterprise longevity.
+            <p className="mt-2 text-sm sm:text-base text-slate-600">
+              We engineer with robust modern languages, reliable data engines, cloud native infrastructure, and enterprise security frameworks.
             </p>
           </div>
 
           <TechRadar />
         </div>
-      </section>
+      </section >
 
-      {/* 7. INDUSTRY SECTOR SOLUTIONS */}
-      <section className="relative">
-        <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8 space-y-10">
-          <div className="max-w-2xl">
-            <span className="eyebrow-gold mb-2">Cross-Sector Impact</span>
-            <h2 className="text-3xl sm:text-4xl font-display font-bold text-ink">
-              Tailored for Critical Industries
-            </h2>
-            <p className="mt-3 text-sm sm:text-base text-muted">
-              We design specialized workflows addressing compliance, offline connectivity, security, and transaction volumes for distinct sectors.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {targetClientsDetailed.map((sector) => {
-              const Icon = SECTOR_ICONS[sector.icon] || Landmark
-              return (
-                <div
-                  key={sector.name}
-                  className="rounded-xl border border-line bg-card/60 p-6 backdrop-blur-md transition-all hover:border-cyanAccent/40 hover:bg-cardHover flex flex-col justify-between"
-                >
-                  <div>
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-cyanAccent/15 text-cyanAccent">
-                        <Icon className="h-5 w-5" />
-                      </div>
-                      <h3 className="font-display text-base font-bold text-ink">{sector.name}</h3>
-                    </div>
-
-                    <p className="text-xs sm:text-sm text-muted leading-relaxed">
-                      {sector.description}
-                    </p>
-                  </div>
-
-                  <div className="mt-4 pt-4 border-t border-line/60">
-                    <div className="flex flex-wrap gap-1.5">
-                      {sector.focusAreas.map((area) => (
-                        <span
-                          key={area}
-                          className="rounded-md border border-line bg-bgRaised/70 px-2 py-0.5 font-mono text-[10px] text-brand-300"
-                        >
-                          {area}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              )
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* 8. SELECTED CASE STUDIES & IMPACT */}
-      <section className="relative">
-        <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8 space-y-10">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
-            <div>
-              <span className="eyebrow mb-2">Proven Results</span>
-              <h2 className="text-3xl sm:text-4xl font-display font-bold text-ink">
-                Featured Case Studies
-              </h2>
-              <p className="mt-2 text-sm sm:text-base text-muted max-w-xl">
-                Real-world problem, architectural solution, and quantified business impact across enterprise deployments.
-              </p>
+      {/* 9. HIGH CONVERSION CTA SECTION */}
+      < section className="relative" >
+        <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8">
+          <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-900 p-8 sm:p-12 md:p-16 text-center text-white shadow-xl">
+            {/* Background Image with Overlay */}
+            <div className="absolute inset-0 z-0">
+              <Image
+                src="/images/kigali-skyline.jpg"
+                alt="Kigali Innovation Hub Skyline"
+                fill
+                className="object-cover object-center opacity-25"
+              />
+              <div className="absolute inset-0 bg-gradient-to-b from-slate-900/90 via-slate-900/85 to-slate-900/95" />
             </div>
 
-            <Link href="/work" className="btn btn-ghost text-sm">
-              <span>View All Case Studies</span>
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {featuredCaseStudies.map((study) => (
-              <div
-                key={study.id}
-                className="relative flex flex-col justify-between rounded-2xl border border-lineLight bg-gradient-to-b from-bgRaised/90 via-card/80 to-bgSubtle/90 p-6 md:p-8 backdrop-blur-xl shadow-glass"
-              >
-                <div>
-                  <div className="flex items-center justify-between gap-2 mb-3">
-                    <span className="font-mono text-xs text-brand-300 font-semibold">{study.sector}</span>
-                    <span className="font-mono text-[10px] text-muted border border-line px-2 py-0.5 rounded-full">
-                      {study.clientType}
-                    </span>
-                  </div>
-
-                  <h3 className="font-display text-xl font-bold text-ink mb-4">{study.title}</h3>
-
-                  <div className="space-y-3 text-xs sm:text-sm">
-                    <div>
-                      <strong className="font-mono text-[11px] text-gold uppercase block mb-1">
-                        Challenge
-                      </strong>
-                      <p className="text-muted leading-relaxed">{study.problem}</p>
-                    </div>
-
-                    <div>
-                      <strong className="font-mono text-[11px] text-brand-300 uppercase block mb-1">
-                        Solution
-                      </strong>
-                      <p className="text-ink/90 leading-relaxed">{study.solution}</p>
-                    </div>
-                  </div>
-
-                  <div className="mt-6 pt-4 border-t border-line/60">
-                    <div className="grid grid-cols-3 gap-2">
-                      {study.metrics.map((m) => (
-                        <div key={m.label} className="rounded-lg bg-bgRaised/80 p-2 text-center border border-line/50">
-                          <p className="font-display text-sm font-bold text-brand-300">{m.value}</p>
-                          <span className="font-mono text-[9px] text-muted block leading-tight">{m.label}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-6 pt-4 border-t border-line/60 flex flex-wrap gap-1.5">
-                  {study.technologies.map((t) => (
-                    <span key={t} className="rounded bg-white/5 px-2 py-0.5 font-mono text-[10px] text-muted">
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 9. DATA & ANALYTICS VISUAL SHOWCASE */}
-      <section className="relative">
-        <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8 space-y-10">
-          <div className="max-w-2xl">
-            <span className="eyebrow mb-2">Data Intelligence</span>
-            <h2 className="text-3xl sm:text-4xl font-display font-bold text-ink">
-              Data &amp; Analytics Visualization
-            </h2>
-            <p className="mt-3 text-sm sm:text-base text-muted">
-              We turn raw, disparate operational data into real-time executive decision systems and predictive intelligence pipelines.
-            </p>
-          </div>
-
-          <DataAnalyticsDemo />
-        </div>
-      </section>
-
-      {/* 10. ABOUT BIGWI HOUSE & DATASPHERE CORPORATE STORY */}
-      <section className="relative">
-        <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8">
-          <div className="rounded-3xl border border-lineLight bg-gradient-to-r from-bgRaised/90 via-card/90 to-bgRaised/90 p-8 md:p-12 backdrop-blur-xl shadow-glass">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-              <div className="lg:col-span-6 space-y-5">
-                <span className="eyebrow">Corporate Profile</span>
-                <h2 className="text-3xl sm:text-4xl font-display font-bold text-ink">
-                  The Product &amp; Engineering Arm of DataSphere Consulting
-                </h2>
-                <p className="text-sm sm:text-base text-muted leading-relaxed">
-                  BIGWI HOUSE was created to eliminate the traditional disconnect between strategic management consulting and hands-on software delivery.
-                </p>
-                <p className="text-sm sm:text-base text-muted leading-relaxed">
-                  We function as an innovation laboratory and production studio — applying modern AI, data architectures, cloud systems, and UX design to concrete market challenges across East Africa and beyond.
-                </p>
-
-                <div className="pt-2 flex items-center gap-4">
-                  <Link href="/about" className="btn btn-primary text-sm">
-                    <span>Full Division Profile</span>
-                    <ArrowRight className="h-4 w-4" />
-                  </Link>
-                  <Link href="/approach" className="btn btn-ghost text-sm">
-                    <span>Growth Roadmap</span>
-                  </Link>
-                </div>
-              </div>
-
-              <div className="lg:col-span-6 space-y-4">
-                <div className="rounded-2xl border border-gold/40 bg-gold/5 p-6 backdrop-blur-md">
-                  <h4 className="font-mono text-xs font-bold uppercase tracking-wider text-gold mb-2">
-                    Our Vision
-                  </h4>
-                  <p className="text-sm text-ink leading-relaxed font-medium">
-                    {vision}
-                  </p>
-                </div>
-
-                <div className="rounded-2xl border border-brand-500/40 bg-brand-500/5 p-6 backdrop-blur-md">
-                  <h4 className="font-mono text-xs font-bold uppercase tracking-wider text-brand-300 mb-2">
-                    Our Mission
-                  </h4>
-                  <p className="text-sm text-ink leading-relaxed font-medium">
-                    {mission}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 11. HIGH CONVERSION CTA SECTION */}
-      <section className="relative">
-        <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8">
-          <div className="relative overflow-hidden rounded-3xl border border-brand-500/50 bg-gradient-to-r from-brand-900/60 via-card to-bgRaised p-8 sm:p-12 md:p-16 text-center backdrop-blur-2xl shadow-glow-teal">
             <div className="relative z-10 max-w-2xl mx-auto space-y-6">
-              <span className="eyebrow">Let's Build Together</span>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-extrabold text-ink leading-tight">
-                Have an idea worth building?
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-extrabold text-white leading-tight">
+                Ready to transform your enterprise data &amp; systems?
               </h2>
-              <p className="text-base sm:text-lg text-muted">
-                Let's turn your business objectives into a scalable, high-performance digital product. Start a confidential discovery conversation with our team today.
+              <p className="text-base sm:text-lg text-slate-300">
+                Let&apos;s turn your business objectives into scalable, high-performance software. Start a confidential discovery conversation with our senior team today.
               </p>
 
               <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
-                <Link href="/contact" className="btn btn-primary text-base py-3.5 px-8 font-bold">
-                  <Sparkles className="h-4 w-4" />
-                  <span>Start a Conversation</span>
+                <Link href="/contact" className="btn btn-teal text-base py-3.5 px-8 font-bold shadow-lg">
+                  <span>Start a Discovery Call</span>
                 </Link>
-                <Link href="/work" className="btn btn-ghost text-base py-3.5 px-8">
-                  <span>View Our Work</span>
+                <Link href="/work" className="btn border border-slate-700 bg-slate-800/90 backdrop-blur-md text-white hover:bg-slate-700 text-base py-3.5 px-8">
+                  <span>View Case Studies</span>
                 </Link>
               </div>
 
-              <div className="pt-6 font-mono text-xs text-muted flex items-center justify-center gap-6">
-                <span>&bull; Full Technical Confidentiality</span>
-                <span>&bull; Response in &lt; 24h</span>
-                <span>&bull; East Africa &amp; Global Delivery</span>
+              <div className="pt-6 font-mono text-xs text-slate-400 flex flex-wrap items-center justify-center gap-6">
+                <span>&bull; Strict Confidentiality / NDA</span>
+                <span>&bull; Response within 24 Hours</span>
+                <span>&bull; Regional &amp; Global Delivery</span>
               </div>
             </div>
           </div>
         </div>
-      </section>
+      </section >
 
-      {/* 12. QUICK INQUIRY CONTACT FORM */}
-      <section id="contact" className="relative">
+      {/* 10. QUICK INQUIRY CONTACT FORM */}
+      < section id="contact" className="relative" >
         <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             <div className="lg:col-span-5 space-y-6">
-              <span className="eyebrow">Direct Engagement</span>
-              <h2 className="text-3xl sm:text-4xl font-display font-bold text-ink">
-                Tell us what you're building.
+              <h2 className="text-3xl sm:text-4xl font-display font-bold text-slate-900">
+                Tell us about your project.
               </h2>
-              <p className="text-sm sm:text-base text-muted leading-relaxed">
-                Share a few parameters regarding your organization, sector, and project scope. A senior solutions architect from BIGWI HOUSE will follow up to schedule a technical discovery call.
+              <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
+                Share a few parameters regarding your organization, sector, and project scope. A senior solutions architect from DataSphere Consulting will follow up to schedule a technical consultation.
               </p>
 
-              <div className="rounded-2xl border border-line bg-card/60 p-6 space-y-3.5 text-xs text-muted">
+              <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6 space-y-3.5 text-xs text-slate-600 shadow-sm">
                 <div>
-                  <strong className="block font-mono text-[11px] text-ink uppercase">Division</strong>
-                  Digital Innovation &amp; Product Development, DataSphere Consulting Ltd.
+                  <strong className="block font-mono text-[11px] text-slate-900 uppercase font-bold">Company</strong>
+                  DataSphere Consulting Ltd.
                 </div>
                 <div>
-                  <strong className="block font-mono text-[11px] text-ink uppercase">Location</strong>
-                  Kigali, Rwanda &bull; Regional East African Delivery Hub
+                  <strong className="block font-mono text-[11px] text-slate-900 uppercase font-bold">Location</strong>
+                  Kigali, Rwanda &bull; East African Delivery Hub
                 </div>
                 <div>
-                  <strong className="block font-mono text-[11px] text-ink uppercase">Confidentiality Guarantee</strong>
-                  All project parameters, data models, and business logic are covered by strict NDA.
+                  <strong className="block font-mono text-[11px] text-slate-900 uppercase font-bold">Confidentiality</strong>
+                  All project parameters, data models, and business logic are covered under strict confidentiality.
                 </div>
               </div>
             </div>
 
-            <div className="lg:col-span-7 rounded-2xl border border-lineLight bg-bgRaised/80 p-6 sm:p-8 backdrop-blur-xl shadow-glass">
+            <div className="lg:col-span-7 rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm">
               <form onSubmit={handleContactSubmit} className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label htmlFor="hp-name" className="mb-1.5 block text-xs font-mono text-muted">
+                    <label htmlFor="hp-name" className="mb-1.5 block text-xs font-semibold text-slate-700">
                       Full Name *
                     </label>
                     <input
@@ -696,12 +801,12 @@ export default function HomePage() {
                       value={contactForm.name}
                       onChange={(e) => setContactForm({ ...contactForm, name: e.target.value })}
                       placeholder="e.g. Jean Claude"
-                      className="w-full rounded-xl border border-line bg-card px-3.5 py-2.5 text-sm text-ink placeholder:text-subtle focus:border-brand-500 focus:outline-none transition-colors"
+                      className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-teal-500 focus:bg-white focus:outline-none transition-colors"
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="hp-email" className="mb-1.5 block text-xs font-mono text-muted">
+                    <label htmlFor="hp-email" className="mb-1.5 block text-xs font-semibold text-slate-700">
                       Business Email *
                     </label>
                     <input
@@ -711,14 +816,14 @@ export default function HomePage() {
                       value={contactForm.email}
                       onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })}
                       placeholder="alex@enterprise.rw"
-                      className="w-full rounded-xl border border-line bg-card px-3.5 py-2.5 text-sm text-ink placeholder:text-subtle focus:border-brand-500 focus:outline-none transition-colors"
+                      className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-teal-500 focus:bg-white focus:outline-none transition-colors"
                     />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label htmlFor="hp-org" className="mb-1.5 block text-xs font-mono text-muted">
+                    <label htmlFor="hp-org" className="mb-1.5 block text-xs font-semibold text-slate-700">
                       Organization
                     </label>
                     <input
@@ -727,19 +832,19 @@ export default function HomePage() {
                       value={contactForm.organization}
                       onChange={(e) => setContactForm({ ...contactForm, organization: e.target.value })}
                       placeholder="Company or Institution"
-                      className="w-full rounded-xl border border-line bg-card px-3.5 py-2.5 text-sm text-ink placeholder:text-subtle focus:border-brand-500 focus:outline-none transition-colors"
+                      className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-teal-500 focus:bg-white focus:outline-none transition-colors"
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="hp-service" className="mb-1.5 block text-xs font-mono text-muted">
+                    <label htmlFor="hp-service" className="mb-1.5 block text-xs font-semibold text-slate-700">
                       Solution Line *
                     </label>
                     <select
                       id="hp-service"
                       value={contactForm.service}
                       onChange={(e) => setContactForm({ ...contactForm, service: e.target.value })}
-                      className="w-full rounded-xl border border-line bg-card px-3.5 py-2.5 text-sm text-ink focus:border-brand-500 focus:outline-none transition-colors"
+                      className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2.5 text-sm text-slate-900 focus:border-teal-500 focus:bg-white focus:outline-none transition-colors"
                     >
                       {services.map((s) => (
                         <option key={s.id} value={s.title}>
@@ -751,7 +856,7 @@ export default function HomePage() {
                 </div>
 
                 <div>
-                  <label htmlFor="hp-msg" className="mb-1.5 block text-xs font-mono text-muted">
+                  <label htmlFor="hp-msg" className="mb-1.5 block text-xs font-semibold text-slate-700">
                     Project Overview &amp; Requirements *
                   </label>
                   <textarea
@@ -761,23 +866,23 @@ export default function HomePage() {
                     value={contactForm.message}
                     onChange={(e) => setContactForm({ ...contactForm, message: e.target.value })}
                     placeholder="Describe your current system challenges, target users, deliverables, and timeline..."
-                    className="w-full rounded-xl border border-line bg-card px-3.5 py-2.5 text-sm text-ink placeholder:text-subtle focus:border-brand-500 focus:outline-none transition-colors"
+                    className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-teal-500 focus:bg-white focus:outline-none transition-colors"
                   />
                 </div>
 
                 {contactStatus === 'success' && (
-                  <div className="flex items-center gap-3 rounded-xl border border-brand-500/40 bg-brand-500/10 p-3.5 text-xs text-brand-300">
-                    <CheckCircle2 className="h-5 w-5 flex-shrink-0 text-brand-400" />
+                  <div className="flex items-center gap-3 rounded-xl border border-emerald-200 bg-emerald-50 p-3.5 text-xs text-emerald-800">
+                    <CheckCircle2 className="h-5 w-5 flex-shrink-0 text-emerald-600" />
                     <div>
-                      <p className="font-semibold">Message Logged Successfully</p>
-                      <p className="text-muted">A solutions architect from BIGWI HOUSE will review and respond promptly.</p>
+                      <p className="font-semibold">Message Received Successfully</p>
+                      <p className="text-slate-600">A solutions architect from DataSphere Consulting will review and respond promptly.</p>
                     </div>
                   </div>
                 )}
 
                 {contactStatus === 'error' && (
-                  <div className="flex items-center gap-3 rounded-xl border border-red-500/40 bg-red-500/10 p-3.5 text-xs text-red-300">
-                    <AlertCircle className="h-5 w-5 flex-shrink-0 text-red-400" />
+                  <div className="flex items-center gap-3 rounded-xl border border-red-200 bg-red-50 p-3.5 text-xs text-red-800">
+                    <AlertCircle className="h-5 w-5 flex-shrink-0 text-red-600" />
                     <div>
                       <p className="font-semibold">Submission Error</p>
                       <p>Please ensure all required fields are filled with valid values.</p>
@@ -806,7 +911,7 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-      </section>
-    </div>
+      </section >
+    </div >
   )
 }

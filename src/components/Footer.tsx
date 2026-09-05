@@ -5,7 +5,6 @@ import {
   ArrowUpRight, 
   Mail, 
   MapPin, 
-  Shield, 
   CheckCircle2,
   Sparkles
 } from '@/components/Icons'
@@ -15,64 +14,59 @@ export default function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="relative mt-24 border-t border-line bg-bgSubtle/90 backdrop-blur-md">
-      {/* Background glow lines */}
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand-500/50 to-transparent" />
-
+    <footer className="relative mt-20 border-t border-slate-200 bg-slate-50 text-slate-900">
       <div className="mx-auto max-w-wide px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
           {/* Brand & Division Profile */}
           <div className="lg:col-span-4 flex flex-col justify-between space-y-6">
             <div>
-              <Link href="/" className="inline-flex items-center gap-3 no-underline group">
-                <div className="relative flex h-11 w-11 items-center justify-center overflow-hidden rounded-xl border border-lineLight bg-bgRaised">
-                  <Image
-                    src="/logo-datasphere.jpeg"
-                    alt="DataSphere / BIGWI HOUSE"
-                    width={42}
-                    height={42}
-                    className="object-contain"
-                  />
-                </div>
+              <Link href="/" className="inline-flex items-center gap-3.5 no-underline group">
+                <Image
+                  src="/logo-datasphere.jpeg"
+                  alt="DataSphere Consulting Ltd"
+                  width={64}
+                  height={64}
+                  className="h-16 w-16 object-contain transition-transform duration-300 group-hover:scale-105"
+                />
                 <div>
-                  <h3 className="font-display text-lg font-bold text-ink group-hover:text-brand-300 transition-colors">
-                    BIGWI HOUSE
+                  <h3 className="font-display text-xl font-bold text-slate-900 group-hover:text-teal-700 transition-colors">
+                    DataSphere
                   </h3>
-                  <p className="font-mono text-xs text-muted">DataSphere Consulting Ltd.</p>
+                  <p className="font-sans text-xs text-slate-500 font-medium">DataSphere Consulting Ltd</p>
                 </div>
               </Link>
 
-              <p className="mt-4 text-sm text-muted leading-relaxed max-w-sm">
-                Digital Innovation &amp; Product Development Division. We turn business strategy, raw data, and bold ideas into scalable digital products and market-ready enterprise software.
+              <p className="mt-4 text-sm text-slate-600 leading-relaxed max-w-sm">
+                Enterprise Data Engineering &amp; Custom Software Solutions. We architect robust platforms, data pipelines, predictive intelligence, and digital products for high-growth organizations.
               </p>
 
               <div className="mt-6 flex flex-wrap gap-2">
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-brand-500/20 bg-brand-500/5 px-3 py-1 font-mono text-xs text-brand-300">
-                  <CheckCircle2 className="h-3 w-3 text-brand-400" />
-                  ISO Compliant Architecture
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-teal-200 bg-teal-50 px-3 py-1 font-mono text-xs text-teal-800 font-medium">
+                  <CheckCircle2 className="h-3 w-3 text-teal-600" />
+                  ISO Standard Engineering
                 </span>
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-gold/20 bg-gold/5 px-3 py-1 font-mono text-xs text-gold">
-                  <Sparkles className="h-3 w-3 text-gold" />
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-1 font-mono text-xs text-slate-700 font-medium shadow-sm">
+                  <Sparkles className="h-3 w-3 text-amber-500" />
                   East Africa Hub
                 </span>
               </div>
             </div>
 
-            <div className="pt-4 border-t border-line/60 space-y-2">
-              <div className="flex items-center gap-2.5 text-xs text-muted">
-                <MapPin className="h-4 w-4 text-brand-400 flex-shrink-0" />
-                <span>Kigali, Rwanda &bull; East Africa Regional Operations</span>
+            <div className="pt-4 border-t border-slate-200 space-y-2">
+              <div className="flex items-center gap-2.5 text-xs text-slate-600 font-medium">
+                <MapPin className="h-4 w-4 text-teal-600 flex-shrink-0" />
+                <span>Kigali, Rwanda &bull; Regional Operations</span>
               </div>
-              <div className="flex items-center gap-2.5 text-xs text-muted">
-                <Mail className="h-4 w-4 text-brand-400 flex-shrink-0" />
-                <span>consulting@datasphere.rw &bull; bigwi@datasphere.rw</span>
+              <div className="flex items-center gap-2.5 text-xs text-slate-600 font-medium">
+                <Mail className="h-4 w-4 text-teal-600 flex-shrink-0" />
+                <span>info@datasphere.rw &bull; consulting@datasphere.rw</span>
               </div>
             </div>
           </div>
 
           {/* Solutions & Core Services */}
           <div className="lg:col-span-3 space-y-4">
-            <h4 className="font-mono text-xs font-semibold uppercase tracking-wider text-brand-300">
+            <h4 className="font-mono text-xs font-semibold uppercase tracking-wider text-teal-800">
               Solutions &amp; Capabilities
             </h4>
             <ul className="space-y-2.5 text-sm">
@@ -80,10 +74,10 @@ export default function Footer() {
                 <li key={service.id}>
                   <Link
                     href={`/services#${service.id}`}
-                    className="text-muted hover:text-ink transition-colors flex items-center justify-between group"
+                    className="text-slate-600 hover:text-slate-900 transition-colors flex items-center justify-between group"
                   >
                     <span>{service.title}</span>
-                    <ArrowUpRight className="h-3.5 w-3.5 opacity-0 group-hover:opacity-100 group-hover:text-brand-300 transition-opacity" />
+                    <ArrowUpRight className="h-3.5 w-3.5 opacity-0 group-hover:opacity-100 group-hover:text-teal-600 transition-opacity" />
                   </Link>
                 </li>
               ))}
@@ -92,7 +86,7 @@ export default function Footer() {
 
           {/* Target Industries */}
           <div className="lg:col-span-3 space-y-4">
-            <h4 className="font-mono text-xs font-semibold uppercase tracking-wider text-cyanAccent">
+            <h4 className="font-mono text-xs font-semibold uppercase tracking-wider text-slate-800">
               Sectors &amp; Industries
             </h4>
             <ul className="space-y-2.5 text-sm">
@@ -100,10 +94,10 @@ export default function Footer() {
                 <li key={client.name}>
                   <Link
                     href="/services#sectors"
-                    className="text-muted hover:text-ink transition-colors flex items-center justify-between group"
+                    className="text-slate-600 hover:text-slate-900 transition-colors flex items-center justify-between group"
                   >
                     <span>{client.name}</span>
-                    <ArrowUpRight className="h-3.5 w-3.5 opacity-0 group-hover:opacity-100 group-hover:text-cyanAccent transition-opacity" />
+                    <ArrowUpRight className="h-3.5 w-3.5 opacity-0 group-hover:opacity-100 group-hover:text-slate-900 transition-opacity" />
                   </Link>
                 </li>
               ))}
@@ -112,33 +106,33 @@ export default function Footer() {
 
           {/* Company & Quick Navigation */}
           <div className="lg:col-span-2 space-y-4">
-            <h4 className="font-mono text-xs font-semibold uppercase tracking-wider text-gold">
+            <h4 className="font-mono text-xs font-semibold uppercase tracking-wider text-slate-800">
               Company
             </h4>
             <ul className="space-y-2.5 text-sm">
               <li>
-                <Link href="/about" className="text-muted hover:text-ink transition-colors">
-                  About BIGWI HOUSE
+                <Link href="/about" className="text-slate-600 hover:text-slate-900 transition-colors">
+                  About DataSphere
                 </Link>
               </li>
               <li>
-                <Link href="/about#structure" className="text-muted hover:text-ink transition-colors">
-                  DataSphere Structure
+                <Link href="/about#structure" className="text-slate-600 hover:text-slate-900 transition-colors">
+                  Company Architecture
                 </Link>
               </li>
               <li>
-                <Link href="/approach" className="text-muted hover:text-ink transition-colors">
-                  Growth &amp; Delivery Method
+                <Link href="/approach" className="text-slate-600 hover:text-slate-900 transition-colors">
+                  Delivery Framework
                 </Link>
               </li>
               <li>
-                <Link href="/work" className="text-muted hover:text-ink transition-colors">
+                <Link href="/work" className="text-slate-600 hover:text-slate-900 transition-colors">
                   Featured Case Studies
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-muted hover:text-ink transition-colors">
-                  Start an Engagement
+                <Link href="/contact" className="text-slate-600 hover:text-slate-900 transition-colors">
+                  Contact Us
                 </Link>
               </li>
             </ul>
@@ -146,23 +140,24 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-12 pt-8 border-t border-line/60 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-muted">
-          <p className="font-mono text-[11px]">
-            &copy; {currentYear} DataSphere Consulting Ltd. All rights reserved. BIGWI HOUSE Digital Innovation &amp; Product Development.
+        <div className="mt-12 pt-8 border-t border-slate-200 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+          <p className="font-sans font-medium text-slate-600">
+            &copy; {currentYear} DataSphere Consulting Ltd. All rights reserved.
           </p>
 
-          <div className="flex items-center gap-6 font-mono text-[11px]">
-            <Link href="/about" className="hover:text-ink transition-colors">
-              Privacy &amp; Confidentiality
+          <div className="flex items-center gap-6 font-medium">
+            <Link href="/about" className="hover:text-slate-900 transition-colors">
+              Privacy &amp; Data Security
             </Link>
-            <Link href="/about" className="hover:text-ink transition-colors">
-              Terms of Engagement
+            <Link href="/about" className="hover:text-slate-900 transition-colors">
+              Terms of Service
             </Link>
-            <span className="text-brand-400">&bull;</span>
-            <span className="text-ink font-semibold">We Turn Ideas Into Digital Businesses</span>
+            <span className="text-teal-600">&bull;</span>
+            <span className="text-slate-900 font-semibold">Transforming Enterprise Data into Value</span>
           </div>
         </div>
       </div>
     </footer>
   )
 }
+

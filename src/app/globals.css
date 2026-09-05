@@ -4,10 +4,11 @@
 
 @layer base {
   :root {
-    --bg-dark: #070C18;
+    --bg-white: #FFFFFF;
+    --bg-slate: #F8FAFC;
+    --brand-navy: #0A2540;
     --brand-teal: #00A896;
-    --brand-cyan: #06B6D4;
-    --brand-gold: #F59E0B;
+    --brand-cyan: #028090;
   }
 
   html {
@@ -15,98 +16,102 @@
   }
 
   body {
-    @apply bg-bg text-ink font-sans antialiased selection:bg-brand-500/30 selection:text-brand-300;
-    background-color: #070D1A;
-    background-image: 
-      radial-gradient(1000px 500px at 85% -10%, rgba(0, 168, 150, 0.12), transparent 70%),
-      radial-gradient(800px 450px at -10% 20%, rgba(6, 182, 212, 0.08), transparent 60%),
-      radial-gradient(600px 400px at 50% 60%, rgba(245, 158, 11, 0.04), transparent 70%);
-    background-attachment: fixed;
+    @apply bg-white text-slate-900 font-sans antialiased selection:bg-teal-100 selection:text-teal-900;
+    background-color: #FFFFFF;
+    color: #0F172A;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display tracking-tight text-ink font-bold;
+    @apply font-display tracking-tight text-slate-900 font-bold;
   }
 
   :focus-visible {
     outline: 2px solid #00A896;
-    outline-offset: 3px;
+    outline-offset: 2px;
     border-radius: 6px;
   }
 }
 
 @layer components {
   .skip-link {
-    @apply sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[999] focus:rounded-lg focus:bg-brand-500 focus:px-4 focus:py-2.5 focus:font-semibold focus:text-bg focus:shadow-lg;
+    @apply sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[999] focus:rounded-lg focus:bg-slate-900 focus:px-4 focus:py-2.5 focus:font-semibold focus:text-white focus:shadow-lg;
   }
 
   .eyebrow {
-    @apply inline-flex items-center gap-2 rounded-full border border-brand-500/30 bg-brand-500/10 px-3.5 py-1 text-xs font-mono uppercase tracking-[0.14em] text-brand-300 backdrop-blur-sm;
+    @apply inline-flex items-center gap-2 rounded-full border border-teal-200 bg-teal-50 px-3.5 py-1 text-xs font-mono uppercase tracking-[0.14em] text-teal-800 font-medium;
+  }
+
+  .eyebrow-navy {
+    @apply inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-100 px-3.5 py-1 text-xs font-mono uppercase tracking-[0.14em] text-slate-800 font-medium;
   }
 
   .eyebrow-gold {
-    @apply inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-3.5 py-1 text-xs font-mono uppercase tracking-[0.14em] text-gold backdrop-blur-sm;
+    @apply inline-flex items-center gap-2 rounded-full border border-amber-200 bg-amber-50 px-3.5 py-1 text-xs font-mono uppercase tracking-[0.14em] text-amber-800 font-medium;
   }
 
   .btn {
-    @apply inline-flex items-center justify-center gap-2.5 rounded-full px-5 py-2.5 text-sm font-semibold transition-all duration-300 active:scale-95 disabled:pointer-events-none disabled:opacity-50;
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-all duration-200 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50;
   }
 
   .btn-primary {
-    @apply bg-gradient-to-r from-brand-500 to-cyanAccent text-bg font-bold shadow-glow-teal hover:shadow-[0_0_28px_rgba(0,168,150,0.55)] hover:scale-[1.02];
+    @apply bg-slate-900 text-white font-semibold shadow-sm hover:bg-slate-800 hover:shadow-md;
+  }
+
+  .btn-teal {
+    @apply bg-teal-600 text-white font-semibold shadow-sm hover:bg-teal-700 hover:shadow-md;
   }
 
   .btn-gold {
-    @apply bg-gradient-to-r from-gold to-amber-500 text-bg font-bold shadow-glow-gold hover:shadow-[0_0_28px_rgba(245,158,11,0.5)] hover:scale-[1.02];
+    @apply bg-amber-600 text-white font-semibold shadow-sm hover:bg-amber-700 hover:shadow-md;
   }
 
   .btn-ghost {
-    @apply border border-line bg-card/60 text-ink backdrop-blur-md hover:border-brand-500/60 hover:bg-bgRaised hover:text-brand-300;
+    @apply border border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900 shadow-sm;
   }
 
   .btn-secondary {
-    @apply bg-bgRaised text-ink border border-line hover:border-brand-500/50 hover:text-brand-300;
+    @apply bg-slate-100 text-slate-800 border border-slate-200 hover:bg-slate-200 hover:text-slate-900;
   }
 
   .card-enterprise {
-    @apply relative overflow-hidden rounded-xl border border-line bg-card/70 p-6 backdrop-blur-md transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-500/40 hover:bg-cardHover hover:shadow-glow-teal;
+    @apply relative overflow-hidden rounded-2xl border border-slate-200/90 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-teal-500/50 hover:shadow-xl shadow-sm;
   }
 
   .glass-panel {
-    @apply rounded-2xl border border-line/80 bg-bgRaised/60 p-6 md:p-8 backdrop-blur-xl shadow-glass;
+    @apply rounded-2xl border border-slate-200 bg-white/90 p-6 md:p-8 backdrop-blur-xl shadow-sm;
   }
 
   .glow-border {
-    @apply relative rounded-xl border border-line before:absolute before:-inset-px before:-z-10 before:rounded-xl before:bg-gradient-to-r before:from-brand-500/20 before:via-cyanAccent/20 before:to-transparent before:opacity-0 before:transition-opacity hover:before:opacity-100;
+    @apply relative rounded-xl border border-slate-200 transition-all hover:border-slate-300;
   }
 
   .bg-grid-pattern {
     background-size: 32px 32px;
     background-image: 
-      linear-gradient(to right, rgba(30, 46, 74, 0.4) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(30, 46, 74, 0.4) 1px, transparent 1px);
+      linear-gradient(to right, rgba(226, 232, 240, 0.6) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(226, 232, 240, 0.6) 1px, transparent 1px);
   }
 
   .bg-dots-pattern {
-    background-image: radial-gradient(rgba(0, 168, 150, 0.15) 1px, transparent 1px);
+    background-image: radial-gradient(rgba(148, 163, 184, 0.25) 1px, transparent 1px);
     background-size: 24px 24px;
   }
 }
 
-/* Custom modern scrollbar */
+/* Custom light modern scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #070D1A;
+  background: #F8FAFC;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1E2E4A;
+  background: #CBD5E1;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #00A896;
+  background: #94A3B8;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -119,3 +124,4 @@
     scroll-behavior: auto !important;
   }
 }
+

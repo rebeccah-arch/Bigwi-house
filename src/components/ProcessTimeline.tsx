@@ -26,7 +26,7 @@ export default function ProcessTimeline() {
   const [activeStep, setActiveStep] = useState(0)
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       {/* Step Tabs */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-3">
         {deliveryProcess.map((step, idx) => {
@@ -38,88 +38,90 @@ export default function ProcessTimeline() {
               key={step.number}
               type="button"
               onClick={() => setActiveStep(idx)}
-              className={`group flex flex-col items-start rounded-xl border p-3.5 sm:p-4 text-left transition-all duration-300 ${
+              className={`group flex flex-col items-start rounded-xl border p-3.5 sm:p-4 text-left transition-all duration-200 ${
                 isActive
-                  ? 'border-brand-500 bg-brand-500/15 shadow-glow-teal scale-[1.02]'
-                  : 'border-line bg-card/60 hover:border-lineLight hover:bg-card'
+                  ? 'border-slate-900 bg-slate-900 text-white shadow-md'
+                  : 'border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50'
               }`}
             >
               <div className="flex w-full items-center justify-between">
                 <span
                   className={`font-mono text-xs font-bold ${
-                    isActive ? 'text-brand-300' : 'text-muted'
+                    isActive ? 'text-teal-400' : 'text-slate-400'
                   }`}
                 >
                   {step.number}
                 </span>
                 <Icon
                   className={`h-4 w-4 transition-colors ${
-                    isActive ? 'text-brand-300' : 'text-muted group-hover:text-ink'
+                    isActive ? 'text-teal-300' : 'text-slate-400 group-hover:text-slate-900'
                   }`}
                 />
               </div>
               <h4
                 className={`mt-2 font-display text-sm font-bold tracking-tight line-clamp-1 ${
-                  isActive ? 'text-ink' : 'text-muted group-hover:text-ink'
+                  isActive ? 'text-white' : 'text-slate-900'
                 }`}
               >
                 {step.title.split(' ')[0]}
               </h4>
-              <span className="font-mono text-[11px] text-muted line-clamp-1">{step.tagline}</span>
+              <span className={`font-sans text-xs line-clamp-1 ${isActive ? 'text-slate-300' : 'text-slate-500'}`}>
+                {step.tagline}
+              </span>
             </button>
           )
         })}
       </div>
 
       {/* Active Stage Detailed Spotlight */}
-      <div className="relative overflow-hidden rounded-2xl border border-lineLight bg-gradient-to-r from-bgRaised via-card to-bgRaised p-6 md:p-8 backdrop-blur-xl shadow-glass">
+      <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 md:p-8 shadow-sm">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-center">
           <div className="lg:col-span-7 space-y-4">
             <div className="flex items-center gap-3">
-              <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-brand-500/20 font-mono text-sm font-bold text-brand-300 border border-brand-500/30">
+              <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-teal-50 font-mono text-sm font-bold text-teal-800 border border-teal-200">
                 {deliveryProcess[activeStep].number}
               </span>
-              <span className="font-mono text-xs font-semibold uppercase tracking-wider text-cyanAccent">
+              <span className="font-mono text-xs font-semibold uppercase tracking-wider text-teal-700">
                 Stage {activeStep + 1} of 6 &bull; {deliveryProcess[activeStep].tagline}
               </span>
             </div>
 
-            <h3 className="font-display text-2xl md:text-3xl font-bold text-ink">
+            <h3 className="font-display text-2xl md:text-3xl font-bold text-slate-900">
               {deliveryProcess[activeStep].title}
             </h3>
 
-            <p className="text-sm md:text-base text-muted leading-relaxed">
+            <p className="text-sm md:text-base text-slate-600 leading-relaxed">
               {deliveryProcess[activeStep].description}
             </p>
 
             <div className="pt-2 flex flex-wrap gap-3">
-              <span className="font-mono text-xs text-brand-300 font-medium">
-                Disciplined Engineering &bull; Measurable Milestones
+              <span className="font-sans text-xs text-slate-500 font-medium">
+                Disciplined Engineering &bull; Rigorous Milestone Governance
               </span>
             </div>
           </div>
 
-          <div className="lg:col-span-5 rounded-xl border border-line bg-bgSubtle/80 p-5 backdrop-blur-md">
-            <h4 className="font-mono text-xs font-semibold uppercase tracking-wider text-gold mb-3 flex items-center gap-1.5">
-              <CheckCircle2 className="h-4 w-4 text-gold" />
+          <div className="lg:col-span-5 rounded-xl border border-slate-200 bg-slate-50 p-5">
+            <h4 className="font-mono text-xs font-semibold uppercase tracking-wider text-slate-800 mb-3 flex items-center gap-1.5">
+              <CheckCircle2 className="h-4 w-4 text-teal-600" />
               Key Phase Deliverables
             </h4>
 
             <ul className="space-y-2.5">
               {deliveryProcess[activeStep].outputs.map((output) => (
-                <li key={output} className="flex items-start gap-2.5 text-xs md:text-sm text-ink/90">
-                  <span className="mt-1 h-1.5 w-1.5 rounded-full bg-brand-400 flex-shrink-0" />
+                <li key={output} className="flex items-start gap-2.5 text-xs md:text-sm text-slate-700">
+                  <span className="mt-1 h-1.5 w-1.5 rounded-full bg-teal-600 flex-shrink-0" />
                   <span>{output}</span>
                 </li>
               ))}
             </ul>
 
-            <div className="mt-5 pt-4 border-t border-line/60 flex items-center justify-between text-xs text-muted">
+            <div className="mt-5 pt-4 border-t border-slate-200 flex items-center justify-between text-xs text-slate-500">
               <span>Next Stage:</span>
               <button
                 type="button"
                 onClick={() => setActiveStep((prev) => (prev + 1) % deliveryProcess.length)}
-                className="font-mono text-brand-300 hover:text-brand-200 flex items-center gap-1 font-semibold"
+                className="font-sans text-teal-700 hover:text-teal-900 flex items-center gap-1 font-semibold"
               >
                 {deliveryProcess[(activeStep + 1) % deliveryProcess.length].title}
                 <ArrowRight className="h-3 w-3" />

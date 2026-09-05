@@ -26,11 +26,11 @@ export async function POST(request: Request) {
       name,
       email,
       organization: organization || 'Enterprise / Private',
-      need: need || 'Custom Software Development',
+      need: need || 'Enterprise Software Development',
       budgetRange: budgetRange || 'Flexible',
       timeline: timeline || 'Standard',
       projectScope,
-      division: 'BIGWI HOUSE (DataSphere Consulting Ltd.)'
+      division: 'DataSphere Consulting Ltd'
     }
 
     console.log('[API: /api/proposal] New Proposal Request Received:', proposalPayload)

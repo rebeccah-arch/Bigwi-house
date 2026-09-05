@@ -23,47 +23,46 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: 'BIGWI HOUSE — Digital Innovation & Product Development Division',
-    template: '%s | BIGWI HOUSE — DataSphere Consulting Ltd.',
+    default: 'DataSphere Consulting Ltd — Enterprise Software & Data Engineering',
+    template: '%s | DataSphere Consulting Ltd',
   },
   description:
-    'BIGWI HOUSE is the engineering and digital innovation division of DataSphere Consulting Ltd. We turn ideas into digital businesses through enterprise software, web and mobile apps, AI & machine learning, and data intelligence.',
+    'DataSphere Consulting Ltd delivers enterprise software engineering, robust data pipelines, analytics & business intelligence, cloud architecture, and digital transformation for organizations across East Africa and beyond.',
   keywords: [
-    'Digital Transformation Rwanda',
-    'Enterprise Software Kigali',
     'DataSphere Consulting',
-    'BIGWI HOUSE',
-    'AI Solutions East Africa',
-    'Mobile App Development Rwanda',
-    'Data Analytics BI',
-    'Cloud Architecture',
-    'SaaS Engineering Africa',
+    'Data Engineering Rwanda',
+    'Enterprise Software Kigali',
+    'Data Analytics BI East Africa',
+    'Custom Software Development',
+    'Cloud DevOps Africa',
+    'SaaS Engineering',
+    'Digital Transformation',
   ],
-  authors: [{ name: 'DataSphere Consulting Ltd.' }],
-  creator: 'BIGWI HOUSE',
-  publisher: 'DataSphere Consulting Ltd.',
-  metadataBase: new URL('https://bigwihouse.datasphere.rw'),
+  authors: [{ name: 'DataSphere Consulting Ltd' }],
+  creator: 'DataSphere Consulting Ltd',
+  publisher: 'DataSphere Consulting Ltd',
+  metadataBase: new URL('https://datasphere.rw'),
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://bigwihouse.datasphere.rw',
-    title: 'BIGWI HOUSE — We Turn Ideas Into Digital Businesses',
+    url: 'https://datasphere.rw',
+    title: 'DataSphere Consulting Ltd — Transforming Enterprise Data Into Value',
     description:
-      'Digital Innovation and Product Development Division of DataSphere Consulting Ltd. Strategy, engineering, AI, and scalable digital platforms.',
-    siteName: 'BIGWI HOUSE',
+      'Enterprise Software, Data Engineering, Business Intelligence, and Digital Consulting.',
+    siteName: 'DataSphere Consulting',
     images: [
       {
         url: '/logo-datasphere.jpeg',
         width: 800,
         height: 800,
-        alt: 'DataSphere BIGWI HOUSE Logo',
+        alt: 'DataSphere Consulting Ltd Logo',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'BIGWI HOUSE — Digital Innovation & Engineering',
-    description: 'We turn business strategy into working software and scalable digital products.',
+    title: 'DataSphere Consulting Ltd — Enterprise Software & Data Engineering',
+    description: 'Transforming enterprise data and operations with scalable software solutions.',
     images: ['/logo-datasphere.jpeg'],
   },
   robots: {
@@ -82,7 +81,7 @@ export default function RootLayout({
       lang="en"
       className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable} scroll-smooth`}
     >
-      <body className="min-h-screen bg-bg text-ink font-sans antialiased overflow-x-hidden">
+      <body className="min-h-screen bg-white text-slate-900 font-sans antialiased overflow-x-hidden selection:bg-teal-100 selection:text-teal-900">
         <ClientShell>{children}</ClientShell>
       </body>
     </html>
