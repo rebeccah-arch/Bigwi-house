@@ -1,16 +1,17 @@
 'use client'
 
 import React, { useState, FormEvent } from 'react'
-import { 
-  Sparkles, 
-  Send, 
-  CheckCircle2, 
-  AlertCircle, 
-  Loader2, 
-  Mail, 
-  MapPin, 
-  Lock, 
-  Clock 
+import Image from 'next/image'
+import { motion } from 'framer-motion'
+import {
+  Send,
+  CheckCircle2,
+  AlertCircle,
+  Loader2,
+  Mail,
+  MapPin,
+  Lock,
+  Clock,
 } from '@/components/Icons'
 import { services } from '@/content/bigwiContent'
 
@@ -67,23 +68,35 @@ export default function ContactPage() {
 
   return (
     <div className="space-y-20 py-10">
-      {/* 1. Header Banner */}
-      <section className="relative">
-        <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl space-y-4">
-            <div className="inline-flex items-center gap-2 rounded-full border border-teal-200 bg-teal-50 px-3.5 py-1.5 font-mono text-xs text-teal-800 font-semibold">
-              <Sparkles className="h-3.5 w-3.5 text-teal-600" />
-              <span>Direct Technical Channel &bull; Technical Consultation</span>
-            </div>
+      {/* 1. Header Banner with Full Cover Background Image */}
+      <section className="relative min-h-[440px] lg:min-h-[480px] flex items-center overflow-hidden border-b border-slate-200">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/hero-team.jpg"
+            alt="DataSphere Consultation &amp; Client Discovery"
+            fill
+            className="object-cover object-center"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-white/60" />
+          <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-white/30" />
+        </div>
 
+        <div className="relative z-10 mx-auto max-w-wide w-full px-4 sm:px-6 lg:px-8 py-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="max-w-3xl space-y-6"
+          >
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-extrabold tracking-tight text-slate-900 leading-tight">
               Tell us about your project.
             </h1>
 
-            <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
+            <p className="text-base sm:text-lg text-slate-700 leading-relaxed font-normal bg-white/60 backdrop-blur-xs p-1 rounded-lg">
               Share details about your organization, current challenges, and project goals. A senior solutions architect from DataSphere Consulting Ltd will follow up to structure an initial technical discovery session.
             </p>
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -91,12 +104,27 @@ export default function ContactPage() {
       <section className="relative">
         <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-            {/* Left Column: Company Information & Confidentiality */}
-            <div className="lg:col-span-5 space-y-6">
-              <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6 md:p-8 space-y-6 shadow-sm">
-                <h3 className="font-display text-xl font-bold text-slate-900 border-b border-slate-200 pb-4">
-                  DataSphere Consulting Ltd
-                </h3>
+            {/* Left Column: Company Information & Real Office Photography */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="lg:col-span-5 space-y-6"
+            >
+              <div className="rounded-3xl border border-slate-200 bg-white p-6 md:p-8 space-y-6 shadow-sm">
+                <div className="relative h-48 w-full rounded-2xl overflow-hidden bg-slate-100">
+                  <Image
+                    src="/images/kigali-skyline.jpg"
+                    alt="DataSphere Kigali Hub"
+                    fill
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
+                  <div className="absolute bottom-3 left-3 text-white">
+                    <p className="font-mono text-[10px] font-bold text-teal-300 uppercase">Kigali Heights, Rwanda</p>
+                    <p className="text-xs font-semibold">East African Regional Delivery Hub</p>
+                  </div>
+                </div>
 
                 <div className="space-y-4 text-sm">
                   <div className="flex items-start gap-3">
@@ -105,7 +133,7 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <strong className="block text-slate-900 font-semibold">Headquarters</strong>
-                      <p className="text-slate-600 text-xs font-medium">Kigali, Rwanda &bull; East African Regional Hub</p>
+                      <p className="text-slate-600 text-xs font-medium">Kigali Heights, Boulevard de l&apos;Uganda, Kigali, Rwanda</p>
                     </div>
                   </div>
 
@@ -115,7 +143,7 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <strong className="block text-slate-900 font-semibold">Corporate Inquiries</strong>
-                      <p className="text-slate-600 text-xs font-medium">info@datasphere.rw &bull; consulting@datasphere.rw</p>
+                      <p className="text-slate-600 text-xs font-medium">info@datasphere.rw • consulting@datasphere.rw</p>
                     </div>
                   </div>
 
@@ -130,7 +158,7 @@ export default function ContactPage() {
                   </div>
                 </div>
 
-                <div className="pt-4 border-t border-slate-200">
+                <div className="pt-4 border-t border-slate-100">
                   <div className="flex items-center gap-2 text-slate-900 font-sans text-xs font-semibold mb-1">
                     <Lock className="h-3.5 w-3.5 text-teal-600" />
                     Enterprise Confidentiality
@@ -140,10 +168,15 @@ export default function ContactPage() {
                   </p>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Right Column: Interactive Project Inquiry Form */}
-            <div className="lg:col-span-7 rounded-2xl border border-slate-200 bg-white p-6 md:p-8 shadow-sm">
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+              className="lg:col-span-7 rounded-3xl border border-slate-200 bg-white p-6 md:p-8 shadow-sm"
+            >
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
@@ -289,7 +322,7 @@ export default function ContactPage() {
                   )}
                 </button>
               </form>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>

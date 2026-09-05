@@ -1,48 +1,84 @@
+'use client'
+
 import React from 'react'
-import type { Metadata } from 'next'
 import Link from 'next/link'
-import { 
-  Building2, 
-  Layers, 
-  Sparkles, 
-  ArrowRight, 
-  CheckCircle2, 
-  Compass, 
-  Target, 
+import Image from 'next/image'
+import { motion, type Variants } from 'framer-motion'
+import {
+  Building2,
+  Layers,
+  ArrowRight,
+  CheckCircle2,
+  Compass,
+  Target,
+  ShieldCheck,
 } from '@/components/Icons'
-import { 
-  orgStructure, 
-  vision, 
-  mission, 
-  competitiveAdvantage, 
+import {
+  orgStructure,
+  vision,
+  mission,
+  competitiveAdvantage,
 } from '@/content/bigwiContent'
 
-export const metadata: Metadata = {
-  title: 'About DataSphere Consulting Ltd',
-  description:
-    'Learn about DataSphere Consulting Ltd, our corporate structure, data engineering capabilities, and digital solutions division across East Africa.',
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1 },
+  },
+}
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 15 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: 'easeOut' },
+  },
 }
 
 export default function AboutPage() {
   return (
     <div className="space-y-20 md:space-y-28 py-10">
-      {/* 1. Header Banner */}
-      <section className="relative">
-        <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl space-y-4">
-            <div className="inline-flex items-center gap-2 rounded-full border border-teal-200 bg-teal-50 px-3.5 py-1.5 font-mono text-xs text-teal-800 font-semibold">
-              <Sparkles className="h-3.5 w-3.5 text-teal-600" />
-              <span>Corporate Profile &bull; Enterprise Consulting</span>
-            </div>
+      {/* 1. Header Banner with Full Cover Background Image */}
+      <section className="relative min-h-[480px] lg:min-h-[540px] flex items-center overflow-hidden border-b border-slate-200">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/hero-team.jpg"
+            alt="DataSphere Engineering and Advisory Team in Kigali"
+            fill
+            className="object-cover object-center"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-white/60" />
+          <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-white/30" />
+        </div>
 
+        <div className="relative z-10 mx-auto max-w-wide w-full px-4 sm:px-6 lg:px-8 py-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="max-w-3xl space-y-6"
+          >
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-extrabold tracking-tight text-slate-900 leading-tight">
               Where strategic advisory and software engineering meet.
             </h1>
 
-            <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
+            <p className="text-base sm:text-lg text-slate-700 leading-relaxed font-normal bg-white/60 backdrop-blur-xs p-1 rounded-lg">
               <strong className="text-slate-900 font-semibold">DataSphere Consulting Ltd</strong> is a premier software engineering, data analytics, and digital transformation consulting firm based in Kigali, Rwanda. We turn complex organizational challenges and disparate data assets into scalable, resilient digital platforms.
             </p>
-          </div>
+
+            <div className="flex flex-wrap items-center gap-4 pt-2">
+              <Link href="/contact" className="btn btn-primary text-sm py-3 px-6 shadow-md">
+                <span>Partner With Us</span>
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link href="/work" className="btn btn-ghost text-sm py-3 px-6 shadow-sm">
+                <span>Explore Deployments</span>
+              </Link>
+            </div>
+          </motion.div>
         </div>
       </section>
 
@@ -50,7 +86,6 @@ export default function AboutPage() {
       <section id="structure" className="relative">
         <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8 space-y-8">
           <div className="max-w-2xl">
-            <span className="eyebrow mb-2">Organizational Structure</span>
             <h2 className="text-3xl sm:text-4xl font-display font-bold text-slate-900">
               Integrated Capabilities &amp; Specialized Units
             </h2>
@@ -94,7 +129,7 @@ export default function AboutPage() {
             <div className="flex justify-center">
               <div className="flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-1.5 font-sans text-xs text-slate-600 shadow-sm font-medium">
                 <span>Direct Strategic Alignment &amp; Engineering Pipeline</span>
-                <span className="text-teal-600">&darr;</span>
+                <span className="text-teal-600">↓</span>
               </div>
             </div>
 
@@ -165,19 +200,29 @@ export default function AboutPage() {
       {/* 4. Strategic Philosophy & Innovation Lab */}
       <section className="relative">
         <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8">
-          <div className="rounded-3xl border border-slate-200 bg-slate-50 p-8 md:p-12 space-y-6 shadow-sm">
-            <span className="eyebrow">Engineering Philosophy</span>
-            <h2 className="text-3xl sm:text-4xl font-display font-bold text-slate-900">
-              Reliable Engineering for Real-World Demands
-            </h2>
+          <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-900 text-white p-8 md:p-14 shadow-xl">
+            <div className="absolute inset-0 opacity-20">
+              <Image
+                src="/images/executive-strategy.jpg"
+                alt="DataSphere Executive Strategy Session"
+                fill
+                className="object-cover"
+              />
+            </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 text-sm sm:text-base text-slate-600 leading-relaxed">
-              <p>
-                Every engagement at DataSphere begins with a <strong>business-first diagnosis</strong>: understanding core organizational workflows, compliance standards, and operational constraints before writing architecture. We avoid one-size-fits-all software templates.
-              </p>
-              <p>
-                Our team builds production systems applying modern data pipelines, cloud-native DevOps, and robust API frameworks to concrete institutional priorities across East Africa. We design resilient systems built for high transaction volume, data integrity, and long-term maintainability.
-              </p>
+            <div className="relative z-10 space-y-6 max-w-3xl">
+              <h2 className="text-3xl sm:text-4xl font-display font-extrabold text-white">
+                Reliable Engineering for Real-World Demands
+              </h2>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm sm:text-base text-slate-300 leading-relaxed">
+                <p>
+                  Every engagement at DataSphere begins with a <strong className="text-white">business-first diagnosis</strong>: understanding core organizational workflows, compliance standards, and operational constraints before writing architecture. We avoid one-size-fits-all software templates.
+                </p>
+                <p>
+                  Our team builds production systems applying modern data pipelines, cloud-native DevOps, and robust API frameworks to concrete institutional priorities across East Africa. We design resilient systems built for high transaction volume, data integrity, and long-term maintainability.
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -187,7 +232,6 @@ export default function AboutPage() {
       <section className="relative">
         <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8 space-y-8">
           <div className="max-w-2xl">
-            <span className="eyebrow-navy mb-2">Key Differentiators</span>
             <h2 className="text-3xl sm:text-4xl font-display font-bold text-slate-900">
               Why Organizations Choose DataSphere
             </h2>
@@ -196,10 +240,17 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={containerVariants}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
             {competitiveAdvantage.map((adv, idx) => (
-              <div
+              <motion.div
                 key={adv}
+                variants={itemVariants}
                 className="card-enterprise flex flex-col justify-between"
               >
                 <div>
@@ -209,9 +260,9 @@ export default function AboutPage() {
                 <div className="mt-4 pt-3 border-t border-slate-100">
                   <span className="font-sans text-xs text-slate-500 font-medium">Guaranteed Execution Standard</span>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -226,7 +277,7 @@ export default function AboutPage() {
               Schedule a discovery consultation with our senior solutions architects to explore how we can architect your next software platform or data pipeline.
             </p>
             <div className="flex justify-center gap-4 pt-2">
-              <Link href="/contact" className="btn btn-teal">
+              <Link href="/contact" className="btn btn-teal py-3 px-7">
                 <span>Start Technical Discovery</span>
                 <ArrowRight className="h-4 w-4" />
               </Link>

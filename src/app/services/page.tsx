@@ -1,35 +1,31 @@
+'use client'
+
 import React from 'react'
-import type { Metadata } from 'next'
 import Link from 'next/link'
-import { 
-  Layers, 
-  Smartphone, 
-  Cpu, 
-  BarChart3, 
-  Workflow, 
-  Cloud, 
-  Palette, 
-  Rocket, 
-  ShieldCheck, 
-  Sparkles, 
-  ArrowRight, 
-  CheckCircle2, 
-  Landmark, 
-  HeartPulse, 
-  Building2, 
-  Globe2, 
-  Sprout, 
-  Truck, 
-  Briefcase, 
-  TrendingUp 
+import Image from 'next/image'
+import { motion, type Variants } from 'framer-motion'
+import {
+  Layers,
+  Smartphone,
+  Cpu,
+  BarChart3,
+  Workflow,
+  Cloud,
+  Palette,
+  Rocket,
+  ShieldCheck,
+  ArrowRight,
+  CheckCircle2,
+  Landmark,
+  HeartPulse,
+  Building2,
+  Globe2,
+  Sprout,
+  Truck,
+  Briefcase,
+  TrendingUp,
 } from '@/components/Icons'
 import { services, targetClientsDetailed } from '@/content/bigwiContent'
-
-export const metadata: Metadata = {
-  title: 'Services & Solutions | DataSphere Consulting Ltd',
-  description:
-    'Explore the core software engineering, data analytics, and digital transformation service lines delivered by DataSphere Consulting Ltd.',
-}
 
 const SERVICE_ICONS: Record<string, React.ElementType> = {
   Layers,
@@ -56,40 +52,83 @@ const SECTOR_ICONS: Record<string, React.ElementType> = {
   TrendingUp,
 }
 
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.08 },
+  },
+}
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 15 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: 'easeOut' },
+  },
+}
+
 export default function ServicesPage() {
   return (
     <div className="space-y-20 md:space-y-28 py-10">
-      {/* 1. Header Banner */}
-      <section className="relative">
-        <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl space-y-4">
-            <div className="inline-flex items-center gap-2 rounded-full border border-teal-200 bg-teal-50 px-3.5 py-1.5 font-mono text-xs text-teal-800 font-semibold">
-              <Sparkles className="h-3.5 w-3.5 text-teal-600" />
-              <span>Full-Stack Engineering &amp; Solutions</span>
-            </div>
+      {/* 1. Header Banner with Full Cover Background */}
+      <section className="relative min-h-[480px] lg:min-h-[540px] flex items-center overflow-hidden border-b border-slate-200">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/data-engineer.jpg"
+            alt="DataSphere Senior Architect &amp; Data Pipeline"
+            fill
+            className="object-cover object-center"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-white/60" />
+          <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-white/30" />
+        </div>
 
+        <div className="relative z-10 mx-auto max-w-wide w-full px-4 sm:px-6 lg:px-8 py-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="max-w-3xl space-y-6"
+          >
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-extrabold tracking-tight text-slate-900 leading-tight">
               Enterprise software and data solutions engineered for scale.
             </h1>
 
-            <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
+            <p className="text-base sm:text-lg text-slate-700 leading-relaxed font-normal bg-white/60 backdrop-blur-xs p-1 rounded-lg">
               From high-concurrency custom platforms and native mobile apps to modern data pipelines and real-time BI telemetry, DataSphere delivers robust, maintainable technology systems.
             </p>
-          </div>
+
+            <div className="flex flex-wrap items-center gap-3 pt-2">
+              <Link href="/contact" className="btn btn-primary text-sm py-3 px-6 shadow-md">
+                <span>Inquire for Your Organization</span>
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+          </motion.div>
         </div>
       </section>
 
       {/* 2. Detailed Service Lines */}
       <section className="relative">
         <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8 space-y-12">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={containerVariants}
+            className="grid grid-cols-1 md:grid-cols-2 gap-8"
+          >
             {services.map((service, idx) => {
               const Icon = SERVICE_ICONS[service.icon] || Layers
 
               return (
-                <div
-                  id={service.id}
+                <motion.div
                   key={service.id}
+                  id={service.id}
+                  variants={itemVariants}
                   className="card-enterprise flex flex-col justify-between p-8 scroll-mt-28"
                 >
                   <div className="space-y-6">
@@ -100,7 +139,7 @@ export default function ServicesPage() {
                         </div>
                         <div>
                           <span className="font-mono text-xs font-bold text-teal-800">
-                            0{idx + 1} &bull; {service.category}
+                            0{idx + 1} • {service.category}
                           </span>
                           <h2 className="font-display text-xl font-bold text-slate-900">
                             {service.title}
@@ -156,10 +195,10 @@ export default function ServicesPage() {
                       <ArrowRight className="h-3.5 w-3.5" />
                     </Link>
                   </div>
-                </div>
+                </motion.div>
               )
             })}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -167,7 +206,6 @@ export default function ServicesPage() {
       <section id="sectors" className="relative">
         <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8 space-y-10">
           <div className="max-w-2xl">
-            <span className="eyebrow-navy mb-2">Industry Focus</span>
             <h2 className="text-3xl sm:text-4xl font-display font-bold text-slate-900">
               Who We Serve
             </h2>
@@ -176,12 +214,19 @@ export default function ServicesPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={containerVariants}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
             {targetClientsDetailed.map((sector) => {
               const Icon = SECTOR_ICONS[sector.icon] || Landmark
               return (
-                <div
+                <motion.div
                   key={sector.name}
+                  variants={itemVariants}
                   className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm hover:border-slate-300 transition-colors"
                 >
                   <div className="flex items-center gap-3 mb-4">
@@ -205,10 +250,10 @@ export default function ServicesPage() {
                       </span>
                     ))}
                   </div>
-                </div>
+                </motion.div>
               )
             })}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -223,7 +268,7 @@ export default function ServicesPage() {
               Whether you require a complete enterprise platform or specialized data pipeline engineering for an existing system, our team is ready.
             </p>
             <div className="flex justify-center gap-4 pt-2">
-              <Link href="/contact" className="btn btn-teal">
+              <Link href="/contact" className="btn btn-teal py-3 px-7">
                 <span>Start Technical Discovery</span>
                 <ArrowRight className="h-4 w-4" />
               </Link>

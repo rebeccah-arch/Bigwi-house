@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { motion, AnimatePresence, type Variants } from 'framer-motion'
 import {
   ArrowRight,
   Sparkles,
@@ -28,6 +29,9 @@ import {
   Send,
   Loader2,
   AlertCircle,
+  MapPin,
+  Clock,
+  Lock,
 } from '@/components/Icons'
 
 import {
@@ -51,23 +55,11 @@ const SERVICE_ICONS: Record<string, React.ElementType> = {
   ShieldCheck,
 }
 
-const SECTOR_ICONS: Record<string, React.ElementType> = {
-  Landmark,
-  HeartPulse,
-  Building2,
-  Globe2,
-  GraduationCap: Building2,
-  Sprout,
-  Truck,
-  Briefcase,
-  TrendingUp,
-}
-
 // Case Gallery Items matching the TikTok video grid style
 const CASE_GALLERY = [
   {
     id: '001',
-    code: '001 &bull; KIGALI',
+    code: '001 • KIGALI',
     title: 'Core Banking & Credit Analytics Engine',
     sector: 'Financial Services',
     image: '/images/hero-team.jpg',
@@ -75,7 +67,7 @@ const CASE_GALLERY = [
   },
   {
     id: '002',
-    code: '002 &bull; REGIONAL',
+    code: '002 • REGIONAL',
     title: 'Mobile Commerce & Payment Switches',
     sector: 'FinTech & Consumer',
     image: '/images/mobile-banking.jpg',
@@ -83,7 +75,7 @@ const CASE_GALLERY = [
   },
   {
     id: '003',
-    code: '003 &bull; EAST AFRICA',
+    code: '003 • EAST AFRICA',
     title: 'Real-Time Logistics & Freight Telematics',
     sector: 'Supply Chain',
     image: '/images/logistics-terminal.jpg',
@@ -91,7 +83,7 @@ const CASE_GALLERY = [
   },
   {
     id: '004',
-    code: '004 &bull; NATIONAL',
+    code: '004 • NATIONAL',
     title: 'Field Data & Community Monitoring Platform',
     sector: 'NGOs & Development',
     image: '/images/data-engineer.jpg',
@@ -99,7 +91,7 @@ const CASE_GALLERY = [
   },
   {
     id: '005',
-    code: '005 &bull; ENTERPRISE',
+    code: '005 • ENTERPRISE',
     title: 'Executive Digital Transformation Advisory',
     sector: 'Corporate Governance',
     image: '/images/executive-strategy.jpg',
@@ -107,7 +99,7 @@ const CASE_GALLERY = [
   },
   {
     id: '006',
-    code: '006 &bull; HUB',
+    code: '006 • HUB',
     title: 'Cloud Infrastructure & API Gateway',
     sector: 'Cloud & DevOps',
     image: '/images/kigali-skyline.jpg',
@@ -118,16 +110,16 @@ const CASE_GALLERY = [
 const LOCATION_HUBS = [
   {
     id: 'kigali-hub',
-    tag: 'HEADQUARTERS &bull; KIGALI',
+    tab: 'Engineering HQ',
     title: 'Engineering Hub in Kigali Heights',
-    description: 'Our primary software engineering center, data science laboratory, and executive solutions advisory team.',
+    description: 'Our primary software engineering center, data science laboratory, and executive solutions advisory team in Kigali, Rwanda.',
     image: '/images/hero-team.jpg',
     latLng: '-1.9441° S, 30.0619° E',
     activeTeam: '24 Senior Engineers & Data Scientists',
   },
   {
     id: 'strategy-center',
-    tag: 'STRATEGY &bull; BUSINESS DISTRICT',
+    tab: 'Strategy Lab',
     title: 'Executive Strategy & Architecture Center',
     description: 'Dedicated board-level digital modernization consulting and enterprise system blueprint design.',
     image: '/images/executive-strategy.jpg',
@@ -136,7 +128,7 @@ const LOCATION_HUBS = [
   },
   {
     id: 'regional-network',
-    tag: 'REGIONAL &bull; EAST AFRICA',
+    tab: 'Cloud Network',
     title: 'Distributed Cloud & Data Network',
     description: 'Multi-region cloud infrastructure serving high-concurrency enterprise workloads across East Africa.',
     image: '/images/kigali-skyline.jpg',
@@ -144,6 +136,28 @@ const LOCATION_HUBS = [
     activeTeam: '24/7 SLA Operations & SRE Support',
   },
 ]
+
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+}
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: 'easeOut',
+    },
+  },
+}
 
 export default function HomePage() {
   const [selectedCategory, setSelectedCategory] = useState<string>('All')
@@ -205,8 +219,8 @@ export default function HomePage() {
 
   return (
     <div className="space-y-24 md:space-y-36 pb-16">
-      {/* 1. HERO SECTION WITH EXPANDING SCROLL DYNAMICS */}
-      <section className="relative min-h-[620px] lg:min-h-[720px] flex items-center justify-center overflow-hidden border-b border-slate-200">
+      {/* 1. HERO SECTION WITH EXPANDING SCROLL DYNAMICS & FRAMER MOTION */}
+      <section className="relative min-h-[640px] lg:min-h-[740px] flex items-center justify-center overflow-hidden border-b border-slate-200">
         {/* Full Cover Background Image with Scroll Scale */}
         <div
           className="absolute inset-0 z-0 transition-transform duration-700 ease-out"
@@ -230,7 +244,12 @@ export default function HomePage() {
         <div className="relative z-10 mx-auto max-w-wide w-full px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
           <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12">
             {/* Left Content */}
-            <div className="lg:col-span-7 space-y-6 max-w-2xl">
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: 'easeOut' }}
+              className="lg:col-span-7 space-y-6 max-w-2xl"
+            >
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-extrabold tracking-tight text-slate-900 leading-[1.1]">
                 Enterprise Software &amp;{' '}
                 <span className="text-teal-700">
@@ -238,7 +257,7 @@ export default function HomePage() {
                 </span>
               </h1>
 
-              <p className="text-base sm:text-lg text-slate-700 leading-relaxed font-normal bg-white/50 backdrop-blur-xs p-1 rounded-lg">
+              <p className="text-base sm:text-lg text-slate-700 leading-relaxed font-normal bg-white/60 backdrop-blur-xs p-1 rounded-lg">
                 We partner with leading enterprises, financial institutions, and public organizations across East Africa to architect mission-critical software, modern data pipelines, and intelligent executive dashboards.
               </p>
 
@@ -256,7 +275,12 @@ export default function HomePage() {
               </div>
 
               {/* Trust Metric Highlights */}
-              <div className="grid grid-cols-3 gap-4 border-t border-slate-300/80 pt-6 mt-6 bg-white/80 backdrop-blur-md p-4 rounded-2xl border shadow-sm">
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="grid grid-cols-3 gap-4 border-t border-slate-300/80 pt-6 mt-6 bg-white/85 backdrop-blur-md p-4 rounded-2xl border shadow-sm"
+              >
                 <div>
                   <div className="font-display text-2xl sm:text-3xl font-extrabold text-slate-900">10+</div>
                   <p className="font-sans text-xs text-slate-600 mt-0.5 font-semibold">Core Capabilities</p>
@@ -269,11 +293,16 @@ export default function HomePage() {
                   <div className="font-display text-2xl sm:text-3xl font-extrabold text-slate-900">100%</div>
                   <p className="font-sans text-xs text-slate-600 mt-0.5 font-semibold">Custom Codebase</p>
                 </div>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
 
             {/* Right Feature Card */}
-            <div className="lg:col-span-5 flex flex-col justify-end items-start lg:items-end space-y-3">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.7, delay: 0.25 }}
+              className="lg:col-span-5 flex flex-col justify-end items-start lg:items-end space-y-3"
+            >
               <div className="rounded-2xl border border-white/60 bg-white/95 p-5 shadow-xl backdrop-blur-md max-w-sm space-y-3">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
@@ -290,7 +319,7 @@ export default function HomePage() {
                   <span className="text-teal-700">Zero-Downtime Deployments</span>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -298,19 +327,25 @@ export default function HomePage() {
       {/* 2. EDITORIAL NARRATIVE & METRIC TICKERS (TikTok Video Style 0:06-0:09) */}
       <section className="relative">
         <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8 space-y-12">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-60px' }}
+            variants={containerVariants}
+            className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center"
+          >
             {/* Left Editorial Text */}
-            <div className="lg:col-span-6 space-y-4">
+            <motion.div variants={itemVariants} className="lg:col-span-6 space-y-4">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold text-slate-900 leading-tight">
                 Your enterprise is scaling. Don&apos;t just collect data — <span className="text-teal-700">find what&apos;s next.</span>
               </h2>
               <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
                 We help you move forward with clarity, confidence, and top-tier African engineering talent by your side.
               </p>
-            </div>
+            </motion.div>
 
             {/* Right Metric Highlights Tickers */}
-            <div className="lg:col-span-6 grid grid-cols-2 sm:grid-cols-3 gap-4">
+            <motion.div variants={itemVariants} className="lg:col-span-6 grid grid-cols-2 sm:grid-cols-3 gap-4">
               <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm hover:shadow-md transition-shadow">
                 <div className="font-display text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
                   12<span className="text-teal-600">+</span>
@@ -334,11 +369,17 @@ export default function HomePage() {
                 <div className="mt-2 font-mono text-xs font-bold text-slate-900 uppercase">System Uptime SLA</div>
                 <p className="mt-1 text-[11px] text-slate-500">Zero-downtime containerized clusters</p>
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
           {/* Large Visual Feature Banner with Subtitle (TikTok Style) */}
-          <div className="relative h-72 sm:h-96 w-full rounded-3xl overflow-hidden border border-slate-200 shadow-md">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.7 }}
+            className="relative h-72 sm:h-96 w-full rounded-3xl overflow-hidden border border-slate-200 shadow-md"
+          >
             <Image
               src="/images/executive-strategy.jpg"
               alt="DataSphere Executive Strategy and System Architecture"
@@ -358,72 +399,91 @@ export default function HomePage() {
                 <ArrowRight className="h-3.5 w-3.5" />
               </Link>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* 3. "OUR CASES" VISUAL GALLERY (TikTok Style Grid) */}
       <section className="relative">
         <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8 space-y-8">
-          <div className="text-center max-w-2xl mx-auto space-y-2">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center max-w-2xl mx-auto space-y-2"
+          >
             <h2 className="text-3xl sm:text-5xl font-display font-extrabold text-slate-900 tracking-tight">
               OUR CASES
             </h2>
             <p className="text-sm sm:text-base text-slate-600">
               High-concurrency systems engineered for leading African enterprises.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-60px' }}
+            variants={containerVariants}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
             {CASE_GALLERY.map((item) => (
-              <Link
-                key={item.id}
-                href="/work"
-                className="group relative block overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm hover:shadow-xl hover:border-teal-500/50 transition-all duration-300"
-              >
-                {/* Image Container */}
-                <div className="relative h-56 w-full overflow-hidden bg-slate-100">
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    fill
-                    className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/25 to-transparent" />
+              <motion.div key={item.id} variants={itemVariants}>
+                <Link
+                  href="/work"
+                  className="group relative block overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm hover:shadow-xl hover:border-teal-500/50 transition-all duration-300"
+                >
+                  {/* Image Container */}
+                  <div className="relative h-56 w-full overflow-hidden bg-slate-100">
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                      fill
+                      className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/25 to-transparent" />
 
-                  {/* Code Badge */}
-                  <div className="absolute top-3 left-3 z-10 rounded-md bg-white/95 px-2.5 py-1 font-mono text-[10px] font-bold text-slate-900 backdrop-blur-sm shadow-sm">
-                    {item.code}
+                    {/* Code Badge */}
+                    <div className="absolute top-3 left-3 z-10 rounded-md bg-white/95 px-2.5 py-1 font-mono text-[10px] font-bold text-slate-900 backdrop-blur-sm shadow-sm">
+                      {item.code}
+                    </div>
+
+                    {/* Sector Tag */}
+                    <div className="absolute top-3 right-3 z-10 rounded-md bg-slate-900/80 px-2.5 py-1 font-sans text-[10px] font-semibold text-white backdrop-blur-sm">
+                      {item.sector}
+                    </div>
+
+                    {/* Impact Metric Floating on Image */}
+                    <div className="absolute bottom-3 left-3 right-3 z-10 text-white">
+                      <p className="font-sans text-xs text-teal-300 font-semibold">{item.metric}</p>
+                    </div>
                   </div>
 
-                  {/* Sector Tag */}
-                  <div className="absolute top-3 right-3 z-10 rounded-md bg-slate-900/80 px-2.5 py-1 font-sans text-[10px] font-semibold text-white backdrop-blur-sm">
-                    {item.sector}
+                  {/* Card Title & Link */}
+                  <div className="p-4 flex items-center justify-between">
+                    <h3 className="font-display text-sm font-bold text-slate-900 group-hover:text-teal-700 transition-colors line-clamp-1">
+                      {item.title}
+                    </h3>
+                    <ArrowRight className="h-4 w-4 text-slate-400 group-hover:text-teal-600 group-hover:translate-x-1 transition-all flex-shrink-0 ml-2" />
                   </div>
-
-                  {/* Impact Metric Floating on Image */}
-                  <div className="absolute bottom-3 left-3 right-3 z-10 text-white">
-                    <p className="font-sans text-xs text-teal-300 font-semibold">{item.metric}</p>
-                  </div>
-                </div>
-
-                {/* Card Title & Link */}
-                <div className="p-4 flex items-center justify-between">
-                  <h3 className="font-display text-sm font-bold text-slate-900 group-hover:text-teal-700 transition-colors line-clamp-1">
-                    {item.title}
-                  </h3>
-                  <ArrowRight className="h-4 w-4 text-slate-400 group-hover:text-teal-600 group-hover:translate-x-1 transition-all flex-shrink-0 ml-2" />
-                </div>
-              </Link>
+                </Link>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* 4. BOLD EDITORIAL STATEMENT & IMPACT BANNER (TikTok Video Style 0:14) */}
       <section className="relative">
         <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8">
-          <div className="relative overflow-hidden rounded-3xl bg-teal-800 text-white p-8 sm:p-14 shadow-2xl">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.98 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="relative overflow-hidden rounded-3xl bg-teal-800 text-white p-8 sm:p-14 shadow-2xl"
+          >
             {/* Subtle background image */}
             <div className="absolute inset-0 opacity-15">
               <Image
@@ -442,15 +502,21 @@ export default function HomePage() {
                 Combining rigorous software engineering, localized market intelligence, and unyielding focus on customer ROI.
               </p>
             </div>
-          </div>
+          </motion.div>
         </div>
-      </section >
+      </section>
 
       {/* 5. VISIONARY LEADERSHIP & ENTERPRISE STABILITY (TikTok Video Style 0:15) */}
-      < section className="relative" >
+      <section className="relative">
         <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8 space-y-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-            <div className="lg:col-span-7 space-y-6">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="lg:col-span-7 space-y-6"
+            >
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold text-slate-900 tracking-tight leading-tight">
                 VISIONARY ARCHITECTURE, GOVERNANCE AND STABILITY.
               </h2>
@@ -469,10 +535,16 @@ export default function HomePage() {
                   <p className="font-sans text-xs text-slate-600 mt-1 font-medium">Verified automated test coverage across core pipeline modules</p>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Right Card: Guaranteed Compliance Card */}
-            <div className="lg:col-span-5 rounded-3xl border border-slate-200 bg-white p-6 sm:p-8 shadow-lg space-y-6">
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="lg:col-span-5 rounded-3xl border border-slate-200 bg-white p-6 sm:p-8 shadow-lg space-y-6"
+            >
               <div className="relative h-44 w-full rounded-2xl overflow-hidden bg-slate-100">
                 <Image
                   src="/images/data-engineer.jpg"
@@ -498,17 +570,16 @@ export default function HomePage() {
                 <span>ISO 27001 Ready</span>
                 <span>GDPR &amp; Rwanda DPPA Compliant</span>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
-      </section >
+      </section>
 
       {/* 6. INTERACTIVE LOCATION & DEPLOYMENT HUB SHOWCASE (TikTok Video Style 0:19-0:23) */}
-      < section className="relative" >
+      <section className="relative">
         <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8 space-y-8">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
             <div>
-              <span className="eyebrow-navy mb-2">Regional Footprint</span>
               <h2 className="text-3xl sm:text-4xl font-display font-extrabold text-slate-900 tracking-tight">
                 Kigali Hub &amp; Operations
               </h2>
@@ -520,70 +591,78 @@ export default function HomePage() {
                 <button
                   key={hub.id}
                   onClick={() => setActiveHubIndex(idx)}
-                  className={`rounded-lg px-3 py-1.5 text-xs font-sans font-medium transition-all ${activeHubIndex === idx
-                    ? 'bg-slate-900 text-white font-semibold shadow-sm'
-                    : 'text-slate-600 hover:text-slate-900'
-                    }`}
+                  className={`rounded-lg px-3.5 py-1.5 text-xs font-sans font-medium transition-all ${
+                    activeHubIndex === idx
+                      ? 'bg-slate-900 text-white font-semibold shadow-sm'
+                      : 'text-slate-600 hover:text-slate-900'
+                  }`}
                 >
-                  {hub.id === 'kigali-hub' ? 'Engineering' : hub.id === 'strategy-center' ? 'Strategy' : 'Cloud Network'}
+                  {hub.tab}
                 </button>
               ))}
             </div>
           </div>
 
           {/* Active Hub Spotlight Card */}
-          <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
-            <div className="grid grid-cols-1 lg:grid-cols-12">
-              <div className="lg:col-span-7 p-8 md:p-12 space-y-6 flex flex-col justify-between">
-                <div className="space-y-4">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeHubIndex}
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.3 }}
+              className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm"
+            >
+              <div className="grid grid-cols-1 lg:grid-cols-12">
+                <div className="lg:col-span-7 p-8 md:p-12 space-y-6 flex flex-col justify-between">
+                  <div className="space-y-4">
+                    <h3 className="text-2xl sm:text-3xl font-display font-bold text-slate-900">
+                      {LOCATION_HUBS[activeHubIndex].title}
+                    </h3>
 
-                  <h3 className="text-2xl sm:text-3xl font-display font-bold text-slate-900">
-                    {LOCATION_HUBS[activeHubIndex].title}
-                  </h3>
+                    <p className="text-sm sm:text-base text-slate-600 leading-relaxed font-normal">
+                      {LOCATION_HUBS[activeHubIndex].description}
+                    </p>
 
-                  <p className="text-sm sm:text-base text-slate-600 leading-relaxed font-normal">
-                    {LOCATION_HUBS[activeHubIndex].description}
-                  </p>
-
-                  <div className="pt-2 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                    <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
-                      <span className="text-slate-500 font-medium block">Coordinates</span>
-                      <span className="font-mono font-bold text-slate-900">{LOCATION_HUBS[activeHubIndex].latLng}</span>
+                    <div className="pt-2 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                      <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
+                        <span className="text-slate-500 font-medium block">Coordinates</span>
+                        <span className="font-mono font-bold text-slate-900">{LOCATION_HUBS[activeHubIndex].latLng}</span>
+                      </div>
+                      <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
+                        <span className="text-slate-500 font-medium block">Active Unit</span>
+                        <span className="font-bold text-teal-800">{LOCATION_HUBS[activeHubIndex].activeTeam}</span>
+                      </div>
                     </div>
-                    <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
-                      <span className="text-slate-500 font-medium block">Active Unit</span>
-                      <span className="font-bold text-teal-800">{LOCATION_HUBS[activeHubIndex].activeTeam}</span>
-                    </div>
+                  </div>
+
+                  <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
+                    <Link href="/about" className="btn btn-primary text-xs sm:text-sm py-2.5 px-5">
+                      <span>Learn More About DataSphere</span>
+                      <ArrowRight className="h-4 w-4" />
+                    </Link>
                   </div>
                 </div>
 
-                <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
-                  <Link href="/about" className="btn btn-primary text-xs sm:text-sm py-2.5 px-5">
-                    <span>Learn More About DataSphere</span>
-                    <ArrowRight className="h-4 w-4" />
-                  </Link>
+                {/* Photo Showcase */}
+                <div className="lg:col-span-5 relative min-h-[280px] lg:min-h-full overflow-hidden bg-slate-100">
+                  <Image
+                    src={LOCATION_HUBS[activeHubIndex].image}
+                    alt={LOCATION_HUBS[activeHubIndex].title}
+                    fill
+                    className="object-cover object-center transition-all duration-500"
+                  />
                 </div>
               </div>
-
-              {/* Photo Showcase */}
-              <div className="lg:col-span-5 relative min-h-[280px] lg:min-h-full overflow-hidden bg-slate-100">
-                <Image
-                  src={LOCATION_HUBS[activeHubIndex].image}
-                  alt={LOCATION_HUBS[activeHubIndex].title}
-                  fill
-                  className="object-cover object-center transition-all duration-500"
-                />
-              </div>
-            </div>
-          </div>
+            </motion.div>
+          </AnimatePresence>
         </div>
-      </section >
+      </section>
 
-      {/* 5. DATA & ANALYTICS VISUAL SHOWCASE */}
-      < section className="relative" >
+      {/* 7. DATA & ANALYTICS VISUAL SHOWCASE */}
+      <section className="relative">
         <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8 space-y-10">
           <div className="max-w-2xl">
-
             <h2 className="text-3xl sm:text-4xl font-display font-bold text-slate-900">
               Enterprise Data &amp; BI Architecture
             </h2>
@@ -594,14 +673,13 @@ export default function HomePage() {
 
           <DataAnalyticsDemo />
         </div>
-      </section >
+      </section>
 
-      {/* 6. CORE SERVICES & DIGITAL SOLUTIONS */}
-      < section id="services" className="relative" >
+      {/* 8. CORE SERVICES & DIGITAL SOLUTIONS */}
+      <section id="services" className="relative">
         <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8 space-y-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
             <div>
-              <span className="eyebrow mb-2">Capabilities</span>
               <h2 className="text-3xl sm:text-4xl font-display font-bold text-slate-900">
                 Disciplined engineering and data solutions.
               </h2>
@@ -617,10 +695,11 @@ export default function HomePage() {
                   key={cat}
                   type="button"
                   onClick={() => setSelectedCategory(cat)}
-                  className={`rounded-lg px-3 py-1.5 text-xs font-sans font-medium transition-all ${selectedCategory === cat
-                    ? 'bg-slate-900 text-white font-semibold shadow-sm'
-                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/60'
-                    }`}
+                  className={`rounded-lg px-3 py-1.5 text-xs font-sans font-medium transition-all ${
+                    selectedCategory === cat
+                      ? 'bg-slate-900 text-white font-semibold shadow-sm'
+                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/60'
+                  }`}
                 >
                   {cat}
                 </button>
@@ -629,12 +708,19 @@ export default function HomePage() {
           </div>
 
           {/* Services Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-60px' }}
+            variants={containerVariants}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
             {filteredServices.map((service) => {
               const Icon = SERVICE_ICONS[service.icon] || Layers
               return (
-                <div
+                <motion.div
                   key={service.id}
+                  variants={itemVariants}
                   className="card-enterprise flex flex-col justify-between group"
                 >
                   <div>
@@ -677,18 +763,17 @@ export default function HomePage() {
                       <ArrowRight className="h-3 w-3" />
                     </Link>
                   </div>
-                </div>
+                </motion.div>
               )
             })}
-          </div>
+          </motion.div>
         </div>
-      </section >
+      </section>
 
-      {/* 7. 6-STAGE ENGINEERING METHODOLOGY */}
-      < section className="relative" >
+      {/* 9. 6-STAGE ENGINEERING METHODOLOGY */}
+      <section className="relative">
         <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8 space-y-10">
           <div className="text-center max-w-2xl mx-auto">
-            <span className="eyebrow mb-2">Methodology</span>
             <h2 className="text-3xl sm:text-4xl font-display font-bold text-slate-900">
               The 6-Stage Engineering Lifecycle
             </h2>
@@ -699,10 +784,10 @@ export default function HomePage() {
 
           <ProcessTimeline />
         </div>
-      </section >
+      </section>
 
-      {/* 8. TECHNOLOGY STACK */}
-      < section className="relative" >
+      {/* 10. TECHNOLOGY STACK */}
+      <section className="relative">
         <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8 space-y-10">
           <div className="max-w-2xl">
             <h2 className="text-3xl sm:text-4xl font-display font-bold text-slate-900">
@@ -715,10 +800,10 @@ export default function HomePage() {
 
           <TechRadar />
         </div>
-      </section >
+      </section>
 
-      {/* 9. HIGH CONVERSION CTA SECTION */}
-      < section className="relative" >
+      {/* 11. HIGH CONVERSION CTA SECTION */}
+      <section className="relative">
         <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8">
           <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-900 p-8 sm:p-12 md:p-16 text-center text-white shadow-xl">
             {/* Background Image with Overlay */}
@@ -750,17 +835,17 @@ export default function HomePage() {
               </div>
 
               <div className="pt-6 font-mono text-xs text-slate-400 flex flex-wrap items-center justify-center gap-6">
-                <span>&bull; Strict Confidentiality / NDA</span>
-                <span>&bull; Response within 24 Hours</span>
-                <span>&bull; Regional &amp; Global Delivery</span>
+                <span>• Strict Confidentiality / NDA</span>
+                <span>• Response within 24 Hours</span>
+                <span>• Regional &amp; Global Delivery</span>
               </div>
             </div>
           </div>
         </div>
-      </section >
+      </section>
 
-      {/* 10. QUICK INQUIRY CONTACT FORM */}
-      < section id="contact" className="relative" >
+      {/* 12. QUICK INQUIRY CONTACT FORM */}
+      <section id="contact" className="relative">
         <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             <div className="lg:col-span-5 space-y-6">
@@ -778,7 +863,7 @@ export default function HomePage() {
                 </div>
                 <div>
                   <strong className="block font-mono text-[11px] text-slate-900 uppercase font-bold">Location</strong>
-                  Kigali, Rwanda &bull; East African Delivery Hub
+                  Kigali, Rwanda • East African Delivery Hub
                 </div>
                 <div>
                   <strong className="block font-mono text-[11px] text-slate-900 uppercase font-bold">Confidentiality</strong>
@@ -911,7 +996,7 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-      </section >
-    </div >
+      </section>
+    </div>
   )
 }
