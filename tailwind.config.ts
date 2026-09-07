@@ -1,6 +1,7 @@
 import type { Config } from 'tailwindcss'
 
 const config: Config = {
+  darkMode: 'class',
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -41,8 +42,12 @@ const config: Config = {
         goldAccent: '#F59E0B',
       },
       fontFamily: {
-        sans: ['var(--font-sans)', 'system-ui', '-apple-system', 'sans-serif'],
-        display: ['var(--font-display)', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-sans)', 'Poppins', 'Manrope', 'Roboto', 'system-ui', '-apple-system', 'sans-serif'],
+        display: ['var(--font-display)', 'Montserrat', 'Poppins', 'Manrope', 'sans-serif'],
+        poppins: ['var(--font-poppins)', 'Poppins', 'sans-serif'],
+        manrope: ['var(--font-manrope)', 'Manrope', 'sans-serif'],
+        montserrat: ['var(--font-montserrat)', 'Montserrat', 'sans-serif'],
+        roboto: ['var(--font-roboto)', 'Roboto', 'sans-serif'],
         mono: ['var(--font-mono)', 'monospace'],
       },
       borderRadius: {

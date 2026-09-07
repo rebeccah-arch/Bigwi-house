@@ -1,4 +1,4 @@
-# BIGWI HOUSE — website (React + TypeScript)
+# BIGWI HOUSE  website (React + TypeScript)
 
 Source: BIGWI HOUSE Corporate & Capability Profile, DataSphere Consulting Ltd. (Aug 1, 2026).
 
@@ -20,7 +20,7 @@ Source: BIGWI HOUSE Corporate & Capability Profile, DataSphere Consulting Ltd. (
    ```bash
    npm run dev
    ```
-   Vite will print a local URL (usually `http://localhost:5173`) — open it in your browser. Hot reload is on, so edits in `src/` show up immediately.
+   Vite will print a local URL (usually `http://localhost:5173`)  open it in your browser. Hot reload is on, so edits in `src/` show up immediately.
 4. Build for production when you're ready to deploy:
    ```bash
    npm run build
@@ -34,8 +34,8 @@ Recommended VS Code extensions: **Tailwind CSS IntelliSense** and **ES7+ React/R
 ```
 src/
   components/       Header, Footer, Card, FormField, Modal, ProposalModal
-  content/          bigwiContent.ts — all copy pulled from the source document
-  hooks/            usePageFocus.ts — accessible focus-on-navigate
+  content/          bigwiContent.ts  all copy pulled from the source document
+  hooks/            usePageFocus.ts  accessible focus-on-navigate
   pages/            Home, About, Services, Approach, Contact, NotFound
   App.tsx           Route table + layout shell
   main.tsx          Entry point, router provider
@@ -46,21 +46,21 @@ src/
 
 All copy from the source document lives in `src/content/bigwiContent.ts` as typed
 arrays/objects (`services`, `problems`, `competitiveAdvantage`, `targetClients`,
-`vision`, `mission`, `orgStructure`, `growthPhases`). Edit that file — the pages
+`vision`, `mission`, `orgStructure`, `growthPhases`). Edit that file  the pages
 re-render automatically. If the profile document is revised, this is the one
 file to update.
 
 ## Wiring the forms
 
 Both forms (`src/pages/Contact.tsx` and `src/components/ProposalModal.tsx`) are
-currently mocked — they validate client-side and show a success message, but
+currently mocked  they validate client-side and show a success message, but
 don't send anything. To connect them to a real backend:
 
 1. Replace the `// TODO` in each `handleSubmit` with a `fetch()` call to your
    endpoint (a serverless function, a form service like Formspree/Getform, or
    your own API).
 2. Keep the existing `status` state (`idle` / `success` / `error`) so the UI
-   feedback keeps working — just set it based on the response instead of
+   feedback keeps working  just set it based on the response instead of
    always succeeding.
 
 ## Accessibility notes already in place

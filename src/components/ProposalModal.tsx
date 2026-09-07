@@ -94,7 +94,7 @@ export default function ProposalModal({ isOpen, onClose }: ProposalModalProps) {
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-900/60 p-4 backdrop-blur-sm animate-in fade-in duration-200"
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-900/60 dark:bg-black/80 p-4 backdrop-blur-sm animate-in fade-in duration-200"
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose()
       }}
@@ -104,28 +104,28 @@ export default function ProposalModal({ isOpen, onClose }: ProposalModalProps) {
     >
       <div
         ref={modalRef}
-        className="relative w-full max-w-xl max-h-[90vh] overflow-y-auto rounded-2xl border border-slate-200 bg-white p-6 md:p-8 shadow-2xl animate-in zoom-in-95 duration-200"
+        className="relative w-full max-w-xl max-h-[90vh] overflow-y-auto rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0B0F19] p-6 md:p-8 shadow-2xl animate-in zoom-in-95 duration-200"
       >
         {/* Close Button */}
         <button
           type="button"
           onClick={onClose}
           aria-label="Close dialog"
-          className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200 bg-slate-50 text-slate-500 hover:border-slate-300 hover:text-slate-900 transition-colors"
+          className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 text-slate-500 dark:text-slate-400 hover:border-slate-300 dark:hover:border-slate-700 hover:text-slate-900 dark:hover:text-white transition-colors"
         >
           <X className="h-4 w-4" />
         </button>
 
         {/* Modal Header */}
         <div className="mb-6">
-          <div className="inline-flex items-center gap-2 rounded-full border border-teal-200 bg-teal-50 px-3 py-1 font-mono text-[11px] text-teal-800 font-semibold mb-2">
-            <Sparkles className="h-3 w-3 text-teal-600" />
+          <div className="inline-flex items-center gap-2 rounded-full border border-teal-200 dark:border-teal-800 bg-teal-50 dark:bg-teal-950/60 px-3 py-1 font-mono text-[11px] text-teal-800 dark:text-teal-300 font-semibold mb-2">
+            <Sparkles className="h-3 w-3 text-teal-600 dark:text-teal-400" />
             Direct Proposal Channel
           </div>
-          <h2 id="proposal-modal-title" className="text-xl md:text-2xl font-display font-bold text-slate-900">
+          <h2 id="proposal-modal-title" className="text-xl md:text-2xl font-display font-bold text-slate-900 dark:text-white">
             Request an Engineering Proposal
           </h2>
-          <p className="mt-1 text-xs md:text-sm text-slate-600">
+          <p className="mt-1 text-xs md:text-sm text-slate-600 dark:text-slate-400">
             Share your project parameters with DataSphere Consulting Ltd. Our engineering team will review requirements and structure a formal technical capability proposal.
           </p>
         </div>
@@ -134,7 +134,7 @@ export default function ProposalModal({ isOpen, onClose }: ProposalModalProps) {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div>
-              <label htmlFor="pm-name" className="mb-1.5 block text-xs font-semibold text-slate-700">
+              <label htmlFor="pm-name" className="mb-1.5 block text-xs font-semibold text-slate-700 dark:text-slate-300">
                 Full Name *
               </label>
               <input
@@ -145,12 +145,12 @@ export default function ProposalModal({ isOpen, onClose }: ProposalModalProps) {
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 placeholder="e.g. Jean Damascene"
-                className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-teal-500 focus:bg-white focus:outline-none transition-colors"
+                className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-3.5 py-2.5 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:border-teal-500 focus:bg-white dark:focus:bg-slate-800 focus:outline-none transition-colors"
               />
             </div>
 
             <div>
-              <label htmlFor="pm-email" className="mb-1.5 block text-xs font-semibold text-slate-700">
+              <label htmlFor="pm-email" className="mb-1.5 block text-xs font-semibold text-slate-700 dark:text-slate-300">
                 Work Email *
               </label>
               <input
@@ -161,14 +161,14 @@ export default function ProposalModal({ isOpen, onClose }: ProposalModalProps) {
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 placeholder="alex@organization.com"
-                className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-teal-500 focus:bg-white focus:outline-none transition-colors"
+                className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-3.5 py-2.5 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:border-teal-500 focus:bg-white dark:focus:bg-slate-800 focus:outline-none transition-colors"
               />
             </div>
           </div>
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div>
-              <label htmlFor="pm-org" className="mb-1.5 block text-xs font-semibold text-slate-700">
+              <label htmlFor="pm-org" className="mb-1.5 block text-xs font-semibold text-slate-700 dark:text-slate-300">
                 Organization / Company
               </label>
               <input
@@ -178,12 +178,12 @@ export default function ProposalModal({ isOpen, onClose }: ProposalModalProps) {
                 value={formData.organization}
                 onChange={(e) => setFormData({ ...formData, organization: e.target.value })}
                 placeholder="e.g. Bank, Enterprise, or NGO"
-                className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-teal-500 focus:bg-white focus:outline-none transition-colors"
+                className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-3.5 py-2.5 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:border-teal-500 focus:bg-white dark:focus:bg-slate-800 focus:outline-none transition-colors"
               />
             </div>
 
             <div>
-              <label htmlFor="pm-need" className="mb-1.5 block text-xs font-semibold text-slate-700">
+              <label htmlFor="pm-need" className="mb-1.5 block text-xs font-semibold text-slate-700 dark:text-slate-300">
                 Primary Solution Needed *
               </label>
               <select
@@ -191,7 +191,7 @@ export default function ProposalModal({ isOpen, onClose }: ProposalModalProps) {
                 name="need"
                 value={formData.need}
                 onChange={(e) => setFormData({ ...formData, need: e.target.value })}
-                className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2.5 text-sm text-slate-900 focus:border-teal-500 focus:bg-white focus:outline-none transition-colors"
+                className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-3.5 py-2.5 text-sm text-slate-900 dark:text-white focus:border-teal-500 focus:bg-white dark:focus:bg-slate-800 focus:outline-none transition-colors"
               >
                 <option value="Enterprise Software Development">Enterprise Software Development</option>
                 <option value="Web & Mobile Applications">Web &amp; Mobile Applications</option>
@@ -205,7 +205,7 @@ export default function ProposalModal({ isOpen, onClose }: ProposalModalProps) {
           </div>
 
           <div>
-            <label htmlFor="pm-scope" className="mb-1.5 block text-xs font-semibold text-slate-700">
+            <label htmlFor="pm-scope" className="mb-1.5 block text-xs font-semibold text-slate-700 dark:text-slate-300">
               Project Summary &amp; Objectives *
             </label>
             <textarea
@@ -216,24 +216,24 @@ export default function ProposalModal({ isOpen, onClose }: ProposalModalProps) {
               value={formData.projectScope}
               onChange={(e) => setFormData({ ...formData, projectScope: e.target.value })}
               placeholder="Describe your current system challenges, expected deliverables, target users, and key timeline..."
-              className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-teal-500 focus:bg-white focus:outline-none transition-colors"
+              className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-3.5 py-2.5 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:border-teal-500 focus:bg-white dark:focus:bg-slate-800 focus:outline-none transition-colors"
             />
           </div>
 
           {/* Feedback states */}
           {status === 'success' && (
-            <div className="flex items-center gap-3 rounded-xl border border-emerald-200 bg-emerald-50 p-3.5 text-xs text-emerald-800">
-              <CheckCircle2 className="h-5 w-5 flex-shrink-0 text-emerald-600" />
+            <div className="flex items-center gap-3 rounded-xl border border-emerald-200 dark:border-emerald-800 bg-emerald-50 dark:bg-emerald-950/40 p-3.5 text-xs text-emerald-800 dark:text-emerald-300">
+              <CheckCircle2 className="h-5 w-5 flex-shrink-0 text-emerald-600 dark:text-emerald-400" />
               <div>
                 <p className="font-semibold">Proposal Request Received</p>
-                <p className="text-slate-600">A senior solutions architect from DataSphere Consulting will follow up within 24 hours.</p>
+                <p className="text-slate-600 dark:text-slate-400">A senior solutions architect from DataSphere Consulting will follow up within 24 hours.</p>
               </div>
             </div>
           )}
 
           {status === 'error' && (
-            <div className="flex items-center gap-3 rounded-xl border border-red-200 bg-red-50 p-3.5 text-xs text-red-800">
-              <AlertCircle className="h-5 w-5 flex-shrink-0 text-red-600" />
+            <div className="flex items-center gap-3 rounded-xl border border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-950/40 p-3.5 text-xs text-red-800 dark:text-red-300">
+              <AlertCircle className="h-5 w-5 flex-shrink-0 text-red-600 dark:text-red-400" />
               <div>
                 <p className="font-semibold">Submission Error</p>
                 <p>{errorMessage}</p>
@@ -245,7 +245,7 @@ export default function ProposalModal({ isOpen, onClose }: ProposalModalProps) {
             <button
               type="submit"
               disabled={status === 'loading'}
-              className="btn btn-primary w-full py-3 justify-center text-sm font-semibold"
+              className="btn btn-primary w-full py-3 justify-center text-sm font-semibold dark:bg-teal-500 dark:text-slate-950 dark:hover:bg-teal-400"
             >
               {status === 'loading' ? (
                 <>
@@ -254,14 +254,14 @@ export default function ProposalModal({ isOpen, onClose }: ProposalModalProps) {
                 </>
               ) : (
                 <>
-                  <Sparkles className="h-4 w-4 text-teal-400" />
+                  <Sparkles className="h-4 w-4 text-teal-400 dark:text-slate-950" />
                   <span>Submit Proposal Request</span>
                 </>
               )}
             </button>
           </div>
 
-          <p className="text-center font-sans text-[11px] text-slate-500">
+          <p className="text-center font-sans text-[11px] text-slate-500 dark:text-slate-400">
             100% Confidential &bull; DataSphere Consulting Enterprise Governance
           </p>
         </form>

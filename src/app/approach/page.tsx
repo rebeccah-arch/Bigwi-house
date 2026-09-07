@@ -33,7 +33,7 @@ export default function ApproachPage() {
   return (
     <div className="space-y-20 md:space-y-28 py-10">
       {/* 1. Header Banner with Full Cover Background Image */}
-      <section className="relative min-h-[480px] lg:min-h-[540px] flex items-center overflow-hidden border-b border-slate-200">
+      <section className="relative min-h-[480px] lg:min-h-[540px] flex items-center overflow-hidden border-b border-slate-200 dark:border-slate-800">
         <div className="absolute inset-0 z-0">
           <Image
             src="/images/executive-strategy.jpg"
@@ -42,8 +42,8 @@ export default function ApproachPage() {
             className="object-cover object-center"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-white/60" />
-          <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-white/30" />
+          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-white/60 dark:from-[#07090E] dark:via-[#07090E]/95 dark:to-[#07090E]/60" />
+          <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-white/30 dark:from-[#07090E] dark:via-transparent dark:to-[#07090E]/30" />
         </div>
 
         <div className="relative z-10 mx-auto max-w-wide w-full px-4 sm:px-6 lg:px-8 py-16">
@@ -53,11 +53,11 @@ export default function ApproachPage() {
             transition={{ duration: 0.6 }}
             className="max-w-3xl space-y-6"
           >
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-extrabold tracking-tight text-slate-900 leading-tight">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight">
               Our engineering strategy &amp; delivery framework.
             </h1>
 
-            <p className="text-base sm:text-lg text-slate-700 leading-relaxed font-normal bg-white/60 backdrop-blur-xs p-1 rounded-lg">
+            <p className="text-base sm:text-lg text-slate-700 dark:text-slate-300 leading-relaxed font-normal bg-white/60 dark:bg-slate-900/60 backdrop-blur-xs p-1 rounded-lg">
               A transparent, disciplined roadmap published so enterprise partners, institutions, and clients understand our software engineering lifecycle, agile sprints, and quality governance.
             </p>
 
@@ -75,10 +75,10 @@ export default function ApproachPage() {
       <section className="relative">
         <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8 space-y-10">
           <div className="max-w-2xl">
-            <h2 className="text-3xl sm:text-4xl font-display font-bold text-slate-900">
+            <h2 className="text-3xl sm:text-4xl font-display font-bold text-slate-900 dark:text-white">
               Three-Tier Strategic Roadmap
             </h2>
-            <p className="mt-2 text-sm sm:text-base text-slate-600">
+            <p className="mt-2 text-sm sm:text-base text-slate-600 dark:text-slate-400">
               Structured institutional scaling from regional delivery hub to pan-African data &amp; software leadership.
             </p>
           </div>
@@ -98,33 +98,33 @@ export default function ApproachPage() {
               >
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-teal-50 font-mono text-sm font-bold text-teal-800 border border-teal-200">
+                    <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-teal-50 dark:bg-teal-950/60 font-mono text-sm font-bold text-teal-800 dark:text-teal-300 border border-teal-200 dark:border-teal-800">
                       0{idx + 1}
                     </span>
-                    <span className="font-mono text-xs text-slate-600 bg-slate-100 border border-slate-200 px-2.5 py-0.5 rounded-full font-medium">
+                    <span className="font-mono text-xs text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-2.5 py-0.5 rounded-full font-medium">
                       {phase.step}
                     </span>
                   </div>
 
                   <div>
-                    <h3 className="font-display text-2xl font-bold text-slate-900 group-hover:text-teal-700 transition-colors">
+                    <h3 className="font-display text-2xl font-bold text-slate-900 dark:text-white group-hover:text-teal-700 dark:group-hover:text-teal-400 transition-colors">
                       {phase.name}
                     </h3>
-                    <p className="font-sans text-xs text-slate-500 font-medium mt-1">{phase.subtitle}</p>
+                    <p className="font-sans text-xs text-slate-500 dark:text-slate-400 font-medium mt-1">{phase.subtitle}</p>
                   </div>
 
-                  <ul className="mt-6 space-y-3 pt-4 border-t border-slate-100">
+                  <ul className="mt-6 space-y-3 pt-4 border-t border-slate-100 dark:border-slate-800">
                     {phase.items.map((item) => (
-                      <li key={item} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700">
-                        <CheckCircle2 className="h-4 w-4 text-teal-600 mt-0.5 flex-shrink-0" />
+                      <li key={item} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700 dark:text-slate-300">
+                        <CheckCircle2 className="h-4 w-4 text-teal-600 dark:text-teal-400 mt-0.5 flex-shrink-0" />
                         <span>{item}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
 
-                <div className="mt-8 pt-4 border-t border-slate-100">
-                  <span className="font-sans text-xs text-slate-400 font-medium block">
+                <div className="mt-8 pt-4 border-t border-slate-100 dark:border-slate-800">
+                  <span className="font-sans text-xs text-slate-400 dark:text-slate-500 font-medium block">
                     Status: {idx === 0 ? 'Active Execution' : idx === 1 ? 'In Progress' : 'Planned Scaling'}
                   </span>
                 </div>
@@ -138,10 +138,10 @@ export default function ApproachPage() {
       <section className="relative">
         <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8 space-y-10">
           <div className="max-w-2xl">
-            <h2 className="text-3xl sm:text-4xl font-display font-bold text-slate-900">
+            <h2 className="text-3xl sm:text-4xl font-display font-bold text-slate-900 dark:text-white">
               End-to-End Delivery Architecture
             </h2>
-            <p className="mt-2 text-sm sm:text-base text-slate-600">
+            <p className="mt-2 text-sm sm:text-base text-slate-600 dark:text-slate-400">
               How we take complex business challenges through disciplined sprints from technical discovery to long-term SLA scaling.
             </p>
           </div>
@@ -154,10 +154,10 @@ export default function ApproachPage() {
       <section className="relative">
         <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8 space-y-10">
           <div className="max-w-2xl">
-            <h2 className="text-3xl sm:text-4xl font-display font-bold text-slate-900">
+            <h2 className="text-3xl sm:text-4xl font-display font-bold text-slate-900 dark:text-white">
               Technical Stack &amp; Infrastructure
             </h2>
-            <p className="mt-2 text-sm sm:text-base text-slate-600">
+            <p className="mt-2 text-sm sm:text-base text-slate-600 dark:text-slate-400">
               Built on production-hardened toolchains, cloud-native frameworks, and automated CI/CD pipelines.
             </p>
           </div>
@@ -169,7 +169,7 @@ export default function ApproachPage() {
       {/* 5. Bottom CTA */}
       <section className="relative">
         <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8">
-          <div className="rounded-3xl border border-slate-200 bg-slate-900 text-white p-8 md:p-12 text-center shadow-xl space-y-6">
+          <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-slate-900 text-white p-8 md:p-12 text-center shadow-xl space-y-6">
             <h2 className="text-3xl sm:text-4xl font-display font-bold text-white">
               Ready to embark on a structured software build?
             </h2>

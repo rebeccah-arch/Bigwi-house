@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -9,20 +11,35 @@
     --brand-navy: #0A2540;
     --brand-teal: #00A896;
     --brand-cyan: #028090;
+    --font-sans: 'Poppins', 'Manrope', 'Roboto', system-ui, -apple-system, sans-serif;
+    --font-display: 'Montserrat', 'Poppins', 'Manrope', sans-serif;
+    --font-poppins: 'Poppins', sans-serif;
+    --font-manrope: 'Manrope', sans-serif;
+    --font-montserrat: 'Montserrat', sans-serif;
+    --font-roboto: 'Roboto', sans-serif;
+  }
+
+  .dark {
+    --bg-white: #07090E;
+    --bg-slate: #0C111C;
+    --brand-navy: #0F172A;
+    --brand-teal: #00A896;
+    --brand-cyan: #028090;
   }
 
   html {
     scroll-behavior: smooth;
+    font-family: var(--font-sans), 'Poppins', 'Manrope', 'Roboto', system-ui, -apple-system, sans-serif;
   }
 
   body {
-    @apply bg-white text-slate-900 font-sans antialiased selection:bg-teal-100 selection:text-teal-900;
-    background-color: #FFFFFF;
-    color: #0F172A;
+    @apply bg-white text-slate-900 font-sans antialiased selection:bg-teal-100 selection:text-teal-900 dark:bg-[#07090E] dark:text-slate-100 dark:selection:bg-teal-900/50 dark:selection:text-teal-200;
+    font-family: var(--font-sans), 'Poppins', 'Manrope', 'Roboto', system-ui, -apple-system, sans-serif;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display tracking-tight text-slate-900 font-bold;
+    @apply font-display tracking-tight text-slate-900 font-bold dark:text-white;
+    font-family: var(--font-display), 'Montserrat', 'Poppins', sans-serif;
   }
 
   :focus-visible {
@@ -34,19 +51,19 @@
 
 @layer components {
   .skip-link {
-    @apply sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[999] focus:rounded-lg focus:bg-slate-900 focus:px-4 focus:py-2.5 focus:font-semibold focus:text-white focus:shadow-lg;
+    @apply sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[999] focus:rounded-lg focus:bg-slate-900 focus:px-4 focus:py-2.5 focus:font-semibold focus:text-white focus:shadow-lg dark:focus:bg-teal-500 dark:focus:text-slate-950;
   }
 
   .eyebrow {
-    @apply inline-flex items-center gap-2 rounded-full border border-teal-200 bg-teal-50 px-3.5 py-1 text-xs font-mono uppercase tracking-[0.14em] text-teal-800 font-medium;
+    @apply inline-flex items-center gap-2 rounded-full border border-teal-200 bg-teal-50 px-3.5 py-1 text-xs font-mono uppercase tracking-[0.14em] text-teal-800 font-medium dark:border-teal-800/80 dark:bg-teal-950/50 dark:text-teal-300;
   }
 
   .eyebrow-navy {
-    @apply inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-100 px-3.5 py-1 text-xs font-mono uppercase tracking-[0.14em] text-slate-800 font-medium;
+    @apply inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-100 px-3.5 py-1 text-xs font-mono uppercase tracking-[0.14em] text-slate-800 font-medium dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300;
   }
 
   .eyebrow-gold {
-    @apply inline-flex items-center gap-2 rounded-full border border-amber-200 bg-amber-50 px-3.5 py-1 text-xs font-mono uppercase tracking-[0.14em] text-amber-800 font-medium;
+    @apply inline-flex items-center gap-2 rounded-full border border-amber-200 bg-amber-50 px-3.5 py-1 text-xs font-mono uppercase tracking-[0.14em] text-amber-800 font-medium dark:border-amber-800/80 dark:bg-amber-950/50 dark:text-amber-300;
   }
 
   .btn {
@@ -54,35 +71,47 @@
   }
 
   .btn-primary {
-    @apply bg-slate-900 text-white font-semibold shadow-sm hover:bg-slate-800 hover:shadow-md;
+    @apply bg-slate-900 text-white font-semibold shadow-sm hover:bg-slate-800 hover:shadow-md dark:bg-teal-500 dark:text-slate-950 dark:hover:bg-teal-400 dark:shadow-teal-950/30;
   }
 
   .btn-teal {
-    @apply bg-teal-600 text-white font-semibold shadow-sm hover:bg-teal-700 hover:shadow-md;
+    @apply bg-teal-600 text-white font-semibold shadow-sm hover:bg-teal-700 hover:shadow-md dark:bg-teal-500 dark:text-slate-950 dark:hover:bg-teal-400;
   }
 
   .btn-gold {
-    @apply bg-amber-600 text-white font-semibold shadow-sm hover:bg-amber-700 hover:shadow-md;
+    @apply bg-amber-600 text-white font-semibold shadow-sm hover:bg-amber-700 hover:shadow-md dark:bg-amber-500 dark:text-slate-950 dark:hover:bg-amber-400;
   }
 
   .btn-ghost {
-    @apply border border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900 shadow-sm;
+    @apply border border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900 shadow-sm dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300 dark:hover:border-slate-700 dark:hover:bg-slate-800 dark:hover:text-white;
   }
 
   .btn-secondary {
-    @apply bg-slate-100 text-slate-800 border border-slate-200 hover:bg-slate-200 hover:text-slate-900;
+    @apply bg-slate-100 text-slate-800 border border-slate-200 hover:bg-slate-200 hover:text-slate-900 dark:bg-slate-800 dark:text-slate-200 dark:border-slate-700 dark:hover:bg-slate-700 dark:hover:text-white;
   }
 
   .card-enterprise {
-    @apply relative overflow-hidden rounded-2xl border border-slate-200/90 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-teal-500/50 hover:shadow-xl shadow-sm;
+    @apply relative overflow-hidden rounded-2xl border border-slate-200/90 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-teal-500/50 hover:shadow-xl shadow-sm dark:border-slate-800/90 dark:bg-slate-900/80 dark:hover:border-teal-400/50 dark:hover:shadow-teal-950/20;
   }
 
   .glass-panel {
-    @apply rounded-2xl border border-slate-200 bg-white/90 p-6 md:p-8 backdrop-blur-xl shadow-sm;
+    @apply rounded-2xl border border-slate-200 bg-white/90 p-6 md:p-8 backdrop-blur-xl shadow-sm dark:border-slate-800 dark:bg-slate-900/80;
   }
 
   .glow-border {
-    @apply relative rounded-xl border border-slate-200 transition-all hover:border-slate-300;
+    @apply relative rounded-xl border border-slate-200 transition-all hover:border-slate-300 dark:border-slate-800 dark:hover:border-slate-700;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-teal-600 via-teal-500 to-cyan-500 dark:from-teal-400 dark:via-teal-300 dark:to-cyan-400;
+  }
+
+  .text-gradient-secondary {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-amber-600 via-amber-500 to-orange-500 dark:from-amber-400 dark:via-amber-300 dark:to-orange-400;
+  }
+
+  .spotlight-card {
+    @apply relative transition-colors duration-500 hover:bg-slate-50/80 dark:hover:bg-slate-900/60;
   }
 
   .bg-grid-pattern {
@@ -92,13 +121,42 @@
       linear-gradient(to bottom, rgba(226, 232, 240, 0.6) 1px, transparent 1px);
   }
 
+  .dark .bg-grid-pattern {
+    background-image: 
+      linear-gradient(to right, rgba(51, 65, 85, 0.25) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(51, 65, 85, 0.25) 1px, transparent 1px);
+  }
+
   .bg-dots-pattern {
     background-image: radial-gradient(rgba(148, 163, 184, 0.25) 1px, transparent 1px);
     background-size: 24px 24px;
   }
+
+  .dark .bg-dots-pattern {
+    background-image: radial-gradient(rgba(148, 163, 184, 0.15) 1px, transparent 1px);
+  }
 }
 
-/* Custom light modern scrollbar */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 28s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Custom light/dark modern scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -106,12 +164,21 @@
 ::-webkit-scrollbar-track {
   background: #F8FAFC;
 }
+.dark ::-webkit-scrollbar-track {
+  background: #0B0F19;
+}
 ::-webkit-scrollbar-thumb {
   background: #CBD5E1;
   border-radius: 4px;
 }
+.dark ::-webkit-scrollbar-thumb {
+  background: #1E293B;
+}
 ::-webkit-scrollbar-thumb:hover {
   background: #94A3B8;
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #334155;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -124,4 +191,3 @@
     scroll-behavior: auto !important;
   }
 }
-

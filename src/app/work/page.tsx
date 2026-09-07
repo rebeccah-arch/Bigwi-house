@@ -37,7 +37,7 @@ export default function WorkPage() {
   return (
     <div className="space-y-20 md:space-y-28 py-10">
       {/* 1. Header Banner with Full Cover Background Image */}
-      <section className="relative min-h-[480px] lg:min-h-[540px] flex items-center overflow-hidden border-b border-slate-200">
+      <section className="relative min-h-[480px] lg:min-h-[540px] flex items-center overflow-hidden border-b border-slate-200 dark:border-slate-800">
         <div className="absolute inset-0 z-0">
           <Image
             src="/images/kigali-skyline.jpg"
@@ -46,8 +46,8 @@ export default function WorkPage() {
             className="object-cover object-center"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-white/60" />
-          <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-white/30" />
+          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-white/60 dark:from-[#07090E] dark:via-[#07090E]/95 dark:to-[#07090E]/60" />
+          <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-white/30 dark:from-[#07090E] dark:via-transparent dark:to-[#07090E]/30" />
         </div>
 
         <div className="relative z-10 mx-auto max-w-wide w-full px-4 sm:px-6 lg:px-8 py-16">
@@ -57,11 +57,11 @@ export default function WorkPage() {
             transition={{ duration: 0.6 }}
             className="max-w-3xl space-y-6"
           >
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-extrabold tracking-tight text-slate-900 leading-tight">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight">
               Selected projects &amp; enterprise transformations.
             </h1>
 
-            <p className="text-base sm:text-lg text-slate-700 leading-relaxed font-normal bg-white/60 backdrop-blur-xs p-1 rounded-lg">
+            <p className="text-base sm:text-lg text-slate-700 dark:text-slate-300 leading-relaxed font-normal bg-white/60 dark:bg-slate-900/60 backdrop-blur-xs p-1 rounded-lg">
               We focus on measurable commercial outcomes, system uptime, and data integrity. Explore how we architect, engineer, and deploy high-concurrency systems across critical economic sectors.
             </p>
           </motion.div>
@@ -85,10 +85,10 @@ export default function WorkPage() {
                 <motion.div
                   key={study.id}
                   variants={itemVariants}
-                  className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm hover:shadow-md transition-shadow"
+                  className="overflow-hidden rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80 shadow-sm hover:shadow-md transition-shadow"
                 >
                   {/* Photo & Header Banner */}
-                  <div className="relative h-64 sm:h-80 w-full overflow-hidden bg-slate-100">
+                  <div className="relative h-64 sm:h-80 w-full overflow-hidden bg-slate-100 dark:bg-slate-800">
                     <Image
                       src={imageSrc}
                       alt={study.title}
@@ -116,26 +116,26 @@ export default function WorkPage() {
                   <div className="p-6 sm:p-10 space-y-8">
                     {/* Problem / Solution Grid */}
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                      <div className="rounded-2xl border border-amber-200 bg-amber-50/40 p-6 space-y-2">
+                      <div className="rounded-2xl border border-amber-200 dark:border-amber-800/80 bg-amber-50/40 dark:bg-amber-950/30 p-6 space-y-2">
                         <div className="flex items-center gap-2">
-                          <span className="h-2 w-2 rounded-full bg-amber-600" />
-                          <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-amber-900">
+                          <span className="h-2 w-2 rounded-full bg-amber-600 dark:bg-amber-400" />
+                          <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-amber-900 dark:text-amber-300">
                             The Operational Challenge
                           </h3>
                         </div>
-                        <p className="text-sm sm:text-base text-slate-700 leading-relaxed font-normal">
+                        <p className="text-sm sm:text-base text-slate-700 dark:text-slate-300 leading-relaxed font-normal">
                           {study.problem}
                         </p>
                       </div>
 
-                      <div className="rounded-2xl border border-teal-200 bg-teal-50/50 p-6 space-y-2">
+                      <div className="rounded-2xl border border-teal-200 dark:border-teal-800/80 bg-teal-50/50 dark:bg-teal-950/30 p-6 space-y-2">
                         <div className="flex items-center gap-2">
-                          <span className="h-2 w-2 rounded-full bg-teal-600" />
-                          <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-teal-900">
+                          <span className="h-2 w-2 rounded-full bg-teal-600 dark:bg-teal-400" />
+                          <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-teal-900 dark:text-teal-300">
                             The Engineering Solution
                           </h3>
                         </div>
-                        <p className="text-sm sm:text-base text-slate-800 leading-relaxed font-medium">
+                        <p className="text-sm sm:text-base text-slate-800 dark:text-slate-200 leading-relaxed font-medium">
                           {study.solution}
                         </p>
                       </div>
@@ -143,7 +143,7 @@ export default function WorkPage() {
 
                     {/* Quantified Business Impact & Metrics */}
                     <div className="space-y-4">
-                      <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-slate-800">
+                      <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-slate-800 dark:text-slate-200">
                         Quantified Business Impact
                       </h3>
 
@@ -151,12 +151,12 @@ export default function WorkPage() {
                         {study.metrics.map((metric) => (
                           <div
                             key={metric.label}
-                            className="rounded-2xl border border-slate-200 bg-slate-50 p-5 text-center"
+                            className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/60 p-5 text-center"
                           >
-                            <div className="font-display text-3xl font-extrabold text-teal-800">
+                            <div className="font-display text-3xl font-extrabold text-teal-800 dark:text-teal-400">
                               {metric.value}
                             </div>
-                            <p className="mt-1 font-sans text-xs text-slate-500 font-medium">{metric.label}</p>
+                            <p className="mt-1 font-sans text-xs text-slate-500 dark:text-slate-400 font-medium">{metric.label}</p>
                           </div>
                         ))}
                       </div>
@@ -165,9 +165,9 @@ export default function WorkPage() {
                         {study.impact.map((item) => (
                           <li
                             key={item}
-                            className="flex items-start gap-2.5 rounded-xl border border-slate-200 bg-slate-50/50 p-3.5 text-xs text-slate-700 font-medium"
+                            className="flex items-start gap-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/40 p-3.5 text-xs text-slate-700 dark:text-slate-300 font-medium"
                           >
-                            <CheckCircle2 className="h-4 w-4 text-teal-600 flex-shrink-0 mt-0.5" />
+                            <CheckCircle2 className="h-4 w-4 text-teal-600 dark:text-teal-400 flex-shrink-0 mt-0.5" />
                             <span>{item}</span>
                           </li>
                         ))}
@@ -175,13 +175,13 @@ export default function WorkPage() {
                     </div>
 
                     {/* Tech Stack & Action Footer */}
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-6 border-t border-slate-100">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-6 border-t border-slate-100 dark:border-slate-800">
                       <div className="flex flex-wrap items-center gap-2">
-                        <span className="font-sans text-xs text-slate-500 font-semibold">Engineered With:</span>
+                        <span className="font-sans text-xs text-slate-500 dark:text-slate-400 font-semibold">Engineered With:</span>
                         {study.technologies.map((tech) => (
                           <span
                             key={tech}
-                            className="rounded-md border border-slate-200 bg-white px-2.5 py-1 font-mono text-[11px] text-slate-700 shadow-sm"
+                            className="rounded-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-2.5 py-1 font-mono text-[11px] text-slate-700 dark:text-slate-300 shadow-sm"
                           >
                             {tech}
                           </span>
@@ -207,7 +207,7 @@ export default function WorkPage() {
       {/* 3. CTA */}
       <section className="relative">
         <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8">
-          <div className="rounded-3xl border border-slate-200 bg-slate-900 text-white p-8 md:p-12 text-center shadow-xl space-y-6">
+          <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-slate-900 text-white p-8 md:p-12 text-center shadow-xl space-y-6">
             <h2 className="text-3xl sm:text-4xl font-display font-bold text-white">
               Ready to achieve measurable enterprise transformation?
             </h2>

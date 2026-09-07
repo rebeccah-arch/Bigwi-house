@@ -1,12 +1,12 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion, AnimatePresence, type Variants } from 'framer-motion'
 import {
   ArrowRight,
-  Sparkles,
+  ArrowLeft,
   CheckCircle2,
   Layers,
   Smartphone,
@@ -17,30 +17,17 @@ import {
   Palette,
   Rocket,
   ShieldCheck,
-  Building2,
-  Landmark,
-  HeartPulse,
-  Globe2,
-  Sprout,
-  Truck,
-  Briefcase,
-  TrendingUp,
+  ChevronLeft,
   ChevronRight,
-  Send,
-  Loader2,
-  AlertCircle,
-  MapPin,
-  Clock,
-  Lock,
+  Code2,
+  Activity,
+  Zap,
+  Compass,
 } from '@/components/Icons'
 
 import {
   services,
 } from '@/content/bigwiContent'
-
-import ProcessTimeline from '@/components/ProcessTimeline'
-import TechRadar from '@/components/TechRadar'
-import DataAnalyticsDemo from '@/components/DataAnalyticsDemo'
 
 const SERVICE_ICONS: Record<string, React.ElementType> = {
   Layers,
@@ -55,944 +42,772 @@ const SERVICE_ICONS: Record<string, React.ElementType> = {
   ShieldCheck,
 }
 
-// Case Gallery Items matching the TikTok video grid style
-const CASE_GALLERY = [
+const CASE_STUDIES = [
   {
-    id: '001',
-    code: '001 • KIGALI',
+    id: 'risk-fraud-hub',
+    sector: 'Banking & Financial Switch',
+    client: 'Regional Banking Consortium',
     title: 'Core Banking & Credit Analytics Engine',
-    sector: 'Financial Services',
+    description: 'A high-concurrency transaction routing and fraud detection dashboard processing rolling 24-hour incidents across 140+ branch nodes with sub-second latency.',
+    metric: '99.99% Uptime & 12x Faster Underwriting',
     image: '/images/hero-team.jpg',
-    metric: '12x Faster Underwriting',
+    tags: ['Next.js', 'Go / Python', 'PostgreSQL', 'Docker'],
+    href: '/work',
   },
   {
-    id: '002',
-    code: '002 • REGIONAL',
-    title: 'Mobile Commerce & Payment Switches',
-    sector: 'FinTech & Consumer',
+    id: 'mobile-fintech-gateway',
+    sector: 'Mobile FinTech & Payments',
+    client: 'East Africa Digital Payments Switch',
+    title: 'Mobile Commerce & Instant Settlement Switch',
+    description: 'End-to-end payment gateway integrating USSD, card rails, and mobile wallets for frictionless multi-currency merchant settlements.',
+    metric: '4.8M Monthly API Invocations',
     image: '/images/mobile-banking.jpg',
-    metric: '99.99% Transaction Sync',
+    tags: ['React Native', 'Node.js', 'Redis', 'Kafka'],
+    href: '/work',
   },
   {
-    id: '003',
-    code: '003 • EAST AFRICA',
-    title: 'Real-Time Logistics & Freight Telematics',
-    sector: 'Supply Chain',
+    id: 'logistics-telematics-mart',
+    sector: 'Supply Chain & Freight',
+    client: 'Cross-Border Logistics Network',
+    title: 'Real-Time Fleet & Cold Chain Telematics Hub',
+    description: 'IoT telemetry ingestion engine consolidating GPS tracking, temperature compliance, and automated customs documentation dispatch.',
+    metric: '+28% Fleet Operational Efficiency',
     image: '/images/logistics-terminal.jpg',
-    metric: '+28% Fleet Efficiency',
-  },
-  {
-    id: '004',
-    code: '004 • NATIONAL',
-    title: 'Field Data & Community Monitoring Platform',
-    sector: 'NGOs & Development',
-    image: '/images/data-engineer.jpg',
-    metric: '45,000+ Verified Surveys',
-  },
-  {
-    id: '005',
-    code: '005 • ENTERPRISE',
-    title: 'Executive Digital Transformation Advisory',
-    sector: 'Corporate Governance',
-    image: '/images/executive-strategy.jpg',
-    metric: '100% On-Time Delivery',
-  },
-  {
-    id: '006',
-    code: '006 • HUB',
-    title: 'Cloud Infrastructure & API Gateway',
-    sector: 'Cloud & DevOps',
-    image: '/images/kigali-skyline.jpg',
-    metric: '<12ms API Latency',
+    tags: ['ClickHouse', 'dbt', 'Python', 'FastAPI'],
+    href: '/work',
   },
 ]
-
-const LOCATION_HUBS = [
-  {
-    id: 'kigali-hub',
-    tab: 'Engineering HQ',
-    title: 'Engineering Hub in Kigali Heights',
-    description: 'Our primary software engineering center, data science laboratory, and executive solutions advisory team in Kigali, Rwanda.',
-    image: '/images/hero-team.jpg',
-    latLng: '-1.9441° S, 30.0619° E',
-    activeTeam: '24 Senior Engineers & Data Scientists',
-  },
-  {
-    id: 'strategy-center',
-    tab: 'Strategy Lab',
-    title: 'Executive Strategy & Architecture Center',
-    description: 'Dedicated board-level digital modernization consulting and enterprise system blueprint design.',
-    image: '/images/executive-strategy.jpg',
-    latLng: '-1.9536° S, 30.0605° E',
-    activeTeam: 'Advisory & Enterprise Architecture Team',
-  },
-  {
-    id: 'regional-network',
-    tab: 'Cloud Network',
-    title: 'Distributed Cloud & Data Network',
-    description: 'Multi-region cloud infrastructure serving high-concurrency enterprise workloads across East Africa.',
-    image: '/images/kigali-skyline.jpg',
-    latLng: 'East African Cross-Border Cluster',
-    activeTeam: '24/7 SLA Operations & SRE Support',
-  },
-]
-
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-}
-
-const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      ease: 'easeOut',
-    },
-  },
-}
 
 export default function HomePage() {
   const [selectedCategory, setSelectedCategory] = useState<string>('All')
-  const [activeHubIndex, setActiveHubIndex] = useState<number>(0)
-  const [scrollProgress, setScrollProgress] = useState<number>(0)
-  const [contactStatus, setContactStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
-  const [contactForm, setContactForm] = useState({
-    name: '',
-    email: '',
-    organization: '',
-    sector: 'Private enterprise',
-    service: 'Enterprise Software Development',
-    message: '',
-  })
+  const [servicePage, setServicePage] = useState<number>(0)
+  const SERVICES_PER_PAGE = 3
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const totalScroll = document.documentElement.scrollHeight - window.innerHeight
-      if (totalScroll > 0) {
-        setScrollProgress(Math.min(window.scrollY / 400, 1))
-      }
-    }
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  const handleCategoryChange = (cat: string) => {
+    setSelectedCategory(cat)
+    setServicePage(0)
+  }
 
   const filteredServices = selectedCategory === 'All'
     ? services
     : services.filter((s) => s.category === selectedCategory)
 
-  const handleContactSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setContactStatus('loading')
+  const totalServicePages = Math.max(1, Math.ceil(filteredServices.length / SERVICES_PER_PAGE))
+  const currentServicePage = Math.min(servicePage, totalServicePages - 1)
+  const paginatedServices = filteredServices.slice(
+    currentServicePage * SERVICES_PER_PAGE,
+    (currentServicePage + 1) * SERVICES_PER_PAGE
+  )
 
-    try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(contactForm),
-      })
-      const data = await res.json()
-      if (res.ok && data.success) {
-        setContactStatus('success')
-        setContactForm({
-          name: '',
-          email: '',
-          organization: '',
-          sector: 'Private enterprise',
-          service: 'Enterprise Software Development',
-          message: '',
-        })
-      } else {
-        setContactStatus('error')
-      }
-    } catch {
-      setContactStatus('error')
-    }
+  const handlePrevService = () => {
+    setServicePage((prev) => Math.max(0, prev - 1))
+  }
+
+  const handleNextService = () => {
+    setServicePage((prev) => Math.min(totalServicePages - 1, prev + 1))
   }
 
   return (
-    <div className="space-y-24 md:space-y-36 pb-16">
-      {/* 1. HERO SECTION WITH EXPANDING SCROLL DYNAMICS & FRAMER MOTION */}
-      <section className="relative min-h-[640px] lg:min-h-[740px] flex items-center justify-center overflow-hidden border-b border-slate-200">
-        {/* Full Cover Background Image with Scroll Scale */}
-        <div
-          className="absolute inset-0 z-0 transition-transform duration-700 ease-out"
-          style={{
-            transform: `scale(${1 + scrollProgress * 0.08})`,
-          }}
-        >
+    <div className="relative mx-auto max-w-[1400px] border-x border-slate-200 dark:border-stone-900 bg-white dark:bg-stone-950 transition-colors duration-300">
+      {/* Background Architectural Grid Guide Lines */}
+      <div className="pointer-events-none absolute inset-0 z-0 grid h-full w-full grid-cols-1 gap-0 md:grid-cols-12">
+        <div className="hidden h-full border-r border-slate-200/40 dark:border-stone-900/40 md:col-span-3 md:block" />
+        <div className="hidden h-full border-r border-slate-200/40 dark:border-stone-900/40 md:col-span-6 md:block" />
+        <div className="hidden h-full md:col-span-3 md:block" />
+      </div>
+
+      {/* 1. FULL-WIDTH ARCHITECTURAL HERO SECTION */}
+      <section className="relative z-10 w-full min-h-[640px] sm:min-h-[720px] md:min-h-[820px] overflow-hidden border-b border-slate-200 dark:border-stone-900 bg-stone-950 flex flex-col justify-end">
+        {/* Full-Bleed Atmospheric Background Image */}
+        <div className="absolute inset-0 h-full w-full overflow-hidden bg-stone-950">
           <Image
-            src="/images/hero-team.jpg"
-            alt="DataSphere Senior Software Engineers & Data Consultants collaborating in Kigali"
+            src="/images/kigali-skyline.jpg"
+            alt="DataSphere Consulting Ltd — Enterprise Software & Data Engineering"
             fill
-            className="object-cover object-center"
             priority
+            className="object-cover object-center opacity-65 contrast-125 grayscale hover:scale-105 transition-transform duration-10000 ease-out"
           />
-          {/* Refined gradient overlays for maximum contrast and legibility */}
-          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 sm:via-white/90 to-white/30 lg:via-white/90 lg:to-white/20" />
-          <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-white/40" />
+          {/* Cinematic Gradient Fade */}
+          <div className="pointer-events-none absolute inset-0 h-full w-full bg-gradient-to-t from-stone-950 via-stone-950/70 to-stone-950/20" />
+          <div className="pointer-events-none absolute inset-0 h-full w-full bg-gradient-to-r from-stone-950/80 via-stone-950/40 to-transparent" />
         </div>
 
-        {/* Hero Content */}
-        <div className="relative z-10 mx-auto max-w-wide w-full px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
-          <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12">
-            {/* Left Content */}
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, ease: 'easeOut' }}
-              className="lg:col-span-7 space-y-6 max-w-2xl"
+        {/* Hero Content Overlay */}
+        <div className="relative z-20 p-6 sm:p-10 md:p-14 lg:p-16 max-w-5xl text-white space-y-6">
+          <div className="space-y-2">
+            <span className="inline-block font-mono text-xs uppercase tracking-[0.25em] text-teal-400 font-semibold">
+              DataSphere Consulting Ltd &bull; Kigali, Rwanda
+            </span>
+            <h1 className="font-display font-extrabold text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight leading-[0.95] text-white">
+              <span className="block text-slate-100">Building</span>
+              <span className="block text-slate-100">Software</span>
+              <span className="block text-gradient">For Humans.</span>
+            </h1>
+          </div>
+
+          <p className="max-w-2xl text-base sm:text-lg md:text-xl text-stone-300 leading-relaxed font-normal">
+            We design and build fault-tolerant enterprise systems, real-time data pipelines, and scalable digital products that transform organizational operations across East Africa and beyond.
+          </p>
+
+          <div className="flex flex-wrap items-center gap-4 pt-2">
+            <Link
+              href="/contact"
+              className="flex items-center gap-2 rounded-full bg-gradient-to-r from-teal-500 via-teal-400 to-cyan-400 px-7 py-3.5 text-sm font-bold text-slate-950 shadow-lg shadow-teal-500/20 transition-all duration-300 hover:scale-105 hover:opacity-95"
             >
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-extrabold tracking-tight text-slate-900 leading-[1.1]">
-                Enterprise Software &amp;{' '}
-                <span className="text-teal-700">
-                  Data Engineering.
-                </span>
-              </h1>
+              <span>Start a Project</span>
+              <ArrowRight className="h-4 w-4" />
+            </Link>
 
-              <p className="text-base sm:text-lg text-slate-700 leading-relaxed font-normal bg-white/60 backdrop-blur-xs p-1 rounded-lg">
-                We partner with leading enterprises, financial institutions, and public organizations across East Africa to architect mission-critical software, modern data pipelines, and intelligent executive dashboards.
-              </p>
-
-              {/* Action Buttons */}
-              <div className="flex flex-wrap items-center gap-3.5 pt-2">
-                <Link href="/contact" className="btn btn-primary text-sm sm:text-base py-3.5 px-7 shadow-md">
-                  <span>Start an Engagement</span>
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-
-                <Link href="/services" className="btn btn-ghost text-sm sm:text-base py-3.5 px-7 shadow-sm">
-                  <span>Explore Solutions</span>
-                  <ChevronRight className="h-4 w-4 text-slate-500" />
-                </Link>
-              </div>
-
-              {/* Trust Metric Highlights */}
-              <motion.div
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="grid grid-cols-3 gap-4 border-t border-slate-300/80 pt-6 mt-6 bg-white/85 backdrop-blur-md p-4 rounded-2xl border shadow-sm"
-              >
-                <div>
-                  <div className="font-display text-2xl sm:text-3xl font-extrabold text-slate-900">10+</div>
-                  <p className="font-sans text-xs text-slate-600 mt-0.5 font-semibold">Core Capabilities</p>
-                </div>
-                <div>
-                  <div className="font-display text-2xl sm:text-3xl font-extrabold text-teal-700">99.9%</div>
-                  <p className="font-sans text-xs text-slate-600 mt-0.5 font-semibold">Uptime SLA</p>
-                </div>
-                <div>
-                  <div className="font-display text-2xl sm:text-3xl font-extrabold text-slate-900">100%</div>
-                  <p className="font-sans text-xs text-slate-600 mt-0.5 font-semibold">Custom Codebase</p>
-                </div>
-              </motion.div>
-            </motion.div>
-
-            {/* Right Feature Card */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.7, delay: 0.25 }}
-              className="lg:col-span-5 flex flex-col justify-end items-start lg:items-end space-y-3"
+            <Link
+              href="/work"
+              className="rounded-full border border-stone-500/40 bg-stone-900/60 px-7 py-3.5 text-sm font-semibold text-stone-200 backdrop-blur-md transition-all duration-300 hover:scale-105 hover:border-stone-400 hover:bg-stone-800/70"
             >
-              <div className="rounded-2xl border border-white/60 bg-white/95 p-5 shadow-xl backdrop-blur-md max-w-sm space-y-3">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <span className="h-2.5 w-2.5 rounded-full bg-emerald-500 animate-pulse" />
-                    <span className="font-mono text-xs font-bold text-slate-900">Kigali Engineering Hub</span>
-                  </div>
-                  <span className="font-mono text-[10px] text-teal-800 bg-teal-50 px-2 py-0.5 rounded font-bold">ACTIVE</span>
-                </div>
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  Full-stack engineering &amp; enterprise data science team delivering across East Africa &amp; international markets.
-                </p>
-                <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] font-semibold text-slate-700">
-                  <span>ISO 27001 Standards</span>
-                  <span className="text-teal-700">Zero-Downtime Deployments</span>
-                </div>
-              </div>
-            </motion.div>
+              Explore Case Studies
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* 2. EDITORIAL NARRATIVE & METRIC TICKERS (TikTok Video Style 0:06-0:09) */}
-      <section className="relative">
-        <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8 space-y-12">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-60px' }}
-            variants={containerVariants}
-            className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center"
-          >
-            {/* Left Editorial Text */}
-            <motion.div variants={itemVariants} className="lg:col-span-6 space-y-4">
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold text-slate-900 leading-tight">
-                Your enterprise is scaling. Don&apos;t just collect data — <span className="text-teal-700">find what&apos;s next.</span>
-              </h2>
-              <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
-                We help you move forward with clarity, confidence, and top-tier African engineering talent by your side.
-              </p>
-            </motion.div>
+      {/* 2. 3-COLUMN METRIC STAT BAR */}
+      <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-slate-200 dark:divide-stone-900 border-b border-slate-200 dark:border-stone-900 bg-white dark:bg-stone-950">
+        <div className="spotlight-card group flex flex-col justify-between p-6 sm:p-8 transition-colors">
+          <div className="flex items-center justify-between mb-4">
+            <span className="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-stone-500 font-semibold">
+              /01 Capability
+            </span>
+            <Layers className="h-6 w-6 text-teal-600 dark:text-teal-400 transition-transform duration-300 group-hover:scale-110" />
+          </div>
+          <div>
+            <h2 className="font-display text-4xl sm:text-5xl font-extrabold text-slate-900 dark:text-stone-100 tracking-tight transition-all duration-300 group-hover:translate-x-1">
+              10+
+            </h2>
+            <span className="mt-1 block font-mono text-xs text-slate-500 dark:text-stone-400 uppercase tracking-wider">
+              Core Tech Capabilities
+            </span>
+          </div>
+        </div>
 
-            {/* Right Metric Highlights Tickers */}
-            <motion.div variants={itemVariants} className="lg:col-span-6 grid grid-cols-2 sm:grid-cols-3 gap-4">
-              <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm hover:shadow-md transition-shadow">
-                <div className="font-display text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-                  12<span className="text-teal-600">+</span>
-                </div>
-                <div className="mt-2 font-mono text-xs font-bold text-slate-900 uppercase">Enterprise Deployments</div>
-                <p className="mt-1 text-[11px] text-slate-500">Live production systems across East Africa</p>
-              </div>
+        <div className="spotlight-card group flex flex-col justify-between p-6 sm:p-8 transition-colors">
+          <div className="flex items-center justify-between mb-4">
+            <span className="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-stone-500 font-semibold">
+              /02 Reliability
+            </span>
+            <ShieldCheck className="h-6 w-6 text-cyan-600 dark:text-cyan-400 transition-transform duration-300 group-hover:scale-110" />
+          </div>
+          <div>
+            <h2 className="font-display text-4xl sm:text-5xl font-extrabold text-teal-700 dark:text-teal-400 tracking-tight transition-all duration-300 group-hover:translate-x-1">
+              99.9%
+            </h2>
+            <span className="mt-1 block font-mono text-xs text-slate-500 dark:text-stone-400 uppercase tracking-wider">
+              Uptime SLA Standard
+            </span>
+          </div>
+        </div>
 
-              <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm hover:shadow-md transition-shadow">
-                <div className="font-display text-3xl sm:text-4xl font-extrabold text-teal-700 tracking-tight">
-                  560<span className="text-teal-500">M+</span>
-                </div>
-                <div className="mt-2 font-mono text-xs font-bold text-slate-900 uppercase">Records Processed</div>
-                <p className="mt-1 text-[11px] text-slate-500">High-throughput streaming ETL pipelines</p>
-              </div>
+        <div className="spotlight-card group flex flex-col justify-between p-6 sm:p-8 transition-colors">
+          <div className="flex items-center justify-between mb-4">
+            <span className="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-stone-500 font-semibold">
+              /03 Code Ownership
+            </span>
+            <Code2 className="h-6 w-6 text-amber-600 dark:text-amber-400 transition-transform duration-300 group-hover:scale-110" />
+          </div>
+          <div>
+            <h2 className="font-display text-4xl sm:text-5xl font-extrabold text-slate-900 dark:text-stone-100 tracking-tight transition-all duration-300 group-hover:translate-x-1">
+              100%
+            </h2>
+            <span className="mt-1 block font-mono text-xs text-slate-500 dark:text-stone-400 uppercase tracking-wider">
+              Custom Architecture &amp; IP
+            </span>
+          </div>
+        </div>
+      </div>
 
-              <div className="col-span-2 sm:col-span-1 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm hover:shadow-md transition-shadow">
-                <div className="font-display text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-                  99.9<span className="text-teal-600">%</span>
-                </div>
-                <div className="mt-2 font-mono text-xs font-bold text-slate-900 uppercase">System Uptime SLA</div>
-                <p className="mt-1 text-[11px] text-slate-500">Zero-downtime containerized clusters</p>
-              </div>
-            </motion.div>
-          </motion.div>
+      {/* 3. CONTINUOUS INFINITE TICKER MARQUEE */}
+      <div className="overflow-hidden border-b border-slate-200 dark:border-stone-900 bg-slate-50/70 dark:bg-stone-950/40 py-4 sm:py-5">
+        <div className="animate-marquee">
+          <div className="flex shrink-0 items-center">
+            <span className="mx-6 font-mono text-xs md:text-sm text-slate-600 dark:text-stone-400 uppercase tracking-widest font-semibold">
+              SOFTWARE BUILT FOR HUMANS
+            </span>
+            <span className="mx-6 font-mono text-teal-600 dark:text-teal-400 text-sm">&bull;</span>
+            <span className="mx-6 font-mono text-xs md:text-sm text-slate-600 dark:text-stone-400 uppercase tracking-widest font-semibold">
+              SUB-SECOND DATA PIPELINES
+            </span>
+            <span className="mx-6 font-mono text-cyan-600 dark:text-cyan-400 text-sm">&bull;</span>
+            <span className="mx-6 font-mono text-xs md:text-sm text-slate-600 dark:text-stone-400 uppercase tracking-widest font-semibold">
+              ZERO TECHNICAL DEBT
+            </span>
+            <span className="mx-6 font-mono text-teal-600 dark:text-teal-400 text-sm">&bull;</span>
+            <span className="mx-6 font-mono text-xs md:text-sm text-slate-600 dark:text-stone-400 uppercase tracking-widest font-semibold">
+              RIGOROUS SLA GOVERNANCE
+            </span>
+            <span className="mx-6 font-mono text-amber-600 dark:text-amber-400 text-sm">&bull;</span>
+            <span className="mx-6 font-mono text-xs md:text-sm text-slate-600 dark:text-stone-400 uppercase tracking-widest font-semibold">
+              TOP-TIER AFRICAN ENGINEERING TALENT
+            </span>
+            <span className="mx-6 font-mono text-teal-600 dark:text-teal-400 text-sm">&bull;</span>
+            <span className="mx-6 font-mono text-xs md:text-sm text-slate-600 dark:text-stone-400 uppercase tracking-widest font-semibold">
+              TRANSPARENCY &amp; DIRECT ACCESS
+            </span>
+            <span className="mx-6 font-mono text-cyan-600 dark:text-cyan-400 text-sm">&bull;</span>
+          </div>
 
-          {/* Large Visual Feature Banner with Subtitle (TikTok Style) */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.7 }}
-            className="relative h-72 sm:h-96 w-full rounded-3xl overflow-hidden border border-slate-200 shadow-md"
-          >
-            <Image
-              src="/images/executive-strategy.jpg"
-              alt="DataSphere Executive Strategy and System Architecture"
-              fill
-              className="object-cover object-center hover:scale-105 transition-transform duration-700"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/30 to-transparent" />
-            <div className="absolute bottom-6 left-6 right-6 flex flex-col sm:flex-row sm:items-end justify-between gap-4 text-white">
+          <div className="flex shrink-0 items-center">
+            <span className="mx-6 font-mono text-xs md:text-sm text-slate-600 dark:text-stone-400 uppercase tracking-widest font-semibold">
+              SOFTWARE BUILT FOR HUMANS
+            </span>
+            <span className="mx-6 font-mono text-teal-600 dark:text-teal-400 text-sm">&bull;</span>
+            <span className="mx-6 font-mono text-xs md:text-sm text-slate-600 dark:text-stone-400 uppercase tracking-widest font-semibold">
+              SUB-SECOND DATA PIPELINES
+            </span>
+            <span className="mx-6 font-mono text-cyan-600 dark:text-cyan-400 text-sm">&bull;</span>
+            <span className="mx-6 font-mono text-xs md:text-sm text-slate-600 dark:text-stone-400 uppercase tracking-widest font-semibold">
+              ZERO TECHNICAL DEBT
+            </span>
+            <span className="mx-6 font-mono text-teal-600 dark:text-teal-400 text-sm">&bull;</span>
+            <span className="mx-6 font-mono text-xs md:text-sm text-slate-600 dark:text-stone-400 uppercase tracking-widest font-semibold">
+              RIGOROUS SLA GOVERNANCE
+            </span>
+            <span className="mx-6 font-mono text-amber-600 dark:text-amber-400 text-sm">&bull;</span>
+            <span className="mx-6 font-mono text-xs md:text-sm text-slate-600 dark:text-stone-400 uppercase tracking-widest font-semibold">
+              TOP-TIER AFRICAN ENGINEERING TALENT
+            </span>
+            <span className="mx-6 font-mono text-teal-600 dark:text-teal-400 text-sm">&bull;</span>
+            <span className="mx-6 font-mono text-xs md:text-sm text-slate-600 dark:text-stone-400 uppercase tracking-widest font-semibold">
+              TRANSPARENCY &amp; DIRECT ACCESS
+            </span>
+            <span className="mx-6 font-mono text-cyan-600 dark:text-cyan-400 text-sm">&bull;</span>
+          </div>
+        </div>
+      </div>
+
+      {/* 4. SEVENX EDITORIAL STATEMENT BANNER (AS IN SCREENSHOT) */}
+      <section className="relative z-10 overflow-hidden border-b border-slate-200 dark:border-stone-900 py-24 sm:py-32 md:py-36 text-center bg-white dark:bg-stone-950">
+        <div className="flex flex-col items-center gap-2">
+          <div className="flex items-center justify-center gap-4 md:gap-8">
+            <h2 className="font-display font-extrabold text-5xl sm:text-7xl md:text-8xl lg:text-9xl text-slate-900 dark:text-stone-100 tracking-tight">
+              Enterprise
+            </h2>
+            <Link
+              href="/contact"
+              aria-label="Contact DataSphere"
+              className="flex h-12 w-12 sm:h-16 sm:w-16 md:h-20 md:w-20 items-center justify-center rounded-full border border-slate-300 dark:border-stone-700 text-slate-800 dark:text-stone-200 transition-all duration-500 hover:border-teal-500 hover:bg-teal-500 hover:text-slate-950 group"
+            >
+              <ArrowRight className="h-6 w-6 sm:h-8 sm:w-8 rotate-45 transition-transform duration-300 group-hover:scale-110" />
+            </Link>
+          </div>
+          <h2 className="font-display font-extrabold text-5xl sm:text-7xl md:text-8xl lg:text-9xl tracking-tight text-gradient pb-2">
+            Architects.
+          </h2>
+        </div>
+        <div className="absolute top-1/2 left-0 -z-10 h-px w-full bg-slate-200 dark:bg-stone-800" />
+      </section>
+
+      {/* 5. WHY ENTERPRISE TEAMS CHOOSE US (SPLIT + 5-MODULE BENTO GRID) */}
+      <section className="relative z-10 border-b border-slate-200 dark:border-stone-900">
+        {/* Split Narrative Header */}
+        <div className="grid grid-cols-1 md:grid-cols-12 border-b border-slate-200 dark:border-stone-900">
+          <div className="col-span-1 md:col-span-4 border-b md:border-b-0 md:border-r border-slate-200 dark:border-stone-900 p-8 sm:p-12 flex flex-col justify-between">
+            <div className="space-y-6">
+              <ShieldCheck className="h-10 w-10 text-teal-600 dark:text-teal-400" />
               <div>
-                <span className="font-mono text-xs uppercase tracking-widest text-teal-300 font-bold">Kigali Strategy &amp; Innovation Labs</span>
-                <h3 className="text-xl sm:text-2xl font-display font-bold text-white mt-1">
-                  Where strategic business acumen meets resilient systems engineering.
+                <h3 className="font-mono text-xs font-bold uppercase tracking-widest text-slate-900 dark:text-stone-100 mb-4">
+                  Why Enterprise Teams Choose Us
                 </h3>
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between border-b border-slate-200 dark:border-stone-900 pb-2.5">
+                    <span className="text-sm font-medium text-slate-700 dark:text-stone-400">Dedicated Senior Engineers</span>
+                    <CheckCircle2 className="h-4 w-4 text-teal-600 dark:text-teal-400" />
+                  </div>
+                  <div className="flex items-center justify-between border-b border-slate-200 dark:border-stone-900 pb-2.5">
+                    <span className="text-sm font-medium text-slate-700 dark:text-stone-400">Direct Engineering Access</span>
+                    <CheckCircle2 className="h-4 w-4 text-teal-600 dark:text-teal-400" />
+                  </div>
+                  <div className="flex items-center justify-between border-b border-slate-200 dark:border-stone-900 pb-2.5">
+                    <span className="text-sm font-medium text-slate-700 dark:text-stone-400">Zero Technical Debt Guarantee</span>
+                    <CheckCircle2 className="h-4 w-4 text-teal-600 dark:text-teal-400" />
+                  </div>
+                </div>
               </div>
-              <Link href="/approach" className="btn btn-teal text-xs py-2.5 px-5 flex-shrink-0">
-                <span>Our Methodology</span>
-                <ArrowRight className="h-3.5 w-3.5" />
-              </Link>
             </div>
-          </motion.div>
-        </div>
-      </section>
+          </div>
 
-      {/* 3. "OUR CASES" VISUAL GALLERY (TikTok Style Grid) */}
-      <section className="relative">
-        <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8 space-y-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center max-w-2xl mx-auto space-y-2"
-          >
-            <h2 className="text-3xl sm:text-5xl font-display font-extrabold text-slate-900 tracking-tight">
-              OUR CASES
+          <div className="col-span-1 md:col-span-8 p-8 sm:p-12 lg:pr-20 flex flex-col justify-center space-y-6">
+            <h2 className="font-display font-medium text-2xl sm:text-3xl md:text-4xl text-slate-900 dark:text-stone-100 leading-tight">
+              We&apos;re a dedicated team of systems architects, data engineers, and UI strategists.{' '}
+              <span className="text-slate-500 dark:text-stone-500">
+                Headquartered in Kigali Heights, we engineer modern software and automated business intelligence pipelines for forward-thinking organizations.
+              </span>
             </h2>
-            <p className="text-sm sm:text-base text-slate-600">
-              High-concurrency systems engineered for leading African enterprises.
-            </p>
-          </motion.div>
 
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-60px' }}
-            variants={containerVariants}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
-          >
-            {CASE_GALLERY.map((item) => (
-              <motion.div key={item.id} variants={itemVariants}>
-                <Link
-                  href="/work"
-                  className="group relative block overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm hover:shadow-xl hover:border-teal-500/50 transition-all duration-300"
-                >
-                  {/* Image Container */}
-                  <div className="relative h-56 w-full overflow-hidden bg-slate-100">
-                    <Image
-                      src={item.image}
-                      alt={item.title}
-                      fill
-                      className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/25 to-transparent" />
-
-                    {/* Code Badge */}
-                    <div className="absolute top-3 left-3 z-10 rounded-md bg-white/95 px-2.5 py-1 font-mono text-[10px] font-bold text-slate-900 backdrop-blur-sm shadow-sm">
-                      {item.code}
-                    </div>
-
-                    {/* Sector Tag */}
-                    <div className="absolute top-3 right-3 z-10 rounded-md bg-slate-900/80 px-2.5 py-1 font-sans text-[10px] font-semibold text-white backdrop-blur-sm">
-                      {item.sector}
-                    </div>
-
-                    {/* Impact Metric Floating on Image */}
-                    <div className="absolute bottom-3 left-3 right-3 z-10 text-white">
-                      <p className="font-sans text-xs text-teal-300 font-semibold">{item.metric}</p>
-                    </div>
-                  </div>
-
-                  {/* Card Title & Link */}
-                  <div className="p-4 flex items-center justify-between">
-                    <h3 className="font-display text-sm font-bold text-slate-900 group-hover:text-teal-700 transition-colors line-clamp-1">
-                      {item.title}
-                    </h3>
-                    <ArrowRight className="h-4 w-4 text-slate-400 group-hover:text-teal-600 group-hover:translate-x-1 transition-all flex-shrink-0 ml-2" />
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* 4. BOLD EDITORIAL STATEMENT & IMPACT BANNER (TikTok Video Style 0:14) */}
-      <section className="relative">
-        <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.98 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="relative overflow-hidden rounded-3xl bg-teal-800 text-white p-8 sm:p-14 shadow-2xl"
-          >
-            {/* Subtle background image */}
-            <div className="absolute inset-0 opacity-15">
-              <Image
-                src="/images/kigali-skyline.jpg"
-                alt="Kigali Skyline"
-                fill
-                className="object-cover"
-              />
-            </div>
-
-            <div className="relative z-10 space-y-4 max-w-3xl">
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold text-white leading-tight uppercase">
-                WE ARCHITECT INTELLIGENCE THAT POWERS SUSTAINED GROWTH.
-              </h2>
-              <p className="text-sm sm:text-base text-teal-100 max-w-2xl leading-relaxed">
-                Combining rigorous software engineering, localized market intelligence, and unyielding focus on customer ROI.
-              </p>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* 5. VISIONARY LEADERSHIP & ENTERPRISE STABILITY (TikTok Video Style 0:15) */}
-      <section className="relative">
-        <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8 space-y-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="lg:col-span-7 space-y-6"
-            >
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold text-slate-900 tracking-tight leading-tight">
-                VISIONARY ARCHITECTURE, GOVERNANCE AND STABILITY.
-              </h2>
-              <p className="text-base text-slate-600 leading-relaxed font-normal">
-                Ranked among the premier bespoke engineering consultancies with strict zero-tolerance for data leaks, unauthorized access, or fragile legacy dependencies.
-              </p>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-                <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
-                  <div className="font-display text-3xl font-extrabold text-slate-900">0 Cases</div>
-                  <p className="font-sans text-xs text-slate-600 mt-1 font-medium">Of unmanaged security breaches or critical SLA disruptions</p>
-                </div>
-
-                <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
-                  <div className="font-display text-3xl font-extrabold text-teal-700">100%</div>
-                  <p className="font-sans text-xs text-slate-600 mt-1 font-medium">Verified automated test coverage across core pipeline modules</p>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Right Card: Guaranteed Compliance Card */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="lg:col-span-5 rounded-3xl border border-slate-200 bg-white p-6 sm:p-8 shadow-lg space-y-6"
-            >
-              <div className="relative h-44 w-full rounded-2xl overflow-hidden bg-slate-100">
-                <Image
-                  src="/images/data-engineer.jpg"
-                  alt="Senior Data Architect"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <span className="inline-block font-mono text-[10px] font-bold uppercase tracking-widest text-teal-800 bg-teal-50 px-2.5 py-1 rounded">
-                  GUARANTEED QUALITY
-                </span>
-                <h4 className="font-display text-lg font-bold text-slate-900">
-                  Senior Architect Peer-Reviewed Delivery
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-2">
+              <div>
+                <h4 className="font-display font-bold text-base text-teal-700 dark:text-teal-400 mb-1">
+                  Engineered for Scale.
                 </h4>
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                  All systems undergo dual code review, threat modeling, and load validation before deployment to your production environment.
+                <p className="text-sm text-slate-600 dark:text-stone-400 leading-relaxed">
+                  We build robust, multi-tenant platforms that withstand high concurrency, erratic connectivity, and strict regional regulatory standards.
                 </p>
               </div>
-
-              <div className="pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500 font-mono">
-                <span>ISO 27001 Ready</span>
-                <span>GDPR &amp; Rwanda DPPA Compliant</span>
+              <div>
+                <h4 className="font-display font-bold text-base text-amber-700 dark:text-amber-400 mb-1">
+                  Quality Over Shortcuts.
+                </h4>
+                <p className="text-sm text-slate-600 dark:text-stone-400 leading-relaxed">
+                  Every pipeline, schema, and API endpoint is audited against strict SLAs, automated test suites, and zero-trust security postures.
+                </p>
               </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* 6. INTERACTIVE LOCATION & DEPLOYMENT HUB SHOWCASE (TikTok Video Style 0:19-0:23) */}
-      <section className="relative">
-        <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8 space-y-8">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
-            <div>
-              <h2 className="text-3xl sm:text-4xl font-display font-extrabold text-slate-900 tracking-tight">
-                Kigali Hub &amp; Operations
-              </h2>
-            </div>
-
-            {/* Hub Tabs */}
-            <div className="flex rounded-xl border border-slate-200 bg-slate-50 p-1">
-              {LOCATION_HUBS.map((hub, idx) => (
-                <button
-                  key={hub.id}
-                  onClick={() => setActiveHubIndex(idx)}
-                  className={`rounded-lg px-3.5 py-1.5 text-xs font-sans font-medium transition-all ${
-                    activeHubIndex === idx
-                      ? 'bg-slate-900 text-white font-semibold shadow-sm'
-                      : 'text-slate-600 hover:text-slate-900'
-                  }`}
-                >
-                  {hub.tab}
-                </button>
-              ))}
             </div>
           </div>
-
-          {/* Active Hub Spotlight Card */}
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeHubIndex}
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
-              transition={{ duration: 0.3 }}
-              className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm"
-            >
-              <div className="grid grid-cols-1 lg:grid-cols-12">
-                <div className="lg:col-span-7 p-8 md:p-12 space-y-6 flex flex-col justify-between">
-                  <div className="space-y-4">
-                    <h3 className="text-2xl sm:text-3xl font-display font-bold text-slate-900">
-                      {LOCATION_HUBS[activeHubIndex].title}
-                    </h3>
-
-                    <p className="text-sm sm:text-base text-slate-600 leading-relaxed font-normal">
-                      {LOCATION_HUBS[activeHubIndex].description}
-                    </p>
-
-                    <div className="pt-2 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                      <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
-                        <span className="text-slate-500 font-medium block">Coordinates</span>
-                        <span className="font-mono font-bold text-slate-900">{LOCATION_HUBS[activeHubIndex].latLng}</span>
-                      </div>
-                      <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
-                        <span className="text-slate-500 font-medium block">Active Unit</span>
-                        <span className="font-bold text-teal-800">{LOCATION_HUBS[activeHubIndex].activeTeam}</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
-                    <Link href="/about" className="btn btn-primary text-xs sm:text-sm py-2.5 px-5">
-                      <span>Learn More About DataSphere</span>
-                      <ArrowRight className="h-4 w-4" />
-                    </Link>
-                  </div>
-                </div>
-
-                {/* Photo Showcase */}
-                <div className="lg:col-span-5 relative min-h-[280px] lg:min-h-full overflow-hidden bg-slate-100">
-                  <Image
-                    src={LOCATION_HUBS[activeHubIndex].image}
-                    alt={LOCATION_HUBS[activeHubIndex].title}
-                    fill
-                    className="object-cover object-center transition-all duration-500"
-                  />
-                </div>
-              </div>
-            </motion.div>
-          </AnimatePresence>
         </div>
-      </section>
 
-      {/* 7. DATA & ANALYTICS VISUAL SHOWCASE */}
-      <section className="relative">
-        <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8 space-y-10">
-          <div className="max-w-2xl">
-            <h2 className="text-3xl sm:text-4xl font-display font-bold text-slate-900">
-              Enterprise Data &amp; BI Architecture
-            </h2>
-            <p className="mt-2 text-sm sm:text-base text-slate-600">
-              Transforming raw, disparate organizational records into real-time executive decision systems and predictive intelligence pipelines.
+        {/* 5-Module Bento Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x border-b border-slate-200 dark:border-stone-900 bg-slate-50/40 dark:bg-stone-950">
+          <div className="spotlight-card p-8 sm:p-10 transition-colors md:col-span-2">
+            <span className="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-stone-500 font-semibold">
+              /01 Architectural Integrity
+            </span>
+            <div className="my-8 flex h-28 items-center justify-center text-teal-600 dark:text-teal-400">
+              <svg className="h-20 w-40 fill-none stroke-current" strokeWidth="1.5" viewBox="0 0 200 100">
+                <circle cx="50" cy="50" r="30" />
+                <circle cx="150" cy="50" r="30" />
+                <line strokeDasharray="6 6" x1="80" x2="120" y1="50" y2="50" />
+              </svg>
+            </div>
+            <h3 className="font-display text-xl font-bold text-slate-900 dark:text-stone-100 mb-2">
+              Retained Top-Tier Engineering Talent
+            </h3>
+            <p className="text-sm text-slate-600 dark:text-stone-400 leading-relaxed max-w-xl">
+              High turnover kills mission-critical enterprise systems. Our engineers stay and grow with us, ensuring uninterrupted institutional knowledge and predictable execution.
             </p>
           </div>
 
-          <DataAnalyticsDemo />
+          <div className="spotlight-card p-8 sm:p-10 transition-colors md:col-span-1">
+            <span className="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-stone-500 font-semibold">
+              /02 Data Sovereignty
+            </span>
+            <div className="my-8 flex h-28 items-center justify-center text-cyan-600 dark:text-cyan-400">
+              <div className="grid grid-cols-2 gap-3">
+                <div className="h-8 w-8 rounded-full border border-current" />
+                <div className="h-8 w-8 rounded-full bg-current" />
+                <div className="h-8 w-8 rounded-full bg-current" />
+                <div className="h-8 w-8 rounded-full border border-current" />
+              </div>
+            </div>
+            <h3 className="font-display text-xl font-bold text-slate-900 dark:text-stone-100 mb-2">
+              Full IP &amp; Code Ownership
+            </h3>
+            <p className="text-sm text-slate-600 dark:text-stone-400 leading-relaxed">
+              You own 100% of the intellectual property, database schemas, and source code. No vendor lock-ins or proprietary walled gardens.
+            </p>
+          </div>
+
+          <div className="spotlight-card p-8 sm:p-10 transition-colors md:col-span-1">
+            <span className="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-stone-500 font-semibold">
+              /03 Production Observability
+            </span>
+            <div className="my-8 flex h-28 items-center justify-center text-amber-600 dark:text-amber-400">
+              <Activity className="h-16 w-16" />
+            </div>
+            <h3 className="font-display text-xl font-bold text-slate-900 dark:text-stone-100 mb-2">
+              Sub-Second Telemetry
+            </h3>
+            <p className="text-sm text-slate-600 dark:text-stone-400 leading-relaxed">
+              Continuous health checks, anomaly detection alerts, and 24/7 dedicated SRE support for board-level peace of mind.
+            </p>
+          </div>
+
+          <div className="spotlight-card p-8 sm:p-10 transition-colors md:col-span-1">
+            <span className="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-stone-500 font-semibold">
+              /04 Direct Engineering Access
+            </span>
+            <div className="my-8 flex h-28 items-center justify-center text-teal-600 dark:text-teal-400">
+              <Zap className="h-16 w-16" />
+            </div>
+            <h3 className="font-display text-xl font-bold text-slate-900 dark:text-stone-100 mb-2">
+              No Middlemen Or Gatekeepers
+            </h3>
+            <p className="text-sm text-slate-600 dark:text-stone-400 leading-relaxed">
+              Your technical leads collaborate directly with principal architects and senior developers via real-time Slack/Discord channels.
+            </p>
+          </div>
+
+          <div className="spotlight-card p-8 sm:p-10 transition-colors md:col-span-1">
+            <span className="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-stone-500 font-semibold">
+              /05 Pan-African &amp; Global Reach
+            </span>
+            <div className="my-8 flex h-28 items-center justify-center text-cyan-600 dark:text-cyan-400">
+              <Compass className="h-16 w-16" />
+            </div>
+            <h3 className="font-display text-xl font-bold text-slate-900 dark:text-stone-100 mb-2">
+              Multi-Region Cloud Readiness
+            </h3>
+            <p className="text-sm text-slate-600 dark:text-stone-400 leading-relaxed">
+              Multi-region cloud infrastructure and cross-border edge networks serving enterprises across East Africa and internationally.
+            </p>
+          </div>
         </div>
       </section>
 
-      {/* 8. CORE SERVICES & DIGITAL SOLUTIONS */}
-      <section id="services" className="relative">
-        <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8 space-y-8">
+      {/* 6. SEVENX 4-STAGE PROCESS GRID ("HOW WE WORK") */}
+      <section id="process" className="relative z-10 border-b border-slate-200 dark:border-stone-900 bg-white dark:bg-stone-950">
+        <div className="p-8 sm:p-10 md:p-12 border-b border-slate-200 dark:border-stone-900 flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <div>
+            <span className="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-stone-500 font-semibold">
+              /03 Delivery Lifecycle
+            </span>
+            <h2 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl text-slate-900 dark:text-stone-100 tracking-tight mt-1">
+              How We Engineer &amp; Deliver
+            </h2>
+          </div>
+          <p className="text-sm text-slate-600 dark:text-stone-400 max-w-md">
+            Disciplined two-week agile sprints, transparent milestone deliverables, and automated regression testing.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 divide-y md:divide-y-0 md:grid-cols-4 md:divide-x divide-slate-200 dark:divide-stone-900">
+          <div className="group p-8 sm:p-10 transition-colors hover:bg-slate-50 dark:hover:bg-stone-900/60">
+            <span className="font-mono text-xs font-bold text-teal-600 dark:text-teal-400 mb-3 block">01</span>
+            <h3 className="font-display text-xl font-bold text-slate-900 dark:text-stone-100 mb-2 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors">
+              Discover &amp; Audit
+            </h3>
+            <p className="text-sm text-slate-600 dark:text-stone-400 leading-relaxed">
+              We audit existing data schemas, system bottlenecks, and user journeys to validate architecture before committing capital.
+            </p>
+          </div>
+
+          <div className="group p-8 sm:p-10 transition-colors hover:bg-slate-50 dark:hover:bg-stone-900/60">
+            <span className="font-mono text-xs font-bold text-cyan-600 dark:text-cyan-400 mb-3 block">02</span>
+            <h3 className="font-display text-xl font-bold text-slate-900 dark:text-stone-100 mb-2 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">
+              Architect &amp; Design
+            </h3>
+            <p className="text-sm text-slate-600 dark:text-stone-400 leading-relaxed">
+              We blueprint database models, API contracts, and high-fidelity interactive user interfaces aligned with operational speed.
+            </p>
+          </div>
+
+          <div className="group p-8 sm:p-10 transition-colors hover:bg-slate-50 dark:hover:bg-stone-900/60">
+            <span className="font-mono text-xs font-bold text-amber-600 dark:text-amber-400 mb-3 block">03</span>
+            <h3 className="font-display text-xl font-bold text-slate-900 dark:text-stone-100 mb-2 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
+              Build &amp; Verify
+            </h3>
+            <p className="text-sm text-slate-600 dark:text-stone-400 leading-relaxed">
+              Clean modular codebases, automated CI/CD pipelines, and continuous regression testing with live staging previews.
+            </p>
+          </div>
+
+          <div className="group p-8 sm:p-10 transition-colors hover:bg-slate-50 dark:hover:bg-stone-900/60">
+            <span className="font-mono text-xs font-bold text-teal-600 dark:text-teal-400 mb-3 block">04</span>
+            <h3 className="font-display text-xl font-bold text-slate-900 dark:text-stone-100 mb-2 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors">
+              Deploy &amp; Scale
+            </h3>
+            <p className="text-sm text-slate-600 dark:text-stone-400 leading-relaxed">
+              Zero-downtime production deployments, telemetry instrumentation, SLA governance, and post-launch optimization.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* 7. CORE SERVICES & DIGITAL SOLUTIONS (PAGINATED 3-CARD SLIDER) */}
+      <section id="services" className="relative z-10 border-b border-slate-200 dark:border-stone-900 bg-white dark:bg-stone-950">
+        <div className="p-8 sm:p-10 md:p-12 space-y-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
             <div>
-              <h2 className="text-3xl sm:text-4xl font-display font-bold text-slate-900">
+              <span className="font-mono text-xs font-semibold text-teal-800 dark:text-teal-400 uppercase tracking-widest">
+                /04 Solutions Directory
+              </span>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-slate-900 dark:text-white mt-1 tracking-tight">
                 Disciplined engineering and data solutions.
               </h2>
-              <p className="mt-2 text-sm sm:text-base text-slate-600 max-w-2xl">
+              <p className="mt-2 text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-2xl">
                 From data pipelines and cloud infrastructure to web and mobile apps, our multidisciplinary team delivers end-to-end reliability.
               </p>
             </div>
 
-            {/* Category Filter Pills */}
-            <div className="flex flex-wrap gap-1 rounded-xl border border-slate-200 bg-slate-50 p-1">
-              {['All', 'Engineering', 'Intelligence', 'Strategy', 'Design'].map((cat) => (
+            <div className="flex flex-wrap items-center gap-3">
+              {/* Category Filter Pills */}
+              <div className="flex flex-wrap gap-1 rounded-xl border border-slate-200 dark:border-stone-800 bg-slate-50 dark:bg-stone-900 p-1">
+                {['All', 'Engineering', 'Intelligence', 'Strategy', 'Design'].map((cat) => (
+                  <button
+                    key={cat}
+                    type="button"
+                    onClick={() => handleCategoryChange(cat)}
+                    className={`rounded-lg px-3 py-1.5 text-xs font-sans font-medium transition-all ${
+                      selectedCategory === cat
+                        ? 'bg-slate-900 text-white font-semibold shadow-sm dark:bg-teal-500 dark:text-slate-950'
+                        : 'text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white dark:hover:bg-stone-800'
+                    }`}
+                  >
+                    {cat}
+                  </button>
+                ))}
+              </div>
+
+              {/* Prev / Next Quick Header Controls */}
+              <div className="hidden sm:flex items-center gap-1.5 border border-slate-200 dark:border-stone-800 rounded-xl p-1 bg-slate-50 dark:bg-stone-900">
                 <button
-                  key={cat}
                   type="button"
-                  onClick={() => setSelectedCategory(cat)}
-                  className={`rounded-lg px-3 py-1.5 text-xs font-sans font-medium transition-all ${
-                    selectedCategory === cat
-                      ? 'bg-slate-900 text-white font-semibold shadow-sm'
-                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/60'
-                  }`}
+                  onClick={handlePrevService}
+                  disabled={currentServicePage === 0}
+                  aria-label="Previous capabilities page"
+                  className="flex h-8 w-8 items-center justify-center rounded-lg border border-transparent text-slate-600 dark:text-slate-400 hover:bg-white dark:hover:bg-stone-800 hover:text-slate-900 dark:hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-sm"
                 >
-                  {cat}
+                  <ChevronLeft className="h-4 w-4" />
                 </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Services Grid */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-60px' }}
-            variants={containerVariants}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-          >
-            {filteredServices.map((service) => {
-              const Icon = SERVICE_ICONS[service.icon] || Layers
-              return (
-                <motion.div
-                  key={service.id}
-                  variants={itemVariants}
-                  className="card-enterprise flex flex-col justify-between group"
-                >
-                  <div>
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-teal-50 text-teal-700 border border-teal-200 group-hover:bg-slate-900 group-hover:text-white group-hover:border-slate-900 transition-colors">
-                        <Icon className="h-5 w-5" />
-                      </div>
-                      <span className="font-mono text-[11px] text-slate-600 bg-slate-100 border border-slate-200 px-2 py-0.5 rounded-full font-medium">
-                        {service.category}
-                      </span>
-                    </div>
-
-                    <h3 className="font-display text-lg font-bold text-slate-900 group-hover:text-teal-700 transition-colors">
-                      {service.title}
-                    </h3>
-                    <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
-                      {service.shortDesc}
-                    </p>
-
-                    <div className="mt-4 pt-4 border-t border-slate-100">
-                      <p className="font-mono text-[11px] text-slate-500 font-semibold mb-2">Key Deliverables:</p>
-                      <ul className="space-y-1.5">
-                        {service.deliverables.slice(0, 3).map((del) => (
-                          <li key={del} className="flex items-center gap-2 text-xs text-slate-700">
-                            <span className="h-1.5 w-1.5 rounded-full bg-teal-600" />
-                            <span>{del}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-
-                  <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
-                    <span className="font-mono text-[10px] text-slate-400">Enterprise Ready</span>
-                    <Link
-                      href={`/services#${service.id}`}
-                      className="font-sans text-xs text-teal-700 hover:text-teal-900 flex items-center gap-1 font-semibold group-hover:translate-x-0.5 transition-transform"
-                    >
-                      <span>Explore</span>
-                      <ArrowRight className="h-3 w-3" />
-                    </Link>
-                  </div>
-                </motion.div>
-              )
-            })}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* 9. 6-STAGE ENGINEERING METHODOLOGY */}
-      <section className="relative">
-        <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8 space-y-10">
-          <div className="text-center max-w-2xl mx-auto">
-            <h2 className="text-3xl sm:text-4xl font-display font-bold text-slate-900">
-              The 6-Stage Engineering Lifecycle
-            </h2>
-            <p className="mt-2 text-sm sm:text-base text-slate-600">
-              Structured sprints, transparent milestone reviews, and automated verification ensure predictable delivery from day one.
-            </p>
-          </div>
-
-          <ProcessTimeline />
-        </div>
-      </section>
-
-      {/* 10. TECHNOLOGY STACK */}
-      <section className="relative">
-        <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8 space-y-10">
-          <div className="max-w-2xl">
-            <h2 className="text-3xl sm:text-4xl font-display font-bold text-slate-900">
-              Production-Grade Architecture
-            </h2>
-            <p className="mt-2 text-sm sm:text-base text-slate-600">
-              We engineer with robust modern languages, reliable data engines, cloud native infrastructure, and enterprise security frameworks.
-            </p>
-          </div>
-
-          <TechRadar />
-        </div>
-      </section>
-
-      {/* 11. HIGH CONVERSION CTA SECTION */}
-      <section className="relative">
-        <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8">
-          <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-900 p-8 sm:p-12 md:p-16 text-center text-white shadow-xl">
-            {/* Background Image with Overlay */}
-            <div className="absolute inset-0 z-0">
-              <Image
-                src="/images/kigali-skyline.jpg"
-                alt="Kigali Innovation Hub Skyline"
-                fill
-                className="object-cover object-center opacity-25"
-              />
-              <div className="absolute inset-0 bg-gradient-to-b from-slate-900/90 via-slate-900/85 to-slate-900/95" />
-            </div>
-
-            <div className="relative z-10 max-w-2xl mx-auto space-y-6">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-extrabold text-white leading-tight">
-                Ready to transform your enterprise data &amp; systems?
-              </h2>
-              <p className="text-base sm:text-lg text-slate-300">
-                Let&apos;s turn your business objectives into scalable, high-performance software. Start a confidential discovery conversation with our senior team today.
-              </p>
-
-              <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
-                <Link href="/contact" className="btn btn-teal text-base py-3.5 px-8 font-bold shadow-lg">
-                  <span>Start a Discovery Call</span>
-                </Link>
-                <Link href="/work" className="btn border border-slate-700 bg-slate-800/90 backdrop-blur-md text-white hover:bg-slate-700 text-base py-3.5 px-8">
-                  <span>View Case Studies</span>
-                </Link>
-              </div>
-
-              <div className="pt-6 font-mono text-xs text-slate-400 flex flex-wrap items-center justify-center gap-6">
-                <span>• Strict Confidentiality / NDA</span>
-                <span>• Response within 24 Hours</span>
-                <span>• Regional &amp; Global Delivery</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 12. QUICK INQUIRY CONTACT FORM */}
-      <section id="contact" className="relative">
-        <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-            <div className="lg:col-span-5 space-y-6">
-              <h2 className="text-3xl sm:text-4xl font-display font-bold text-slate-900">
-                Tell us about your project.
-              </h2>
-              <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
-                Share a few parameters regarding your organization, sector, and project scope. A senior solutions architect from DataSphere Consulting will follow up to schedule a technical consultation.
-              </p>
-
-              <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6 space-y-3.5 text-xs text-slate-600 shadow-sm">
-                <div>
-                  <strong className="block font-mono text-[11px] text-slate-900 uppercase font-bold">Company</strong>
-                  DataSphere Consulting Ltd.
-                </div>
-                <div>
-                  <strong className="block font-mono text-[11px] text-slate-900 uppercase font-bold">Location</strong>
-                  Kigali, Rwanda • East African Delivery Hub
-                </div>
-                <div>
-                  <strong className="block font-mono text-[11px] text-slate-900 uppercase font-bold">Confidentiality</strong>
-                  All project parameters, data models, and business logic are covered under strict confidentiality.
-                </div>
-              </div>
-            </div>
-
-            <div className="lg:col-span-7 rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm">
-              <form onSubmit={handleContactSubmit} className="space-y-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label htmlFor="hp-name" className="mb-1.5 block text-xs font-semibold text-slate-700">
-                      Full Name *
-                    </label>
-                    <input
-                      id="hp-name"
-                      type="text"
-                      required
-                      value={contactForm.name}
-                      onChange={(e) => setContactForm({ ...contactForm, name: e.target.value })}
-                      placeholder="e.g. Jean Claude"
-                      className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-teal-500 focus:bg-white focus:outline-none transition-colors"
-                    />
-                  </div>
-
-                  <div>
-                    <label htmlFor="hp-email" className="mb-1.5 block text-xs font-semibold text-slate-700">
-                      Business Email *
-                    </label>
-                    <input
-                      id="hp-email"
-                      type="email"
-                      required
-                      value={contactForm.email}
-                      onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })}
-                      placeholder="alex@enterprise.rw"
-                      className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-teal-500 focus:bg-white focus:outline-none transition-colors"
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label htmlFor="hp-org" className="mb-1.5 block text-xs font-semibold text-slate-700">
-                      Organization
-                    </label>
-                    <input
-                      id="hp-org"
-                      type="text"
-                      value={contactForm.organization}
-                      onChange={(e) => setContactForm({ ...contactForm, organization: e.target.value })}
-                      placeholder="Company or Institution"
-                      className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-teal-500 focus:bg-white focus:outline-none transition-colors"
-                    />
-                  </div>
-
-                  <div>
-                    <label htmlFor="hp-service" className="mb-1.5 block text-xs font-semibold text-slate-700">
-                      Solution Line *
-                    </label>
-                    <select
-                      id="hp-service"
-                      value={contactForm.service}
-                      onChange={(e) => setContactForm({ ...contactForm, service: e.target.value })}
-                      className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2.5 text-sm text-slate-900 focus:border-teal-500 focus:bg-white focus:outline-none transition-colors"
-                    >
-                      {services.map((s) => (
-                        <option key={s.id} value={s.title}>
-                          {s.title}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-
-                <div>
-                  <label htmlFor="hp-msg" className="mb-1.5 block text-xs font-semibold text-slate-700">
-                    Project Overview &amp; Requirements *
-                  </label>
-                  <textarea
-                    id="hp-msg"
-                    rows={4}
-                    required
-                    value={contactForm.message}
-                    onChange={(e) => setContactForm({ ...contactForm, message: e.target.value })}
-                    placeholder="Describe your current system challenges, target users, deliverables, and timeline..."
-                    className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-teal-500 focus:bg-white focus:outline-none transition-colors"
-                  />
-                </div>
-
-                {contactStatus === 'success' && (
-                  <div className="flex items-center gap-3 rounded-xl border border-emerald-200 bg-emerald-50 p-3.5 text-xs text-emerald-800">
-                    <CheckCircle2 className="h-5 w-5 flex-shrink-0 text-emerald-600" />
-                    <div>
-                      <p className="font-semibold">Message Received Successfully</p>
-                      <p className="text-slate-600">A solutions architect from DataSphere Consulting will review and respond promptly.</p>
-                    </div>
-                  </div>
-                )}
-
-                {contactStatus === 'error' && (
-                  <div className="flex items-center gap-3 rounded-xl border border-red-200 bg-red-50 p-3.5 text-xs text-red-800">
-                    <AlertCircle className="h-5 w-5 flex-shrink-0 text-red-600" />
-                    <div>
-                      <p className="font-semibold">Submission Error</p>
-                      <p>Please ensure all required fields are filled with valid values.</p>
-                    </div>
-                  </div>
-                )}
-
+                <span className="font-mono text-xs text-slate-500 dark:text-slate-400 px-2 font-medium">
+                  {String(currentServicePage + 1).padStart(2, '0')} / {String(totalServicePages).padStart(2, '0')}
+                </span>
                 <button
-                  type="submit"
-                  disabled={contactStatus === 'loading'}
-                  className="btn btn-primary w-full py-3 justify-center text-sm font-semibold"
+                  type="button"
+                  onClick={handleNextService}
+                  disabled={currentServicePage >= totalServicePages - 1}
+                  aria-label="Next capabilities page"
+                  className="flex h-8 w-8 items-center justify-center rounded-lg border border-transparent text-slate-600 dark:text-slate-400 hover:bg-white dark:hover:bg-stone-800 hover:text-slate-900 dark:hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-sm"
                 >
-                  {contactStatus === 'loading' ? (
-                    <>
-                      <Loader2 className="h-4 w-4 animate-spin" />
-                      <span>Sending Inquiry...</span>
-                    </>
-                  ) : (
-                    <>
-                      <Send className="h-4 w-4" />
-                      <span>Send Project Inquiry</span>
-                    </>
-                  )}
+                  <ChevronRight className="h-4 w-4" />
                 </button>
-              </form>
+              </div>
+            </div>
+          </div>
+
+          {/* Paginated Services Grid with Animated Transition */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={`page-${currentServicePage}-${selectedCategory}`}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.25, ease: 'easeInOut' }}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 min-h-[380px]"
+            >
+              {paginatedServices.map((service) => {
+                const Icon = SERVICE_ICONS[service.icon] || Layers
+                return (
+                  <div
+                    key={service.id}
+                    className="card-enterprise flex flex-col justify-between group h-full bg-white dark:bg-stone-900/90 border border-slate-200 dark:border-stone-800 rounded-2xl p-6"
+                  >
+                    <div>
+                      <div className="flex items-center justify-between mb-4">
+                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-teal-50 text-teal-700 border border-teal-200 group-hover:bg-slate-900 group-hover:text-white group-hover:border-slate-900 dark:bg-teal-950/60 dark:text-teal-300 dark:border-teal-800 dark:group-hover:bg-teal-500 dark:group-hover:text-slate-950 dark:group-hover:border-teal-400 transition-colors">
+                          <Icon className="h-5 w-5" />
+                        </div>
+                        <span className="font-mono text-[11px] text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-stone-800 border border-slate-200 dark:border-stone-700 px-2.5 py-0.5 rounded-full font-medium">
+                          {service.category}
+                        </span>
+                      </div>
+
+                      <h3 className="font-display text-lg font-bold text-slate-900 dark:text-white group-hover:text-teal-700 dark:group-hover:text-teal-400 transition-colors">
+                        {service.title}
+                      </h3>
+                      <p className="mt-2 text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                        {service.shortDesc}
+                      </p>
+
+                      <div className="mt-4 pt-4 border-t border-slate-100 dark:border-stone-800">
+                        <p className="font-mono text-[11px] text-slate-500 dark:text-slate-400 font-semibold mb-2">Key Deliverables:</p>
+                        <ul className="space-y-1.5">
+                          {service.deliverables.slice(0, 3).map((del) => (
+                            <li key={del} className="flex items-center gap-2 text-xs text-slate-700 dark:text-slate-300">
+                              <span className="h-1.5 w-1.5 rounded-full bg-teal-600 dark:bg-teal-400 flex-shrink-0" />
+                              <span className="line-clamp-1">{del}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div className="mt-6 pt-4 border-t border-slate-100 dark:border-stone-800 flex items-center justify-between">
+                      <span className="font-mono text-[10px] text-slate-400 dark:text-slate-500">Enterprise Ready</span>
+                      <Link
+                        href={`/services#${service.id}`}
+                        className="font-sans text-xs text-teal-700 dark:text-teal-400 hover:text-teal-900 dark:hover:text-teal-300 flex items-center gap-1 font-semibold group-hover:translate-x-0.5 transition-transform"
+                      >
+                        <span>Explore</span>
+                        <ArrowRight className="h-3 w-3" />
+                      </Link>
+                    </div>
+                  </div>
+                )
+              })}
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Bottom Pagination & Navigation Controls */}
+          <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-slate-200/80 dark:border-stone-800">
+            <div className="text-xs text-slate-500 dark:text-slate-400 font-medium">
+              Showing{' '}
+              <span className="font-mono font-semibold text-slate-900 dark:text-slate-200">
+                {filteredServices.length === 0 ? 0 : currentServicePage * SERVICES_PER_PAGE + 1}–
+                {Math.min((currentServicePage + 1) * SERVICES_PER_PAGE, filteredServices.length)}
+              </span>{' '}
+              of{' '}
+              <span className="font-mono font-semibold text-slate-900 dark:text-slate-200">
+                {filteredServices.length}
+              </span>{' '}
+              capabilities
+            </div>
+
+            {/* Pagination Dots */}
+            {totalServicePages > 1 && (
+              <div className="flex items-center gap-2">
+                {Array.from({ length: totalServicePages }).map((_, idx) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    onClick={() => setServicePage(idx)}
+                    aria-label={`Go to page ${idx + 1}`}
+                    className={`h-2 rounded-full transition-all duration-300 ${
+                      currentServicePage === idx
+                        ? 'w-8 bg-teal-600 dark:bg-teal-400'
+                        : 'w-2 bg-slate-300 dark:bg-stone-700 hover:bg-slate-400 dark:hover:bg-stone-600'
+                    }`}
+                  />
+                ))}
+              </div>
+            )}
+
+            {/* Navigation Buttons */}
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                onClick={handlePrevService}
+                disabled={currentServicePage === 0}
+                className="flex items-center gap-1.5 rounded-xl border border-slate-200 dark:border-stone-800 bg-white dark:bg-stone-900 px-3.5 py-2 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-stone-800 hover:text-slate-900 dark:hover:text-white disabled:opacity-40 disabled:cursor-not-allowed transition-all shadow-sm"
+              >
+                <ChevronLeft className="h-3.5 w-3.5" />
+                <span>Previous</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={handleNextService}
+                disabled={currentServicePage >= totalServicePages - 1}
+                className="flex items-center gap-1.5 rounded-xl border border-slate-200 dark:border-stone-800 bg-white dark:bg-stone-900 px-3.5 py-2 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-stone-800 hover:text-slate-900 dark:hover:text-white disabled:opacity-40 disabled:cursor-not-allowed transition-all shadow-sm"
+              >
+                <span>Next</span>
+                <ChevronRight className="h-3.5 w-3.5" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 8. SEVENX HORIZONTAL SPLIT CASE STUDIES ("OUR WORK") */}
+      <section id="work" className="relative z-10 border-b border-slate-200 dark:border-stone-900 bg-white dark:bg-stone-950">
+        <div className="p-8 sm:p-10 md:p-12 border-b border-slate-200 dark:border-stone-900 flex items-end justify-between">
+          <div>
+            <span className="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-stone-500 font-semibold">
+              /05 Featured Deployments
+            </span>
+            <h2 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl text-slate-900 dark:text-stone-100 tracking-tight mt-1">
+              Case Studies &amp; Proven Impact
+            </h2>
+          </div>
+          <Link
+            href="/work"
+            className="hidden sm:flex items-center gap-1.5 text-xs font-mono font-semibold uppercase tracking-wider text-teal-700 dark:text-teal-400 hover:underline"
+          >
+            <span>View All Projects</span>
+            <ArrowRight className="h-3.5 w-3.5" />
+          </Link>
+        </div>
+
+        {/* Full-Width Split Rows */}
+        <div className="divide-y divide-slate-200 dark:divide-stone-900">
+          {CASE_STUDIES.map((study) => (
+            <Link key={study.id} href={study.href} className="group block">
+              <div className="grid grid-cols-1 md:grid-cols-12 min-h-[300px] transition-colors duration-500 hover:bg-slate-50 dark:hover:bg-stone-900/40">
+                {/* Left 5 cols: Details */}
+                <div className="col-span-1 md:col-span-5 p-8 sm:p-10 md:p-12 border-b md:border-b-0 md:border-r border-slate-200 dark:border-stone-900 flex flex-col justify-center space-y-4">
+                  <div className="flex items-center gap-3">
+                    <span className="font-mono text-xs text-teal-700 dark:text-teal-400 font-semibold uppercase tracking-wider">
+                      {study.sector}
+                    </span>
+                    <div className="h-px w-6 bg-slate-300 dark:bg-stone-700" />
+                    <span className="font-mono text-xs text-slate-500 dark:text-stone-400">
+                      {study.client}
+                    </span>
+                  </div>
+
+                  <h3 className="font-display text-2xl sm:text-3xl font-bold text-slate-900 dark:text-stone-100 tracking-tight group-hover:translate-x-2 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-all duration-300">
+                    {study.title}
+                  </h3>
+
+                  <p className="text-sm text-slate-600 dark:text-stone-400 leading-relaxed">
+                    {study.description}
+                  </p>
+
+                  <div className="pt-2 flex flex-wrap items-center gap-2">
+                    <span className="inline-block rounded-full bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800/80 px-3 py-1 font-mono text-xs font-semibold text-teal-800 dark:text-teal-300">
+                      {study.metric}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Right 7 cols: Image with hover zoom */}
+                <div className="col-span-1 md:col-span-7 relative min-h-[240px] md:min-h-full overflow-hidden bg-stone-950">
+                  <Image
+                    src={study.image}
+                    alt={study.title}
+                    fill
+                    className="object-cover opacity-60 grayscale group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-transparent to-transparent md:hidden" />
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* 9. BIG STATEMENT CALL-TO-ACTION (CONTACT US) */}
+      <section className="relative z-10 overflow-hidden py-24 sm:py-32 md:py-40 text-center bg-slate-50/70 dark:bg-stone-950">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 space-y-8">
+          <span className="font-mono text-xs uppercase tracking-widest text-teal-700 dark:text-teal-400 font-semibold">
+            /06 Ready to Engineer Your Future?
+          </span>
+
+          <div className="space-y-4">
+            <h2 className="font-display font-extrabold text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-slate-900 dark:text-stone-100 tracking-tight leading-tight">
+              Let&apos;s Build Together.
+            </h2>
+            <p className="text-base sm:text-lg md:text-xl text-slate-600 dark:text-stone-400 max-w-2xl mx-auto leading-relaxed">
+              Have a mission-critical enterprise challenge, data pipeline modernization, or custom software vision? Our senior architects are ready to execute.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap items-center justify-center gap-5 pt-4">
+            <Link
+              href="/contact"
+              className="group flex items-center gap-3 rounded-full bg-slate-900 dark:bg-teal-500 text-white dark:text-slate-950 font-bold px-8 sm:px-12 py-4 sm:py-5 text-base sm:text-lg shadow-xl shadow-teal-500/20 transition-all duration-300 hover:scale-105 hover:bg-slate-800 dark:hover:bg-teal-400"
+            >
+              <span>Contact Us</span>
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/20 dark:bg-slate-950/20 transition-transform group-hover:translate-x-1">
+                <ArrowRight className="h-4 w-4" />
+              </div>
+            </Link>
+
+            <Link
+              href="/services"
+              className="rounded-full border border-slate-300 dark:border-stone-700 bg-white dark:bg-stone-900/80 px-8 sm:px-10 py-4 sm:py-5 text-base sm:text-lg font-semibold text-slate-700 dark:text-stone-200 backdrop-blur-md transition-all duration-300 hover:scale-105 hover:border-slate-400 hover:bg-slate-50 dark:hover:bg-stone-800"
+            >
+              Explore Solutions
+            </Link>
+          </div>
+
+          <div className="pt-10 border-t border-slate-200/80 dark:border-stone-800/80 flex flex-wrap items-center justify-center gap-6 sm:gap-10 text-xs font-mono text-slate-500 dark:text-stone-400">
+            <div className="flex items-center gap-2">
+              <span className="h-2 w-2 rounded-full bg-teal-500" />
+              <span>Direct email: info@datasphere.rw</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="h-2 w-2 rounded-full bg-teal-500" />
+              <span>Kigali Heights, 5th Floor</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="h-2 w-2 rounded-full bg-teal-500" />
+              <span>Response SLA: &lt;24 business hours</span>
             </div>
           </div>
         </div>
