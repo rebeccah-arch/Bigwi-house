@@ -1,11 +1,11 @@
-// Single source of truth for DataSphere Consulting Ltd Corporate & Capability Profile
+// Single source of truth for DataSphere Consulting Ltd & BIGWI HOUSE Data & AI Profile
 
 export interface Service {
   id: string
   title: string
   shortDesc: string
   description: string
-  category: 'Engineering' | 'Intelligence' | 'Strategy' | 'Design'
+  category: 'AI & Machine Learning' | 'Data & Analytics' | 'Data & AI Consultancy' | 'Digital Solutions'
   deliverables: string[]
   techHighlights: string[]
   icon: string
@@ -13,122 +13,163 @@ export interface Service {
 
 export const services: Service[] = [
   {
-    id: 'enterprise-software',
-    title: 'Enterprise Software Development',
-    shortDesc: 'Custom systems that automate operations and scale with your organization.',
-    description: 'We architect and build fault-tolerant, high-concurrency enterprise platforms designed around complex business workflows, multi-tenant architectures, and strict compliance standards.',
-    category: 'Engineering',
-    deliverables: ['Custom ERP & CRM systems', 'Workflow automation engines', 'Role-based access & auditing', 'Legacy system modernization'],
-    techHighlights: ['Next.js', 'Node.js / Go', 'PostgreSQL', 'Docker / Kubernetes', 'Microservices'],
-    icon: 'Layers'
-  },
-  {
-    id: 'web-mobile-apps',
-    title: 'Web & Mobile Applications',
-    shortDesc: 'Customer- and staff-facing apps built for real-world connectivity conditions.',
-    description: 'High-performance web and native mobile applications crafted for seamless user journeys, offline resilience, and rapid cross-platform deployment.',
-    category: 'Engineering',
-    deliverables: ['iOS & Android mobile apps', 'Progressive Web Apps (PWAs)', 'Responsive customer portals', 'Real-time sync architectures'],
-    techHighlights: ['React Native / Flutter', 'TypeScript', 'Tailwind CSS', 'GraphQL', 'Edge Caching'],
-    icon: 'Smartphone'
-  },
-  {
-    id: 'ai-ml-solutions',
-    title: 'AI & Machine Learning Solutions',
-    shortDesc: 'Applied models tuned to local data, not generic global datasets.',
-    description: 'Production-ready machine learning pipelines tailored to specific operational contexts, predictive modeling, and intelligent automation.',
-    category: 'Intelligence',
-    deliverables: ['Custom predictive algorithms', 'Natural Language Processing (NLP)', 'Document intelligence & OCR', 'Recommendation engines'],
-    techHighlights: ['Python / PyTorch', 'Scikit-Learn', 'FastAPI', 'Vector Databases', 'LLM Fine-Tuning'],
+    id: 'ai-model-building',
+    title: 'Model Building & Predictive Analytics',
+    shortDesc: 'Custom machine learning models built on your specific operational data.',
+    description: 'We develop tailored statistical and machine learning models designed to solve concrete operational problems, from credit risk scoring and demand forecasting to automated document extraction and classification.',
+    category: 'AI & Machine Learning',
+    deliverables: [
+      'Custom predictive algorithms & supervised learning',
+      'Natural Language Processing (NLP) & text classification',
+      'Document intelligence & data extraction pipelines',
+      'Risk modeling & anomaly detection algorithms'
+    ],
+    techHighlights: ['Python', 'PyTorch', 'Scikit-Learn', 'FastAPI', 'Pandas', 'NumPy'],
     icon: 'Cpu'
   },
   {
-    id: 'data-analytics-bi',
-    title: 'Data Analytics & Business Intelligence',
-    shortDesc: 'Dashboards and pipelines that turn raw data into actionable decisions.',
-    description: 'End-to-end data engineering, modern data warehouses, ETL pipelines, and interactive executive dashboards delivering real-time clarity across organizational KPIs.',
-    category: 'Intelligence',
-    deliverables: ['Executive BI dashboards', 'Automated ETL/ELT pipelines', 'Data warehouse architecture', 'Real-time telemetry & alerts'],
-    techHighlights: ['PowerBI / Superset', 'dbt', 'PostgreSQL / ClickHouse', 'Apache Spark', 'Snowflake'],
+    id: 'model-evaluation-monitoring',
+    title: 'Model Evaluation, Deployment & Monitoring',
+    shortDesc: 'Taking models from experimentation into stable, monitored production.',
+    description: 'A model is only valuable if it performs consistently in production. We implement rigorous validation frameworks, containerized API deployments, and continuous drift monitoring to ensure accuracy over time.',
+    category: 'AI & Machine Learning',
+    deliverables: [
+      'Model performance benchmarking & bias audits',
+      'Containerized inference APIs & low-latency endpoints',
+      'Automated data drift & model decay monitoring',
+      'CI/CD pipelines for periodic model retraining'
+    ],
+    techHighlights: ['Docker', 'MLflow', 'FastAPI', 'Prometheus', 'Grafana', 'Kubernetes'],
+    icon: 'Activity'
+  },
+  {
+    id: 'data-collection-pipelines',
+    title: 'Data Collection & Pipeline Infrastructure',
+    shortDesc: 'Reliable ingestion pipelines that aggregate data across disparate sources.',
+    description: 'We design resilient automated ETL/ELT pipelines that collect, clean, and standardize structured and unstructured data from field apps, databases, IoT telemetry, and third-party APIs.',
+    category: 'Data & Analytics',
+    deliverables: [
+      'Automated batch and real-time ingestion pipelines',
+      'Offline-first field data collection tools',
+      'Data cleaning, validation & schema harmonization',
+      'API connectors for legacy databases & public records'
+    ],
+    techHighlights: ['Python', 'PostgreSQL', 'dbt', 'Apache Airflow', 'Kafka', 'Redis'],
+    icon: 'Layers'
+  },
+  {
+    id: 'bi-dashboards-insights',
+    title: 'Analytics & Decision Support Dashboards',
+    shortDesc: 'Interactive dashboards that turn raw records into clear executive decisions.',
+    description: 'We build tailored analytics platforms and business intelligence dashboards that give leaders and program managers instantaneous visibility into key metrics, regional trends, and operational performance.',
+    category: 'Data & Analytics',
+    deliverables: [
+      'Executive KPI dashboards & operational reports',
+      'Geospatial (GIS) mapping & regional heatmaps',
+      'Automated recurring email/PDF briefing reports',
+      'Self-service exploratory analytics tools'
+    ],
+    techHighlights: ['PowerBI', 'Apache Superset', 'PostgreSQL', 'PostGIS', 'ClickHouse', 'TypeScript'],
     icon: 'BarChart3'
   },
   {
-    id: 'digital-transformation',
-    title: 'Digital Transformation Consulting',
-    shortDesc: 'Strategy and roadmaps for modernizing legacy operations.',
-    description: 'Strategic advisory that evaluates operational bottlenecks, identifies high-leverage technology investments, and structures phased implementation roadmaps.',
-    category: 'Strategy',
-    deliverables: ['Digital readiness audits', 'Technology roadmaps', 'Change management frameworks', 'System integration blueprints'],
-    techHighlights: ['Enterprise Architecture', 'TOGAF', 'Business Process Modeling', 'Cloud Migration Matrix'],
+    id: 'data-ai-strategy-advisory',
+    title: 'Data & AI Strategic Advisory',
+    shortDesc: 'Practical roadmaps for organizations adopting data-driven workflows.',
+    description: 'We evaluate organizational readiness, audit data quality, identify high-ROI use cases, and structure realistic phased roadmaps for government agencies, financial institutions, and enterprises.',
+    category: 'Data & AI Consultancy',
+    deliverables: [
+      'Data maturity audits & readiness assessments',
+      'Applied AI feasibility studies & ROI calculations',
+      'Data governance & regulatory compliance roadmaps',
+      'Institutional capacity building & team coaching'
+    ],
+    techHighlights: ['Data Governance Frameworks', 'Architecture Audits', 'Compliance Reviews', 'Roadmapping'],
     icon: 'Workflow'
   },
   {
-    id: 'cloud-solutions',
-    title: 'Cloud Solutions & DevOps',
-    shortDesc: 'Resilient, cost-aware infrastructure and migration support.',
-    description: 'Secure, cost-optimized cloud architectures engineered for high availability, zero-downtime CI/CD automation, and multi-region disaster recovery.',
-    category: 'Engineering',
-    deliverables: ['Cloud architecture & migration', 'Automated CI/CD pipelines', 'Infrastructure as Code (IaC)', 'Security & compliance hardening'],
-    techHighlights: ['AWS / GCP / Azure', 'Terraform', 'Kubernetes', 'GitHub Actions', 'Cloudflare'],
+    id: 'custom-software-platforms',
+    title: 'Enterprise Software & Digital Applications',
+    shortDesc: 'Software systems built to operationalize your data and workflows.',
+    description: 'When off-the-shelf software falls short, we build custom web portals, field mobile applications, and internal management tools that integrate directly with your central data infrastructure.',
+    category: 'Digital Solutions',
+    deliverables: [
+      'Role-based staff portals & administrative platforms',
+      'Offline-capable mobile apps for field teams (iOS & Android)',
+      'Secure multi-tenant databases with role-based access',
+      'API integrations with existing legacy enterprise tools'
+    ],
+    techHighlights: ['Next.js', 'React Native', 'Node.js', 'PostgreSQL', 'Tailwind CSS', 'Docker'],
+    icon: 'Smartphone'
+  },
+  {
+    id: 'cloud-infrastructure-devops',
+    title: 'Cloud Infrastructure & Data Warehousing',
+    shortDesc: 'Secure, cost-conscious cloud hosting and database architecture.',
+    description: 'We architect cloud environments that protect sensitive organizational data, minimize hosting costs, and ensure high availability across international and regional networks.',
+    category: 'Digital Solutions',
+    deliverables: [
+      'Modern data warehouse setup (ClickHouse, PostgreSQL, Snowflake)',
+      'Automated database backups & disaster recovery plans',
+      'Infrastructure as Code (IaC) & zero-downtime deployments',
+      'Security hardening & role-based access controls'
+    ],
+    techHighlights: ['AWS', 'Google Cloud', 'Terraform', 'PostgreSQL', 'Cloudflare', 'Docker'],
     icon: 'Cloud'
   },
   {
-    id: 'ui-ux-design',
-    title: 'UI/UX Design & Product Strategy',
-    shortDesc: 'Interfaces designed around how people actually work.',
-    description: 'Human-centered user experience design, rapid interactive prototyping, and design systems tailored to user mental models and operational speed.',
-    category: 'Design',
-    deliverables: ['User journey & wireframing', 'High-fidelity design systems', 'Usability testing & audits', 'Interactive design prototypes'],
-    techHighlights: ['Figma', 'Design Tokens', 'Accessibility (WCAG 2.1)', 'Prototyping', 'User Research'],
-    icon: 'Palette'
-  },
-  {
-    id: 'branding-digital-marketing',
-    title: 'Branding & Digital Marketing',
-    shortDesc: 'Identity and visibility for organizations competing online.',
-    description: 'Strategic visual identities, conversion-focused brand positioning, and performance marketing infrastructure built to establish digital authority.',
-    category: 'Design',
-    deliverables: ['Corporate brand guidelines', 'Conversion-optimized assets', 'SEO & content strategy', 'Market positioning analysis'],
-    techHighlights: ['Brand Systems', 'Technical SEO', 'Performance Analytics', 'Campaign Orchestration'],
-    icon: 'Megaphone'
-  },
-  {
-    id: 'saas-product-development',
-    title: 'SaaS Product Development',
-    shortDesc: 'Multi-tenant products built for recurring revenue.',
-    description: 'Full lifecycle software product incubation, tenant isolation, billing engine integrations, self-serve onboarding, and growth telemetry.',
-    category: 'Engineering',
-    deliverables: ['Multi-tenant SaaS architecture', 'Subscription & billing gateways', 'Usage analytics & metering', 'Admin & customer tenant portals'],
-    techHighlights: ['Next.js', 'Stripe / Paypack / MOMO API', 'Supabase / Prisma', 'Redis', 'Webhooks'],
-    icon: 'Rocket'
-  },
-  {
-    id: 'technical-support-maintenance',
-    title: 'Technical Support & Maintenance',
-    shortDesc: 'Long-term reliability and SLA support after initial launch.',
-    description: 'Dedicated post-launch SLA support, 24/7 uptime monitoring, security patching, and ongoing feature enhancements to protect tech investments.',
-    category: 'Strategy',
-    deliverables: ['24/7 system health monitoring', 'Security patching & vulnerability audits', 'Performance optimization SLAs', 'Continuous feature delivery'],
-    techHighlights: ['Datadog / Prometheus', 'Sentry', 'Automated Backups', 'SLA Response Guarantee'],
+    id: 'sla-support-maintenance',
+    title: 'Technical Support & SLA Maintenance',
+    shortDesc: 'Dedicated post-launch monitoring, security updates, and performance tuning.',
+    description: 'We partner for the long term, offering structured service level agreements (SLAs) covering 24/7 uptime monitoring, security patching, and continuous pipeline optimization.',
+    category: 'Data & AI Consultancy',
+    deliverables: [
+      'Proactive system health & uptime monitoring',
+      'Security vulnerability audits & regular patching',
+      'Database optimization & query performance tuning',
+      'Guaranteed SLA response times for critical incidents'
+    ],
+    techHighlights: ['Datadog', 'Prometheus', 'Sentry', 'Automated Backups', 'SLA Response Guarantee'],
     icon: 'ShieldCheck'
   },
 ]
 
-export const problems: string[] = [
-  'Legacy, fragmented databases with slow manual reporting',
-  'Inadequate operational software that cannot scale with business volume',
-  'Low digital customer engagement and outdated web platforms',
-  'Security and compliance risks in unmanaged IT infrastructure',
-  'Lack of data-driven insights to make executive decisions',
-  'High engineering cost without clear business ROI',
-]
-
-export const competitiveAdvantage: string[] = [
-  'Data-first consulting backed by experienced senior software engineers',
-  'End-to-end delivery: from strategy and data pipelines through cloud deployment',
-  'Rigorous human-crafted engineering without generic AI shortcuts',
-  'Focus on measurable business metrics, speed, and reliability',
-  'Dedicated long-term SLA support and infrastructure maintenance',
+export const corePillars = [
+  {
+    number: '01',
+    title: 'Data Collection',
+    description: 'Gathering structured and unstructured data from field operations, mobile apps, databases, and third-party systems reliably.'
+  },
+  {
+    number: '02',
+    title: 'Insights & Analytics',
+    description: 'Transforming raw records into clean data warehouses, interactive dashboards, and executive decision-support tools.'
+  },
+  {
+    number: '03',
+    title: 'Model Building',
+    description: 'Training practical machine learning algorithms tailored to specific regional contexts and organizational workflows.'
+  },
+  {
+    number: '04',
+    title: 'Model Evaluation',
+    description: 'Auditing predictive accuracy, testing against edge cases, and validating performance before production rollout.'
+  },
+  {
+    number: '05',
+    title: 'Model Deployment',
+    description: 'Integrating models into production systems via low-latency, scalable APIs that staff and customer apps can rely on.'
+  },
+  {
+    number: '06',
+    title: 'Model Monitoring',
+    description: 'Tracking accuracy in real-time, detecting data drift, and maintaining retraining schedules for ongoing reliability.'
+  },
+  {
+    number: '07',
+    title: 'Data & AI Consultancy',
+    description: 'Advising leadership on data governance, technology strategy, compliance, and long-term capability building.'
+  }
 ]
 
 export interface TargetClientSector {
@@ -141,67 +182,66 @@ export interface TargetClientSector {
 export const targetClientsDetailed: TargetClientSector[] = [
   {
     name: 'Financial Institutions',
-    description: 'Core banking portals, loan origination systems, microfinance platforms, and fraud detection engines.',
+    description: 'Underwriting models, credit risk assessment pipelines, automated reconciliation, and fraud detection systems.',
     icon: 'Landmark',
-    focusAreas: ['FinTech Integration', 'Regulatory Compliance', 'Automated Reconciliation', 'Mobile Money APIs']
+    focusAreas: ['Credit Risk Scoring', 'Transaction Analytics', 'Regulatory Compliance', 'Mobile Money Integration']
   },
   {
-    name: 'Healthcare Organizations',
-    description: 'Telemedicine apps, hospital management systems, patient records, and medical supply chain tracking.',
-    icon: 'HeartPulse',
-    focusAreas: ['Health Information Systems', 'Electronic Medical Records', 'Patient Portals', 'Data Privacy']
-  },
-  {
-    name: 'Government Institutions',
-    description: 'Public service delivery portals, digital revenue collection, citizen identification, and registry systems.',
+    name: 'Government & Public Institutions',
+    description: 'Citizen service platforms, registry data management, revenue analytics, and national telemetry portals.',
     icon: 'Building2',
-    focusAreas: ['E-Government Services', 'Open Data Platforms', 'Secure Identity Verification', 'Civic Portals']
+    focusAreas: ['Open Data Portals', 'Service Monitoring', 'Public Health Telemetry', 'Secure Identity Verification']
   },
   {
-    name: 'NGOs & Development Partners',
-    description: 'Field data collection tools, impact monitoring dashboards, grant management, and community platforms.',
+    name: 'International NGOs & Development Partners',
+    description: 'Offline field data collection, monitoring & evaluation (M&E) systems, donor reporting dashboards, and GIS maps.',
     icon: 'Globe2',
-    focusAreas: ['M&E Dashboards', 'Offline Field Surveys', 'Donor Reporting Tools', 'GIS Mapping']
-  },
-  {
-    name: 'Educational Institutions',
-    description: 'Learning management systems (LMS), student information portals, and automated tuition processing.',
-    icon: 'GraduationCap',
-    focusAreas: ['Online Learning Portals', 'Student Portals', 'Course Analytics', 'Exam Management']
+    focusAreas: ['M&E Dashboards', 'Offline Field Surveys', 'Impact Measurement', 'GIS Spatial Mapping']
   },
   {
     name: 'Agriculture & Supply Chain',
-    description: 'Farm-to-market traceability platforms, cooperative management software, and weather intelligence tools.',
+    description: 'Farm-level data collection, yield forecasting models, inventory tracking, and cooperative management platforms.',
     icon: 'Sprout',
-    focusAreas: ['Agri-Fintech', 'Traceability Systems', 'Cooperative Portals', 'IoT Sensor Data']
+    focusAreas: ['Traceability Systems', 'Yield Forecasting', 'Cooperative Data Portals', 'Commodity Price Feeds']
   },
   {
     name: 'Logistics & Transportation',
-    description: 'Fleet tracking, route optimization engines, inventory management, and cross-border shipment monitoring.',
+    description: 'Fleet GPS telematics, dispatch automation, route efficiency analytics, and cold chain temperature compliance.',
     icon: 'Truck',
-    focusAreas: ['GPS Fleet Telematics', 'Warehouse Systems', 'Dispatch Automation', 'Real-Time Tracking']
+    focusAreas: ['GPS Telematics', 'Dispatch Optimization', 'Warehouse Analytics', 'Delivery Verification']
   },
   {
-    name: 'Large Enterprises & Corporates',
-    description: 'Custom ERPs, centralized business intelligence, customer engagement engines, and workflow automation.',
+    name: 'Commercial Enterprises & Businesses',
+    description: 'Centralized business intelligence, customer behavior analytics, automated reporting, and custom software systems.',
     icon: 'Briefcase',
-    focusAreas: ['Enterprise Architecture', 'Departmental Integration', 'Data Warehousing', 'Legacy Modernization']
-  },
-  {
-    name: 'High-Growth Startups & SMEs',
-    description: 'Rapid MVP development, SaaS product engineering, scalable cloud infrastructure, and go-to-market tech.',
-    icon: 'TrendingUp',
-    focusAreas: ['MVP Prototyping', 'SaaS Scaling', 'Payment Gateways', 'Growth Analytics']
-  },
+    focusAreas: ['BI Dashboards', 'Customer Analytics', 'Workflow Automation', 'Data Warehousing']
+  }
 ]
 
-export const targetClients: string[] = targetClientsDetailed.map(t => t.name)
-
 export const vision =
-  "To be the premier data engineering, enterprise software, and digital consulting partner across East Africa, empowering organizations with reliable technology."
+  'To be a trusted international Data & AI consultancy partner, helping organizations solve practical problems with robust data infrastructure and reliable machine learning.'
 
 export const mission =
-  'To turn complex business challenges and raw organizational data into resilient software systems, actionable intelligence, and long-term digital value.'
+  'To build data and software solutions that help organizations make better decisions, automate operations, and scale with confidence.'
+
+export const companyValues = [
+  {
+    title: 'Evidence Over Buzzwords',
+    description: 'We focus on measurable outcomes, clean code, and working systems rather than exaggerated promises or AI hype.'
+  },
+  {
+    title: 'Human-Centered Design',
+    description: 'We build technology that matches how teams actually work in the real world, prioritizing usability and offline reliability.'
+  },
+  {
+    title: 'Data Integrity & Sovereignty',
+    description: 'Our clients retain 100% ownership of their data, algorithms, and intellectual property without vendor lock-in.'
+  },
+  {
+    title: 'Long-Term Partnership',
+    description: 'We support our deployments with transparent governance, ongoing monitoring, and disciplined SLA commitments.'
+  }
+]
 
 export interface OrgTier {
   label: string
@@ -212,27 +252,25 @@ export interface OrgTier {
 export const orgStructure: { parent: OrgTier; child: OrgTier } = {
   parent: {
     label: 'DataSphere Consulting Ltd',
-    tagline: 'Enterprise Advisory, Data & Software Engineering Firm',
+    tagline: 'Enterprise Advisory & Technology Firm',
     items: [
-      'Business Strategy & Enterprise Architecture',
-      'Data Engineering & Business Intelligence',
-      'Artificial Intelligence & Predictive Analytics',
-      'Cloud Architecture & DevOps Governance',
-      'Digital Transformation & Legacy Modernization',
-      'Capacity Building & Engineering Training',
+      'Strategic Advisory & Technology Roadmaps',
+      'Data Governance & Compliance Architecture',
+      'Enterprise Solution Architecture',
+      'Institutional Capacity Building',
+      'Long-Term SLA Governance & Support',
     ],
   },
   child: {
-    label: 'DataSphere Digital Solutions',
-    tagline: 'Custom Software & Product Engineering Unit',
+    label: 'BIGWI HOUSE',
+    tagline: 'Data & AI Consultancy Hub',
     items: [
-      'Enterprise Software & Core ERPs',
-      'Mobile Applications (iOS & Android)',
-      'Web Platforms & Client Portals',
-      'Cloud Solutions & CI/CD Pipelines',
-      'Data Warehousing & Real-Time Dashboards',
-      'Human-Centered UI/UX Design',
-      'Technical Support & 24/7 SLA Maintenance',
+      'Data Collection & Pipeline Infrastructure',
+      'Business Intelligence & Executive Dashboards',
+      'Machine Learning Model Building & Evaluation',
+      'Model Deployment & Real-Time Monitoring',
+      'Applied Data Science & Predictive Analytics',
+      'Custom Software & Mobile Applications',
     ],
   },
 }
@@ -247,38 +285,188 @@ export interface Phase {
 export const growthPhases: Phase[] = [
   {
     step: 'Phase 01',
-    name: 'Foundation & Rigor',
-    subtitle: 'Core Enterprise Delivery & Architecture',
+    name: 'Discovery & Diagnosis',
+    subtitle: 'Understanding the Business Problem',
     items: [
-      'Build robust reference enterprise systems and verified case studies',
-      'Partner with leading regional financial institutions, public bodies, and enterprises',
-      'Establish enterprise cloud, database, and security standards',
-      'Standardize development pipelines, code review protocols, and SLA packages',
+      'Audit existing data sources, schemas, and operational bottlenecks',
+      'Define clear business objectives and target metrics with leadership',
+      'Assess technical feasibility and data quality constraints',
+      'Establish security, privacy, and compliance guidelines',
     ],
   },
   {
     step: 'Phase 02',
-    name: 'Expansion',
-    subtitle: 'Regional Penetration & Advanced Data Units',
+    name: 'Architecture & Prototyping',
+    subtitle: 'Blueprint & Model Validation',
     items: [
-      'Expand cross-sector footprint across Rwanda and East African commercial hubs',
-      'Scale specialized engineering, data engineering, and BI analytics units',
-      'Deploy mission-critical data pipelines and executive monitoring dashboards',
-      'Accelerate long-term maintenance and technical partnership agreements',
+      'Design data pipelines, database models, and API interfaces',
+      'Develop baseline ML models and benchmark against test datasets',
+      'Create interactive UI prototypes and review with key stakeholders',
+      'Define sprint delivery milestones and evaluation criteria',
     ],
   },
   {
     step: 'Phase 03',
-    name: 'Regional Hub',
-    subtitle: 'Pan-African & Global Engineering Excellence',
+    name: 'Deployment & Monitoring',
+    subtitle: 'Production Rollout & Long-Term Reliability',
     items: [
-      'Scale engineering presence across East Africa and international clients',
-      'Deliver distributed engineering for global technology organizations',
-      'Introduce high-performance SaaS products and multi-tenant architectures',
-      'Lead high-impact regional digital transformation initiatives',
+      'Deploy containerized systems to secure cloud infrastructure',
+      'Configure automated data quality checks and model drift alerts',
+      'Train operational staff and hand over system documentation',
+      'Provide structured SLA maintenance and iterative enhancements',
     ],
   },
 ]
+
+export interface CaseStudy {
+  id: string
+  caseNumber: string
+  title: string
+  clientClassification: 'Real Client' | 'Confidential Client' | 'Internal Project' | 'Prototype / Demonstration'
+  client: string
+  region: string
+  sector: string
+  problem: string
+  solution: string
+  impact: string[]
+  metrics: { label: string; value: string }[]
+  technologies: string[]
+  image: string
+}
+
+export const featuredCaseStudies: CaseStudy[] = [
+  {
+    id: 'case-01',
+    caseNumber: 'Case 01',
+    title: 'Credit Intelligence & Risk Assessment Platform',
+    clientClassification: 'Real Client',
+    client: 'Regional Microfinance Institution',
+    region: 'East Africa',
+    sector: 'Financial Services',
+    problem: 'Loan officers relied on fragmented branch spreadsheets and manual paperwork, resulting in slow underwriting turnaround of 5 days and elevated default rates due to inconsistent risk checks.',
+    solution: 'BIGWI HOUSE designed an automated data pipeline consolidating branch records, built a statistical credit risk model, and deployed an intuitive assessment portal for underwriting teams.',
+    impact: [
+      'Reduced credit assessment turnaround time from 5 business days to under 4 hours',
+      'Harmonized customer loan histories across 32 regional branch locations into a single database',
+      'Decreased calculation errors and missing documentation incidents by over 90%'
+    ],
+    metrics: [
+      { label: 'Turnaround Time', value: 'Under 4 hrs' },
+      { label: 'Branches Unified', value: '32 Locations' },
+      { label: 'Data Accuracy', value: '99.8%' }
+    ],
+    technologies: ['Python', 'PostgreSQL', 'PowerBI', 'Docker', 'FastAPI', 'Next.js'],
+    image: '/images/hero-team.jpg'
+  },
+  {
+    id: 'case-02',
+    caseNumber: 'Case 02',
+    title: 'Field Data Infrastructure & Impact Monitoring System',
+    clientClassification: 'Real Client',
+    client: 'Community Development Organization',
+    region: 'Rwanda & Regional Zones',
+    sector: 'Public Sector & NGOs',
+    problem: 'Field workers surveying rural beneficiary communities faced poor network connectivity, resulting in lost paper forms, delayed quarterly reporting, and no spatial visibility into aid distribution.',
+    solution: 'Engineered an offline-first mobile data collection application with automated background synchronization, coupled with a central registry and geospatial (GIS) impact dashboard.',
+    impact: [
+      'Achieved 100% reliable offline data capture with automatic queue sync once mobile connectivity resumes',
+      'Shortened quarterly donor reporting cycles from 4 weeks to instantaneous live metrics',
+      'Mapped and verified over 45,000 community beneficiary interventions on interactive GIS layers'
+    ],
+    metrics: [
+      { label: 'Field Records', value: '45,000+' },
+      { label: 'Offline Sync', value: '100% Reliable' },
+      { label: 'Reporting Lag', value: 'Instant' }
+    ],
+    technologies: ['React Native', 'Node.js', 'PostgreSQL', 'PostGIS', 'AWS', 'TypeScript'],
+    image: '/images/mobile-banking.jpg'
+  },
+  {
+    id: 'case-03',
+    caseNumber: 'Case 03',
+    title: 'Logistics Intelligence & Fleet Telematics Hub',
+    clientClassification: 'Real Client',
+    client: 'Commercial Freight & Logistics Operator',
+    region: 'East Africa Corridor',
+    sector: 'Supply Chain & Logistics',
+    problem: 'Manual paper logbooks and lack of real-time GPS visibility caused route delays, unexpected vehicle downtime, driver overtime disputes, and slow billing reconciliations.',
+    solution: 'Developed a real-time dispatch dashboard, driver mobile companion tool, and automated telematics pipeline that processes live GPS coordinates, fuel sensor data, and digital delivery confirmations.',
+    impact: [
+      'Provided dispatch managers with live vehicle tracking and automated ETA alerts for customers',
+      'Automated trip reconciliation and electronic invoicing, saving approximately 35 administrative hours weekly',
+      'Improved overall fleet capacity utilization by 28% across active transit corridors'
+    ],
+    metrics: [
+      { label: 'Fleet Efficiency', value: '+28%' },
+      { label: 'Admin Time Saved', value: '35 hrs / wk' },
+      { label: 'On-Time Dispatch', value: '96.4%' }
+    ],
+    technologies: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Python', 'Redis', 'PostGIS', 'Leaflet'],
+    image: '/images/logistics-terminal.jpg'
+  }
+]
+
+export interface InsightArticle {
+  id: string
+  title: string
+  category: 'Data Strategy' | 'Applied AI' | 'Case Perspective' | 'Technology Review'
+  readTime: string
+  publishDate: string
+  summary: string
+  keyTakeaways: string[]
+}
+
+export const insightArticles: InsightArticle[] = [
+  {
+    id: 'practical-ai-readiness',
+    title: 'Assessing Organizational AI Readiness: A Practical Framework for Leaders',
+    category: 'Data Strategy',
+    readTime: '6 min read',
+    publishDate: 'August 2026',
+    summary: 'Why clean, accessible data pipelines matter far more than model complexity when deploying AI in institutional environments.',
+    keyTakeaways: [
+      'Start with a well-defined business problem before selecting modeling approaches',
+      'Audit existing data quality and collection consistency across operational departments',
+      'Plan for model evaluation and ongoing drift monitoring from day one'
+    ]
+  },
+  {
+    id: 'offline-first-field-data',
+    title: 'Designing Offline-First Systems for Rural Data Collection in East Africa',
+    category: 'Technology Review',
+    readTime: '5 min read',
+    publishDate: 'July 2026',
+    summary: 'Architectural patterns for mobile surveys and telemetry in areas with intermittent connectivity, ensuring zero data loss.',
+    keyTakeaways: [
+      'Local-first SQLite storage paired with idempotent sync queues',
+      'Conflict resolution strategies when multiple field officers update shared records',
+      'Battery and bandwidth optimization for standard low-cost Android hardware'
+    ]
+  },
+  {
+    id: 'credit-scoring-models-local-context',
+    title: 'Building Credit Scoring Models Tailored to Informal Economy Realities',
+    category: 'Applied AI',
+    readTime: '7 min read',
+    publishDate: 'June 2026',
+    summary: 'How alternative data points such as mobile money transactions and utility records create fairer, more accurate risk models.',
+    keyTakeaways: [
+      'Traditional bureau data often excludes viable micro-entrepreneurs',
+      'Feature engineering with mobile transaction frequency and cash-flow regularity',
+      'Ensuring model explainability for regulatory audits and fair lending standards'
+    ]
+  }
+]
+
+export const contactDetails = {
+  company: 'DataSphere Consulting Ltd',
+  division: 'BIGWI HOUSE — Data & AI Consultancy Hub',
+  address: 'Kigali, Rwanda',
+  email: 'contact@datasphere.rw',
+  inquiriesEmail: 'info@datasphere.rw',
+  hours: 'Monday – Friday, 8:30 AM – 5:30 PM (CAT)',
+  responseSLA: 'Inquiries answered within 24 business hours'
+}
 
 export interface ProcessStep {
   number: string
@@ -292,155 +480,84 @@ export interface ProcessStep {
 export const deliveryProcess: ProcessStep[] = [
   {
     number: '01',
-    title: 'Discover & Align',
-    tagline: 'Business Diagnosis',
-    description: 'We conduct deep discovery workshops to understand your organizational objectives, user pain points, system bottlenecks, and market opportunity.',
-    outputs: ['Stakeholder alignment', 'Requirement specification', 'Technical feasibility study', 'Risk assessment'],
+    title: 'Discover & Diagnose',
+    tagline: 'Problem Diagnosis',
+    description: 'We conduct discovery sessions with your operational leads to understand data sources, reporting bottlenecks, and institutional objectives.',
+    outputs: ['Data source audit', 'Requirement specification', 'Feasibility analysis', 'Security & compliance plan'],
     icon: 'Search'
   },
   {
     number: '02',
-    title: 'Strategize & Architect',
-    tagline: 'System Blueprint',
-    description: 'We define the technical architecture, data model, security framework, and product roadmap before writing a single line of code.',
-    outputs: ['System architecture diagram', 'Data schema & API spec', 'Technology stack selection', 'Sprint delivery roadmap'],
+    title: 'Strategize & Blueprint',
+    tagline: 'System Architecture',
+    description: 'We map the database models, API contracts, model validation parameters, and cloud hosting plan before writing code.',
+    outputs: ['Architecture blueprint', 'Data schema & API spec', 'Toolchain selection', 'Sprint delivery roadmap'],
     icon: 'Compass'
   },
   {
     number: '03',
     title: 'Design & Prototype',
-    tagline: 'Human-Centered UX',
-    description: 'We craft intuitive user journeys, interactive wireframes, and production design systems with rigorous usability testing.',
-    outputs: ['Figma design system', 'Interactive prototype', 'WCAG accessibility audit', 'Component library'],
-    icon: 'Figma'
+    tagline: 'Interactive UX',
+    description: 'We design intuitive executive dashboards, reporting interfaces, and field app screens tailored to operational speed.',
+    outputs: ['Interactive wireframes', 'UI design system', 'Usability review', 'Field survey forms'],
+    icon: 'Palette'
   },
   {
     number: '04',
-    title: 'Build & Engineer',
-    tagline: 'Agile Implementation',
-    description: 'Our engineering teams build scalable, cleanly typed code with continuous integration, automated unit tests, and bi-weekly milestone demos.',
-    outputs: ['Production codebase', 'Automated test suite', 'CI/CD deployment pipeline', 'API documentation'],
+    title: 'Build & Train',
+    tagline: 'Data & Model Delivery',
+    description: 'Our team builds automated ingestion pipelines, trains machine learning models, and develops custom software with automated testing.',
+    outputs: ['Data ingestion pipelines', 'Model weights & training code', 'Automated test suite', 'Technical documentation'],
     icon: 'Code2'
   },
   {
     number: '05',
-    title: 'Deploy & Optimize',
-    tagline: 'Production Readiness',
-    description: 'We orchestrate secure cloud deployments, conduct penetration testing, load test concurrency, and configure telemetry monitoring.',
-    outputs: ['Cloud infrastructure (IaC)', 'Load & security audit', 'Telemetry & alerting setup', 'User onboarding & training'],
+    title: 'Evaluate & Deploy',
+    tagline: 'Production Verification',
+    description: 'We conduct rigorous model evaluation, test inference latency under load, and deploy containerized services to secure infrastructure.',
+    outputs: ['Model evaluation report', 'Cloud infrastructure setup', 'Telemetry & alerting setup', 'User onboarding & training'],
     icon: 'Rocket'
   },
   {
     number: '06',
-    title: 'Scale & Support',
-    tagline: 'Continuous Growth',
-    description: 'We monitor live performance, extract real-time data insights, provide 24/7 SLA maintenance, and iteratively build new capability.',
-    outputs: ['24/7 SLA monitoring', 'Quarterly data reviews', 'Feature backlog iteration', 'Performance optimizations'],
+    title: 'Monitor & Support',
+    tagline: 'Long-Term Reliability',
+    description: 'We track live accuracy, detect data drift, provide 24/7 SLA uptime maintenance, and support periodic model retraining.',
+    outputs: ['24/7 SLA monitoring', 'Model drift alerts', 'Quarterly data reviews', 'Scheduled retraining pipelines'],
     icon: 'TrendingUp'
-  }
-]
-
-export interface CaseStudy {
-  id: string
-  title: string
-  clientType: string
-  sector: string
-  problem: string
-  solution: string
-  technologies: string[]
-  impact: string[]
-  metrics: { label: string; value: string }[]
-}
-
-export const featuredCaseStudies: CaseStudy[] = [
-  {
-    id: 'financial-analytics-engine',
-    title: 'Enterprise Analytics & Credit Intelligence Engine',
-    clientType: 'Regional Financial Institution',
-    sector: 'Banking & Financial Services',
-    problem: 'The client struggled with fragmented loan applicant data across branches, causing slow underwriting times and high risk of non-performing loans.',
-    solution: 'Engineered an automated data pipeline, risk-scoring ML model, and real-time executive dashboard integrating multiple core banking data streams.',
-    technologies: ['Next.js', 'Python / ML', 'PostgreSQL', 'PowerBI', 'Docker'],
-    impact: [
-      'Accelerated credit assessment turn-around from 5 days to under 4 hours',
-      'Unified data across 32 regional branch locations into real-time KPI feeds',
-      'Decreased loan assessment calculation errors by over 90%'
-    ],
-    metrics: [
-      { label: 'Processing Speed', value: '12x Faster' },
-      { label: 'Data Accuracy', value: '99.8%' },
-      { label: 'Branches Unified', value: '32+' }
-    ]
-  },
-  {
-    id: 'field-data-monitoring',
-    title: 'Nationwide Field Data & Impact Monitoring System',
-    clientType: 'International Development Organization',
-    sector: 'NGOs & Development Partners',
-    problem: 'Field agents in rural zones lacked offline data capture tools, resulting in delayed beneficiary reporting, missing telemetry, and tedious manual paperwork.',
-    solution: 'Designed and deployed an offline-first mobile application paired with a cloud-synchronized central registry and GIS visual mapping interface.',
-    technologies: ['React Native', 'Node.js', 'PostgreSQL / PostGIS', 'AWS', 'PWA'],
-    impact: [
-      'Enabled 100% offline survey capture with automatic background sync upon cellular connection',
-      'Reduced national quarterly reporting lag from 4 weeks to instantaneous live metrics',
-      'Successfully mapped over 45,000 community beneficiary interventions'
-    ],
-    metrics: [
-      { label: 'Offline Sync', value: '100% Reliable' },
-      { label: 'Field Records', value: '45,000+' },
-      { label: 'Reporting Lag', value: '< 1 min' }
-    ]
-  },
-  {
-    id: 'logistics-supply-chain',
-    title: 'Real-Time Multi-Tenant Logistics & Dispatch Platform',
-    clientType: 'Commercial Freight & Logistics Operator',
-    sector: 'Logistics & Supply Chain',
-    problem: 'Manual dispatch logs, lack of real-time GPS visibility, and paper invoices led to lost driver hours, customer billing friction, and idle vehicle downtime.',
-    solution: 'Architected a cloud-native SaaS dispatch portal, driver mobile companion, automated electronic invoicing, and IoT telemetry tracking engine.',
-    technologies: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Go API', 'Redis', 'Leaflet / GIS'],
-    impact: [
-      'Delivered live GPS tracking and automated delivery milestone notifications for shippers',
-      'Automated invoice generation and payment verification, saving 35 administrative hours weekly',
-      'Increased fleet capacity utilization by 28%'
-    ],
-    metrics: [
-      { label: 'Fleet Efficiency', value: '+28%' },
-      { label: 'Admin Hours Saved', value: '35h / wk' },
-      { label: 'On-Time Dispatch', value: '96.4%' }
-    ]
   }
 ]
 
 export const techCapabilities = [
   {
-    category: 'Modern Web & Frontend',
-    items: ['Next.js (App Router)', 'React 18 / 19', 'TypeScript', 'Tailwind CSS', 'Accessible UI', 'PWA / Offline Workers'],
+    category: 'Data Engineering & Pipelines',
+    items: ['PostgreSQL & ClickHouse', 'dbt & Apache Airflow', 'Pandas & NumPy', 'Kafka & Redis', 'Automated ETL/ELT', 'Data Warehousing'],
+    icon: 'Database'
+  },
+  {
+    category: 'Machine Learning & AI',
+    items: ['Python & PyTorch', 'Scikit-Learn', 'FastAPI Inference', 'MLflow Tracking', 'Model Drift Telemetry', 'NLP & Text Classification'],
+    icon: 'Brain'
+  },
+  {
+    category: 'Analytics & Dashboards',
+    items: ['PowerBI & Superset', 'PostGIS & Spatial Maps', 'Executive KPI Reports', 'Automated PDF/Email Feeds', 'Telemetry Dashboards', 'Self-Service BI'],
     icon: 'Layout'
   },
   {
     category: 'Backend & APIs',
-    items: ['Node.js / Express', 'Go (Golang)', 'Python (FastAPI / Django)', 'REST & GraphQL', 'gRPC', 'Event-Driven Architecture'],
+    items: ['Python (FastAPI / Django)', 'Node.js & Express', 'Go (Golang)', 'REST & GraphQL', 'Role-Based Access (RBAC)', 'Microservices'],
     icon: 'Server'
   },
   {
-    category: 'Mobile Applications',
-    items: ['React Native', 'Flutter', 'iOS (Swift)', 'Android (Kotlin)', 'Offline-First SQLite', 'Push Telemetry'],
+    category: 'Mobile & Field Applications',
+    items: ['React Native', 'Flutter', 'Offline SQLite Sync', 'PWA / Web Portals', 'USSD Integrations', 'GIS Field Mapping'],
     icon: 'Smartphone'
   },
   {
-    category: 'Data Engineering & Analytics',
-    items: ['PostgreSQL & ClickHouse', 'dbt & Airflow', 'Pandas & NumPy', 'PowerBI & Superset', 'Data Pipelines', 'Predictive Modeling'],
-    icon: 'Brain'
-  },
-  {
-    category: 'Databases & Cache',
-    items: ['PostgreSQL', 'Supabase', 'Redis', 'ClickHouse', 'MongoDB', 'Elasticsearch'],
-    icon: 'Database'
-  },
-  {
-    category: 'Cloud, DevOps & Security',
-    items: ['AWS / Google Cloud', 'Docker & Kubernetes', 'Terraform (IaC)', 'CI/CD Pipelines', 'Cloudflare CDN & WAF', 'OAuth / RBAC'],
+    category: 'Cloud & Infrastructure',
+    items: ['AWS & Google Cloud', 'Docker & Kubernetes', 'Terraform (IaC)', 'CI/CD Pipelines', 'Cloudflare CDN', 'Prometheus & Grafana'],
     icon: 'CloudLightning'
   }
 ]
+

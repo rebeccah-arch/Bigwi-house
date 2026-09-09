@@ -1,15 +1,17 @@
 import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://bigwihouse.datasphere.rw'
+  const baseUrl = 'https://datasphere.rw'
 
   const routes = [
     '',
-    '/about',
     '/services',
     '/approach',
     '/work',
+    '/insights',
+    '/about',
     '/contact',
+    '/privacy',
   ]
 
   return routes.map((route) => ({

@@ -32,12 +32,12 @@ const itemVariants: Variants = {
 export default function ApproachPage() {
   return (
     <div className="space-y-20 md:space-y-28 py-10">
-      {/* 1. Header Banner with Full Cover Background Image */}
-      <section className="relative min-h-[480px] lg:min-h-[540px] flex items-center overflow-hidden border-b border-slate-200 dark:border-slate-800">
+      {/* 1. Header Banner */}
+      <section className="relative min-h-[440px] lg:min-h-[500px] flex items-center overflow-hidden border-b border-slate-200 dark:border-slate-800">
         <div className="absolute inset-0 z-0">
           <Image
             src="/images/executive-strategy.jpg"
-            alt="DataSphere Executive Strategy &amp; Systems Architecture"
+            alt="DataSphere & BIGWI HOUSE Engineering Strategy and Delivery"
             fill
             className="object-cover object-center"
             priority
@@ -51,19 +51,23 @@ export default function ApproachPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="max-w-3xl space-y-6"
+            className="max-w-3xl space-y-5"
           >
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight">
-              Our engineering strategy &amp; delivery framework.
+            <div className="inline-flex items-center gap-2 rounded-full border border-teal-500/30 bg-teal-50 dark:bg-teal-950/60 px-3 py-1 text-xs font-mono text-teal-800 dark:text-teal-300">
+              <span>Delivery Methodology</span>
+            </div>
+
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight">
+              A disciplined, transparent delivery framework.
             </h1>
 
-            <p className="text-base sm:text-lg text-slate-700 dark:text-slate-300 leading-relaxed font-normal bg-white/60 dark:bg-slate-900/60 backdrop-blur-xs p-1 rounded-lg">
-              A transparent, disciplined roadmap published so enterprise partners, institutions, and clients understand our software engineering lifecycle, agile sprints, and quality governance.
+            <p className="text-sm sm:text-base text-slate-700 dark:text-slate-300 leading-relaxed font-normal">
+              We publish our delivery process so enterprise partners, governments, and commercial clients know exactly what to expect from initial discovery to live system monitoring.
             </p>
 
             <div className="flex flex-wrap items-center gap-3 pt-2">
-              <Link href="/contact" className="btn btn-primary text-sm py-3 px-6 shadow-md">
-                <span>Schedule Technical Discovery</span>
+              <Link href="/contact" className="btn btn-primary text-xs sm:text-sm py-2.5 px-5">
+                <span>Discuss your project</span>
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
@@ -71,15 +75,18 @@ export default function ApproachPage() {
         </div>
       </section>
 
-      {/* 2. Growth Phases (Foundation, Expansion, Regional Hub) */}
+      {/* 2. 3-Phase Delivery Roadmap */}
       <section className="relative">
-        <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8 space-y-10">
+        <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8 space-y-8">
           <div className="max-w-2xl">
-            <h2 className="text-3xl sm:text-4xl font-display font-bold text-slate-900 dark:text-white">
-              Three-Tier Strategic Roadmap
+            <span className="font-mono text-xs font-bold uppercase tracking-widest text-teal-700 dark:text-teal-400">
+              Phase Progression
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-display font-bold text-slate-900 dark:text-white mt-1">
+              Phased Implementation Methodology
             </h2>
-            <p className="mt-2 text-sm sm:text-base text-slate-600 dark:text-slate-400">
-              Structured institutional scaling from regional delivery hub to pan-African data &amp; software leadership.
+            <p className="mt-2 text-xs sm:text-sm text-slate-600 dark:text-slate-400">
+              How we reduce implementation risk and ensure system stability before deployment.
             </p>
           </div>
 
@@ -88,17 +95,17 @@ export default function ApproachPage() {
             whileInView="visible"
             viewport={{ once: true }}
             variants={containerVariants}
-            className="grid grid-cols-1 lg:grid-cols-3 gap-8"
+            className="grid grid-cols-1 lg:grid-cols-3 gap-6"
           >
             {growthPhases.map((phase, idx) => (
               <motion.div
                 key={phase.name}
                 variants={itemVariants}
-                className="card-enterprise flex flex-col justify-between p-8 relative overflow-hidden group"
+                className="card-enterprise flex flex-col justify-between p-7 relative overflow-hidden bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-3xl"
               >
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-teal-50 dark:bg-teal-950/60 font-mono text-sm font-bold text-teal-800 dark:text-teal-300 border border-teal-200 dark:border-teal-800">
+                    <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-teal-50 dark:bg-teal-950/60 font-mono text-xs font-bold text-teal-800 dark:text-teal-300 border border-teal-200 dark:border-teal-800">
                       0{idx + 1}
                     </span>
                     <span className="font-mono text-xs text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-2.5 py-0.5 rounded-full font-medium">
@@ -107,15 +114,15 @@ export default function ApproachPage() {
                   </div>
 
                   <div>
-                    <h3 className="font-display text-2xl font-bold text-slate-900 dark:text-white group-hover:text-teal-700 dark:group-hover:text-teal-400 transition-colors">
+                    <h3 className="font-display text-xl font-bold text-slate-900 dark:text-white">
                       {phase.name}
                     </h3>
                     <p className="font-sans text-xs text-slate-500 dark:text-slate-400 font-medium mt-1">{phase.subtitle}</p>
                   </div>
 
-                  <ul className="mt-6 space-y-3 pt-4 border-t border-slate-100 dark:border-slate-800">
+                  <ul className="mt-4 space-y-2.5 pt-3 border-t border-slate-100 dark:border-slate-800">
                     {phase.items.map((item) => (
-                      <li key={item} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700 dark:text-slate-300">
+                      <li key={item} className="flex items-start gap-2.5 text-xs text-slate-700 dark:text-slate-300">
                         <CheckCircle2 className="h-4 w-4 text-teal-600 dark:text-teal-400 mt-0.5 flex-shrink-0" />
                         <span>{item}</span>
                       </li>
@@ -123,9 +130,9 @@ export default function ApproachPage() {
                   </ul>
                 </div>
 
-                <div className="mt-8 pt-4 border-t border-slate-100 dark:border-slate-800">
+                <div className="mt-6 pt-3 border-t border-slate-100 dark:border-slate-800">
                   <span className="font-sans text-xs text-slate-400 dark:text-slate-500 font-medium block">
-                    Status: {idx === 0 ? 'Active Execution' : idx === 1 ? 'In Progress' : 'Planned Scaling'}
+                    Focus: {idx === 0 ? 'Diagnosis & Feasibility' : idx === 1 ? 'Architecture & Validation' : 'Production & Monitoring'}
                   </span>
                 </div>
               </motion.div>
@@ -136,13 +143,16 @@ export default function ApproachPage() {
 
       {/* 3. 6-Stage Engineering Process */}
       <section className="relative">
-        <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8 space-y-10">
+        <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8 space-y-8">
           <div className="max-w-2xl">
-            <h2 className="text-3xl sm:text-4xl font-display font-bold text-slate-900 dark:text-white">
-              End-to-End Delivery Architecture
+            <span className="font-mono text-xs font-bold uppercase tracking-widest text-teal-700 dark:text-teal-400">
+              Lifecycle
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-display font-bold text-slate-900 dark:text-white mt-1">
+              End-to-End Delivery Lifecycle
             </h2>
-            <p className="mt-2 text-sm sm:text-base text-slate-600 dark:text-slate-400">
-              How we take complex business challenges through disciplined sprints from technical discovery to long-term SLA scaling.
+            <p className="mt-2 text-xs sm:text-sm text-slate-600 dark:text-slate-400">
+              Structured sprints from requirement diagnosis to ongoing SLA support and model drift monitoring.
             </p>
           </div>
 
@@ -150,15 +160,18 @@ export default function ApproachPage() {
         </div>
       </section>
 
-      {/* 4. Technology Stack */}
+      {/* 4. Technology Toolchains */}
       <section className="relative">
-        <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8 space-y-10">
+        <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8 space-y-8">
           <div className="max-w-2xl">
-            <h2 className="text-3xl sm:text-4xl font-display font-bold text-slate-900 dark:text-white">
-              Technical Stack &amp; Infrastructure
+            <span className="font-mono text-xs font-bold uppercase tracking-widest text-teal-700 dark:text-teal-400">
+              Toolchains
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-display font-bold text-slate-900 dark:text-white mt-1">
+              Technology Stack &amp; Infrastructure
             </h2>
-            <p className="mt-2 text-sm sm:text-base text-slate-600 dark:text-slate-400">
-              Built on production-hardened toolchains, cloud-native frameworks, and automated CI/CD pipelines.
+            <p className="mt-2 text-xs sm:text-sm text-slate-600 dark:text-slate-400">
+              Production-hardened databases, data engineering tools, machine learning frameworks, and secure cloud environments.
             </p>
           </div>
 
@@ -169,16 +182,16 @@ export default function ApproachPage() {
       {/* 5. Bottom CTA */}
       <section className="relative">
         <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8">
-          <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-slate-900 text-white p-8 md:p-12 text-center shadow-xl space-y-6">
-            <h2 className="text-3xl sm:text-4xl font-display font-bold text-white">
-              Ready to embark on a structured software build?
+          <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-slate-900 text-white p-8 md:p-12 text-center shadow-xl space-y-5">
+            <h2 className="text-2xl sm:text-3xl font-display font-bold text-white">
+              Ready to structure your data roadmap?
             </h2>
-            <p className="text-slate-300 max-w-xl mx-auto text-sm sm:text-base">
-              Align your product roadmap with an engineering partner that delivers measurable business outcomes.
+            <p className="text-slate-300 max-w-xl mx-auto text-xs sm:text-sm">
+              Connect with our technical team to discuss your current data challenges, timelines, and deliverable milestones.
             </p>
             <div className="flex justify-center gap-4 pt-2">
-              <Link href="/contact" className="btn btn-teal py-3 px-7">
-                <span>Engage Our Team</span>
+              <Link href="/contact" className="btn btn-teal text-xs sm:text-sm py-2.5 px-6">
+                <span>Start a conversation</span>
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </div>

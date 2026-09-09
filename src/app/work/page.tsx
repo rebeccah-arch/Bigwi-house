@@ -10,12 +10,6 @@ import {
 } from '@/components/Icons'
 import { featuredCaseStudies } from '@/content/bigwiContent'
 
-const CASE_IMAGES: Record<string, string> = {
-  'case-01': '/images/hero-team.jpg',
-  'case-02': '/images/mobile-banking.jpg',
-  'case-03': '/images/logistics-terminal.jpg',
-}
-
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
@@ -36,12 +30,12 @@ const itemVariants: Variants = {
 export default function WorkPage() {
   return (
     <div className="space-y-20 md:space-y-28 py-10">
-      {/* 1. Header Banner with Full Cover Background Image */}
-      <section className="relative min-h-[480px] lg:min-h-[540px] flex items-center overflow-hidden border-b border-slate-200 dark:border-slate-800">
+      {/* 1. Header Banner */}
+      <section className="relative min-h-[440px] lg:min-h-[500px] flex items-center overflow-hidden border-b border-slate-200 dark:border-slate-800">
         <div className="absolute inset-0 z-0">
           <Image
             src="/images/kigali-skyline.jpg"
-            alt="DataSphere Deployments &amp; Case Studies"
+            alt="DataSphere & BIGWI HOUSE Case Studies and Deployments"
             fill
             className="object-cover object-center"
             priority
@@ -55,20 +49,24 @@ export default function WorkPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="max-w-3xl space-y-6"
+            className="max-w-3xl space-y-5"
           >
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight">
-              Selected projects &amp; enterprise transformations.
+            <div className="inline-flex items-center gap-2 rounded-full border border-teal-500/30 bg-teal-50 dark:bg-teal-950/60 px-3 py-1 text-xs font-mono text-teal-800 dark:text-teal-300">
+              <span>Case Studies &amp; Deployments</span>
+            </div>
+
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight">
+              Selected data pipelines, predictive models &amp; field systems.
             </h1>
 
-            <p className="text-base sm:text-lg text-slate-700 dark:text-slate-300 leading-relaxed font-normal bg-white/60 dark:bg-slate-900/60 backdrop-blur-xs p-1 rounded-lg">
-              We focus on measurable commercial outcomes, system uptime, and data integrity. Explore how we architect, engineer, and deploy high-concurrency systems across critical economic sectors.
+            <p className="text-sm sm:text-base text-slate-700 dark:text-slate-300 leading-relaxed font-normal">
+              We structure our portfolio around real operational challenges, concrete engineering solutions, and measurable business outcomes.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* 2. Detailed Case Studies List with Real Photography */}
+      {/* 2. Detailed Case Studies List */}
       <section className="relative">
         <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8 space-y-12">
           <motion.div
@@ -78,145 +76,144 @@ export default function WorkPage() {
             variants={containerVariants}
             className="space-y-12"
           >
-            {featuredCaseStudies.map((study, idx) => {
-              const imageSrc = CASE_IMAGES[study.id] || '/images/hero-team.jpg'
+            {featuredCaseStudies.map((study) => (
+              <motion.div
+                key={study.id}
+                variants={itemVariants}
+                className="overflow-hidden rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80 shadow-sm"
+              >
+                {/* Visual Header Banner */}
+                <div className="relative h-60 sm:h-72 w-full overflow-hidden bg-slate-100 dark:bg-slate-800">
+                  <Image
+                    src={study.image}
+                    alt={study.title}
+                    fill
+                    className="object-cover object-center"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-transparent" />
+                  
+                  <div className="absolute top-4 left-4 right-4 flex flex-wrap items-center justify-between gap-2">
+                    <span className="font-mono text-xs font-bold text-slate-900 bg-white/95 px-3 py-1 rounded-md backdrop-blur-sm shadow-sm">
+                      {study.caseNumber} &bull; {study.sector}
+                    </span>
+                    <span className="font-mono text-xs text-white bg-slate-900/85 border border-slate-700 px-3 py-1 rounded-md backdrop-blur-sm">
+                      {study.clientClassification} &bull; {study.region}
+                    </span>
+                  </div>
 
-              return (
-                <motion.div
-                  key={study.id}
-                  variants={itemVariants}
-                  className="overflow-hidden rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80 shadow-sm hover:shadow-md transition-shadow"
-                >
-                  {/* Photo & Header Banner */}
-                  <div className="relative h-64 sm:h-80 w-full overflow-hidden bg-slate-100 dark:bg-slate-800">
-                    <Image
-                      src={imageSrc}
-                      alt={study.title}
-                      fill
-                      className="object-cover object-center"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-transparent" />
-                    
-                    <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
-                      <span className="font-mono text-xs font-bold text-slate-900 bg-white/95 px-3 py-1 rounded-md backdrop-blur-sm shadow-sm">
-                        Case 0{idx + 1} • {study.sector}
-                      </span>
-                      <span className="font-mono text-xs text-white bg-slate-900/80 px-3 py-1 rounded-md backdrop-blur-sm">
-                        {study.clientType}
-                      </span>
+                  <div className="absolute bottom-5 left-6 right-6 text-white">
+                    <span className="text-xs text-teal-300 font-mono block mb-1">
+                      Client: {study.client}
+                    </span>
+                    <h2 className="text-xl sm:text-2xl lg:text-3xl font-display font-extrabold text-white">
+                      {study.title}
+                    </h2>
+                  </div>
+                </div>
+
+                <div className="p-6 sm:p-10 space-y-8">
+                  {/* Problem / Solution Grid (Outcome First Hierarchy) */}
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div className="rounded-2xl border border-amber-200 dark:border-amber-800/80 bg-amber-50/40 dark:bg-amber-950/30 p-6 space-y-2">
+                      <div className="flex items-center gap-2">
+                        <span className="h-2 w-2 rounded-full bg-amber-600 dark:bg-amber-400" />
+                        <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-amber-900 dark:text-amber-300">
+                          1. The Business Challenge
+                        </h3>
+                      </div>
+                      <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-normal">
+                        {study.problem}
+                      </p>
                     </div>
 
-                    <div className="absolute bottom-6 left-6 right-6 text-white">
-                      <h2 className="text-2xl sm:text-3xl font-display font-extrabold text-white">
-                        {study.title}
-                      </h2>
+                    <div className="rounded-2xl border border-teal-200 dark:border-teal-800/80 bg-teal-50/50 dark:bg-teal-950/30 p-6 space-y-2">
+                      <div className="flex items-center gap-2">
+                        <span className="h-2 w-2 rounded-full bg-teal-600 dark:text-teal-400" />
+                        <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-teal-900 dark:text-teal-300">
+                          2. What BIGWI HOUSE Built
+                        </h3>
+                      </div>
+                      <p className="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed font-normal">
+                        {study.solution}
+                      </p>
                     </div>
                   </div>
 
-                  <div className="p-6 sm:p-10 space-y-8">
-                    {/* Problem / Solution Grid */}
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                      <div className="rounded-2xl border border-amber-200 dark:border-amber-800/80 bg-amber-50/40 dark:bg-amber-950/30 p-6 space-y-2">
-                        <div className="flex items-center gap-2">
-                          <span className="h-2 w-2 rounded-full bg-amber-600 dark:bg-amber-400" />
-                          <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-amber-900 dark:text-amber-300">
-                            The Operational Challenge
-                          </h3>
-                        </div>
-                        <p className="text-sm sm:text-base text-slate-700 dark:text-slate-300 leading-relaxed font-normal">
-                          {study.problem}
-                        </p>
-                      </div>
+                  {/* Measurable Results & Impact */}
+                  <div className="space-y-4">
+                    <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-slate-800 dark:text-slate-200">
+                      3. Measurable Outcomes &amp; Impact
+                    </h3>
 
-                      <div className="rounded-2xl border border-teal-200 dark:border-teal-800/80 bg-teal-50/50 dark:bg-teal-950/30 p-6 space-y-2">
-                        <div className="flex items-center gap-2">
-                          <span className="h-2 w-2 rounded-full bg-teal-600 dark:bg-teal-400" />
-                          <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-teal-900 dark:text-teal-300">
-                            The Engineering Solution
-                          </h3>
-                        </div>
-                        <p className="text-sm sm:text-base text-slate-800 dark:text-slate-200 leading-relaxed font-medium">
-                          {study.solution}
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Quantified Business Impact & Metrics */}
-                    <div className="space-y-4">
-                      <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-slate-800 dark:text-slate-200">
-                        Quantified Business Impact
-                      </h3>
-
-                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                        {study.metrics.map((metric) => (
-                          <div
-                            key={metric.label}
-                            className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/60 p-5 text-center"
-                          >
-                            <div className="font-display text-3xl font-extrabold text-teal-800 dark:text-teal-400">
-                              {metric.value}
-                            </div>
-                            <p className="mt-1 font-sans text-xs text-slate-500 dark:text-slate-400 font-medium">{metric.label}</p>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                      {study.metrics.map((metric) => (
+                        <div
+                          key={metric.label}
+                          className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/60 p-4 sm:p-5 text-center"
+                        >
+                          <div className="font-display text-2xl sm:text-3xl font-extrabold text-teal-800 dark:text-teal-400">
+                            {metric.value}
                           </div>
-                        ))}
-                      </div>
-
-                      <ul className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-2">
-                        {study.impact.map((item) => (
-                          <li
-                            key={item}
-                            className="flex items-start gap-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/40 p-3.5 text-xs text-slate-700 dark:text-slate-300 font-medium"
-                          >
-                            <CheckCircle2 className="h-4 w-4 text-teal-600 dark:text-teal-400 flex-shrink-0 mt-0.5" />
-                            <span>{item}</span>
-                          </li>
-                        ))}
-                      </ul>
+                          <p className="mt-1 font-sans text-xs text-slate-500 dark:text-slate-400 font-medium">{metric.label}</p>
+                        </div>
+                      ))}
                     </div>
 
-                    {/* Tech Stack & Action Footer */}
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-6 border-t border-slate-100 dark:border-slate-800">
-                      <div className="flex flex-wrap items-center gap-2">
-                        <span className="font-sans text-xs text-slate-500 dark:text-slate-400 font-semibold">Engineered With:</span>
-                        {study.technologies.map((tech) => (
-                          <span
-                            key={tech}
-                            className="rounded-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-2.5 py-1 font-mono text-[11px] text-slate-700 dark:text-slate-300 shadow-sm"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-
-                      <Link
-                        href="/contact"
-                        className="btn btn-teal text-xs py-2.5 px-5 flex items-center gap-1.5"
-                      >
-                        <span>Build A Similar Platform</span>
-                        <ArrowRight className="h-3.5 w-3.5" />
-                      </Link>
-                    </div>
+                    <ul className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-2">
+                      {study.impact.map((item) => (
+                        <li
+                          key={item}
+                          className="flex items-start gap-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/40 p-3.5 text-xs text-slate-700 dark:text-slate-300 font-medium"
+                        >
+                          <CheckCircle2 className="h-4 w-4 text-teal-600 dark:text-teal-400 flex-shrink-0 mt-0.5" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                </motion.div>
-              )
-            })}
+
+                  {/* Technologies (Not Engineered With) */}
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-6 border-t border-slate-100 dark:border-slate-800">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className="font-mono text-xs text-slate-500 dark:text-slate-400 font-semibold">Technologies:</span>
+                      {study.technologies.map((tech) => (
+                        <span
+                          key={tech}
+                          className="rounded-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-2.5 py-1 font-mono text-[11px] text-slate-700 dark:text-slate-300 shadow-sm"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+
+                    <Link
+                      href="/contact"
+                      className="btn btn-teal text-xs py-2.5 px-4 flex items-center gap-1.5 self-start sm:self-auto"
+                    >
+                      <span>Discuss similar project</span>
+                      <ArrowRight className="h-3.5 w-3.5" />
+                    </Link>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
           </motion.div>
         </div>
       </section>
 
-      {/* 3. CTA */}
+      {/* 3. Bottom CTA */}
       <section className="relative">
         <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8">
-          <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-slate-900 text-white p-8 md:p-12 text-center shadow-xl space-y-6">
-            <h2 className="text-3xl sm:text-4xl font-display font-bold text-white">
-              Ready to achieve measurable enterprise transformation?
+          <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-slate-900 text-white p-8 md:p-12 text-center shadow-xl space-y-5">
+            <h2 className="text-2xl sm:text-3xl font-display font-bold text-white">
+              Have a data or machine learning challenge?
             </h2>
-            <p className="text-slate-300 max-w-xl mx-auto text-sm sm:text-base">
-              Talk with our senior engineering architects about your organization&apos;s digital roadmap.
+            <p className="text-slate-300 max-w-xl mx-auto text-xs sm:text-sm">
+              We can help you audit your existing systems, assess feasibility, and structure a phased implementation plan.
             </p>
             <div className="flex justify-center gap-4 pt-2">
-              <Link href="/contact" className="btn btn-teal py-3 px-7">
-                <span>Start Technical Discovery</span>
+              <Link href="/contact" className="btn btn-teal text-xs sm:text-sm py-2.5 px-6">
+                <span>Discuss your project</span>
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </div>

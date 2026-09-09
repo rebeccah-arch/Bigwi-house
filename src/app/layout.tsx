@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Poppins, Montserrat, Manrope, Roboto, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 import ClientShell from '@/components/ClientShell'
+import { ThemeProvider } from '@/context/ThemeContext'
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -39,20 +40,21 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: 'DataSphere Consulting Ltd  Enterprise Software & Data Engineering',
-    template: '%s | DataSphere Consulting Ltd',
+    default: 'DataSphere | BIGWI HOUSE — Data & AI Consultancy',
+    template: '%s | DataSphere & BIGWI HOUSE',
   },
   description:
-    'DataSphere Consulting Ltd delivers enterprise software engineering, robust data pipelines, analytics & business intelligence, cloud architecture, and digital transformation for organizations across East Africa and beyond.',
+    'DataSphere Consulting Ltd and BIGWI HOUSE deliver data pipelines, machine learning model building, model evaluation, analytics dashboards, and strategic advisory for international organizations and enterprises.',
   keywords: [
     'DataSphere Consulting',
-    'Data Engineering Rwanda',
-    'Enterprise Software Kigali',
-    'Data Analytics BI East Africa',
-    'Custom Software Development',
-    'Cloud DevOps Africa',
-    'SaaS Engineering',
-    'Digital Transformation',
+    'BIGWI HOUSE',
+    'Data and AI Consultancy',
+    'Machine Learning Models',
+    'Model Evaluation and Deployment',
+    'Data Pipelines Rwanda',
+    'Business Intelligence Dashboards',
+    'Field Data Collection Africa',
+    'Enterprise Data Strategy',
   ],
   authors: [{ name: 'DataSphere Consulting Ltd' }],
   creator: 'DataSphere Consulting Ltd',
@@ -62,10 +64,10 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: 'https://datasphere.rw',
-    title: 'DataSphere Consulting Ltd  Transforming Enterprise Data Into Value',
+    title: 'DataSphere & BIGWI HOUSE — Data & AI Consultancy',
     description:
-      'Enterprise Software, Data Engineering, Business Intelligence, and Digital Consulting.',
-    siteName: 'DataSphere Consulting',
+      'Data collection, machine learning models, model evaluation, analytics dashboards, and strategic advisory.',
+    siteName: 'DataSphere Consulting Ltd',
     images: [
       {
         url: '/logo-datasphere.jpeg',
@@ -77,8 +79,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'DataSphere Consulting Ltd  Enterprise Software & Data Engineering',
-    description: 'Transforming enterprise data and operations with scalable software solutions.',
+    title: 'DataSphere & BIGWI HOUSE — Data & AI Consultancy',
+    description: 'Data pipelines, applied machine learning, and business analytics.',
     images: ['/logo-datasphere.jpeg'],
   },
   robots: {
@@ -87,13 +89,32 @@ export const metadata: Metadata = {
   },
 }
 
-import { ThemeProvider } from '@/context/ThemeContext'
-
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'DataSphere Consulting Ltd',
+    alternateName: 'BIGWI HOUSE',
+    url: 'https://datasphere.rw',
+    logo: 'https://datasphere.rw/logo-datasphere.jpeg',
+    description:
+      'Data & AI consultancy delivering data collection pipelines, machine learning models, model evaluation, and analytics dashboards.',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Kigali',
+      addressCountry: 'Rwanda',
+    },
+    contactPoint: {
+      '@type': 'ContactPoint',
+      email: 'contact@datasphere.rw',
+      contactType: 'technical support and sales',
+    },
+  }
+
   return (
     <html
       lang="en"
@@ -102,13 +123,18 @@ export default function RootLayout({
     >
       <head>
         <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        <script
           dangerouslySetInnerHTML={{
             __html: `
               try {
-                const theme = localStorage.getItem('theme');
-                const isDark = theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches);
-                if (isDark) document.documentElement.classList.add('dark');
-                else document.documentElement.classList.remove('dark');
+                if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                  document.documentElement.classList.add('dark');
+                } else {
+                  document.documentElement.classList.remove('dark');
+                }
               } catch (_) {}
             `,
           }}

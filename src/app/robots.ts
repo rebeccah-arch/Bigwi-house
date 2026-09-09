@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: '/api/',
     },
-    sitemap: 'https://bigwihouse.datasphere.rw/sitemap.xml',
+    sitemap: 'https://datasphere.rw/sitemap.xml',
   }
 }

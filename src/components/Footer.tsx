@@ -29,7 +29,7 @@ export default function Footer() {
           {/* 1. Brand & Tagline */}
           <div className="lg:col-span-4 space-y-5">
             <Link href="/" className="inline-flex items-center gap-3.5 group no-underline">
-              <div className="relative h-12 w-12 overflow-hidden rounded-xl bg-white p-1 shadow-md transition-transform duration-300 group-hover:scale-105">
+              <div className="relative h-12 w-12 overflow-hidden rounded-xl transition-transform duration-300 group-hover:scale-105">
                 <Image
                   src="/logo-datasphere.jpeg"
                   alt="DataSphere Consulting Ltd"
@@ -38,31 +38,32 @@ export default function Footer() {
                 />
               </div>
               <div>
-                <span className="font-display text-xl font-extrabold tracking-wider text-white group-hover:text-teal-400 transition-colors uppercase">
+                <span className="font-display text-xl font-bold tracking-tight text-white group-hover:text-teal-400 transition-colors">
                   DataSphere
                 </span>
-                <p className="font-sans text-[11px] text-zinc-400 font-medium tracking-wide">
-                  Consulting Ltd
+                <p className="font-mono text-[11px] text-zinc-400 font-medium tracking-wide">
+                  BIGWI HOUSE &bull; Data &amp; AI
                 </p>
               </div>
             </Link>
 
             <p className="max-w-xs text-xs sm:text-sm text-zinc-400 leading-relaxed font-normal">
-              Enterprise software engineering, scalable cloud architecture &amp; data intelligence for high-growth African enterprises.
+              Practical data collection, business intelligence, and applied machine learning solutions for international organizations, governments, and enterprises.
             </p>
 
-            <div className="text-[11px] font-mono text-zinc-500 pt-1">
-              Kigali, Rwanda &bull; Delivery Across Africa
+            <div className="space-y-1 text-xs text-zinc-400 font-mono pt-1">
+              <p>Kigali, Rwanda &bull; Delivery Across Africa &amp; Internationally</p>
+              <p>Direct inquiries: <a href="mailto:contact@datasphere.rw" className="text-teal-400 hover:underline">contact@datasphere.rw</a></p>
             </div>
           </div>
 
           {/* 2. SITEMAP */}
           <div className="lg:col-span-3 space-y-4">
             <h4 className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-zinc-400">
-              SITEMAP
+              NAVIGATION
             </h4>
             <div className="grid grid-cols-2 gap-x-6 gap-y-3 pt-1 text-sm font-medium">
-              <div className="flex flex-col space-y-3">
+              <div className="flex flex-col space-y-2.5">
                 <Link href="/" className="text-zinc-400 hover:text-white transition-colors duration-200">
                   Home
                 </Link>
@@ -70,18 +71,24 @@ export default function Footer() {
                   Services
                 </Link>
                 <Link href="/approach" className="text-zinc-400 hover:text-white transition-colors duration-200">
-                  Our Story
+                  Approach
+                </Link>
+                <Link href="/work" className="text-zinc-400 hover:text-white transition-colors duration-200">
+                  Case Studies
                 </Link>
               </div>
-              <div className="flex flex-col space-y-3">
-                <Link href="/work" className="text-zinc-400 hover:text-white transition-colors duration-200">
-                  Work
+              <div className="flex flex-col space-y-2.5">
+                <Link href="/insights" className="text-zinc-400 hover:text-white transition-colors duration-200">
+                  Insights
                 </Link>
                 <Link href="/about" className="text-zinc-400 hover:text-white transition-colors duration-200">
                   About
                 </Link>
                 <Link href="/contact" className="text-zinc-400 hover:text-white transition-colors duration-200">
                   Contact
+                </Link>
+                <Link href="/privacy" className="text-zinc-400 hover:text-white transition-colors duration-200">
+                  Privacy Policy
                 </Link>
               </div>
             </div>
@@ -92,10 +99,10 @@ export default function Footer() {
             {/* Newsletter Subscription Field */}
             <div className="space-y-3">
               <h4 className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-zinc-400">
-                SUBSCRIBE
+                INDUSTRY BRIEFINGS
               </h4>
               <p className="text-xs text-zinc-400 max-w-sm leading-relaxed">
-                Stay updated on enterprise data architectures, tech whitepapers, and engineering insights.
+                Receive practical perspectives on applied data architecture, field collection strategies, and model evaluation.
               </p>
 
               {subscribed ? (
@@ -128,13 +135,12 @@ export default function Footer() {
 
             {/* Socials & Legal */}
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 pt-4 border-t border-zinc-900">
-              {/* Social Icons */}
+              {/* Social Links */}
               <div className="space-y-2">
                 <span className="block font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-zinc-500">
                   CONNECT
                 </span>
                 <div className="flex items-center gap-2.5">
-                  {/* LinkedIn */}
                   <a
                     href="https://linkedin.com"
                     target="_blank"
@@ -147,35 +153,6 @@ export default function Footer() {
                     </svg>
                   </a>
 
-                  {/* Instagram */}
-                  <a
-                    href="https://instagram.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Instagram"
-                    className="flex h-8 w-8 items-center justify-center rounded-lg border border-zinc-800 bg-zinc-900/60 text-zinc-400 transition-all duration-200 hover:border-zinc-600 hover:bg-zinc-800 hover:text-white"
-                  >
-                    <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                      <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
-                      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-                      <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
-                    </svg>
-                  </a>
-
-                  {/* Twitter / X */}
-                  <a
-                    href="https://twitter.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Twitter / X"
-                    className="flex h-8 w-8 items-center justify-center rounded-lg border border-zinc-800 bg-zinc-900/60 text-zinc-400 transition-all duration-200 hover:border-zinc-600 hover:bg-zinc-800 hover:text-white"
-                  >
-                    <svg className="h-3.5 w-3.5" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                    </svg>
-                  </a>
-
-                  {/* GitHub */}
                   <a
                     href="https://github.com"
                     target="_blank"
@@ -193,16 +170,16 @@ export default function Footer() {
               {/* Legal & Copyright */}
               <div className="space-y-1 sm:text-right">
                 <div className="flex items-center gap-3 text-xs text-zinc-400 font-medium sm:justify-end">
-                  <Link href="/about" className="hover:text-white transition-colors">
-                    Privacy
+                  <Link href="/privacy" className="hover:text-white transition-colors">
+                    Privacy Policy
                   </Link>
                   <span>&bull;</span>
-                  <Link href="/about" className="hover:text-white transition-colors">
-                    Terms
+                  <Link href="/contact" className="hover:text-white transition-colors">
+                    Consultation
                   </Link>
                 </div>
                 <p className="text-[11px] font-sans text-zinc-500 font-normal">
-                  &copy; {currentYear} DataSphere Ltd.
+                  &copy; {currentYear} DataSphere Consulting Ltd. All rights reserved.
                 </p>
               </div>
             </div>
@@ -210,9 +187,9 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Giant Typography Watermark at the Bottom */}
+      {/* Watermark at the Bottom */}
       <div className="relative w-full select-none pointer-events-none overflow-hidden leading-none text-center">
-        <div className="font-display font-black tracking-tighter uppercase text-white/[0.045] text-[15vw] sm:text-[18vw] md:text-[19vw] lg:text-[20vw] leading-[0.8] translate-y-[10%]">
+        <div className="font-display font-black tracking-tighter uppercase text-white/[0.04] text-[14vw] sm:text-[16vw] md:text-[17vw] lg:text-[18vw] leading-[0.8] translate-y-[10%]">
           DATASPHERE
         </div>
       </div>

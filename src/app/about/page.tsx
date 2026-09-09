@@ -12,12 +12,15 @@ import {
   Compass,
   Target,
   ShieldCheck,
+  Cpu,
+  Users,
+  Award
 } from '@/components/Icons'
 import {
   orgStructure,
   vision,
   mission,
-  competitiveAdvantage,
+  companyValues,
 } from '@/content/bigwiContent'
 
 const containerVariants: Variants = {
@@ -40,12 +43,12 @@ const itemVariants: Variants = {
 export default function AboutPage() {
   return (
     <div className="space-y-20 md:space-y-28 py-10">
-      {/* 1. Header Banner with Full Cover Background Image */}
-      <section className="relative min-h-[480px] lg:min-h-[540px] flex items-center overflow-hidden border-b border-slate-200 dark:border-slate-800">
+      {/* 1. Header Banner with Background Image */}
+      <section className="relative min-h-[440px] lg:min-h-[500px] flex items-center overflow-hidden border-b border-slate-200 dark:border-slate-800">
         <div className="absolute inset-0 z-0">
           <Image
             src="/images/hero-team.jpg"
-            alt="DataSphere Engineering and Advisory Team in Kigali"
+            alt="DataSphere and BIGWI HOUSE Data & AI Team in Kigali"
             fill
             className="object-cover object-center"
             priority
@@ -59,43 +62,50 @@ export default function AboutPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="max-w-3xl space-y-6"
+            className="max-w-3xl space-y-5"
           >
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight">
-              Where strategic advisory and software engineering meet.
+            <div className="inline-flex items-center gap-2 rounded-full border border-teal-500/30 bg-teal-50 dark:bg-teal-950/60 px-3 py-1 text-xs font-mono text-teal-800 dark:text-teal-300">
+              <span>About DataSphere &bull; BIGWI HOUSE</span>
+            </div>
+
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight">
+              Data &amp; AI consulting grounded in practical outcomes.
             </h1>
 
-            <p className="text-base sm:text-lg text-slate-700 dark:text-slate-300 leading-relaxed font-normal bg-white/60 dark:bg-slate-900/60 backdrop-blur-xs p-1 rounded-lg">
-              <strong className="text-slate-900 dark:text-white font-semibold">DataSphere Consulting Ltd</strong> is a premier software engineering, data analytics, and digital transformation consulting firm based in Kigali, Rwanda. We turn complex organizational challenges and disparate data assets into scalable, resilient digital platforms.
+            <p className="text-sm sm:text-base text-slate-700 dark:text-slate-300 leading-relaxed font-normal">
+              <strong className="text-slate-900 dark:text-white font-semibold">DataSphere Consulting Ltd</strong> is an advisory and technology firm based in Kigali, Rwanda. Through our dedicated unit, <strong className="text-slate-900 dark:text-white font-semibold">BIGWI HOUSE</strong>, we deliver end-to-end data pipelines, predictive models, business intelligence dashboards, and custom software systems for international organizations, governments, and commercial enterprises.
             </p>
 
-            <div className="flex flex-wrap items-center gap-4 pt-2">
-              <Link href="/contact" className="btn btn-primary text-sm py-3 px-6 shadow-md">
-                <span>Partner With Us</span>
+            <div className="flex flex-wrap items-center gap-3 pt-2">
+              <Link href="/contact" className="btn btn-primary text-xs sm:text-sm py-2.5 px-5">
+                <span>Discuss a project</span>
                 <ArrowRight className="h-4 w-4" />
               </Link>
-              <Link href="/work" className="btn btn-ghost text-sm py-3 px-6 shadow-sm">
-                <span>Explore Deployments</span>
+              <Link href="/work" className="btn btn-ghost text-xs sm:text-sm py-2.5 px-5">
+                <span>View case studies</span>
               </Link>
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* 2. Dual-Tier Corporate Structure */}
-      <section id="structure" className="relative">
+      {/* 2. Company & Organizational Structure */}
+      <section id="company" className="relative">
         <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8 space-y-8">
           <div className="max-w-2xl">
-            <h2 className="text-3xl sm:text-4xl font-display font-bold text-slate-900 dark:text-white">
-              Integrated Capabilities &amp; Specialized Units
+            <span className="font-mono text-xs font-bold uppercase tracking-widest text-teal-700 dark:text-teal-400">
+              01 &bull; Organization
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-display font-bold text-slate-900 dark:text-white mt-1">
+              Structure &amp; Operational Hubs
             </h2>
-            <p className="mt-2 text-sm sm:text-base text-slate-600 dark:text-slate-400">
-              A cohesive architecture combining executive advisory with deep in-house engineering and data intelligence capabilities.
+            <p className="mt-2 text-xs sm:text-sm text-slate-600 dark:text-slate-400">
+              A clear division combining strategic institutional advisory with specialized in-house data and applied AI delivery.
             </p>
           </div>
 
           <div className="space-y-6">
-            {/* Parent Firm: DataSphere Consulting */}
+            {/* Parent Firm: DataSphere Consulting Ltd */}
             <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/60 p-6 md:p-8 shadow-sm">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-4">
                 <div className="flex items-center gap-3">
@@ -103,12 +113,12 @@ export default function AboutPage() {
                     <Building2 className="h-5 w-5" />
                   </div>
                   <div>
-                    <h3 className="font-display text-xl font-bold text-slate-900 dark:text-white">{orgStructure.parent.label}</h3>
+                    <h3 className="font-display text-lg sm:text-xl font-bold text-slate-900 dark:text-white">{orgStructure.parent.label}</h3>
                     <p className="font-sans text-xs text-teal-700 dark:text-teal-400 font-semibold">{orgStructure.parent.tagline}</p>
                   </div>
                 </div>
                 <span className="font-mono text-xs text-slate-600 dark:text-slate-300 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-3 py-1 rounded-full font-medium">
-                  Advisory &amp; Data Intelligence
+                  Parent Firm &bull; Advisory &amp; Governance
                 </span>
               </div>
 
@@ -125,28 +135,20 @@ export default function AboutPage() {
               </div>
             </div>
 
-            {/* Connection Flow Arrow */}
-            <div className="flex justify-center">
-              <div className="flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 py-1.5 font-sans text-xs text-slate-600 dark:text-slate-400 shadow-sm font-medium">
-                <span>Direct Strategic Alignment &amp; Engineering Pipeline</span>
-                <span className="text-teal-600 dark:text-teal-400">↓</span>
-              </div>
-            </div>
-
-            {/* Solutions Division */}
-            <div className="rounded-2xl border border-teal-200 dark:border-teal-800/80 bg-teal-50/50 dark:bg-teal-950/30 p-6 md:p-8 shadow-sm">
+            {/* Hub: BIGWI HOUSE */}
+            <div className="rounded-2xl border border-teal-200 dark:border-teal-800/80 bg-teal-50/40 dark:bg-teal-950/30 p-6 md:p-8 shadow-sm">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-teal-200/60 dark:border-teal-800/60 pb-4">
                 <div className="flex items-center gap-3">
                   <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-teal-700 dark:bg-teal-600 text-white shadow-sm">
-                    <Layers className="h-5 w-5" />
+                    <Cpu className="h-5 w-5" />
                   </div>
                   <div>
-                    <h3 className="font-display text-xl font-bold text-slate-900 dark:text-white">{orgStructure.child.label}</h3>
+                    <h3 className="font-display text-lg sm:text-xl font-bold text-slate-900 dark:text-white">{orgStructure.child.label}</h3>
                     <p className="font-sans text-xs text-teal-800 dark:text-teal-300 font-semibold">{orgStructure.child.tagline}</p>
                   </div>
                 </div>
                 <span className="font-mono text-xs text-teal-800 dark:text-teal-300 border border-teal-200 dark:border-teal-800 bg-white dark:bg-slate-800 px-3 py-1 rounded-full font-medium">
-                  Engineering &amp; Product Delivery
+                  Specialized Delivery Unit &bull; Data &amp; AI
                 </span>
               </div>
 
@@ -166,120 +168,120 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 3. Vision & Mission Cards */}
-      <section className="relative">
-        <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80 p-8 shadow-sm">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-50 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-800">
-                  <Compass className="h-5 w-5" />
-                </div>
-                <h3 className="font-display text-2xl font-bold text-slate-900 dark:text-white">Our Vision</h3>
-              </div>
-              <p className="text-sm sm:text-base text-slate-700 dark:text-slate-300 leading-relaxed font-normal">
-                {vision}
+      {/* 3. People & Execution Philosophy */}
+      <section id="people" className="relative">
+        <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8 space-y-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div className="lg:col-span-6 space-y-4">
+              <span className="font-mono text-xs font-bold uppercase tracking-widest text-teal-700 dark:text-teal-400">
+                02 &bull; People &amp; Expertise
+              </span>
+              <h2 className="text-2xl sm:text-3xl font-display font-bold text-slate-900 dark:text-white">
+                Multidisciplinary Consultants &amp; Specialists
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
+                Our team brings together data engineers, machine learning specialists, systems architects, and business analysts. We work collaboratively with your internal teams, transferring knowledge and ensuring you have complete visibility throughout the delivery process.
               </p>
+              <div className="space-y-2.5 pt-2">
+                <div className="flex items-start gap-2 text-xs text-slate-700 dark:text-slate-300">
+                  <CheckCircle2 className="h-4 w-4 text-teal-600 dark:text-teal-400 mt-0.5 flex-shrink-0" />
+                  <span>Senior solution architects lead all client technical discovery and system design</span>
+                </div>
+                <div className="flex items-start gap-2 text-xs text-slate-700 dark:text-slate-300">
+                  <CheckCircle2 className="h-4 w-4 text-teal-600 dark:text-teal-400 mt-0.5 flex-shrink-0" />
+                  <span>Direct communication with the technical team delivering your data pipelines and models</span>
+                </div>
+                <div className="flex items-start gap-2 text-xs text-slate-700 dark:text-slate-300">
+                  <CheckCircle2 className="h-4 w-4 text-teal-600 dark:text-teal-400 mt-0.5 flex-shrink-0" />
+                  <span>Commitment to clean documentation, code reviews, and structured handover sessions</span>
+                </div>
+              </div>
             </div>
 
-            <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80 p-8 shadow-sm">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-teal-50 dark:bg-teal-950/60 text-teal-800 dark:text-teal-300 border border-teal-200 dark:border-teal-800">
-                  <Target className="h-5 w-5" />
-                </div>
-                <h3 className="font-display text-2xl font-bold text-slate-900 dark:text-white">Our Mission</h3>
-              </div>
-              <p className="text-sm sm:text-base text-slate-700 dark:text-slate-300 leading-relaxed font-normal">
-                {mission}
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 4. Strategic Philosophy & Innovation Lab */}
-      <section className="relative">
-        <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8">
-          <div className="relative overflow-hidden rounded-3xl border border-slate-200 dark:border-slate-800 bg-slate-900 p-8 md:p-14 shadow-xl">
-            <div className="absolute inset-0 opacity-20">
+            <div className="lg:col-span-6 relative min-h-[320px] rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-md">
               <Image
                 src="/images/executive-strategy.jpg"
-                alt="DataSphere Executive Strategy Session"
+                alt="DataSphere and BIGWI HOUSE consultants collaborating"
                 fill
                 className="object-cover"
               />
             </div>
+          </div>
+        </div>
+      </section>
 
-            <div className="relative z-10 space-y-6 max-w-3xl">
-              <h2 className="text-3xl sm:text-4xl font-display font-extrabold text-white">
-                Reliable Engineering for Real-World Demands
-              </h2>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm sm:text-base text-slate-300 leading-relaxed">
-                <p>
-                  Every engagement at DataSphere begins with a <strong className="text-white">business-first diagnosis</strong>: understanding core organizational workflows, compliance standards, and operational constraints before writing architecture. We avoid one-size-fits-all software templates.
-                </p>
-                <p>
-                  Our team builds production systems applying modern data pipelines, cloud-native DevOps, and robust API frameworks to concrete institutional priorities across East Africa. We design resilient systems built for high transaction volume, data integrity, and long-term maintainability.
-                </p>
+      {/* 4. Mission, Vision & Values */}
+      <section id="values" className="relative">
+        <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8 space-y-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80 p-6 sm:p-8 shadow-sm">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-50 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-800">
+                  <Compass className="h-4.5 w-4.5" />
+                </div>
+                <h3 className="font-display text-xl font-bold text-slate-900 dark:text-white">Our Vision</h3>
               </div>
+              <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-normal">
+                {vision}
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80 p-6 sm:p-8 shadow-sm">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-teal-50 dark:bg-teal-950/60 text-teal-800 dark:text-teal-300 border border-teal-200 dark:border-teal-800">
+                  <Target className="h-4.5 w-4.5" />
+                </div>
+                <h3 className="font-display text-xl font-bold text-slate-900 dark:text-white">Our Mission</h3>
+              </div>
+              <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-normal">
+                {mission}
+              </p>
+            </div>
+          </div>
+
+          {/* Company Core Values */}
+          <div className="pt-6">
+            <h3 className="text-xl font-display font-bold text-slate-900 dark:text-white mb-4">
+              Core Principles We Operate By
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {companyValues.map((val, idx) => (
+                <div key={val.title} className="p-5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/60 flex flex-col justify-between">
+                  <div>
+                    <span className="font-mono text-xs font-bold text-teal-600 dark:text-teal-400">0{idx + 1}</span>
+                    <h4 className="font-display text-sm font-bold text-slate-900 dark:text-white mt-1 mb-2">{val.title}</h4>
+                    <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">{val.description}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* 5. Competitive Advantages */}
-      <section className="relative">
-        <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8 space-y-8">
-          <div className="max-w-2xl">
-            <h2 className="text-3xl sm:text-4xl font-display font-bold text-slate-900 dark:text-white">
-              Why Organizations Choose DataSphere
-            </h2>
-            <p className="mt-2 text-sm sm:text-base text-slate-600 dark:text-slate-400">
-              Measurable outcomes, transparent engineering governance, and dedicated long-term partnerships.
-            </p>
-          </div>
-
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={containerVariants}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-          >
-            {competitiveAdvantage.map((adv, idx) => (
-              <motion.div
-                key={adv}
-                variants={itemVariants}
-                className="card-enterprise flex flex-col justify-between"
-              >
-                <div>
-                  <span className="font-mono text-2xl font-bold text-teal-700 dark:text-teal-400">0{idx + 1}</span>
-                  <h3 className="mt-3 font-display text-base font-bold text-slate-900 dark:text-white">{adv}</h3>
-                </div>
-                <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800">
-                  <span className="font-sans text-xs text-slate-500 dark:text-slate-400 font-medium">Guaranteed Execution Standard</span>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* 6. CTA */}
-      <section className="relative">
+      {/* 5. Credibility & Standards */}
+      <section id="credibility" className="relative">
         <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8">
-          <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-slate-900 text-white p-8 md:p-12 text-center shadow-xl space-y-6">
-            <h2 className="text-3xl sm:text-4xl font-display font-bold text-white">
-              Ready to partner with DataSphere Consulting?
-            </h2>
-            <p className="text-slate-300 max-w-xl mx-auto text-sm sm:text-base">
-              Schedule a discovery consultation with our senior solutions architects to explore how we can architect your next software platform or data pipeline.
-            </p>
-            <div className="flex justify-center gap-4 pt-2">
-              <Link href="/contact" className="btn btn-teal py-3 px-7">
-                <span>Start Technical Discovery</span>
+          <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-slate-900 text-white p-8 md:p-12 shadow-xl space-y-6">
+            <div className="max-w-2xl space-y-3">
+              <span className="font-mono text-xs uppercase tracking-widest text-teal-400 font-semibold">
+                Credibility &amp; Data Governance
+              </span>
+              <h2 className="text-2xl sm:text-3xl font-display font-bold text-white">
+                Standards Built for Institutional Partners
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                Whether deploying data pipelines for international financial institutions or public health programs, we adhere to strict non-disclosure agreements, data sovereignty protocols, and transparent delivery milestones.
+              </p>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-4 pt-2">
+              <Link href="/contact" className="btn btn-teal text-xs sm:text-sm py-2.5 px-6">
+                <span>Start a conversation</span>
                 <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link href="/services" className="rounded-full border border-slate-700 px-5 py-2.5 text-xs sm:text-sm text-slate-300 hover:text-white hover:border-slate-500 transition-colors">
+                Explore capabilities
               </Link>
             </div>
           </div>
