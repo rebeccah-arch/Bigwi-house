@@ -22,10 +22,10 @@ export default function Footer() {
   }
 
   return (
-    <footer className="relative mt-24 overflow-hidden border-t border-zinc-900 bg-[#070707] text-white">
-      {/* Top / Main Navigation Section */}
-      <div className="relative z-10 mx-auto max-w-[1400px] border-x border-zinc-900/80 px-4 pt-16 pb-12 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-12 lg:gap-8">
+    <footer className="relative mt-16 sm:mt-24 overflow-hidden rounded-t-[36px] sm:rounded-t-[52px] lg:rounded-t-[68px] border-t border-zinc-800/80 bg-[#070707] text-white shadow-2xl">
+      {/* Main Content Section - Centered */}
+      <div className="relative z-10 mx-auto max-w-[1400px] px-6 sm:px-8 lg:px-12 pt-20 sm:pt-24 lg:pt-28 pb-16 sm:pb-20">
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-12 lg:gap-10 items-start">
           {/* 1. Brand & Tagline */}
           <div className="lg:col-span-4 space-y-5">
             <Link href="/" className="inline-flex items-center gap-3.5 group no-underline">
@@ -58,7 +58,7 @@ export default function Footer() {
           </div>
 
           {/* 2. SITEMAP */}
-          <div className="lg:col-span-3 space-y-4">
+          <div className="lg:col-span-3 space-y-4 lg:pl-4">
             <h4 className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-zinc-400">
               NAVIGATION
             </h4>
@@ -187,9 +187,9 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Watermark at the Bottom */}
-      <div className="relative w-full select-none pointer-events-none overflow-hidden leading-none text-center">
-        <div className="font-display font-black tracking-tighter uppercase text-white/[0.04] text-[14vw] sm:text-[16vw] md:text-[17vw] lg:text-[18vw] leading-[0.8] translate-y-[10%]">
+      {/* Watermark at the Bottom - Absolute Ambient Layer */}
+      <div className="absolute inset-x-0 bottom-0 select-none pointer-events-none overflow-hidden leading-none text-center z-0">
+        <div className="font-display font-black tracking-tighter uppercase text-white/[0.03] text-[14vw] sm:text-[16vw] md:text-[17vw] lg:text-[18vw] leading-[0.75] translate-y-[20%]">
           DATASPHERE
         </div>
       </div>
