@@ -128,8 +128,8 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Main Content Architectural Grid Frame */}
-      <div className="relative mx-auto max-w-[1400px] border-x border-slate-200 dark:border-stone-900 bg-white dark:bg-stone-950 transition-colors duration-300">
+      {/* Main Content Frame */}
+      <div className="relative mx-auto max-w-[1400px] bg-white dark:bg-stone-950 transition-colors duration-300">
         {/* 2. Category Filter & Service List */}
         <section className="relative p-6 sm:p-10 lg:p-14 border-b border-slate-200 dark:border-stone-900">
           <div className="space-y-10">

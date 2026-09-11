@@ -99,8 +99,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Main Content Architectural Grid Frame */}
-      <div className="relative mx-auto max-w-[1400px] border-x border-slate-200 dark:border-stone-900 bg-white dark:bg-stone-950 transition-colors duration-300">
+      {/* Main Content Frame */}
+      <div className="relative mx-auto max-w-[1400px] bg-white dark:bg-stone-950 transition-colors duration-300">
         {/* 2. Company & Organizational Structure */}
         <section id="company" className="relative p-6 sm:p-10 lg:p-14 border-b border-slate-200 dark:border-stone-900">
           <div className="space-y-8">
