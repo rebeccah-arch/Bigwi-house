@@ -40,151 +40,206 @@ export default function InsightsPage() {
     : insightArticles.filter((a) => a.category === selectedCategory)
 
   return (
-    <div className="space-y-20 md:space-y-28 py-10">
-      {/* 1. Header Banner */}
-      <section className="relative min-h-[420px] lg:min-h-[480px] flex items-center overflow-hidden border-b border-slate-200 dark:border-slate-800">
-        <div className="absolute inset-0 z-0">
+    <div className="w-full bg-white dark:bg-stone-950 transition-colors duration-300 overflow-x-hidden">
+      {/* 1. Header Banner (Full-Bleed Hero with Curved Bottom) */}
+      <section className="relative z-10 w-full min-h-[460px] sm:min-h-[520px] overflow-hidden rounded-b-[40px] sm:rounded-b-[60px] lg:rounded-b-[80px] shadow-2xl border-b border-slate-200/20 dark:border-stone-800/40 bg-stone-950 flex flex-col justify-end pt-36 sm:pt-44 pb-16 sm:pb-24">
+        {/* Full-Bleed Atmospheric Background Image */}
+        <div className="absolute inset-0 h-full w-full overflow-hidden bg-stone-950">
           <Image
             src="/images/executive-strategy.jpg"
             alt="Data & AI Insights and Research by DataSphere & BIGWI HOUSE"
             fill
-            className="object-cover object-center"
             priority
+            className="object-cover object-center opacity-60 contrast-125 grayscale hover:scale-105 transition-transform duration-10000 ease-out"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-white/60 dark:from-[#07090E] dark:via-[#07090E]/95 dark:to-[#07090E]/60" />
-          <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-white/30 dark:from-[#07090E] dark:via-transparent dark:to-[#07090E]/30" />
+          {/* Cinematic Gradient Fade */}
+          <div className="pointer-events-none absolute inset-0 h-full w-full bg-gradient-to-t from-stone-950 via-stone-950/75 to-stone-950/20" />
+          <div className="pointer-events-none absolute inset-0 h-full w-full bg-gradient-to-r from-stone-950/85 via-stone-950/45 to-transparent" />
         </div>
 
-        <div className="relative z-10 mx-auto max-w-wide w-full px-4 sm:px-6 lg:px-8 py-16">
+        {/* Hero Content Overlay */}
+        <div className="relative z-20 mx-auto max-w-[1400px] w-full px-4 sm:px-6 lg:px-8">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="max-w-3xl space-y-5"
           >
-            <div className="inline-flex items-center gap-2 rounded-full border border-teal-500/30 bg-teal-50 dark:bg-teal-950/60 px-3 py-1 text-xs font-mono text-teal-800 dark:text-teal-300">
+            <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-teal-300 bg-teal-950/80 border border-teal-500/30">
               <BookOpen className="h-3.5 w-3.5" />
               <span>Research &amp; Perspectives</span>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight">
-              Applied data strategy, research notes &amp; technical perspectives.
+            <h1 className="font-display font-extrabold text-3xl sm:text-5xl md:text-6xl text-white tracking-tight leading-tight">
+              Applied Data Strategy &amp; Research Notes.
             </h1>
 
-            <p className="text-sm sm:text-base text-slate-700 dark:text-slate-300 leading-relaxed font-normal">
+            <p className="text-base sm:text-lg text-stone-300 leading-relaxed font-normal max-w-2xl">
               Practical observations and architectural patterns drawn from our experience delivering data pipelines, machine learning models, and software across Africa.
             </p>
+
+            <div className="flex flex-wrap items-center gap-4 pt-2">
+              <Link
+                href="/contact"
+                className="flex items-center gap-2 rounded-full bg-teal-500 px-7 py-3.5 text-sm font-bold text-slate-950 shadow-lg shadow-teal-500/20 transition-all duration-300 hover:scale-105 hover:bg-teal-400"
+              >
+                <span>Consult our researchers</span>
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
           </motion.div>
         </div>
       </section>
 
-      {/* 2. Filter & Articles List */}
-      <section className="relative">
-        <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8 space-y-10">
-          {/* Topic Filters */}
-          <div className="flex flex-wrap gap-2 pb-2 border-b border-slate-200 dark:border-slate-800">
-            {CATEGORIES.map((cat) => (
-              <button
-                key={cat}
-                type="button"
-                onClick={() => setSelectedCategory(cat)}
-                className={`rounded-full px-4 py-2 text-xs font-medium transition-all ${
-                  selectedCategory === cat
-                    ? 'bg-slate-900 text-white font-semibold shadow-sm dark:bg-teal-500 dark:text-slate-950'
-                    : 'bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700'
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
+      {/* Main Content Architectural Grid Frame */}
+      <div className="relative mx-auto max-w-[1400px] border-x border-slate-200 dark:border-stone-900 bg-white dark:bg-stone-950 transition-colors duration-300">
+        {/* 2. Filter & Articles List */}
+        <section className="relative p-6 sm:p-10 lg:p-14">
+          <div className="space-y-10">
+            {/* Topic Filters */}
+            <div className="flex flex-wrap gap-2 pb-2 border-b border-slate-200 dark:border-stone-800">
+              {CATEGORIES.map((cat) => (
+                <button
+                  key={cat}
+                  type="button"
+                  onClick={() => setSelectedCategory(cat)}
+                  className={`rounded-full px-4 py-2 text-xs font-medium transition-all ${
+                    selectedCategory === cat
+                      ? 'bg-slate-900 text-white font-semibold shadow-sm dark:bg-teal-500 dark:text-slate-950'
+                      : 'bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-stone-900 dark:text-stone-300 dark:hover:bg-stone-800'
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
 
-          {/* Articles Grid */}
-          <motion.div
-            key={selectedCategory}
-            initial="hidden"
-            animate="visible"
-            variants={containerVariants}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          >
-            {filtered.map((article) => (
-              <motion.article
-                key={article.id}
-                variants={itemVariants}
-                className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80 p-7 sm:p-8 flex flex-col justify-between shadow-sm hover:border-slate-300 dark:hover:border-slate-700 transition-colors"
-              >
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between text-xs font-mono text-slate-500 dark:text-slate-400">
-                    <span className="px-2.5 py-0.5 rounded-full bg-teal-50 dark:bg-teal-950/60 text-teal-800 dark:text-teal-300 border border-teal-200 dark:border-teal-800">
-                      {article.category}
-                    </span>
-                    <div className="flex items-center gap-2">
-                      <Clock className="h-3.5 w-3.5" />
-                      <span>{article.readTime}</span>
+            {/* Articles Grid */}
+            <motion.div
+              key={selectedCategory}
+              initial="hidden"
+              animate="visible"
+              variants={containerVariants}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            >
+              {filtered.map((article) => (
+                <motion.article
+                  key={article.id}
+                  variants={itemVariants}
+                  className="rounded-3xl border border-slate-200 dark:border-stone-800/80 bg-white dark:bg-stone-900/60 p-7 sm:p-8 flex flex-col justify-between shadow-sm hover:border-teal-500/40 transition-all duration-300"
+                >
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between text-xs font-mono text-slate-500 dark:text-stone-400">
+                      <span className="px-2.5 py-0.5 rounded-full bg-teal-50 dark:bg-teal-950/60 text-teal-800 dark:text-teal-300 border border-teal-200 dark:border-teal-800">
+                        {article.category}
+                      </span>
+                      <div className="flex items-center gap-2">
+                        <Clock className="h-3.5 w-3.5" />
+                        <span>{article.readTime}</span>
+                      </div>
+                    </div>
+
+                    <h2 className="font-display text-lg sm:text-xl font-bold text-slate-900 dark:text-white leading-snug">
+                      {article.title}
+                    </h2>
+
+                    <p className="text-xs sm:text-sm text-slate-600 dark:text-stone-300 leading-relaxed font-normal">
+                      {article.summary}
+                    </p>
+
+                    <div className="pt-3 border-t border-slate-100 dark:border-stone-800 space-y-2">
+                      <span className="font-mono text-[11px] font-semibold text-slate-700 dark:text-stone-300 uppercase tracking-wider block">
+                        Key Takeaways:
+                      </span>
+                      <ul className="space-y-1.5">
+                        {article.keyTakeaways.map((point) => (
+                          <li key={point} className="flex items-start gap-2 text-xs text-slate-600 dark:text-stone-400">
+                            <CheckCircle2 className="h-3.5 w-3.5 text-teal-600 dark:text-teal-400 mt-0.5 flex-shrink-0" />
+                            <span>{point}</span>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
                   </div>
 
-                  <h2 className="font-display text-lg sm:text-xl font-bold text-slate-900 dark:text-white leading-snug">
-                    {article.title}
-                  </h2>
-
-                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
-                    {article.summary}
-                  </p>
-
-                  <div className="pt-3 border-t border-slate-100 dark:border-slate-800 space-y-2">
-                    <span className="font-mono text-[11px] font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider block">
-                      Key Takeaways:
-                    </span>
-                    <ul className="space-y-1.5">
-                      {article.keyTakeaways.map((point) => (
-                        <li key={point} className="flex items-start gap-2 text-xs text-slate-600 dark:text-slate-400">
-                          <CheckCircle2 className="h-3.5 w-3.5 text-teal-600 dark:text-teal-400 mt-0.5 flex-shrink-0" />
-                          <span>{point}</span>
-                        </li>
-                      ))}
-                    </ul>
+                  <div className="mt-6 pt-4 border-t border-slate-100 dark:border-stone-800 flex items-center justify-between text-xs text-slate-500 dark:text-stone-400 font-mono">
+                    <div className="flex items-center gap-1.5">
+                      <Calendar className="h-3.5 w-3.5" />
+                      <span>{article.publishDate}</span>
+                    </div>
+                    <Link
+                      href="/contact"
+                      className="font-sans font-semibold text-teal-700 dark:text-teal-400 hover:underline flex items-center gap-1"
+                    >
+                      <span>Discuss topic</span>
+                      <ArrowRight className="h-3 w-3" />
+                    </Link>
                   </div>
-                </div>
+                </motion.article>
+              ))}
+            </motion.div>
+          </div>
+        </section>
+      </div>
 
-                <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 font-mono">
-                  <div className="flex items-center gap-1.5">
-                    <Calendar className="h-3.5 w-3.5" />
-                    <span>{article.publishDate}</span>
-                  </div>
-                  <Link
-                    href="/contact"
-                    className="font-sans font-semibold text-teal-700 dark:text-teal-400 hover:underline flex items-center gap-1"
-                  >
-                    <span>Discuss topic</span>
-                    <ArrowRight className="h-3 w-3" />
-                  </Link>
-                </div>
-              </motion.article>
-            ))}
-          </motion.div>
+      {/* 3. Full-Bleed Curved Canopy CTA */}
+      <div className="relative w-full bg-white dark:bg-stone-950 transition-colors duration-300">
+        {/* Top Arch Canopy Curve */}
+        <div className="w-full overflow-hidden leading-none -mb-[1px]">
+          <svg
+            viewBox="0 0 1440 100"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-full h-12 sm:h-20 lg:h-28 block text-[#080d1a]"
+            preserveAspectRatio="none"
+          >
+            <path
+              d="M0,100 L0,65 Q35,32 90,26 L450,14 Q600,0 720,0 Q840,0 990,14 L1350,26 Q1405,32 1440,65 L1440,100 Z"
+              fill="currentColor"
+            />
+          </svg>
         </div>
-      </section>
 
-      {/* 3. Bottom Consultation Callout */}
-      <section className="relative">
-        <div className="mx-auto max-w-wide px-4 sm:px-6 lg:px-8">
-          <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-slate-900 text-white p-8 md:p-12 text-center shadow-xl space-y-5">
-            <h2 className="text-2xl sm:text-3xl font-display font-bold text-white">
+        <section className="relative z-10 w-full bg-[#080d1a] text-white py-16 sm:py-24 text-center overflow-hidden">
+          <div className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 h-96 w-[800px] rounded-full bg-teal-500/10 blur-[120px]" />
+          <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 space-y-6 relative z-10">
+            <span className="font-mono text-xs uppercase tracking-widest text-teal-400 font-semibold">
+              Advisory
+            </span>
+            <h2 className="font-display font-extrabold text-3xl sm:text-5xl text-white tracking-tight leading-tight">
               Need custom research or data architecture advisory?
             </h2>
-            <p className="text-slate-300 max-w-xl mx-auto text-xs sm:text-sm">
+            <p className="text-stone-300 max-w-xl mx-auto text-sm sm:text-base leading-relaxed">
               We work with institutional partners to evaluate technology feasibility, audit data governance, and publish joint case studies.
             </p>
             <div className="flex justify-center gap-4 pt-2">
-              <Link href="/contact" className="btn btn-teal text-xs sm:text-sm py-2.5 px-6">
+              <Link
+                href="/contact"
+                className="flex items-center gap-2 rounded-full bg-teal-500 px-8 py-3.5 text-sm sm:text-base font-bold text-slate-950 shadow-lg shadow-teal-500/20 transition-all duration-300 hover:scale-105 hover:bg-teal-400"
+              >
                 <span>Inquire with our research team</span>
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
           </div>
+        </section>
+
+        {/* Bottom Arch Canopy Curve */}
+        <div className="w-full overflow-hidden leading-none -mt-[1px]">
+          <svg
+            viewBox="0 0 1440 100"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-full h-12 sm:h-20 lg:h-28 block text-[#080d1a]"
+            preserveAspectRatio="none"
+          >
+            <path
+              d="M0,0 L0,35 Q35,68 90,74 L450,86 Q600,100 720,100 Q840,100 990,86 L1350,74 Q1405,68 1440,35 L1440,0 Z"
+              fill="currentColor"
+            />
+          </svg>
         </div>
-      </section>
+      </div>
     </div>
   )
 }

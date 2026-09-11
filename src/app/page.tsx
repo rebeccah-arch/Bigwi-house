@@ -24,16 +24,11 @@ import {
   Compass,
   CheckCircle2,
   Mail,
-  Database,
-  HeartPulse,
-  TrendingUp,
-  Sparkles
 } from '@/components/Icons'
 
 import {
   services,
   corePillars,
-  featuredCaseStudies,
   targetClientsDetailed,
   growthPhases
 } from '@/content/bigwiContent'
@@ -528,9 +523,27 @@ export default function HomePage() {
 
           </div>
         </section>
+      </div>
 
-        {/* SECTION: THE DELIVERY ENGINE — 3-STEP SEQUENTIAL STORYTELLING (ZIPLINE-INSPIRED) */}
-        <section id="how-we-deliver" className="relative z-10 border-b border-slate-200 dark:border-stone-900 bg-[#080d1a] text-white py-20 sm:py-28 overflow-hidden">
+      {/* SECTION: THE DELIVERY ENGINE — 3-STEP SEQUENTIAL STORYTELLING (ZIPLINE-INSPIRED) */}
+      <div className="relative w-full bg-white dark:bg-stone-950 transition-colors duration-300">
+        {/* Top Arch Canopy Curve (Zipline-Inspired Arch) */}
+        <div className="w-full overflow-hidden leading-none -mb-[1px]">
+          <svg
+            viewBox="0 0 1440 100"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-full h-12 sm:h-20 lg:h-28 block text-[#080d1a]"
+            preserveAspectRatio="none"
+          >
+            <path
+              d="M0,100 L0,65 Q35,32 90,26 L450,14 Q600,0 720,0 Q840,0 990,14 L1350,26 Q1405,32 1440,65 L1440,100 Z"
+              fill="currentColor"
+            />
+          </svg>
+        </div>
+
+        <section id="how-we-deliver" className="relative z-10 w-full bg-[#080d1a] text-white pt-6 pb-16 sm:pb-24 overflow-hidden">
           {/* Ambient Lighting & Glow */}
           <div className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 h-96 w-[800px] rounded-full bg-teal-500/10 blur-[120px]" />
 
@@ -606,7 +619,7 @@ export default function HomePage() {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: -20, scale: 0.98 }}
                     transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                    className="h-full rounded-3xl border border-teal-500/30 bg-stone-900/90 backdrop-blur-xl p-8 sm:p-12 flex flex-col justify-between shadow-2xl relative overflow-hidden"
+                    className="h-full rounded-3xl border border-white/10 bg-white/[0.03] backdrop-blur-xl p-8 sm:p-12 flex flex-col justify-between shadow-2xl relative overflow-hidden"
                   >
                     {/* Background Graphic Watermark */}
                     <span className="pointer-events-none absolute -bottom-10 -right-6 font-display font-black text-9xl text-white/[0.03] select-none">
@@ -625,7 +638,6 @@ export default function HomePage() {
                           {growthPhases[activePhaseIndex].subtitle}
                         </p>
                       </div>
-
                       {/* Deliverables Checklist */}
                       <div className="space-y-3.5 pt-4 border-t border-white/10">
                         <span className="font-mono text-xs uppercase tracking-wider text-stone-400 font-semibold block">
@@ -641,7 +653,6 @@ export default function HomePage() {
                         ))}
                       </div>
                     </div>
-
                     <div className="pt-8 border-t border-white/10 flex flex-wrap items-center justify-between gap-4 relative z-10">
                       <span className="font-mono text-xs text-stone-400">
                         Phase 0{activePhaseIndex + 1} of 03 &bull; SLA Protected Delivery
@@ -657,7 +668,6 @@ export default function HomePage() {
                   </motion.div>
                 </AnimatePresence>
               </div>
-
             </div>
 
             {/* Live Impact Counters Strip */}
@@ -676,7 +686,6 @@ export default function HomePage() {
                   Data Records Processed
                 </span>
               </div>
-
               <div className="p-6 rounded-2xl bg-white/[0.04] border border-white/10 text-center">
                 <span className="font-display text-3xl sm:text-4xl font-extrabold text-teal-400 block tracking-tight">
                   &lt; 4 Hours
@@ -685,7 +694,6 @@ export default function HomePage() {
                   Average Underwriting Time
                 </span>
               </div>
-
               <div className="p-6 rounded-2xl bg-white/[0.04] border border-white/10 text-center">
                 <span className="font-display text-3xl sm:text-4xl font-extrabold text-teal-400 block tracking-tight">
                   99.2%
@@ -694,7 +702,6 @@ export default function HomePage() {
                   Production Model Accuracy
                 </span>
               </div>
-
               <div className="p-6 rounded-2xl bg-white/[0.04] border border-white/10 text-center">
                 <span className="font-display text-3xl sm:text-4xl font-extrabold text-teal-400 block tracking-tight">
                   100%
@@ -704,10 +711,28 @@ export default function HomePage() {
                 </span>
               </div>
             </motion.div>
-
           </div>
         </section>
 
+        {/* Bottom Arch Canopy Curve */}
+        <div className="w-full overflow-hidden leading-none -mt-[1px]">
+          <svg
+            viewBox="0 0 1440 100"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-full h-12 sm:h-20 lg:h-28 block text-[#080d1a]"
+            preserveAspectRatio="none"
+          >
+            <path
+              d="M0,0 L0,35 Q35,68 90,74 L450,86 Q600,100 720,100 Q840,100 990,86 L1350,74 Q1405,68 1440,35 L1440,0 Z"
+              fill="currentColor"
+            />
+          </svg>
+        </div>
+      </div>
+
+      {/* Main Content Architectural Grid Frame (Continued) */}
+      <div className="relative mx-auto max-w-[1400px] border-x border-slate-200 dark:border-stone-900 bg-white dark:bg-stone-950 transition-colors duration-300">
         {/* 5. SECTION 4 — SERVICES DIRECTORY */}
         <section id="services" className="relative z-10 border-b border-slate-200 dark:border-stone-900 bg-slate-50/40 dark:bg-stone-950">
           <div className="p-8 sm:p-10 md:p-12 space-y-8">
@@ -741,7 +766,6 @@ export default function HomePage() {
                     </button>
                   ))}
                 </div>
-
                 {/* Prev / Next Quick Header Controls */}
                 <div className="hidden sm:flex items-center gap-1.5 border border-slate-200 dark:border-stone-800 rounded-xl p-1 bg-white dark:bg-stone-900">
                   <button
@@ -768,7 +792,6 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
-
             {/* Paginated Services Grid */}
             <AnimatePresence mode="wait">
               <motion.div
@@ -914,7 +937,6 @@ export default function HomePage() {
                 <span>Discuss your project</span>
                 <ArrowRight className="h-4 w-4" />
               </Link>
-
               <Link
                 href="/services"
                 className="rounded-full border border-slate-300 dark:border-stone-700 bg-white dark:bg-stone-900 px-7 py-3.5 text-sm sm:text-base font-semibold text-slate-700 dark:text-stone-200 transition-all duration-300 hover:scale-105 hover:border-slate-400"
@@ -924,9 +946,7 @@ export default function HomePage() {
             </div>
           </div>
         </section>
-
       </div>
     </div>
   )
 }
-

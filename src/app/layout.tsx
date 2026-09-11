@@ -6,28 +6,26 @@ import { ThemeProvider } from '@/context/ThemeContext'
 
 const poppins = Poppins({
   subsets: ['latin'],
-  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+  weight: ['300', '400', '500', '600', '700', '800'],
   variable: '--font-sans',
   display: 'swap',
 })
 
 const montserrat = Montserrat({
   subsets: ['latin'],
-  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
   variable: '--font-display',
   display: 'swap',
 })
 
 const manrope = Manrope({
   subsets: ['latin'],
-  weight: ['200', '300', '400', '500', '600', '700', '800'],
   variable: '--font-manrope',
   display: 'swap',
 })
 
 const roboto = Roboto({
   subsets: ['latin'],
-  weight: ['100', '300', '400', '500', '700', '900'],
+  weight: ['300', '400', '500', '700'],
   variable: '--font-roboto',
   display: 'swap',
 })
