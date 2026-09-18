@@ -32,7 +32,7 @@ const WHY_CHOOSE_US: WhyChooseItem[] = [
 
 export default function WhoWeAreSection() {
   return (
-    <section id="why-clients-choose-us" className="relative z-10 w-full bg-[#080a11] text-white py-16 sm:py-24 lg:py-28 px-6 sm:px-10 lg:px-16 border-b border-slate-900/80 overflow-hidden">
+    <section id="why-clients-choose-us" className="relative z-10 w-full bg-[#080a11] text-white py-16 sm:py-24 lg:py-28 px-6 sm:px-10 lg:px-16 overflow-hidden">
       
       {/* Subtle Background Glow */}
       <div className="pointer-events-none absolute -top-40 right-0 h-96 w-96 rounded-full bg-teal-500/5 blur-[120px]" />

@@ -50,7 +50,7 @@ export default function Header({ onOpenProposal }: HeaderProps) {
 
         {/* Left: Brand Logo & Title */}
         <Link href="/" className="group flex items-center gap-3 no-underline focus:outline-none">
-          <div className="relative h-10 w-10 sm:h-11 sm:w-11 overflow-hidden rounded-lg transition-transform duration-300 group-hover:scale-105">
+          {/* <div className="relative h-10 w-10 sm:h-11 sm:w-11 overflow-hidden rounded-lg transition-transform duration-300 group-hover:scale-105">
             <Image
               src="/logo-datasphere.jpeg"
               alt="DataSphere Consulting Ltd"
@@ -58,7 +58,7 @@ export default function Header({ onOpenProposal }: HeaderProps) {
               className="object-contain"
               priority
             />
-          </div>
+          </div> */}
           <div className="flex flex-col">
             <span className="font-serif text-base sm:text-lg font-bold tracking-tight text-white leading-none">
               DataSphere

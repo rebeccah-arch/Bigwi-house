@@ -42,13 +42,13 @@ export default function Footer() {
                   DataSphere
                 </span>
                 <p className="font-mono text-[11px] text-zinc-400 font-medium tracking-wide">
-                  BIGWI HOUSE &bull; Data &amp; AI
+                  BIGWI HOUSE &bull; Data &amp; Technology Practice
                 </p>
               </div>
             </Link>
 
             <p className="max-w-xs text-xs sm:text-sm text-zinc-400 leading-relaxed font-normal">
-              Practical data collection, business intelligence, and applied machine learning solutions for international organizations, governments, and enterprises.
+              Enterprise data engineering, high-throughput lakehouses, executive decision dashboards, and predictive modeling for international organizations, governments, and commercial enterprises.
             </p>
 
             <div className="space-y-1 text-xs text-zinc-400 font-mono pt-1">
@@ -99,10 +99,10 @@ export default function Footer() {
             {/* Newsletter Subscription Field */}
             <div className="space-y-3">
               <h4 className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-zinc-400">
-                INDUSTRY BRIEFINGS
+                PRACTICE BRIEFINGS
               </h4>
               <p className="text-xs text-zinc-400 max-w-sm leading-relaxed">
-                Receive practical perspectives on applied data architecture, field collection strategies, and model evaluation.
+                Receive practical perspectives on enterprise data engineering, lakehouses, decision intelligence, and predictive models.
               </p>
 
               {subscribed ? (
