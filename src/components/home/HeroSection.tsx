@@ -8,66 +8,94 @@ import { ArrowRight } from '@/components/Icons'
 
 export default function HeroSection() {
   return (
-    <section className="relative z-10 w-full min-h-[100svh] sm:min-h-screen overflow-hidden rounded-b-[36px] sm:rounded-b-[60px] lg:rounded-b-[80px] shadow-2xl border-b border-slate-200/20 dark:border-stone-800/40 bg-stone-950 flex flex-col justify-center items-center pt-24 sm:pt-32 pb-16 sm:pb-24">
-      {/* Full-Bleed Atmospheric Background Image Across 100% Viewport */}
-      <div className="absolute inset-0 h-full w-full overflow-hidden bg-stone-950">
-        <Image
-          src="/images/kigali-skyline.jpg"
-          alt="DataSphere & BIGWI HOUSE — Data & AI Consultancy"
-          fill
-          priority
-          className="object-cover object-center opacity-60 contrast-125 grayscale hover:scale-105 transition-transform duration-10000 ease-out"
-        />
-        {/* Cinematic Centered Gradient Fade */}
-        <div className="pointer-events-none absolute inset-0 h-full w-full bg-gradient-to-t from-stone-950 via-stone-950/75 to-stone-950/40" />
-        <div className="pointer-events-none absolute inset-0 h-full w-full bg-gradient-to-b from-stone-950/60 via-transparent to-stone-950/70" />
-      </div>
-
-      {/* Hero Content Overlay (Aligned to 1400px grid & Centered) */}
-      <div className="relative z-20 mx-auto max-w-[1400px] w-full px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 35 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-          className="max-w-4xl text-white space-y-4 sm:space-y-6 flex flex-col items-center text-center mx-auto"
-        >
-          <div className="space-y-2 sm:space-y-3">
-            <h1 className="font-display font-extrabold text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl tracking-tight leading-[1.1] sm:leading-[1.05] text-white text-center">
-              Data, Machine Learning &amp; Practical Implementation.
-            </h1>
-          </div>
-
-          <motion.p
+    <section className="relative z-10 w-full bg-[#080a11] text-white pt-32 sm:pt-40 pb-16 sm:pb-24 px-6 sm:px-10 lg:px-16 border-b border-slate-900/80 overflow-hidden">
+      <div className="max-w-[1240px] mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+          
+          {/* Left Column: Bold Headline & Commercial Value Proposition (Quantium Exact Style) */}
+          <motion.div
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-            className="max-w-2xl text-xs sm:text-base md:text-lg text-stone-300 leading-relaxed font-normal text-center mx-auto"
+            transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-7 space-y-6 sm:space-y-8"
           >
-            We build data pipelines, machine learning models, and custom software that help organizations make better decisions, automate field operations, and scale with confidence.
-          </motion.p>
+            <h1 className="font-sans font-extrabold text-3xl sm:text-5xl md:text-6xl lg:text-[58px] tracking-tight leading-[1.08] text-white">
+              Enterprise AI for complex business challenges
+            </h1>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-row items-center justify-center gap-2.5 sm:gap-4 pt-2 sm:pt-4 mx-auto"
-          >
-            <Link
-              href="/contact"
-              className="inline-flex items-center justify-center gap-1.5 sm:gap-2 rounded-full bg-teal-500 px-3.5 py-2.5 sm:px-7 sm:py-3.5 text-xs sm:text-sm font-bold text-slate-950 shadow-lg shadow-teal-500/20 transition-all duration-300 hover:scale-105 hover:bg-teal-400 whitespace-nowrap shrink-0"
-            >
-              <span>Discuss your project</span>
-              <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-            </Link>
+            <p className="text-base sm:text-lg md:text-xl text-[#A6ADB9] leading-relaxed font-normal max-w-2xl">
+              We combine advanced data science, applied machine learning, and proprietary client data to solve high-stakes challenges and drive measurable commercial outcomes.
+            </p>
 
-            <Link
-              href="/services"
-              className="inline-flex items-center justify-center rounded-full border border-stone-600/60 bg-stone-900/70 px-3.5 py-2.5 sm:px-7 sm:py-3.5 text-xs sm:text-sm font-semibold text-stone-200 backdrop-blur-md transition-all duration-300 hover:scale-105 hover:border-stone-400 hover:bg-stone-800/80 whitespace-nowrap shrink-0"
-            >
-              <span>View our capabilities</span>
-            </Link>
+            {/* Action Buttons */}
+            <div className="flex flex-wrap items-center gap-4 pt-2">
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-bold text-slate-950 shadow-xl transition-all duration-300 hover:bg-stone-200"
+              >
+                <span>Talk to us</span>
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+
+              <Link
+                href="/services"
+                className="inline-flex items-center justify-center rounded-full border border-stone-700 bg-transparent px-7 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:border-white hover:bg-white/5"
+              >
+                <span>Explore capabilities</span>
+              </Link>
+            </div>
+
+            {/* Clean Metrics Row */}
+            <div className="pt-8 border-t border-slate-800 grid grid-cols-2 sm:grid-cols-3 gap-6">
+              <div>
+                <div className="font-sans text-2xl sm:text-3xl font-extrabold text-white">
+                  4 Pillars
+                </div>
+                <div className="text-xs text-[#8A92A0] mt-1 font-normal">
+                  End-to-end Data &amp; AI delivery
+                </div>
+              </div>
+
+              <div>
+                <div className="font-sans text-2xl sm:text-3xl font-extrabold text-white">
+                  100%
+                </div>
+                <div className="text-xs text-[#8A92A0] mt-1 font-normal">
+                  Client IP &amp; data ownership
+                </div>
+              </div>
+
+              <div>
+                <div className="font-sans text-2xl sm:text-3xl font-extrabold text-white">
+                  Kigali &bull; Global
+                </div>
+                <div className="text-xs text-[#8A92A0] mt-1 font-normal">
+                  Direct senior practitioner practice
+                </div>
+              </div>
+            </div>
+
           </motion.div>
-        </motion.div>
+
+          {/* Right Column: Clean Team / Modern Office Photography */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.97, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 0.85, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-5 relative"
+          >
+            <div className="relative aspect-[4/3] sm:aspect-[16/11] lg:aspect-[4/3] w-full overflow-hidden rounded-2xl border border-slate-800 shadow-2xl bg-stone-900">
+              <Image
+                src="/images/data-engineer.jpg"
+                alt="DataSphere Consulting Ltd & BIGWI HOUSE practitioners"
+                fill
+                priority
+                className="object-cover object-center"
+              />
+            </div>
+          </motion.div>
+
+        </div>
       </div>
     </section>
   )

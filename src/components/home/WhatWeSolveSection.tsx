@@ -1,86 +1,147 @@
 'use client'
 
 import React from 'react'
-import Link from 'next/link'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { ArrowRight } from '@/components/Icons'
-import { corePillars } from '@/content/bigwiContent'
+
+const HOW_WE_WORK_STEPS = [
+  {
+    dots: '•',
+    title: 'Built for business impact',
+    description:
+      'We align data architectures and predictive models directly with strategic priorities, defining measurable operational KPIs and payback milestones before writing code.'
+  },
+  {
+    dots: '••',
+    title: 'Systems embedded in your operations',
+    description:
+      'Our senior data engineers and machine learning scientists embed real-time decisioning and automated data pipelines directly into your operational software and field apps.'
+  },
+  {
+    dots: '•••',
+    title: 'Capability built to last',
+    description:
+      'We upskill your internal teams and establish comprehensive data governance, continuous drift telemetry, and documentation to ensure long-term independence.'
+  }
+]
+
+const WHAT_WE_DELIVER_ITEMS = [
+  {
+    title: 'Customer intelligence',
+    description:
+      'Segmentation, personalised experiences, and AI-powered customer platforms that build loyalty and deepen relationships.'
+  },
+  {
+    title: 'Smarter operations',
+    description:
+      'Systems that forecast demand, manage inventory, automate processes, and allocate resources better.'
+  },
+  {
+    title: 'GenAI in production',
+    description:
+      'Custom applications that connect AI to your proprietary data, delivering commercial value within weeks. We choose the right tools for your organisation and develop capability across your teams.'
+  },
+  {
+    title: 'Risk management',
+    description:
+      'Models that detect fraud, assess lending risk, ensure compliance, and spot emerging threats. Make faster decisions with more confidence while protecting critical assets.'
+  }
+]
 
 export default function WhatWeSolveSection() {
   return (
-    <section id="what-we-solve" className="relative z-10 border-b border-slate-200 dark:border-stone-900 bg-slate-50/50 dark:bg-stone-950">
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-60px' }}
-        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-        className="p-8 sm:p-10 md:p-12 border-b border-slate-200 dark:border-stone-900 flex flex-col md:flex-row md:items-end justify-between gap-4"
-      >
-        <div>
-          <span className="font-mono text-xs uppercase tracking-widest text-teal-700 dark:text-teal-400 font-semibold">
-            /02 What We Solve
-          </span>
-          <h2 className="font-display font-bold text-2xl sm:text-3xl md:text-4xl text-slate-900 dark:text-stone-100 tracking-tight mt-1">
-            The Data &amp; AI Lifecycle
-          </h2>
-        </div>
-        <p className="text-xs sm:text-sm text-slate-600 dark:text-stone-400 max-w-md">
-          From initial field collection to production machine learning and strategic advisory, we support organizations at every stage.
-        </p>
-      </motion.div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:gap-px bg-slate-200 dark:bg-stone-900">
-        {corePillars.map((pillar, idx) => (
-          <motion.div
-            key={pillar.number}
-            initial={{ opacity: 0, y: 25 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-40px' }}
-            transition={{ duration: 0.5, delay: idx * 0.05 }}
-            className="bg-white dark:bg-stone-950 p-6 sm:p-7 flex flex-col justify-between transition-colors hover:bg-slate-50 dark:hover:bg-stone-900/60"
-          >
-            <div>
-              <span className="font-mono text-xs font-bold text-teal-600 dark:text-teal-400">
-                {pillar.number}
-              </span>
-              <h3 className="font-display text-base font-bold text-slate-900 dark:text-stone-100 mt-2">
-                {pillar.title}
-              </h3>
-              <p className="mt-2 text-xs text-slate-600 dark:text-stone-400 leading-relaxed">
-                {pillar.description}
-              </p>
-            </div>
-          </motion.div>
-        ))}
-
-        {/* 8th card linking to consultation */}
-        <motion.div
-          initial={{ opacity: 0, y: 25 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-40px' }}
-          transition={{ duration: 0.5, delay: 0.35 }}
-          className="bg-teal-50/40 dark:bg-teal-950/20 p-6 sm:p-7 flex flex-col justify-between"
-        >
-          <div>
-            <span className="font-mono text-xs font-bold text-teal-700 dark:text-teal-400">
-              Next Steps
+    <div className="w-full transition-colors duration-300">
+      
+      {/* 1. Quantium 'How We Work' 3-Column Strip */}
+      <section className="bg-[#f8f9fb] dark:bg-stone-950 p-8 sm:p-12 lg:p-16 border-b border-slate-200 dark:border-stone-900">
+        <div className="max-w-[1240px] mx-auto space-y-12">
+          <div className="max-w-3xl space-y-2">
+            <span className="font-mono text-xs font-bold uppercase tracking-wider text-teal-600 dark:text-teal-400">
+              HOW WE WORK
             </span>
-            <h3 className="font-display text-base font-bold text-slate-900 dark:text-stone-100 mt-2">
-              Have a specific data challenge?
-            </h3>
-            <p className="mt-2 text-xs text-slate-600 dark:text-stone-400 leading-relaxed">
-              Our senior consultants will review your data readiness and outline practical technical options.
-            </p>
+            <h2 className="font-display font-extrabold text-2xl sm:text-3xl lg:text-4xl text-slate-900 dark:text-white tracking-tight">
+              Engineering real-world decision intelligence
+            </h2>
           </div>
-          <Link
-            href="/contact"
-            className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-teal-700 dark:text-teal-400 hover:underline"
-          >
-            <span>Schedule a discovery call</span>
-            <ArrowRight className="h-3 w-3" />
-          </Link>
-        </motion.div>
-      </div>
-    </section>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {HOW_WE_WORK_STEPS.map((step, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ duration: 0.6, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                className="rounded-3xl border border-slate-200/80 dark:border-stone-800 bg-white dark:bg-stone-900/60 p-7 sm:p-8 space-y-4 shadow-sm"
+              >
+                <div className="font-mono text-2xl font-bold text-teal-600 dark:text-teal-400">
+                  {step.dots}
+                </div>
+                <h3 className="font-display text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
+                  {step.title}
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-600 dark:text-stone-300 leading-relaxed font-normal">
+                  {step.description}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 2. Quantium 'What We Deliver' (Exact Layout from Screenshot) */}
+      <section id="what-we-deliver" className="bg-[#eae7e1] dark:bg-[#0c0f17] text-slate-950 dark:text-stone-100 border-b border-stone-300 dark:border-stone-900 overflow-hidden">
+        <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[580px] items-stretch">
+          
+          {/* Left Column: Full-Height Team Photo from Screenshot */}
+          <div className="lg:col-span-6 relative min-h-[380px] sm:min-h-[480px] lg:min-h-full w-full bg-stone-300 dark:bg-stone-900 overflow-hidden">
+            <Image
+              src="/images/team-atrium.jpg"
+              alt="DataSphere team collaborating in modern office atrium"
+              fill
+              priority
+              className="object-cover object-center"
+            />
+          </div>
+
+          {/* Right Column: 'What we deliver' Content (Exact Quantium Copy & Typography) */}
+          <div className="lg:col-span-6 p-8 sm:p-12 lg:p-16 xl:p-20 flex flex-col justify-center">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-50px' }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              className="space-y-8 max-w-xl"
+            >
+              <h2 className="font-sans font-extrabold text-3xl sm:text-4xl lg:text-[46px] text-slate-950 dark:text-white tracking-tight leading-tight">
+                What we deliver
+              </h2>
+
+              <div className="space-y-7">
+                {WHAT_WE_DELIVER_ITEMS.map((item, idx) => (
+                  <motion.div
+                    key={item.title}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: '-30px' }}
+                    transition={{ duration: 0.5, delay: idx * 0.08 }}
+                    className="space-y-1.5"
+                  >
+                    <h3 className="font-sans font-bold text-base sm:text-lg text-slate-950 dark:text-white">
+                      {item.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-slate-700 dark:text-stone-300 leading-relaxed font-normal">
+                      {item.description}
+                    </p>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
   )
 }

@@ -96,7 +96,7 @@ export default function ProcessTimeline() {
 
             <div className="pt-2 flex flex-wrap gap-3">
               <span className="font-sans text-xs text-slate-500 dark:text-slate-400 font-medium">
-                Disciplined Engineering &bull; Rigorous Milestone Governance
+                Disciplined Delivery &bull; Rigorous Milestone Governance
               </span>
             </div>
           </div>

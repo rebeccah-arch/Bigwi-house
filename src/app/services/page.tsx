@@ -3,362 +3,400 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { motion, type Variants } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import {
-  Layers,
-  Smartphone,
-  Cpu,
-  BarChart3,
-  Workflow,
-  Cloud,
-  ShieldCheck,
   ArrowRight,
+  ArrowLeft,
   CheckCircle2,
-  Activity,
-  Landmark,
-  Building2,
-  Globe2,
-  Sprout,
-  Truck,
-  Briefcase
+  X,
+  Share2
 } from '@/components/Icons'
-import { services, targetClientsDetailed } from '@/content/bigwiContent'
 
-const SERVICE_ICONS: Record<string, React.ElementType> = {
-  Cpu,
-  Activity,
-  Layers,
-  BarChart3,
-  Workflow,
-  Smartphone,
-  Cloud,
-  ShieldCheck,
+interface ServiceItem {
+  id: string
+  pillar: 'Data Engineering' | 'Analytics & BI' | 'Applied Machine Learning' | 'Strategic Advisory'
+  title: string
+  image: string
+  description: string
+  deliverables: string[]
 }
 
-const SECTOR_ICONS: Record<string, React.ElementType> = {
-  Landmark,
-  Building2,
-  Globe2,
-  Sprout,
-  Truck,
-  Briefcase,
-}
-
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.08 },
+const SERVICES_DATA: ServiceItem[] = [
+  // 1. Data Engineering
+  {
+    id: 'data-pipelines-etl',
+    pillar: 'Data Engineering',
+    title: 'Automated Ingestion & ETL/ELT Pipelines',
+    image: '/images/data-engineer.jpg',
+    description:
+      'We design and build resilient, automated pipelines that extract, normalize, and load data from databases, third-party APIs, IoT sensors, and unstructured files into centralized warehouses.',
+    deliverables: [
+      'Idempotent ingestion schedules with automated error recovery',
+      'Continuous data contract validation and schema drift alerts',
+      'Sub-minute stream processing for high-velocity transaction feeds'
+    ]
   },
-}
-
-const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 15 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: 'easeOut' },
+  {
+    id: 'lakehouse-medallion',
+    pillar: 'Data Engineering',
+    title: 'Medallion Lakehouse Architecture (Bronze/Silver/Gold)',
+    image: '/images/insights/light_trails.jpg',
+    description:
+      'Structuring raw storage into high-speed queryable layers, separating raw telemetry from cleaned business entities and executive aggregations.',
+    deliverables: [
+      'Immutable Bronze raw event capture with point-in-time recovery',
+      'Silver conformed data layers with referential integrity guarantees',
+      'Gold pre-aggregated analytical cubes optimized for sub-second BI loading'
+    ]
   },
-}
+  {
+    id: 'offline-field-telemetry',
+    pillar: 'Data Engineering',
+    title: 'Offline-First Telemetry & Edge Data Collection',
+    image: '/images/logistics-terminal.jpg',
+    description:
+      'Custom mobile sync engines for field operators in low-connectivity environments, ensuring zero data loss and automated queue synchronization upon reconnection.',
+    deliverables: [
+      'Local-first SQLite storage with cryptographic device signatures',
+      'Conflict-free multi-agent sync queues with automatic resolution',
+      'Battery and bandwidth compression protocols for remote field hardware'
+    ]
+  },
 
-const CATEGORIES = [
+  // 2. Analytics & BI
+  {
+    id: 'executive-kpi-dashboards',
+    pillar: 'Analytics & BI',
+    title: 'Executive Decision Portals & KPI Trees',
+    image: '/images/executive-strategy.jpg',
+    description:
+      'We design intuitive, real-time executive dashboards that link daily operational metrics directly to quarterly financial targets and strategic EBITDA objectives.',
+    deliverables: [
+      'Automated executive summary dashboards updated in real time',
+      'Semantic KPI trees establishing single-source-of-truth definitions',
+      'Scheduled daily PDF and email briefing digests for leadership'
+    ]
+  },
+  {
+    id: 'commercial-cohort-analytics',
+    pillar: 'Analytics & BI',
+    title: 'Customer Intelligence & Cohort Modeling',
+    image: '/images/mobile-banking.jpg',
+    description:
+      'Deconstructing customer lifecycle patterns, identifying high-value subscriber segments, predicting churn risks, and optimizing pricing strategies.',
+    deliverables: [
+      'Customer lifetime value (LTV) and churn hazard rate models',
+      'RFM (Recency, Frequency, Monetary) behavioral segmentation',
+      'Marketing campaign attribution and unit payback telemetry'
+    ]
+  },
+
+  // 3. Applied Machine Learning
+  {
+    id: 'production-ml-models',
+    pillar: 'Applied Machine Learning',
+    title: 'Custom Machine Learning & Scoring Algorithms',
+    image: '/images/insights/neural_helix.jpg',
+    description:
+      'Developing, evaluating, and deploying practical machine learning models tailored to specific institutional workflows, risk parameters, and regional market realities.',
+    deliverables: [
+      'Alternative data credit risk and underwriting models',
+      'Dynamic geospatial logistics dispatch and route optimization heuristics',
+      'Document NLP and automated form classification pipelines'
+    ]
+  },
+  {
+    id: 'mlops-drift-telemetry',
+    pillar: 'Applied Machine Learning',
+    title: 'Production MLOps, Drift Telemetry & Retraining',
+    image: '/images/insights/wave_grid.jpg',
+    description:
+      'Continuous telemetry layers tracking prediction latency, Population Stability Index (PSI), and feature drift to prevent silent model degradation.',
+    deliverables: [
+      'Containerized low-latency FastAPI inference endpoints',
+      'Real-time feature distribution and accuracy drift monitors',
+      'Automated pipeline retraining triggers with historical versioning'
+    ]
+  },
+
+  // 4. Strategic Advisory & Governance
+  {
+    id: 'data-maturity-audits',
+    pillar: 'Strategic Advisory',
+    title: 'Institutional Data Readiness & Modern Stack Advisory',
+    image: '/images/team-atrium.jpg',
+    description:
+      'Evaluating enterprise data infrastructure, pipeline debt, and AI feasibility to build actionable 12-month technology roadmaps with defined ROI payback.',
+    deliverables: [
+      'Comprehensive data architecture audit and bottleneck assessment',
+      'Target modern data stack blueprint and vendor evaluation',
+      '2-week zero-risk pilot sprint specifications'
+    ]
+  },
+  {
+    id: 'governance-data-sovereignty',
+    pillar: 'Strategic Advisory',
+    title: 'Data Governance, Sovereignty & Compliance Audits',
+    image: '/images/hero-team.jpg',
+    description:
+      'Implementing role-based access control (RBAC), data cataloging, column-level masking, and immutable access logging compliant with regional data protection acts.',
+    deliverables: [
+      'Data cataloging and enterprise dictionary governance',
+      'PII masking and sovereign cloud hosting frameworks',
+      'Immutable audit logging ensuring 100% regulatory readiness'
+    ]
+  }
+]
+
+const PILLARS = [
   'All Capabilities',
-  'AI & Machine Learning',
-  'Data & Analytics',
-  'Data & AI Consultancy',
-  'Digital Solutions'
+  'Data Engineering',
+  'Analytics & BI',
+  'Applied Machine Learning',
+  'Strategic Advisory'
 ]
 
 export default function ServicesPage() {
-  const [activeCategory, setActiveCategory] = useState('All Capabilities')
+  const [selectedPillar, setSelectedPillar] = useState('All Capabilities')
+  const [activeService, setActiveService] = useState<ServiceItem | null>(null)
 
-  const filtered = activeCategory === 'All Capabilities'
-    ? services
-    : services.filter((s) => s.category === activeCategory)
+  const filteredServices =
+    selectedPillar === 'All Capabilities'
+      ? SERVICES_DATA
+      : SERVICES_DATA.filter((s) => s.pillar === selectedPillar)
 
   return (
-    <div className="w-full bg-white dark:bg-stone-950 transition-colors duration-300 overflow-x-hidden">
-      {/* 1. Header Banner (Full-Bleed Hero with Curved Bottom) */}
-      <section className="relative z-10 w-full min-h-[460px] sm:min-h-[520px] overflow-hidden rounded-b-[40px] sm:rounded-b-[60px] lg:rounded-b-[80px] shadow-2xl border-b border-slate-200/20 dark:border-stone-800/40 bg-stone-950 flex flex-col justify-end pt-36 sm:pt-44 pb-16 sm:pb-24">
-        {/* Full-Bleed Atmospheric Background Image */}
-        <div className="absolute inset-0 h-full w-full overflow-hidden bg-stone-950">
-          <Image
-            src="/images/data-engineer.jpg"
-            alt="Data & AI Services by DataSphere & BIGWI HOUSE"
-            fill
-            priority
-            className="object-cover object-center opacity-60 contrast-125 grayscale hover:scale-105 transition-transform duration-10000 ease-out"
-          />
-          {/* Cinematic Gradient Fade */}
-          <div className="pointer-events-none absolute inset-0 h-full w-full bg-gradient-to-t from-stone-950 via-stone-950/75 to-stone-950/20" />
-          <div className="pointer-events-none absolute inset-0 h-full w-full bg-gradient-to-r from-stone-950/85 via-stone-950/45 to-transparent" />
+    <div className="w-full min-h-screen bg-white dark:bg-[#080a11] text-slate-900 dark:text-stone-100 transition-colors duration-300">
+
+      {/* 1. Header Masthead (Exact Quantium / McKinsey Style) */}
+      <section className="pt-28 sm:pt-36 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 max-w-[1240px] mx-auto text-center space-y-5">
+
+        {/* Top-Left Back Link */}
+        <div className="text-left mb-4">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-1.5 text-xs text-slate-500 dark:text-stone-400 hover:text-slate-900 dark:hover:text-white transition-colors"
+          >
+            <ArrowLeft className="h-3 w-3" />
+            <span>Back to Overview</span>
+          </Link>
         </div>
 
-        {/* Hero Content Overlay */}
-        <div className="relative z-20 mx-auto max-w-[1400px] w-full px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="max-w-3xl space-y-5"
-          >
-            <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-teal-300 bg-teal-950/80 border border-teal-500/30">
-              <Layers className="h-3.5 w-3.5" />
-              <span>Capabilities &amp; Solutions</span>
-            </div>
+        {/* Centered Page Title */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="space-y-4 max-w-3xl mx-auto text-center"
+        >
+          <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-bold tracking-tight text-slate-950 dark:text-white leading-[1.15]">
+            Capabilities &amp; Services
+          </h1>
 
-            <h1 className="font-display font-extrabold text-3xl sm:text-5xl md:text-6xl text-white tracking-tight leading-tight">
-              Specialized Data &amp; Applied AI Capabilities.
-            </h1>
+          <p className="text-sm sm:text-base text-slate-600 dark:text-stone-300 max-w-2xl mx-auto leading-relaxed font-normal">
+            From modern data engineering and executive analytics to applied machine learning and strategic cloud advisory, we provide end-to-end data capability for scaling enterprises.
+          </p>
 
-            <p className="text-base sm:text-lg text-stone-300 leading-relaxed font-normal max-w-2xl">
-              We help organizations gather structured records, develop custom machine learning models, build executive dashboards, and maintain systems in production with dedicated SLAs.
-            </p>
+          {/* Centered Blue CTA Button */}
+          <div className="pt-2">
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center gap-2 bg-[#1A56DB] hover:bg-blue-700 text-white font-bold px-7 py-2.5 text-xs tracking-wide shadow-sm transition-colors"
+            >
+              <span>Schedule a practice consultation</span>
+            </Link>
+          </div>
+        </motion.div>
+      </section>
 
-            <div className="flex flex-wrap items-center gap-4 pt-2">
-              <Link
-                href="/contact"
-                className="flex items-center gap-2 rounded-full bg-teal-500 px-7 py-3.5 text-sm font-bold text-slate-950 shadow-lg shadow-teal-500/20 transition-all duration-300 hover:scale-105 hover:bg-teal-400"
-              >
-                <span>Request a consultation</span>
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
-          </motion.div>
+      {/* 2. Main Content Container */}
+      <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 pb-24 space-y-12">
+
+        {/* Category Filter Pills */}
+        <div className="flex flex-wrap items-center justify-center gap-2 border-b border-slate-200 dark:border-stone-800 pb-6">
+          {PILLARS.map((pil) => (
+            <button
+              key={pil}
+              type="button"
+              onClick={() => setSelectedPillar(pil)}
+              className={`rounded-full px-5 py-2 text-xs font-semibold transition-all ${
+                selectedPillar === pil
+                  ? 'bg-slate-950 text-white shadow-sm dark:bg-blue-600 dark:text-white'
+                  : 'bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-stone-900 dark:text-stone-300 dark:hover:bg-stone-800'
+              }`}
+            >
+              {pil}
+            </button>
+          ))}
+        </div>
+
+        {/* 3. Services Grid (Cards with Sample Images, No Icons, No Tech Tags) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10">
+          {filteredServices.map((service, idx) => (
+            <motion.article
+              key={service.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-30px' }}
+              transition={{ duration: 0.5, delay: (idx % 3) * 0.06 }}
+              onClick={() => setActiveService(service)}
+              className="group cursor-pointer flex flex-col justify-between border border-slate-200 dark:border-stone-800 bg-white dark:bg-stone-900/40 p-6 sm:p-7 shadow-sm hover:border-blue-500/50 dark:hover:border-blue-500/50 hover:shadow-md transition-all duration-300"
+            >
+              <div className="space-y-4">
+                
+                {/* Clean Image Card */}
+                <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-100 dark:bg-stone-900">
+                  <Image
+                    src={service.image}
+                    alt={service.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className="object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out"
+                  />
+                </div>
+
+                {/* Pillar Tag */}
+                <span className="font-mono text-[11px] font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider block">
+                  {service.pillar}
+                </span>
+
+                {/* Title with Blue Angle Bracket */}
+                <h3 className="font-serif font-bold text-lg sm:text-xl text-slate-950 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors leading-snug">
+                  <span>{service.title}</span>
+                  <span className="text-[#1A56DB] dark:text-[#3B82F6] font-bold ml-1.5 inline-block text-[17px] leading-none">&rsaquo;</span>
+                </h3>
+
+                {/* Description */}
+                <p className="text-xs sm:text-sm text-slate-600 dark:text-stone-300 leading-relaxed font-normal">
+                  {service.description}
+                </p>
+
+                {/* Deliverables */}
+                <div className="pt-3 border-t border-slate-100 dark:border-stone-800 space-y-2">
+                  <span className="text-[11px] font-mono font-bold text-slate-900 dark:text-white uppercase tracking-wider block">
+                    Core Deliverables:
+                  </span>
+                  <ul className="space-y-1.5">
+                    {service.deliverables.slice(0, 3).map((del, dIdx) => (
+                      <li key={dIdx} className="flex items-start gap-2 text-xs text-slate-600 dark:text-stone-300">
+                        <CheckCircle2 className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400 shrink-0 mt-0.5" />
+                        <span className="leading-snug">{del}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+              </div>
+
+              {/* Action Link at Bottom */}
+              <div className="pt-6 mt-6 border-t border-slate-100 dark:border-stone-800 flex items-center justify-between">
+                <span className="text-xs font-semibold text-blue-600 dark:text-blue-400 group-hover:underline">
+                  View Practice Scope &rsaquo;
+                </span>
+              </div>
+            </motion.article>
+          ))}
+        </div>
+      </div>
+
+      {/* 4. Quantium-Style Bottom Consultation CTA Section */}
+      <section className="bg-[#080a11] text-white py-20 sm:py-24 text-center border-t border-stone-800/80">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+          <span className="font-mono text-xs uppercase tracking-widest text-blue-400 font-semibold">
+            Institutional Partnership
+          </span>
+
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight leading-tight">
+            Ready to structure your enterprise data foundations?
+          </h2>
+
+          <p className="text-stone-300 max-w-xl mx-auto text-sm sm:text-base leading-relaxed">
+            Schedule a strategic discovery session with our senior solution architects to assess your infrastructure and roadmap realistic implementation milestones.
+          </p>
+
+          <div className="pt-3">
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center gap-2 bg-white hover:bg-stone-200 text-slate-950 font-bold px-8 py-3.5 text-xs tracking-wide shadow-md transition-colors"
+            >
+              <span>Schedule a consultation</span>
+              <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          </div>
         </div>
       </section>
 
-      {/* Main Content Frame */}
-      <div className="relative mx-auto max-w-[1400px] bg-white dark:bg-stone-950 transition-colors duration-300">
-        {/* 2. Category Filter & Service List */}
-        <section className="relative p-6 sm:p-10 lg:p-14 border-b border-slate-200 dark:border-stone-900">
-          <div className="space-y-10">
-            {/* Category Filter Pills */}
-            <div className="flex flex-wrap gap-2 pb-2 border-b border-slate-200 dark:border-stone-800">
-              {CATEGORIES.map((cat) => (
-                <button
-                  key={cat}
-                  type="button"
-                  onClick={() => setActiveCategory(cat)}
-                  className={`rounded-full px-4 py-2 text-xs font-medium transition-all ${
-                    activeCategory === cat
-                      ? 'bg-slate-900 text-white font-semibold shadow-sm dark:bg-teal-500 dark:text-slate-950'
-                      : 'bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-stone-900 dark:text-stone-300 dark:hover:bg-stone-800'
-                  }`}
-                >
-                  {cat}
-                </button>
-              ))}
-            </div>
-
-            {/* Detailed Service Cards Grid */}
+      {/* 5. Interactive Service Modal */}
+      <AnimatePresence>
+        {activeService && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 lg:p-8 bg-black/80 backdrop-blur-sm overflow-y-auto">
             <motion.div
-              key={activeCategory}
-              initial="hidden"
-              animate="visible"
-              variants={containerVariants}
-              className="grid grid-cols-1 md:grid-cols-2 gap-8"
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              transition={{ duration: 0.25, ease: 'easeOut' }}
+              className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto bg-white dark:bg-stone-950 p-6 sm:p-10 shadow-2xl border border-slate-200 dark:border-stone-800 space-y-6"
             >
-              {filtered.map((service, idx) => {
-                const Icon = SERVICE_ICONS[service.icon] || Layers
-
-                return (
-                  <motion.div
-                    key={service.id}
-                    id={service.id}
-                    variants={itemVariants}
-                    className="flex flex-col justify-between p-7 sm:p-8 scroll-mt-28 bg-white dark:bg-stone-900/60 border border-slate-200 dark:border-stone-800/80 rounded-3xl shadow-sm hover:border-teal-500/40 transition-all duration-300"
-                  >
-                    <div className="space-y-5">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3">
-                          <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-teal-50 text-teal-700 border border-teal-200 dark:bg-teal-950/60 dark:text-teal-300 dark:border-teal-800">
-                            <Icon className="h-5 w-5" />
-                          </div>
-                          <div>
-                            <span className="font-mono text-[11px] font-bold text-teal-800 dark:text-teal-400">
-                              0{idx + 1} &bull; {service.category}
-                            </span>
-                            <h2 className="font-display text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
-                              {service.title}
-                            </h2>
-                          </div>
-                        </div>
-                      </div>
-
-                      <p className="text-xs sm:text-sm text-slate-600 dark:text-stone-300 leading-relaxed font-normal">
-                        {service.description}
-                      </p>
-
-                      {/* Deliverables */}
-                      <div className="space-y-2 rounded-2xl border border-slate-200 dark:border-stone-800 bg-slate-50/70 dark:bg-stone-950/60 p-4">
-                        <h3 className="font-mono text-[11px] font-bold uppercase tracking-wider text-slate-800 dark:text-stone-200">
-                          Primary Deliverables:
-                        </h3>
-                        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
-                          {service.deliverables.map((del) => (
-                            <li key={del} className="flex items-start gap-2 text-xs text-slate-700 dark:text-stone-300">
-                              <CheckCircle2 className="h-3.5 w-3.5 text-teal-600 dark:text-teal-400 mt-0.5 flex-shrink-0" />
-                              <span>{del}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-
-                      {/* Tech Stacks */}
-                      <div>
-                        <span className="font-mono text-[11px] text-slate-500 dark:text-stone-400 font-semibold block mb-2">
-                          Technologies:
-                        </span>
-                        <div className="flex flex-wrap gap-1.5">
-                          {service.techHighlights.map((tech) => (
-                            <span
-                              key={tech}
-                              className="rounded-md border border-slate-200 dark:border-stone-700 bg-white dark:bg-stone-800 px-2 py-0.5 font-mono text-[11px] text-slate-700 dark:text-stone-300"
-                            >
-                              {tech}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="mt-6 pt-4 border-t border-slate-100 dark:border-stone-800 flex items-center justify-between">
-                      <span className="font-mono text-[11px] text-slate-400 dark:text-stone-500">Production SLA Ready</span>
-                      <Link
-                        href="/contact"
-                        className="font-sans text-xs text-teal-700 dark:text-teal-400 hover:text-teal-900 dark:hover:text-teal-300 flex items-center gap-1 font-semibold"
-                      >
-                        <span>Inquire about this service</span>
-                        <ArrowRight className="h-3.5 w-3.5" />
-                      </Link>
-                    </div>
-                  </motion.div>
-                )
-              })}
-            </motion.div>
-          </div>
-        </section>
-
-        {/* 3. Sectors & Institutional Focus */}
-        <section id="sectors" className="relative p-6 sm:p-10 lg:p-14">
-          <div className="space-y-10">
-            <div className="max-w-2xl">
-              <span className="font-mono text-xs font-bold uppercase tracking-widest text-teal-700 dark:text-teal-400">
-                Sector Applications
-              </span>
-              <h2 className="text-2xl sm:text-3xl font-display font-bold text-slate-900 dark:text-white mt-1">
-                Solutions Tailored to Your Industry
-              </h2>
-              <p className="mt-2 text-xs sm:text-sm text-slate-600 dark:text-stone-400">
-                How our data infrastructure and applied AI capabilities address specific domain constraints.
-              </p>
-            </div>
-
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={containerVariants}
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
-            >
-              {targetClientsDetailed.map((sector) => {
-                const Icon = SECTOR_ICONS[sector.icon] || Landmark
-                return (
-                  <motion.div
-                    key={sector.name}
-                    variants={itemVariants}
-                    className="rounded-2xl border border-slate-200 dark:border-stone-800 bg-white dark:bg-stone-900/60 p-6 shadow-sm flex flex-col justify-between hover:border-teal-500/40 transition-all duration-300"
-                  >
-                    <div>
-                      <div className="flex items-center gap-3 mb-3">
-                        <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-slate-100 dark:bg-stone-800 text-slate-800 dark:text-stone-200">
-                          <Icon className="h-4.5 w-4.5" />
-                        </div>
-                        <h3 className="font-display text-base font-bold text-slate-900 dark:text-white">{sector.name}</h3>
-                      </div>
-
-                      <p className="text-xs sm:text-sm text-slate-600 dark:text-stone-400 leading-relaxed mb-4">
-                        {sector.description}
-                      </p>
-                    </div>
-
-                    <div className="flex flex-wrap gap-1.5 pt-3 border-t border-slate-100 dark:border-stone-800">
-                      {sector.focusAreas.map((area) => (
-                        <span
-                          key={area}
-                          className="rounded bg-slate-50 dark:bg-stone-800/80 border border-slate-200 dark:border-stone-700 px-2 py-0.5 font-mono text-[10px] text-slate-600 dark:text-stone-300"
-                        >
-                          {area}
-                        </span>
-                      ))}
-                    </div>
-                  </motion.div>
-                )
-              })}
-            </motion.div>
-          </div>
-        </section>
-      </div>
-
-      {/* 4. Full-Bleed Curved Canopy CTA */}
-      <div className="relative w-full bg-white dark:bg-stone-950 transition-colors duration-300">
-        {/* Top Arch Canopy Curve */}
-        <div className="w-full overflow-hidden leading-none -mb-[1px]">
-          <svg
-            viewBox="0 0 1440 100"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-full h-12 sm:h-20 lg:h-28 block text-[#080d1a]"
-            preserveAspectRatio="none"
-          >
-            <path
-              d="M0,100 L0,65 Q35,32 90,26 L450,14 Q600,0 720,0 Q840,0 990,14 L1350,26 Q1405,32 1440,65 L1440,100 Z"
-              fill="currentColor"
-            />
-          </svg>
-        </div>
-
-        <section className="relative z-10 w-full bg-[#080d1a] text-white py-16 sm:py-24 text-center overflow-hidden">
-          <div className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 h-96 w-[800px] rounded-full bg-teal-500/10 blur-[120px]" />
-          <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 space-y-6 relative z-10">
-            <span className="font-mono text-xs uppercase tracking-widest text-teal-400 font-semibold">
-              Get Started
-            </span>
-            <h2 className="font-display font-extrabold text-3xl sm:text-5xl text-white tracking-tight leading-tight">
-              Need a tailored data or machine learning engagement?
-            </h2>
-            <p className="text-stone-300 max-w-xl mx-auto text-sm sm:text-base leading-relaxed">
-              Schedule a discovery session with our senior consultants to review your system requirements and project roadmap.
-            </p>
-            <div className="flex justify-center gap-4 pt-2">
-              <Link
-                href="/contact"
-                className="flex items-center gap-2 rounded-full bg-teal-500 px-8 py-3.5 text-sm sm:text-base font-bold text-slate-950 shadow-lg shadow-teal-500/20 transition-all duration-300 hover:scale-105 hover:bg-teal-400"
+              <button
+                type="button"
+                onClick={() => setActiveService(null)}
+                className="absolute top-6 right-6 h-9 w-9 rounded-full bg-slate-100 dark:bg-stone-900 border border-slate-200 dark:border-stone-800 flex items-center justify-center text-slate-600 dark:text-stone-300 hover:bg-slate-200 dark:hover:bg-stone-800 transition-colors"
+                aria-label="Close"
               >
-                <span>Discuss your project</span>
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
-          </div>
-        </section>
+                <X className="h-4 w-4" />
+              </button>
 
-        {/* Bottom Arch Canopy Curve */}
-        <div className="w-full overflow-hidden leading-none -mt-[1px]">
-          <svg
-            viewBox="0 0 1440 100"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-full h-12 sm:h-20 lg:h-28 block text-[#080d1a]"
-            preserveAspectRatio="none"
-          >
-            <path
-              d="M0,0 L0,35 Q35,68 90,74 L450,86 Q600,100 720,100 Q840,100 990,86 L1350,74 Q1405,68 1440,35 L1440,0 Z"
-              fill="currentColor"
-            />
-          </svg>
-        </div>
-      </div>
+              <div className="space-y-3 pr-10 border-b border-slate-200 dark:border-stone-800 pb-5">
+                <div className="text-xs font-mono text-blue-600 dark:text-blue-400 font-bold uppercase tracking-wider">
+                  {activeService.pillar}
+                </div>
+                <h2 className="font-serif text-2xl sm:text-3xl font-bold text-slate-950 dark:text-white leading-tight">
+                  {activeService.title}
+                </h2>
+                <p className="text-sm text-slate-600 dark:text-stone-300 leading-relaxed font-normal">
+                  {activeService.description}
+                </p>
+              </div>
+
+              {/* Service Details & Deliverables */}
+              <div className="bg-slate-50 dark:bg-stone-900 border border-slate-200 dark:border-stone-800 p-5 space-y-3">
+                <h4 className="font-mono text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white flex items-center gap-2">
+                  <span className="h-2 w-2 rounded-full bg-blue-600 dark:bg-blue-400" />
+                  <span>Standard Practice Deliverables:</span>
+                </h4>
+                <ul className="space-y-2">
+                  {activeService.deliverables.map((del, dIdx) => (
+                    <li key={dIdx} className="flex items-start gap-2.5 text-xs text-slate-700 dark:text-stone-300">
+                      <CheckCircle2 className="h-4 w-4 text-blue-600 dark:text-blue-400 shrink-0 mt-0.5" />
+                      <span className="leading-relaxed">{del}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="flex flex-wrap items-center justify-between gap-4 pt-5 border-t border-slate-200 dark:border-stone-800">
+                <button
+                  type="button"
+                  onClick={() => setActiveService(null)}
+                  className="px-4 py-2 text-xs font-semibold text-slate-600 dark:text-stone-400 hover:text-slate-900 dark:hover:text-white"
+                >
+                  Close
+                </button>
+
+                <Link
+                  href="/contact"
+                  onClick={() => setActiveService(null)}
+                  className="inline-flex items-center gap-2 bg-[#1A56DB] hover:bg-blue-700 text-white font-bold px-5 py-2.5 text-xs shadow transition-colors"
+                >
+                  <span>Discuss requirements with practice lead</span>
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
     </div>
   )
 }

@@ -72,7 +72,7 @@ export default function ServicesSection() {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div>
             <span className="font-mono text-xs font-semibold text-teal-800 dark:text-teal-400 uppercase tracking-widest">
-              /04 Services Directory
+              Services Directory
             </span>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-display font-bold text-slate-900 dark:text-white mt-1 tracking-tight">
               Specialized Capabilities

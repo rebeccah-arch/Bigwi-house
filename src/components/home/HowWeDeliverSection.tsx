@@ -45,15 +45,11 @@ export default function HowWeDeliverSection() {
             transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
             className="text-center max-w-3xl mx-auto space-y-4 mb-16"
           >
-            <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-teal-300 bg-teal-950/80 border border-teal-500/30">
-              <Workflow className="h-3.5 w-3.5" />
-              <span>How We Deliver</span>
-            </div>
             <h2 className="font-display font-extrabold text-3xl sm:text-5xl text-white tracking-tight leading-tight">
-              The DataSphere Implementation Engine
+              The DataSphere Delivery Framework
             </h2>
             <p className="text-sm sm:text-base text-stone-300 leading-relaxed">
-              From fragmented organizational records to production-hardened machine learning systems — engineered through three disciplined milestones.
+              From fragmented organizational records to production-ready machine learning systems — delivered through three disciplined milestones.
             </p>
           </motion.div>
 
@@ -129,7 +125,7 @@ export default function HowWeDeliverSection() {
                     {/* Deliverables Checklist */}
                     <div className="space-y-3.5 pt-4 border-t border-white/10">
                       <span className="font-mono text-xs uppercase tracking-wider text-stone-400 font-semibold block">
-                        Key Deliverables &amp; Engineering Activities:
+                        Key Deliverables &amp; Milestones:
                       </span>
                       {growthPhases[activePhaseIndex].items.map((item) => (
                         <div key={item} className="flex items-start gap-3 text-xs sm:text-sm text-stone-200">
@@ -157,48 +153,6 @@ export default function HowWeDeliverSection() {
               </AnimatePresence>
             </div>
           </div>
-
-          {/* Live Impact Counters Strip */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-40px' }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="mt-16 grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 border-t border-white/10 pt-12"
-          >
-            <div className="p-6 rounded-2xl bg-white/[0.04] border border-white/10 text-center">
-              <span className="font-display text-3xl sm:text-4xl font-extrabold text-teal-400 block tracking-tight">
-                15M+
-              </span>
-              <span className="font-mono text-xs text-stone-400 block mt-1">
-                Data Records Processed
-              </span>
-            </div>
-            <div className="p-6 rounded-2xl bg-white/[0.04] border border-white/10 text-center">
-              <span className="font-display text-3xl sm:text-4xl font-extrabold text-teal-400 block tracking-tight">
-                &lt; 4 Hours
-              </span>
-              <span className="font-mono text-xs text-stone-400 block mt-1">
-                Average Underwriting Time
-              </span>
-            </div>
-            <div className="p-6 rounded-2xl bg-white/[0.04] border border-white/10 text-center">
-              <span className="font-display text-3xl sm:text-4xl font-extrabold text-teal-400 block tracking-tight">
-                99.2%
-              </span>
-              <span className="font-mono text-xs text-stone-400 block mt-1">
-                Production Model Accuracy
-              </span>
-            </div>
-            <div className="p-6 rounded-2xl bg-white/[0.04] border border-white/10 text-center">
-              <span className="font-display text-3xl sm:text-4xl font-extrabold text-teal-400 block tracking-tight">
-                100%
-              </span>
-              <span className="font-mono text-xs text-stone-400 block mt-1">
-                Data &amp; IP Sovereignty
-              </span>
-            </div>
-          </motion.div>
         </div>
       </section>
 

@@ -33,8 +33,8 @@ export default function DataAnalyticsDemo() {
           <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent" />
           
           <div className="absolute bottom-6 left-6 right-6 text-white space-y-1">
-            <span className="inline-block rounded bg-teal-600 px-2.5 py-0.5 text-xs font-semibold text-white">
-              Data Engineering Team
+            <span className="inline-block rounded-full bg-teal-500/90 px-3 py-0.5 text-xs font-bold text-slate-950">
+              Applied AI &amp; Data Practice
             </span>
             <h4 className="font-display text-lg font-bold">Custom Analytics Architectures</h4>
             <p className="text-xs text-slate-200">
@@ -48,9 +48,6 @@ export default function DataAnalyticsDemo() {
           {/* Header & Mode Switcher */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4 dark:border-slate-800">
             <div>
-              <span className="font-mono text-xs font-semibold text-teal-800 uppercase tracking-wider dark:text-teal-400">
-                Enterprise Data Engine
-              </span>
               <h3 className="font-display text-xl font-bold text-slate-900 dark:text-white">
                 Business Intelligence &amp; Data Pipeline Architecture
               </h3>

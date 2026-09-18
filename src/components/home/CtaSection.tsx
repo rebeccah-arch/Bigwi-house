@@ -8,10 +8,6 @@ export default function CtaSection() {
   return (
     <section className="relative z-10 overflow-hidden py-20 sm:py-28 text-center bg-slate-50/80 dark:bg-stone-950">
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 space-y-6">
-        <span className="font-mono text-xs uppercase tracking-widest text-teal-700 dark:text-teal-400 font-semibold">
-          /06 Work With Us
-        </span>
-
         <div className="space-y-3">
           <h2 className="font-display font-extrabold text-3xl sm:text-5xl text-slate-900 dark:text-stone-100 tracking-tight leading-tight">
             Start with a clear technical conversation.

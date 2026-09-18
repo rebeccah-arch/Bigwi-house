@@ -4,40 +4,30 @@ import {
   WhoWeAreSection,
   WhatWeSolveSection,
   WhoWeServeSection,
-  HowWeDeliverSection,
-  ServicesSection,
+  InsightsPreviewSection,
   CtaSection,
 } from '@/components/home'
 
 export default function HomePage() {
   return (
     <div className="w-full bg-white dark:bg-stone-950 transition-colors duration-300 overflow-x-hidden">
-      {/* 1. Hero Section (Full-bleed with curved bottom) */}
+
+      {/* 1. Quantium Split Hero Section */}
       <HeroSection />
 
-      {/* Main Content Frame */}
-      <div className="relative mx-auto max-w-[1400px] bg-white dark:bg-stone-950 transition-colors duration-300">
-        {/* 2. Who We Are */}
-        <WhoWeAreSection />
+      {/* 2. Quantium Value Pillars: "Why organisations choose us" */}
+      <WhoWeAreSection />
 
-        {/* 3. What We Solve (7 Core Pillars) */}
-        <WhatWeSolveSection />
+      {/* 3. Quantium "How We Work" & "The 4 Core Pillars" */}
+      <WhatWeSolveSection />
+      {/* 5. Quantium Multi-Sector Expertise Showcase */}
+      <WhoWeServeSection />
 
-        {/* 4. Who We Serve (Target Sectors) */}
-        <WhoWeServeSection />
-      </div>
+      {/* 6. Thought Leadership & Latest Research (Connected to QuantumBlack/Quantium Insights) */}
+      <InsightsPreviewSection />
 
-      {/* 5. The Delivery Engine (3-Step Milestone Storytelling) */}
-      <HowWeDeliverSection />
-
-      {/* Main Content Frame (Continued) */}
-      <div className="relative mx-auto max-w-[1400px] bg-white dark:bg-stone-950 transition-colors duration-300">
-        {/* 6. Services Directory (Interactive filter & pagination) */}
-        <ServicesSection />
-
-        {/* 7. Primary Call to Action */}
-        <CtaSection />
-      </div>
+      {/* 7. Bottom Call to Action */}
+      <CtaSection />
     </div>
   )
 }

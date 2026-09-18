@@ -10,6 +10,7 @@ export default function ClientShell({ children }: { children: React.ReactNode })
   const [proposalOpen, setProposalOpen] = useState(false)
   const pathname = usePathname()
   const isHome = pathname === '/'
+  const hasDarkHero = pathname === '/' || pathname === '/about' || pathname === '/approach'
 
   return (
     <>
@@ -23,7 +24,7 @@ export default function ClientShell({ children }: { children: React.ReactNode })
         id="main-content"
         tabIndex={-1}
         className={`outline-none min-h-[calc(100vh-200px)] ${
-          isHome ? 'pt-0' : 'pt-20 sm:pt-24 md:pt-28'
+          hasDarkHero ? 'pt-0' : 'pt-24 sm:pt-28 md:pt-32'
         }`}
       >
         {React.cloneElement(children as React.ReactElement, {

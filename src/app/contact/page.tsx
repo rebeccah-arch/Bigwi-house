@@ -1,33 +1,26 @@
 'use client'
 
 import React, { useState, FormEvent } from 'react'
-import Image from 'next/image'
+import Link from 'next/link'
 import { motion } from 'framer-motion'
 import {
-  Send,
   CheckCircle2,
   AlertCircle,
-  Loader2,
-  Clock,
-  Building2,
-  Mail,
-  ShieldCheck,
-  Compass
+  Loader2
 } from '@/components/Icons'
-import { services, contactDetails } from '@/content/bigwiContent'
 
 export default function ContactPage() {
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [errorMessage, setErrorMessage] = useState('')
 
   const [formData, setFormData] = useState({
-    name: '',
+    firstName: '',
+    lastName: '',
     email: '',
-    organization: '',
-    sector: 'Financial Institution',
-    service: 'Model Building & Predictive Analytics',
-    timeline: '1-3 Months',
+    company: '',
+    jobTitle: '',
     message: '',
+    referralSource: ''
   })
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -39,7 +32,14 @@ export default function ContactPage() {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          name: `${formData.firstName} ${formData.lastName}`.trim(),
+          email: formData.email,
+          organization: formData.company,
+          jobTitle: formData.jobTitle,
+          message: formData.message,
+          referralSource: formData.referralSource
+        }),
       })
 
       const data = await res.json()
@@ -47,17 +47,17 @@ export default function ContactPage() {
       if (res.ok && data.success) {
         setStatus('success')
         setFormData({
-          name: '',
+          firstName: '',
+          lastName: '',
           email: '',
-          organization: '',
-          sector: 'Financial Institution',
-          service: 'Model Building & Predictive Analytics',
-          timeline: '1-3 Months',
+          company: '',
+          jobTitle: '',
           message: '',
+          referralSource: ''
         })
       } else {
         setStatus('error')
-        setErrorMessage(data.message || 'Failed to submit inquiry. Please verify all fields.')
+        setErrorMessage(data.message || 'Failed to submit inquiry. Please check all fields.')
       }
     } catch {
       setStatus('error')
@@ -65,310 +65,245 @@ export default function ContactPage() {
     }
   }
 
-  return (
-    <div className="w-full bg-white dark:bg-stone-950 transition-colors duration-300 overflow-x-hidden">
-      {/* 1. Header Banner (Full-Bleed Hero with Curved Bottom) */}
-      <section className="relative z-10 w-full min-h-[440px] sm:min-h-[480px] overflow-hidden rounded-b-[40px] sm:rounded-b-[60px] lg:rounded-b-[80px] shadow-2xl border-b border-slate-200/20 dark:border-stone-800/40 bg-stone-950 flex flex-col justify-end pt-36 sm:pt-44 pb-16 sm:pb-24">
-        {/* Full-Bleed Atmospheric Background Image */}
-        <div className="absolute inset-0 h-full w-full overflow-hidden bg-stone-950">
-          <Image
-            src="/images/hero-team.jpg"
-            alt="DataSphere Consultation &amp; Client Discovery"
-            fill
-            priority
-            className="object-cover object-center opacity-60 contrast-125 grayscale hover:scale-105 transition-transform duration-10000 ease-out"
-          />
-          {/* Cinematic Gradient Fade */}
-          <div className="pointer-events-none absolute inset-0 h-full w-full bg-gradient-to-t from-stone-950 via-stone-950/75 to-stone-950/20" />
-          <div className="pointer-events-none absolute inset-0 h-full w-full bg-gradient-to-r from-stone-950/85 via-stone-950/45 to-transparent" />
-        </div>
+  const benefits = [
+    'Successful project delivery. Guaranteed.',
+    'Integrated solutions that span technologies and domain expertise',
+    'Custom solutions designed with deep industry expertise',
+    'Flexible engagement options to fit your specific needs',
+    'Cutting edge data & analytics innovation through DataSphere research and development'
+  ]
 
-        {/* Hero Content Overlay */}
-        <div className="relative z-20 mx-auto max-w-[1400px] w-full px-4 sm:px-6 lg:px-8">
+  return (
+    <div className="w-full min-h-screen bg-[#f4f6f8] dark:bg-[#0b0f19] text-slate-900 dark:text-stone-100 transition-colors duration-300">
+      
+      <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-14 pb-24 sm:pb-32">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+          
+          {/* Left Column: Heading, Subtitle & Value Checklist */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="max-w-3xl space-y-4"
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-5 space-y-8 lg:sticky lg:top-32"
           >
-            <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-teal-300 bg-teal-950/80 border border-teal-500/30">
-              <Mail className="h-3.5 w-3.5" />
-              <span>Start an Engagement</span>
+            <div className="space-y-4">
+              <h1 className="font-sans font-extrabold text-4xl sm:text-5xl lg:text-[54px] text-slate-950 dark:text-white tracking-tight leading-[1.12]">
+                Get in touch with an expert
+              </h1>
+
+              <p className="text-base sm:text-lg text-slate-600 dark:text-stone-300 font-normal leading-relaxed">
+                An elite team built to deliver unparalleled solutions and results.
+              </p>
             </div>
 
-            <h1 className="font-display font-extrabold text-3xl sm:text-5xl md:text-6xl text-white tracking-tight leading-tight">
-              Let&apos;s Discuss Your Data Challenges.
-            </h1>
-
-            <p className="text-base sm:text-lg text-stone-300 leading-relaxed font-normal max-w-2xl">
-              Whether you need to build custom machine learning models, aggregate field data, or develop executive analytics, our senior team is ready to assist.
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Main Content Frame */}
-      <div className="relative mx-auto max-w-[1400px] bg-white dark:bg-stone-950 transition-colors duration-300">
-        {/* 2. Contact Grid */}
-        <section className="relative p-6 sm:p-10 lg:p-14">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
-            {/* Left Column: Form */}
-            <div className="lg:col-span-7">
-              <div className="rounded-3xl border border-slate-200 dark:border-stone-800/80 bg-white dark:bg-stone-900/60 p-6 sm:p-10 shadow-sm space-y-6">
-                <div>
-                  <h2 className="text-xl sm:text-2xl font-display font-bold text-slate-900 dark:text-white">
-                    Submit a Project Inquiry
-                  </h2>
-                  <p className="mt-1 text-xs sm:text-sm text-slate-600 dark:text-stone-400">
-                    Provide a brief overview and a senior consultant will review and follow up within 24 business hours.
-                  </p>
+            {/* Checklist items with solid circular badges */}
+            <div className="space-y-4 pt-2">
+              {benefits.map((benefit, idx) => (
+                <div key={idx} className="flex items-start gap-3.5">
+                  <div className="h-5 w-5 rounded-full bg-slate-900 dark:bg-blue-600 text-white flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
+                    <svg
+                      className="h-3.5 w-3.5"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="3"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                  </div>
+                  <span className="text-sm sm:text-base text-slate-800 dark:text-stone-200 font-medium leading-snug">
+                    {benefit}
+                  </span>
                 </div>
+              ))}
+            </div>
 
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label htmlFor="cf-name" className="mb-1.5 block text-xs font-semibold text-slate-700 dark:text-stone-300">
-                        Full Name *
-                      </label>
-                      <input
-                        id="cf-name"
-                        type="text"
-                        required
-                        value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        placeholder="e.g. Jean Damascene"
-                        className="w-full rounded-xl border border-slate-200 dark:border-stone-700 bg-slate-50 dark:bg-stone-800 px-3.5 py-2.5 text-xs sm:text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:border-teal-500 focus:bg-white dark:focus:bg-stone-800 focus:outline-none transition-colors"
-                      />
-                    </div>
+            {/* Direct Contact Info */}
+            <div className="pt-8 border-t border-slate-200 dark:border-stone-800 space-y-2 text-xs text-slate-500 dark:text-stone-400 font-mono">
+              <div>HQ: Kigali, Rwanda &bull; Global Operations</div>
+              <div>Direct: contact@datasphere.rw</div>
+            </div>
+          </motion.div>
 
-                    <div>
-                      <label htmlFor="cf-email" className="mb-1.5 block text-xs font-semibold text-slate-700 dark:text-stone-300">
-                        Work Email *
-                      </label>
-                      <input
-                        id="cf-email"
-                        type="email"
-                        required
-                        value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        placeholder="alex@organization.com"
-                        className="w-full rounded-xl border border-slate-200 dark:border-stone-700 bg-slate-50 dark:bg-stone-800 px-3.5 py-2.5 text-xs sm:text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:border-teal-500 focus:bg-white dark:focus:bg-stone-800 focus:outline-none transition-colors"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label htmlFor="cf-org" className="mb-1.5 block text-xs font-semibold text-slate-700 dark:text-stone-300">
-                        Organization / Institution
-                      </label>
-                      <input
-                        id="cf-org"
-                        type="text"
-                        value={formData.organization}
-                        onChange={(e) => setFormData({ ...formData, organization: e.target.value })}
-                        placeholder="e.g. Development Bank"
-                        className="w-full rounded-xl border border-slate-200 dark:border-stone-700 bg-slate-50 dark:bg-stone-800 px-3.5 py-2.5 text-xs sm:text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:border-teal-500 focus:bg-white dark:focus:bg-stone-800 focus:outline-none transition-colors"
-                      />
-                    </div>
-
-                    <div>
-                      <label htmlFor="cf-sector" className="mb-1.5 block text-xs font-semibold text-slate-700 dark:text-stone-300">
-                        Sector / Industry
-                      </label>
-                      <select
-                        id="cf-sector"
-                        value={formData.sector}
-                        onChange={(e) => setFormData({ ...formData, sector: e.target.value })}
-                        className="w-full rounded-xl border border-slate-200 dark:border-stone-700 bg-slate-50 dark:bg-stone-800 px-3.5 py-2.5 text-xs sm:text-sm text-slate-900 dark:text-white focus:border-teal-500 focus:bg-white dark:focus:bg-stone-800 focus:outline-none transition-colors"
-                      >
-                        <option value="Financial Institution">Financial Institution / Microfinance</option>
-                        <option value="Government & Public Sector">Government &amp; Public Sector</option>
-                        <option value="International Development">International Development / NGO</option>
-                        <option value="Agriculture & Supply Chain">Agriculture &amp; Supply Chain</option>
-                        <option value="Logistics & Mobility">Logistics &amp; Mobility</option>
-                        <option value="Commercial Enterprise">Commercial Enterprise</option>
-                        <option value="Other">Other Sector</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label htmlFor="cf-service" className="mb-1.5 block text-xs font-semibold text-slate-700 dark:text-stone-300">
-                        Primary Service Area
-                      </label>
-                      <select
-                        id="cf-service"
-                        value={formData.service}
-                        onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                        className="w-full rounded-xl border border-slate-200 dark:border-stone-700 bg-slate-50 dark:bg-stone-800 px-3.5 py-2.5 text-xs sm:text-sm text-slate-900 dark:text-white focus:border-teal-500 focus:bg-white dark:focus:bg-stone-800 focus:outline-none transition-colors"
-                      >
-                        {services.map((s) => (
-                          <option key={s.id} value={s.title}>
-                            {s.title}
-                          </option>
-                        ))}
-                        <option value="General Strategic Advisory">General Strategic Advisory</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label htmlFor="cf-timeline" className="mb-1.5 block text-xs font-semibold text-slate-700 dark:text-stone-300">
-                        Anticipated Timeline
-                      </label>
-                      <select
-                        id="cf-timeline"
-                        value={formData.timeline}
-                        onChange={(e) => setFormData({ ...formData, timeline: e.target.value })}
-                        className="w-full rounded-xl border border-slate-200 dark:border-stone-700 bg-slate-50 dark:bg-stone-800 px-3.5 py-2.5 text-xs sm:text-sm text-slate-900 dark:text-white focus:border-teal-500 focus:bg-white dark:focus:bg-stone-800 focus:outline-none transition-colors"
-                      >
-                        <option value="Immediate (< 1 Month)">Immediate (&lt; 1 Month)</option>
-                        <option value="1-3 Months">1-3 Months</option>
-                        <option value="3-6 Months">3-6 Months</option>
-                        <option value="Exploratory / Planning Stage">Exploratory / Planning Stage</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div>
-                    <label htmlFor="cf-message" className="mb-1.5 block text-xs font-semibold text-slate-700 dark:text-stone-300">
-                      Project Details &amp; Operational Objectives *
+          {/* Right Column: Floating White Form Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-7"
+          >
+            <div className="bg-white dark:bg-stone-900 rounded-[28px] p-6 sm:p-10 lg:p-12 shadow-xl border border-slate-200/80 dark:border-stone-800 text-slate-900 dark:text-stone-100">
+              
+              <form onSubmit={handleSubmit} className="space-y-5">
+                
+                {/* Row 1: First Name & Last Name */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+                  <div className="space-y-1.5">
+                    <label htmlFor="firstName" className="block text-xs font-semibold text-slate-800 dark:text-stone-200">
+                      First Name <span className="text-teal-600 dark:text-teal-400">*</span>
                     </label>
-                    <textarea
-                      id="cf-message"
+                    <input
+                      id="firstName"
+                      type="text"
                       required
-                      rows={4}
-                      value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      placeholder="Describe your data pipeline, predictive model goals, or dashboard requirements..."
-                      className="w-full rounded-xl border border-slate-200 dark:border-stone-700 bg-slate-50 dark:bg-stone-800 px-3.5 py-2.5 text-xs sm:text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:border-teal-500 focus:bg-white dark:focus:bg-stone-800 focus:outline-none transition-colors"
+                      value={formData.firstName}
+                      onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+                      placeholder="First name"
+                      className="w-full rounded-xl border border-slate-200 dark:border-stone-700 bg-slate-50/70 dark:bg-stone-800 px-4 py-3 text-xs sm:text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:bg-white dark:focus:bg-stone-800 focus:border-teal-500 focus:outline-none transition-colors"
                     />
                   </div>
 
-                  {status === 'error' && (
-                    <div className="flex items-center gap-2 rounded-xl bg-red-50 dark:bg-red-950/40 p-3 text-xs text-red-800 dark:text-red-300 border border-red-200 dark:border-red-800">
-                      <AlertCircle className="h-4 w-4 flex-shrink-0" />
-                      <span>{errorMessage}</span>
-                    </div>
+                  <div className="space-y-1.5">
+                    <label htmlFor="lastName" className="block text-xs font-semibold text-slate-800 dark:text-stone-200">
+                      Last Name <span className="text-teal-600 dark:text-teal-400">*</span>
+                    </label>
+                    <input
+                      id="lastName"
+                      type="text"
+                      required
+                      value={formData.lastName}
+                      onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                      placeholder="Last name"
+                      className="w-full rounded-xl border border-slate-200 dark:border-stone-700 bg-slate-50/70 dark:bg-stone-800 px-4 py-3 text-xs sm:text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:bg-white dark:focus:bg-stone-800 focus:border-teal-500 focus:outline-none transition-colors"
+                    />
+                  </div>
+                </div>
+
+                {/* Row 2: Business Email */}
+                <div className="space-y-1.5">
+                  <label htmlFor="email" className="block text-xs font-semibold text-slate-800 dark:text-stone-200">
+                    Business Email <span className="text-teal-600 dark:text-teal-400">*</span>
+                  </label>
+                  <input
+                    id="email"
+                    type="email"
+                    required
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    placeholder="Enter your Business Email"
+                    className="w-full rounded-xl border border-slate-200 dark:border-stone-700 bg-slate-50/70 dark:bg-stone-800 px-4 py-3 text-xs sm:text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:bg-white dark:focus:bg-stone-800 focus:border-teal-500 focus:outline-none transition-colors"
+                  />
+                </div>
+
+                {/* Row 3: Company & Job Title */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+                  <div className="space-y-1.5">
+                    <label htmlFor="company" className="block text-xs font-semibold text-slate-800 dark:text-stone-200">
+                      Company <span className="text-teal-600 dark:text-teal-400">*</span>
+                    </label>
+                    <input
+                      id="company"
+                      type="text"
+                      required
+                      value={formData.company}
+                      onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                      placeholder="Company Name"
+                      className="w-full rounded-xl border border-slate-200 dark:border-stone-700 bg-slate-50/70 dark:bg-stone-800 px-4 py-3 text-xs sm:text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:bg-white dark:focus:bg-stone-800 focus:border-teal-500 focus:outline-none transition-colors"
+                    />
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label htmlFor="jobTitle" className="block text-xs font-semibold text-slate-800 dark:text-stone-200">
+                      Job Title <span className="text-teal-600 dark:text-teal-400">*</span>
+                    </label>
+                    <input
+                      id="jobTitle"
+                      type="text"
+                      required
+                      value={formData.jobTitle}
+                      onChange={(e) => setFormData({ ...formData, jobTitle: e.target.value })}
+                      placeholder="Job Title"
+                      className="w-full rounded-xl border border-slate-200 dark:border-stone-700 bg-slate-50/70 dark:bg-stone-800 px-4 py-3 text-xs sm:text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:bg-white dark:focus:bg-stone-800 focus:border-teal-500 focus:outline-none transition-colors"
+                    />
+                  </div>
+                </div>
+
+                {/* Row 4: How can we help? */}
+                <div className="space-y-1.5">
+                  <label htmlFor="message" className="block text-xs font-semibold text-slate-800 dark:text-stone-200">
+                    How can we help? <span className="text-teal-600 dark:text-teal-400">*</span>
+                  </label>
+                  <textarea
+                    id="message"
+                    required
+                    rows={4}
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    placeholder="Enter description..."
+                    className="w-full rounded-xl border border-slate-200 dark:border-stone-700 bg-slate-50/70 dark:bg-stone-800 px-4 py-3 text-xs sm:text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:bg-white dark:focus:bg-stone-800 focus:border-teal-500 focus:outline-none transition-colors resize-y"
+                  />
+                </div>
+
+                {/* Row 5: How did you hear about us? */}
+                <div className="space-y-1.5">
+                  <label htmlFor="referralSource" className="block text-xs font-semibold text-slate-800 dark:text-stone-200">
+                    How did you hear about us? <span className="text-teal-600 dark:text-teal-400">*</span>
+                  </label>
+                  <textarea
+                    id="referralSource"
+                    required
+                    rows={3}
+                    value={formData.referralSource}
+                    onChange={(e) => setFormData({ ...formData, referralSource: e.target.value })}
+                    placeholder="Enter details..."
+                    className="w-full rounded-xl border border-slate-200 dark:border-stone-700 bg-slate-50/70 dark:bg-stone-800 px-4 py-3 text-xs sm:text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:bg-white dark:focus:bg-stone-800 focus:border-teal-500 focus:outline-none transition-colors resize-y"
+                  />
+                </div>
+
+                {/* Status Messages */}
+                {status === 'error' && (
+                  <div className="flex items-center gap-2 rounded-xl border border-red-200 bg-red-50 p-3.5 text-xs text-red-800">
+                    <AlertCircle className="h-4 w-4 shrink-0" />
+                    <span>{errorMessage}</span>
+                  </div>
+                )}
+
+                {status === 'success' && (
+                  <div className="flex items-center gap-2 rounded-xl border border-emerald-200 bg-emerald-50 p-3.5 text-xs text-emerald-800">
+                    <CheckCircle2 className="h-4 w-4 shrink-0" />
+                    <span>Thank you! Your message has been received. An expert will reach out within 24 business hours.</span>
+                  </div>
+                )}
+
+                {/* Submit Button: Vibrant Teal Pill Button */}
+                <button
+                  type="submit"
+                  disabled={status === 'loading'}
+                  className="w-full rounded-full bg-[#1FB6A6] hover:bg-[#18a294] text-white font-bold py-4 text-sm sm:text-base tracking-wide transition-all duration-200 shadow-md active:scale-[0.99] disabled:opacity-50 flex items-center justify-center gap-2 cursor-pointer"
+                >
+                  {status === 'loading' ? (
+                    <>
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                      <span>Sending inquiry...</span>
+                    </>
+                  ) : (
+                    <span>Start the Conversation</span>
                   )}
+                </button>
 
-                  {status === 'success' && (
-                    <div className="flex items-center gap-2 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 p-3 text-xs text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
-                      <CheckCircle2 className="h-4 w-4 flex-shrink-0" />
-                      <span>Inquiry submitted successfully! A consultant will respond within 24 business hours.</span>
-                    </div>
-                  )}
+                {/* Disclaimer / Terms note */}
+                <p className="text-[11px] text-slate-500 dark:text-stone-400 text-center leading-relaxed pt-2">
+                  By clicking submit you consent to agree to our{' '}
+                  <Link href="/privacy" className="text-teal-700 dark:text-teal-400 underline font-medium hover:text-teal-900">
+                    Terms
+                  </Link>
+                  . Your data will be processed in accordance with our{' '}
+                  <Link href="/privacy" className="text-teal-700 dark:text-teal-400 underline font-medium hover:text-teal-900">
+                    Privacy Policy
+                  </Link>
+                  . You may opt out at any time.
+                </p>
 
-                  <button
-                    type="submit"
-                    disabled={status === 'loading'}
-                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-slate-900 dark:bg-teal-500 text-white dark:text-slate-950 font-bold px-6 py-3.5 text-xs sm:text-sm shadow-md transition-all duration-300 hover:scale-[1.01] hover:bg-slate-800 dark:hover:bg-teal-400 disabled:opacity-50"
-                  >
-                    {status === 'loading' ? (
-                      <>
-                        <Loader2 className="h-4 w-4 animate-spin" />
-                        <span>Processing Inquiry...</span>
-                      </>
-                    ) : (
-                      <>
-                        <Send className="h-4 w-4" />
-                        <span>Send Project Inquiry</span>
-                      </>
-                    )}
-                  </button>
-                </form>
-              </div>
+              </form>
+
             </div>
+          </motion.div>
 
-            {/* Right Column: Information & Roadmap */}
-            <div className="lg:col-span-5 space-y-6">
-              {/* Direct Office Details */}
-              <div className="rounded-3xl border border-slate-200 dark:border-stone-800/80 bg-white dark:bg-stone-900/60 p-6 sm:p-8 shadow-sm space-y-5">
-                <h3 className="font-display text-lg font-bold text-slate-900 dark:text-white">
-                  Consultancy Office
-                </h3>
-
-                <div className="space-y-4 text-xs sm:text-sm text-slate-700 dark:text-stone-300">
-                  <div className="flex items-start gap-3">
-                    <Building2 className="h-4 w-4 text-teal-600 dark:text-teal-400 mt-0.5 flex-shrink-0" />
-                    <div>
-                      <strong className="block text-slate-900 dark:text-white font-semibold">{contactDetails.company}</strong>
-                      <span className="block text-slate-500 dark:text-stone-400">{contactDetails.division}</span>
-                      <span>{contactDetails.address}</span>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-3">
-                    <Mail className="h-4 w-4 text-teal-600 dark:text-teal-400 mt-0.5 flex-shrink-0" />
-                    <div>
-                      <a href={`mailto:${contactDetails.email}`} className="text-teal-700 dark:text-teal-400 hover:underline">
-                        {contactDetails.email}
-                      </a>
-                      <span className="block text-slate-500 dark:text-stone-400">Direct technical inquiries</span>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-3">
-                    <Clock className="h-4 w-4 text-teal-600 dark:text-teal-400 mt-0.5 flex-shrink-0" />
-                    <div>
-                      <span>{contactDetails.hours}</span>
-                      <span className="block text-slate-500 dark:text-stone-400">{contactDetails.responseSLA}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* What Happens Next Roadmap */}
-              <div className="rounded-3xl border border-slate-200 dark:border-stone-800/80 bg-slate-50/70 dark:bg-stone-900/40 p-6 sm:p-8 shadow-sm space-y-4">
-                <div className="flex items-center gap-2">
-                  <Compass className="h-4 w-4 text-teal-600 dark:text-teal-400" />
-                  <h3 className="font-display text-base font-bold text-slate-900 dark:text-white">
-                    What Happens Next
-                  </h3>
-                </div>
-
-                <div className="space-y-4 pt-1">
-                  <div className="flex items-start gap-3">
-                    <span className="flex h-6 w-6 items-center justify-center rounded-full bg-slate-900 text-white dark:bg-teal-500 dark:text-slate-950 font-mono text-xs font-bold flex-shrink-0">
-                      1
-                    </span>
-                    <div>
-                      <h4 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white">Initial Discovery Call</h4>
-                      <p className="text-xs text-slate-600 dark:text-stone-400 mt-0.5">A 30-minute technical review with our solutions architect to understand your goals and current data setup.</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-3">
-                    <span className="flex h-6 w-6 items-center justify-center rounded-full bg-slate-900 text-white dark:bg-teal-500 dark:text-slate-950 font-mono text-xs font-bold flex-shrink-0">
-                      2
-                    </span>
-                    <div>
-                      <h4 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white">Technical Assessment</h4>
-                      <p className="text-xs text-slate-600 dark:text-stone-400 mt-0.5">We review data schema feasibility, compliance requirements, and integration dependencies.</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-3">
-                    <span className="flex h-6 w-6 items-center justify-center rounded-full bg-slate-900 text-white dark:bg-teal-500 dark:text-slate-950 font-mono text-xs font-bold flex-shrink-0">
-                      3
-                    </span>
-                    <div>
-                      <h4 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white">Structured Proposal</h4>
-                      <p className="text-xs text-slate-600 dark:text-stone-400 mt-0.5">You receive a clear scope of work detailing deliverables, architecture diagrams, milestones, and SLA terms.</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="pt-3 border-t border-slate-200 dark:border-stone-800 flex items-center gap-2 text-xs text-slate-500 dark:text-stone-400 font-mono">
-                  <ShieldCheck className="h-4 w-4 text-teal-600 dark:text-teal-400" />
-                  <span>Strict NDA standards applied to all inquiries</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        </div>
       </div>
+
     </div>
   )
 }
