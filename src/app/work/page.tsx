@@ -394,7 +394,7 @@ export default function WorkPage() {
     <div className="w-full min-h-screen bg-white dark:bg-[#0b0f19] text-slate-900 dark:text-stone-100 transition-colors duration-300">
       
       {/* 1. Header Masthead (Exact McKinsey QuantumBlack Style) */}
-      <section className="pt-28 sm:pt-36 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 max-w-[1240px] mx-auto text-center space-y-5">
+      <section className="pt-6 sm:pt-8 md:pt-10 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 max-w-[1240px] mx-auto text-center space-y-5">
         
         {/* Top-Left Back Link */}
         <div className="text-left mb-4">

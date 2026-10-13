@@ -39,7 +39,7 @@ export default function Header({ onOpenProposal }: HeaderProps) {
     setMenuOpen(false)
   }, [pathname])
 
-  const isDarkHero = pathname === '/' || pathname === '/about' || pathname === '/approach'
+  const isDarkHero = pathname === '/' || pathname === '/about' || pathname === '/approach' || pathname === '/contact'
 
   return (
     <header

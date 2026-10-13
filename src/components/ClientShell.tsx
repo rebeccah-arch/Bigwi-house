@@ -10,7 +10,7 @@ export default function ClientShell({ children }: { children: React.ReactNode })
   const [proposalOpen, setProposalOpen] = useState(false)
   const pathname = usePathname()
   const isHome = pathname === '/'
-  const hasDarkHero = pathname === '/' || pathname === '/about' || pathname === '/approach'
+  const hasDarkHero = pathname === '/' || pathname === '/about' || pathname === '/approach' || pathname === '/contact'
 
   return (
     <>
