@@ -22,7 +22,7 @@ export default function Footer() {
   }
 
   return (
-    <footer className="relative mt-16 sm:mt-24 overflow-hidden rounded-none border-t border-zinc-800/80 bg-[#070707] text-white shadow-2xl">
+    <footer className="relative mt-0 overflow-hidden rounded-none border-t border-zinc-800/80 bg-[#070707] text-white shadow-2xl">
       {/* Main Content Section - Centered */}
       <div className="relative z-10 mx-auto max-w-[1400px] px-6 sm:px-8 lg:px-12 pt-20 sm:pt-24 lg:pt-28 pb-16 sm:pb-20">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-12 lg:gap-10 items-start">

@@ -7,9 +7,7 @@ import { motion } from 'framer-motion'
 import {
   ArrowRight,
   CheckCircle2,
-  Compass,
   Server,
-  Layers,
   ShieldCheck,
   Cpu,
   BarChart3
@@ -19,70 +17,73 @@ import { growthPhases, deliveryProcess } from '@/content/bigwiContent'
 export default function ApproachPage() {
   return (
     <div className="w-full bg-white dark:bg-[#080a11] text-slate-900 dark:text-stone-100 transition-colors duration-300">
-      
-      {/* 1. Header Banner (Quantium Style Dark Hero) */}
-      <section className="relative w-full bg-[#080a11] text-white pt-32 sm:pt-40 pb-20 sm:pb-28 border-b border-stone-800/60">
-        <div className="max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-            
-            {/* Left Column: Headline */}
+
+      {/* 1. Full-Height Curved Split Dark Hero (Matching HeroSection.tsx) */}
+      <section className="relative z-10 w-full min-h-[640px] lg:min-h-[740px] bg-[#080a11] text-white overflow-hidden flex items-center">
+
+        {/* Right Column: Full-Height Curved Split Image (Matching HeroSection) */}
+        <div className="absolute right-0 top-0 bottom-0 w-full lg:w-[48%] xl:w-[52%] h-full z-0 pointer-events-none">
+          <div className="relative w-full h-full overflow-hidden lg:rounded-l-[100px] xl:rounded-l-[160px]">
+            <Image
+              src="/images/executive-strategy.jpg"
+              alt="DataSphere Architecture Delivery Session"
+              fill
+              priority
+              className="object-cover object-center scale-105"
+            />
+            {/* Subtle gradient overlay on left, top and bottom for seamless blend with header and dark background */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[#080a11] via-[#080a11]/40 to-transparent lg:hidden" />
+            <div className="hidden lg:block absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[#080a11]/80 to-transparent" />
+            <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-[#080a11] via-[#080a11]/60 to-transparent z-10" />
+            <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#080a11] to-transparent" />
+
+          </div>
+        </div>
+
+        {/* Main Container Content */}
+        <div className="relative z-10 w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 pt-32 sm:pt-40 pb-20 sm:pb-28">
+          <div className="max-w-full lg:max-w-[54%] xl:max-w-[50%] space-y-6 sm:space-y-8">
+            {/* Headline */}
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
+              className="font-sans font-extrabold text-3xl sm:text-5xl md:text-6xl lg:text-[54px] xl:text-[58px] tracking-tight leading-[1.08] text-white"
+            >
+              A disciplined, transparent delivery framework
+            </motion.h1>
+
+            {/* Subtitle */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="text-base sm:text-lg md:text-xl text-[#A6ADB9] leading-relaxed font-normal max-w-2xl"
+            >
+              We publish our delivery process so enterprise partners, governments, and commercial clients know exactly what to expect from initial discovery to live production monitoring and continuous SLA support.
+            </motion.p>
+
+            {/* Action Buttons */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className="lg:col-span-7 space-y-6"
+              transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+              className="flex flex-wrap items-center gap-4 pt-2"
             >
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-stone-900 border border-stone-800 text-xs font-mono text-stone-300">
-                <span className="h-2 w-2 rounded-full bg-blue-500" />
-                <span>Delivery Methodology</span>
-              </div>
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-7 py-3.5 text-xs sm:text-sm font-bold text-slate-950 shadow-xl transition-all duration-300 hover:bg-stone-200"
+              >
+                <span>Discuss your project</span>
+                <ArrowRight className="h-4 w-4" />
+              </Link>
 
-              <h1 className="font-serif text-3xl sm:text-5xl lg:text-[54px] font-bold tracking-tight text-white leading-[1.15]">
-                A disciplined, transparent delivery framework.
-              </h1>
-
-              <p className="text-base sm:text-lg text-stone-300 leading-relaxed font-normal max-w-2xl">
-                We publish our delivery process so enterprise partners, governments, and commercial clients know exactly what to expect from initial discovery to live production monitoring and continuous SLA support.
-              </p>
-
-              <div className="flex flex-wrap items-center gap-4 pt-3">
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center justify-center gap-2 bg-white hover:bg-stone-200 text-slate-950 font-bold px-7 py-3 text-xs tracking-wide shadow-md transition-colors"
-                >
-                  <span>Discuss your project</span>
-                  <ArrowRight className="h-3.5 w-3.5" />
-                </Link>
-
-                <Link
-                  href="/work"
-                  className="inline-flex items-center justify-center gap-2 border border-stone-700 hover:border-stone-500 bg-stone-900/60 text-white font-semibold px-7 py-3 text-xs tracking-wide transition-colors"
-                >
-                  <span>Explore case studies</span>
-                </Link>
-              </div>
-            </motion.div>
-
-            {/* Right Column: Grounded Strategy Photography */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.96 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-              className="lg:col-span-5 relative"
-            >
-              <div className="relative aspect-[4/3] sm:aspect-[16/11] w-full overflow-hidden border border-stone-800 bg-stone-900 shadow-2xl">
-                <Image
-                  src="/images/executive-strategy.jpg"
-                  alt="DataSphere Architecture Delivery Session"
-                  fill
-                  priority
-                  className="object-cover object-center"
-                />
-              </div>
-              <div className="mt-3 text-xs text-stone-400 font-mono flex items-center justify-between">
-                <span>Architecture Discovery Session</span>
-                <span>DataSphere Consulting</span>
-              </div>
+              <Link
+                href="/work"
+                className="inline-flex items-center justify-center rounded-full border border-stone-700 bg-stone-900/60 backdrop-blur-sm px-7 py-3.5 text-xs sm:text-sm font-semibold text-white transition-all duration-300 hover:border-white hover:bg-white/10"
+              >
+                <span>Explore case studies</span>
+              </Link>
             </motion.div>
 
           </div>
@@ -92,7 +93,7 @@ export default function ApproachPage() {
       {/* 2. 3-Phase Implementation Methodology */}
       <section className="py-20 sm:py-28 max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 border-b border-slate-200 dark:border-stone-800/80">
         <div className="space-y-12">
-          
+
           <div className="max-w-2xl space-y-2">
             <span className="font-mono text-xs font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400">
               Phase Progression
@@ -155,7 +156,7 @@ export default function ApproachPage() {
       {/* 3. 6-Stage Engineering Lifecycle */}
       <section className="py-20 sm:py-28 max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 border-b border-slate-200 dark:border-stone-800/80">
         <div className="space-y-12">
-          
+
           <div className="max-w-2xl space-y-2">
             <span className="font-mono text-xs font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400">
               Execution Lifecycle
@@ -214,7 +215,7 @@ export default function ApproachPage() {
       {/* 4. Technology Stack & Open Standards */}
       <section className="py-20 sm:py-28 max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 border-b border-slate-200 dark:border-stone-800/80">
         <div className="space-y-12">
-          
+
           <div className="max-w-2xl space-y-2">
             <span className="font-mono text-xs font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400">
               Toolchains &amp; Architecture
@@ -228,7 +229,7 @@ export default function ApproachPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            
+
             <div className="p-6 border border-slate-200 dark:border-stone-800 bg-slate-50/50 dark:bg-stone-900/40 space-y-3">
               <Server className="h-6 w-6 text-blue-600 dark:text-blue-400" />
               <h3 className="font-serif text-base font-bold text-slate-950 dark:text-white">Data Lakehouses</h3>
@@ -284,10 +285,10 @@ export default function ApproachPage() {
           <div className="pt-3">
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center gap-2 bg-white hover:bg-stone-200 text-slate-950 font-bold px-8 py-3.5 text-xs tracking-wide shadow-md transition-colors"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-white hover:bg-stone-200 text-slate-950 font-bold px-8 py-3.5 text-xs sm:text-sm tracking-wide shadow-md transition-all duration-300"
             >
               <span>Start a conversation</span>
-              <ArrowRight className="h-3.5 w-3.5" />
+              <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
         </div>
