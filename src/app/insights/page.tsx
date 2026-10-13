@@ -313,10 +313,10 @@ export default function InsightsPage() {
         <div className="pt-6">
           <div 
             onClick={() => setActiveArticle(COLLECTION_ITEM)}
-            className="group cursor-pointer grid grid-cols-1 md:grid-cols-12 bg-white dark:bg-stone-950 border border-slate-200 dark:border-stone-800 overflow-hidden shadow-sm hover:border-blue-500/50 dark:hover:border-teal-500/50 transition-colors"
+            className="group cursor-pointer grid grid-cols-1 md:grid-cols-12 min-h-[360px] sm:min-h-[400px] lg:min-h-[440px] bg-white dark:bg-stone-950 border border-slate-200 dark:border-stone-800 overflow-hidden shadow-sm hover:border-blue-500/50 dark:hover:border-teal-500/50 transition-colors"
           >
             {/* Left Image (Wave Mesh) */}
-            <div className="md:col-span-6 relative aspect-[16/9] md:aspect-auto w-full min-h-[220px] bg-black">
+            <div className="md:col-span-6 relative w-full h-full min-h-[260px] sm:min-h-[320px] md:min-h-[400px] lg:min-h-[440px] bg-black overflow-hidden">
               <Image
                 src={COLLECTION_ITEM.image}
                 alt={COLLECTION_ITEM.title}
@@ -326,15 +326,15 @@ export default function InsightsPage() {
             </div>
 
             {/* Right Text Block */}
-            <div className="md:col-span-6 p-8 sm:p-10 flex flex-col justify-center space-y-3">
-              <div className="text-xs font-sans text-slate-500 dark:text-stone-400 font-medium">
+            <div className="md:col-span-6 p-8 sm:p-12 lg:p-16 flex flex-col justify-center space-y-4">
+              <div className="text-xs sm:text-sm font-sans text-slate-500 dark:text-stone-400 font-medium tracking-wide">
                 {COLLECTION_ITEM.type}
               </div>
-              <h3 className="font-serif text-2xl sm:text-3xl font-bold text-slate-950 dark:text-white leading-tight group-hover:text-blue-600 dark:group-hover:text-teal-400 transition-colors">
+              <h3 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-950 dark:text-white leading-tight group-hover:text-blue-600 dark:group-hover:text-teal-400 transition-colors">
                 <span>{COLLECTION_ITEM.title}</span>
                 <span className="text-blue-600 dark:text-teal-400 font-bold ml-1.5">&rsaquo;</span>
               </h3>
-              <p className="text-xs sm:text-sm text-slate-600 dark:text-stone-300 leading-relaxed font-normal">
+              <p className="text-sm sm:text-base text-slate-600 dark:text-stone-300 leading-relaxed font-normal">
                 {COLLECTION_ITEM.excerpt}
               </p>
             </div>
@@ -351,11 +351,11 @@ export default function InsightsPage() {
 
           <div 
             onClick={() => setActiveArticle(PUBLICATION_ITEM)}
-            className="group cursor-pointer grid grid-cols-1 md:grid-cols-12 bg-white dark:bg-stone-950 border border-slate-200 dark:border-stone-800 overflow-hidden shadow-sm hover:border-blue-500/50 dark:hover:border-teal-500/50 transition-colors"
+            className="group cursor-pointer grid grid-cols-1 md:grid-cols-12 min-h-[360px] sm:min-h-[400px] lg:min-h-[440px] bg-white dark:bg-stone-950 border border-slate-200 dark:border-stone-800 overflow-hidden shadow-sm hover:border-blue-500/50 dark:hover:border-teal-500/50 transition-colors"
           >
             {/* Left Image (Book Mockup) */}
-            <div className="md:col-span-6 relative aspect-[4/3] md:aspect-auto w-full min-h-[240px] bg-slate-50 dark:bg-stone-900 flex items-center justify-center p-4">
-              <div className="relative w-full h-full min-h-[200px]">
+            <div className="md:col-span-6 relative w-full h-full min-h-[260px] sm:min-h-[320px] md:min-h-[400px] lg:min-h-[440px] bg-slate-50 dark:bg-stone-900 flex items-center justify-center p-6 sm:p-8 overflow-hidden">
+              <div className="relative w-full h-full min-h-[240px] sm:min-h-[300px]">
                 <Image
                   src={PUBLICATION_ITEM.image}
                   alt={PUBLICATION_ITEM.title}
@@ -366,15 +366,15 @@ export default function InsightsPage() {
             </div>
 
             {/* Right Text Block */}
-            <div className="md:col-span-6 p-8 sm:p-10 flex flex-col justify-center space-y-3">
-              <div className="text-xs font-sans text-slate-500 dark:text-stone-400 font-medium">
+            <div className="md:col-span-6 p-8 sm:p-12 lg:p-16 flex flex-col justify-center space-y-4">
+              <div className="text-xs sm:text-sm font-sans text-slate-500 dark:text-stone-400 font-medium tracking-wide">
                 {PUBLICATION_ITEM.type}
               </div>
-              <h3 className="font-serif text-2xl sm:text-3xl font-bold text-slate-950 dark:text-white leading-tight group-hover:text-blue-600 dark:group-hover:text-teal-400 transition-colors">
+              <h3 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-950 dark:text-white leading-tight group-hover:text-blue-600 dark:group-hover:text-teal-400 transition-colors">
                 <span>{PUBLICATION_ITEM.title}</span>
                 <span className="text-blue-600 dark:text-teal-400 font-bold ml-1.5">&rsaquo;</span>
               </h3>
-              <p className="text-xs sm:text-sm text-slate-600 dark:text-stone-300 leading-relaxed font-normal">
+              <p className="text-sm sm:text-base text-slate-600 dark:text-stone-300 leading-relaxed font-normal">
                 {PUBLICATION_ITEM.excerpt}
               </p>
             </div>

@@ -52,17 +52,6 @@ export default function AboutPage() {
         <div className="relative z-10 w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 pt-32 sm:pt-40 pb-20 sm:pb-28">
           <div className="max-w-full lg:max-w-[54%] xl:max-w-[50%] space-y-6 sm:space-y-8">
 
-            {/* Eyebrow Badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/5 border border-zinc-800 text-xs font-mono text-zinc-300 backdrop-blur-sm"
-            >
-              <span className="h-2 w-2 rounded-full bg-teal-400" />
-              <span>About DataSphere</span>
-            </motion.div>
-
             {/* Headline */}
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
