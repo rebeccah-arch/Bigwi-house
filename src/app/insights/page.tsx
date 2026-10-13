@@ -479,9 +479,9 @@ export default function InsightsPage() {
                   <Link
                     href="/contact"
                     onClick={() => setActiveArticle(null)}
-                    className="inline-flex items-center gap-2 bg-blue-600 dark:bg-teal-500 text-white dark:text-slate-950 font-bold px-5 py-2.5 text-xs shadow hover:bg-blue-700 dark:hover:bg-teal-400 transition-colors"
+                    className="inline-flex items-center gap-2 rounded-full bg-slate-950 dark:bg-teal-500 text-white dark:text-slate-950 font-bold px-6 py-2.5 text-xs shadow hover:bg-slate-800 dark:hover:bg-teal-400 transition-all duration-300"
                   >
-                    <span>Discuss with our practice</span>
+                    <span>Discuss your project</span>
                     <ArrowRight className="h-3.5 w-3.5" />
                   </Link>
                 </div>

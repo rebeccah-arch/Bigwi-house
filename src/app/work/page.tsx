@@ -426,9 +426,9 @@ export default function WorkPage() {
           <div className="pt-2">
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center gap-2 bg-[#1A56DB] hover:bg-blue-700 text-white font-bold px-7 py-2.5 text-xs tracking-wide shadow-sm transition-colors"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-slate-950 dark:bg-white hover:bg-slate-800 dark:hover:bg-stone-200 text-white dark:text-slate-950 font-bold px-7 py-3 text-xs sm:text-sm tracking-wide shadow-sm transition-all duration-300"
             >
-              <span>Connect with us</span>
+              <span>Discuss your project</span>
             </Link>
           </div>
         </motion.div>
@@ -577,9 +577,9 @@ export default function WorkPage() {
                   <Link
                     href="/contact"
                     onClick={() => setActiveCase(null)}
-                    className="inline-flex items-center gap-2 bg-[#1A56DB] hover:bg-blue-700 text-white font-bold px-5 py-2.5 text-xs shadow transition-colors"
+                    className="inline-flex items-center gap-2 rounded-full bg-slate-950 dark:bg-white hover:bg-slate-800 dark:hover:bg-stone-200 text-white dark:text-slate-950 font-bold px-6 py-2.5 text-xs shadow transition-all duration-300"
                   >
-                    <span>Schedule architecture session</span>
+                    <span>Discuss your project</span>
                     <ArrowRight className="h-3.5 w-3.5" />
                   </Link>
                 </div>

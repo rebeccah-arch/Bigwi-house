@@ -15,11 +15,12 @@ interface HeaderProps {
 }
 
 const NAV_ITEMS = [
+  { href: '/', label: 'Home' },
   { href: '/services', label: 'Services' },
-  { href: '/work', label: 'Case Studies' },
+  { href: '/work', label: 'Our Work' },
   { href: '/insights', label: 'Insights' },
-  { href: '/approach', label: 'Approach' },
-  { href: '/about', label: 'About' },
+  { href: '/about', label: 'About Us' },
+  { href: '/contact', label: 'Contact' },
 ]
 
 export default function Header({ onOpenProposal }: HeaderProps) {
@@ -67,7 +68,7 @@ export default function Header({ onOpenProposal }: HeaderProps) {
         </Link>
 
         {/* Center: Desktop Clean Navigation Links */}
-        <nav className="hidden lg:flex items-center gap-8 xl:gap-10">
+        <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
           {NAV_ITEMS.map((item) => {
             const isActive = pathname === item.href
             return (
@@ -86,13 +87,13 @@ export default function Header({ onOpenProposal }: HeaderProps) {
           })}
         </nav>
 
-        {/* Right: "Meet an Expert" Button */}
+        {/* Right: "Discuss your project" Button */}
         <div className="flex items-center gap-3">
           <Link
             href="/contact"
             className="hidden sm:inline-flex items-center justify-center rounded-full border border-zinc-700 bg-white/5 text-white px-5 py-2 text-xs sm:text-sm font-medium tracking-wide hover:bg-white hover:text-zinc-950 transition-all duration-200 backdrop-blur-sm"
           >
-            Meet an Expert
+            Discuss your project
           </Link>
 
           {/* Mobile Menu Toggle */}
@@ -146,7 +147,7 @@ export default function Header({ onOpenProposal }: HeaderProps) {
                 onClick={() => setMenuOpen(false)}
                 className="w-full rounded-full bg-white text-zinc-950 py-2.5 text-center text-sm font-medium hover:bg-zinc-200 transition-all block"
               >
-                Meet an Expert
+                Discuss your project
               </Link>
 
               <div className="flex items-center justify-between px-2 pt-2 text-xs text-zinc-500 font-mono">

@@ -83,7 +83,7 @@ export default function AboutPage() {
                 href="/contact"
                 className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-7 py-3.5 text-xs sm:text-sm font-bold text-slate-950 shadow-xl transition-all duration-300 hover:bg-stone-200"
               >
-                <span>Discuss your architecture</span>
+                <span>Discuss your project</span>
                 <ArrowRight className="h-4 w-4" />
               </Link>
 
@@ -255,10 +255,10 @@ export default function AboutPage() {
           <div className="pt-3">
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center gap-2 bg-white hover:bg-stone-200 text-slate-950 font-bold px-8 py-3.5 text-xs tracking-wide shadow-md transition-colors"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-white hover:bg-stone-200 text-slate-950 font-bold px-8 py-3.5 text-xs sm:text-sm tracking-wide shadow-md transition-all duration-300"
             >
-              <span>Schedule a consultation</span>
-              <ArrowRight className="h-3.5 w-3.5" />
+              <span>Discuss your project</span>
+              <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
         </div>

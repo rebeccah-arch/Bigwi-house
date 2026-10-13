@@ -137,7 +137,7 @@ export default function ContactPage() {
                 href="#contact-form"
                 className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-7 py-3.5 text-xs sm:text-sm font-bold text-slate-950 shadow-xl transition-all duration-300 hover:bg-stone-200"
               >
-                <span>Start inquiry form</span>
+                <span>Discuss your project</span>
                 <ArrowRight className="h-4 w-4" />
               </a>
 
