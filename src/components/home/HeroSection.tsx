@@ -20,9 +20,10 @@ export default function HeroSection() {
             priority
             className="object-cover object-center scale-105"
           />
-          {/* Subtle gradient overlay on left and bottom for seamless blend */}
+          {/* Subtle gradient overlay on left, top and bottom for seamless blend with header */}
           <div className="absolute inset-0 bg-gradient-to-r from-[#080a11] via-[#080a11]/40 to-transparent lg:hidden" />
           <div className="hidden lg:block absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[#080a11]/80 to-transparent" />
+          <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-[#080a11] via-[#080a11]/60 to-transparent z-10" />
           <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#080a11] to-transparent" />
         </div>
       </div>
@@ -30,7 +31,7 @@ export default function HeroSection() {
       {/* Main Container Content */}
       <div className="relative z-10 w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 pt-32 sm:pt-40 pb-20 sm:pb-28">
         <div className="max-w-full lg:max-w-[54%] xl:max-w-[50%] space-y-6 sm:space-y-8">
-          
+
           {/* Headline */}
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
@@ -73,42 +74,6 @@ export default function HeroSection() {
               <span>Explore capabilities</span>
             </Link>
           </motion.div>
-
-          {/* Clean Metrics Row */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="pt-8 border-t border-stone-800/80 grid grid-cols-2 sm:grid-cols-3 gap-6"
-          >
-            <div>
-              <div className="font-sans text-2xl sm:text-3xl font-extrabold text-white">
-                4 Pillars
-              </div>
-              <div className="text-xs text-[#8A92A0] mt-1 font-normal">
-                End-to-end data delivery
-              </div>
-            </div>
-
-            <div>
-              <div className="font-sans text-2xl sm:text-3xl font-extrabold text-white">
-                100%
-              </div>
-              <div className="text-xs text-[#8A92A0] mt-1 font-normal">
-                Client IP &amp; data ownership
-              </div>
-            </div>
-
-            <div>
-              <div className="font-sans text-2xl sm:text-3xl font-extrabold text-white">
-                Kigali &bull; Global
-              </div>
-              <div className="text-xs text-[#8A92A0] mt-1 font-normal">
-                Direct senior practice
-              </div>
-            </div>
-          </motion.div>
-
         </div>
       </div>
 

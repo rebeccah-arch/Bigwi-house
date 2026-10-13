@@ -22,39 +22,26 @@ export default function Footer() {
   }
 
   return (
-    <footer className="relative mt-16 sm:mt-24 overflow-hidden rounded-t-[36px] sm:rounded-t-[52px] lg:rounded-t-[68px] border-t border-zinc-800/80 bg-[#070707] text-white shadow-2xl">
+    <footer className="relative mt-16 sm:mt-24 overflow-hidden rounded-none border-t border-zinc-800/80 bg-[#070707] text-white shadow-2xl">
       {/* Main Content Section - Centered */}
       <div className="relative z-10 mx-auto max-w-[1400px] px-6 sm:px-8 lg:px-12 pt-20 sm:pt-24 lg:pt-28 pb-16 sm:pb-20">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-12 lg:gap-10 items-start">
           {/* 1. Brand & Tagline */}
           <div className="lg:col-span-4 space-y-5">
-            <Link href="/" className="inline-flex items-center gap-3.5 group no-underline">
-              <div className="relative h-12 w-12 overflow-hidden rounded-xl transition-transform duration-300 group-hover:scale-105">
+            <Link href="/" className="inline-block group no-underline">
+              <div className="relative h-16 sm:h-20 w-48 sm:w-60 transition-transform duration-300 group-hover:scale-105 flex-shrink-0">
                 <Image
                   src="/logo-datasphere.jpeg"
                   alt="DataSphere Consulting Ltd"
                   fill
-                  className="object-contain"
+                  className="object-contain object-left"
                 />
-              </div>
-              <div>
-                <span className="font-display text-xl font-bold tracking-tight text-white group-hover:text-teal-400 transition-colors">
-                  DataSphere
-                </span>
-                <p className="font-mono text-[11px] text-zinc-400 font-medium tracking-wide">
-                  BIGWI HOUSE &bull; Data &amp; Technology Practice
-                </p>
               </div>
             </Link>
 
             <p className="max-w-xs text-xs sm:text-sm text-zinc-400 leading-relaxed font-normal">
               Enterprise data engineering, high-throughput lakehouses, executive decision dashboards, and predictive modeling for international organizations, governments, and commercial enterprises.
             </p>
-
-            <div className="space-y-1 text-xs text-zinc-400 font-mono pt-1">
-              <p>Kigali, Rwanda &bull; Delivery Across Africa &amp; Internationally</p>
-              <p>Direct inquiries: <a href="mailto:contact@datasphere.rw" className="text-teal-400 hover:underline">contact@datasphere.rw</a></p>
-            </div>
           </div>
 
           {/* 2. SITEMAP */}

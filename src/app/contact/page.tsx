@@ -75,10 +75,10 @@ export default function ContactPage() {
 
   return (
     <div className="w-full min-h-screen bg-[#f4f6f8] dark:bg-[#0b0f19] text-slate-900 dark:text-stone-100 transition-colors duration-300">
-      
+
       <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-14 pb-24 sm:pb-32">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          
+
           {/* Left Column: Heading, Subtitle & Value Checklist */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -119,12 +119,6 @@ export default function ContactPage() {
                 </div>
               ))}
             </div>
-
-            {/* Direct Contact Info */}
-            <div className="pt-8 border-t border-slate-200 dark:border-stone-800 space-y-2 text-xs text-slate-500 dark:text-stone-400 font-mono">
-              <div>HQ: Kigali, Rwanda &bull; Global Operations</div>
-              <div>Direct: contact@datasphere.rw</div>
-            </div>
           </motion.div>
 
           {/* Right Column: Floating White Form Card */}
@@ -135,9 +129,9 @@ export default function ContactPage() {
             className="lg:col-span-7"
           >
             <div className="bg-white dark:bg-stone-900 rounded-[28px] p-6 sm:p-10 lg:p-12 shadow-xl border border-slate-200/80 dark:border-stone-800 text-slate-900 dark:text-stone-100">
-              
+
               <form onSubmit={handleSubmit} className="space-y-5">
-                
+
                 {/* Row 1: First Name & Last Name */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
                   <div className="space-y-1.5">
