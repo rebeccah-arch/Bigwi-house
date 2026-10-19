@@ -643,3 +643,230 @@ export const techCapabilities = [
     icon: 'CloudLightning'
   }
 ]
+
+export interface LeaderProfile {
+  id: string
+  name: string
+  shortName: string
+  displayRole: string
+  role: string
+  division: 'DataSphere Advisory' | 'BIGWI HOUSE Delivery'
+  credential: string
+  bio: string
+  image: string
+  specialties: string[]
+  certifications: string[]
+  education: string
+  linkedinUrl: string
+  email: string
+  authoredInsightId?: string
+}
+
+export const leadershipTeam: LeaderProfile[] = [
+  {
+    id: 'sandrine-umutoni',
+    name: 'Sandrine Umutoni',
+    shortName: 'Sandrine',
+    displayRole: 'Senior Geospatial Analyst',
+    role: 'Lead GIS & Geospatial Telemetry Specialist',
+    division: 'BIGWI HOUSE Delivery',
+    credential: 'PostGIS & Remote Sensing Analytics Specialist',
+    bio: 'Transforms high-frequency GPS telemetry, farm-level spatial maps, and regional logistics data into interactive executive decision cockpits and routing heatmaps.',
+    image: '/images/team/member-sandrine.jpg',
+    specialties: ['Geospatial GIS Telemetry', 'PostGIS & Spatial SQL', 'Fleet Route Optimization', 'Remote Sensing'],
+    certifications: ['PostGIS GIS Specialist', 'QGIS Remote Sensing', 'Carto Spatial Analyst'],
+    education: 'B.Sc. Geomatics & Environmental Engineering, UR',
+    linkedinUrl: 'https://linkedin.com',
+    email: 'sandrine.u@datasphere.rw'
+  },
+  {
+    id: 'aimable-bigwi',
+    name: 'Aimable Bigwi Mugisha',
+    shortName: 'Aimable',
+    displayRole: 'Agency Director',
+    role: 'Managing Director & Principal Architect',
+    division: 'DataSphere Advisory',
+    credential: 'M.Sc. Enterprise Architecture & Systems Design',
+    bio: 'Over 14 years advising boardrooms, ministries, and regional commercial enterprises on data sovereignty, modern lakehouse roadmaps, and digital capability building. Direct engagement on high-stakes institutional advisory and technical governance.',
+    image: '/images/team/leader-managing-director.jpg',
+    specialties: ['Enterprise Data Strategy', 'National Data Sovereignty', 'Lakehouse Architecture', 'Executive Advisory'],
+    certifications: ['AWS Solutions Architect Professional', 'TOGAF 9 Enterprise Architect', 'Certified Data Management Professional (CDMP)'],
+    education: 'M.Sc. Computer Engineering, University of Rwanda / Carnegie Mellon Africa',
+    linkedinUrl: 'https://linkedin.com',
+    email: 'aimable.b@datasphere.rw',
+    authoredInsightId: 'practical-ai-readiness'
+  },
+  {
+    id: 'dr-claire-uwase',
+    name: 'Dr. Claire Uwase',
+    shortName: 'Claire',
+    displayRole: 'Head of Applied AI',
+    role: 'Head of Applied AI & Machine Learning',
+    division: 'BIGWI HOUSE Delivery',
+    credential: 'Ph.D. in Computational Intelligence & Statistics',
+    bio: 'Directs the applied data science and predictive analytics practice at BIGWI HOUSE. Specializes in explainable machine learning, credit underwriting algorithms, NLP document intelligence, and real-time MLOps model decay telemetry.',
+    image: '/images/team/leader-applied-ai.jpg',
+    specialties: ['Predictive ML Modeling', 'Credit Risk & Scoring', 'NLP Document Intelligence', 'MLOps & Drift Telemetry'],
+    certifications: ['PyTorch Deep Learning Specialist', 'TensorFlow Production ML', 'Stanford ML Specialization'],
+    education: 'Ph.D. Computer Science & Applied Statistics',
+    linkedinUrl: 'https://linkedin.com',
+    email: 'claire.u@datasphere.rw',
+    authoredInsightId: 'genai-agentic-data-architecture'
+  },
+  {
+    id: 'diane-mukamana',
+    name: 'Diane Mukamana',
+    shortName: 'Diane',
+    displayRole: 'People & Culture',
+    role: 'Director of Decision Intelligence & Client Solutions',
+    division: 'DataSphere Advisory',
+    credential: 'Lead Analytics & Executive Intelligence Consultant',
+    bio: 'Bridges institutional leadership strategy and operational execution. Specializes in executive KPI portals, geospatial GIS telemetry systems, self-service BI governance, and change management for enterprise clients.',
+    image: '/images/team/leader-analytics.jpg',
+    specialties: ['Executive Decision Dashboards', 'Geospatial GIS Telemetry', 'Self-Service BI Adoption', 'Institutional Change Management'],
+    certifications: ['Microsoft Certified Power BI Data Analyst', 'GIS & Remote Sensing Specialist', 'Certified Scrum Product Owner (CSPO)'],
+    education: 'M.Sc. Information Systems Management & Economics',
+    linkedinUrl: 'https://linkedin.com',
+    email: 'diane.m@datasphere.rw',
+    authoredInsightId: 'logistics-dispatch-telematics'
+  },
+  {
+    id: 'kevin-mugabo',
+    name: 'Kevin Mugabo',
+    shortName: 'Kevin',
+    displayRole: 'Front-end Developer',
+    role: 'Senior Lakehouse & Data Platform Engineer',
+    division: 'BIGWI HOUSE Delivery',
+    credential: 'Delta Lake & Modern Data Stack Specialist',
+    bio: 'Builds automated batch and streaming ingestion pipelines, Medallion layer transformations in dbt, and clean dashboard data models for low-latency queries.',
+    image: '/images/team/member-kevin.jpg',
+    specialties: ['dbt SQL Transformations', 'ClickHouse Analytics', 'Airflow Orchestration', 'Data Quality Contracts'],
+    certifications: ['dbt Certified Developer', 'Databricks Associate Engineer'],
+    education: 'B.Sc. Computer Science',
+    linkedinUrl: 'https://linkedin.com',
+    email: 'kevin.m@datasphere.rw'
+  },
+  {
+    id: 'jean-paul-habimana',
+    name: 'Jean-Paul Habimana',
+    shortName: 'Jean-Paul',
+    displayRole: 'Head of Engineering',
+    role: 'Head of Data Engineering & Cloud Platforms',
+    division: 'BIGWI HOUSE Delivery',
+    credential: 'Principal Lakehouse & Streaming Architect',
+    bio: 'Architects robust, high-throughput ingestion pipelines and scalable cloud data warehouses. Deep technical authority across Medallion Delta Lake layers, ClickHouse, Apache Kafka, dbt transformations, and zero-downtime cloud infrastructure.',
+    image: '/images/team/leader-data-engineering.jpg',
+    specialties: ['Medallion Lakehouse (Delta/dbt)', 'Streaming Ingestion (Kafka/Redis)', 'High-Speed SQL (ClickHouse)', 'Infrastructure as Code (Terraform)'],
+    certifications: ['Databricks Certified Data Engineer Professional', 'dbt Certified Developer', 'Google Cloud Professional Data Engineer'],
+    education: 'B.Sc. Software Engineering & Distributed Systems',
+    linkedinUrl: 'https://linkedin.com',
+    email: 'jp.habimana@datasphere.rw',
+    authoredInsightId: 'lakehouse-bronze-silver-gold'
+  },
+  {
+    id: 'aline-gasana',
+    name: 'Aline Gasana',
+    shortName: 'Aline',
+    displayRole: 'MLOps Lead',
+    role: 'Applied ML & Model Drift Telemetry Specialist',
+    division: 'BIGWI HOUSE Delivery',
+    credential: 'M.Sc. Machine Learning & Computer Vision',
+    bio: 'Designs containerized inference microservices, automated validation test suites, and model decay telemetry tracking population drift in production financial models.',
+    image: '/images/team/member-aline.jpg',
+    specialties: ['MLOps & Automated CI/CD', 'Model Drift Telemetry', 'FastAPI Microservices', 'PyTorch Inference'],
+    certifications: ['AWS Machine Learning Specialty', 'Kubernetes CKA', 'MLflow Certified'],
+    education: 'M.Sc. Artificial Intelligence, CMU Africa',
+    linkedinUrl: 'https://linkedin.com',
+    email: 'aline.g@datasphere.rw'
+  },
+  {
+    id: 'eric-nkurunziza',
+    name: 'Eric Nkurunziza',
+    shortName: 'Eric',
+    displayRole: 'Lead Systems Engineer',
+    role: 'Lead Platform & Cloud Architect',
+    division: 'BIGWI HOUSE Delivery',
+    credential: 'Cloud Infrastructure & Offline Sync Architect',
+    bio: 'Leads edge computing, offline-first mobile survey engines, multi-tenant cloud hosting, and security hardening for government and enterprise deployments.',
+    image: '/images/team/member-eric.jpg',
+    specialties: ['Offline-First Sync Engines', 'Kubernetes & Docker', 'Terraform Cloud IaC', 'SOC 2 & ISO Security'],
+    certifications: ['AWS DevOps Professional', 'HashiCorp Terraform Associate'],
+    education: 'B.Sc. Computer Engineering',
+    linkedinUrl: 'https://linkedin.com',
+    email: 'eric.n@datasphere.rw'
+  }
+]
+
+
+export interface TeamPractice {
+  title: string
+  code: string
+  disciplines: string[]
+  focus: string
+  leadRole: string
+  headcount: string
+  certifications: string[]
+}
+
+export const teamPractices: TeamPractice[] = [
+  {
+    title: 'Data Foundations & Lakehouse Engineering',
+    code: 'PRACTICE 01',
+    disciplines: ['Lakehouse Architects', 'Senior Pipeline Engineers', 'Analytics Engineers', 'Database Tuning Specialists'],
+    focus: 'Resilient ETL/ELT pipelines, Medallion storage layers, schema validation, and real-time Kafka/ClickHouse telemetry.',
+    leadRole: 'Led by Principal Lakehouse Architect',
+    headcount: '8 In-House Engineers',
+    certifications: ['Databricks Certified', 'dbt Core', 'AWS Data Analytics']
+  },
+  {
+    title: 'Applied AI, Machine Learning & MLOps',
+    code: 'PRACTICE 02',
+    disciplines: ['Machine Learning Engineers', 'Research Statisticians', 'NLP Specialists', 'MLOps Infrastructure Leads'],
+    focus: 'Custom risk models, predictive forecasting, automated document extraction, and containerized inference APIs.',
+    leadRole: 'Led by Head of Applied AI',
+    headcount: '6 Applied Data Scientists',
+    certifications: ['PyTorch', 'MLflow', 'Kubernetes CKA']
+  },
+  {
+    title: 'Decision Intelligence & Executive Portals',
+    code: 'PRACTICE 03',
+    disciplines: ['BI Solutions Architects', 'Data Visualization Designers', 'GIS Spatial Analysts', 'Business Domain Leads'],
+    focus: 'Tailored executive dashboards, geospatial heatmaps, automated PDF/email board briefings, and self-service analytics.',
+    leadRole: 'Led by Director of Decision Intelligence',
+    headcount: '5 Analytics Consultants',
+    certifications: ['Power BI Certified', 'PostGIS GIS', 'Tableau Desktop']
+  },
+  {
+    title: 'Enterprise Software & Cloud Platforms',
+    code: 'PRACTICE 04',
+    disciplines: ['Full-Stack Software Engineers', 'Mobile/Offline Systems Developers', 'DevSecOps & Cloud Engineers'],
+    focus: 'Offline-capable mobile apps (React Native/Flutter), secure multi-tenant web portals, and zero-downtime cloud hosting.',
+    leadRole: 'Led by Lead Systems Architect',
+    headcount: '7 Platform Engineers',
+    certifications: ['AWS DevOps Professional', 'Docker/K8s', 'ISO 27001 Foundation']
+  }
+]
+
+export const verifiableGovernancePoints = [
+  {
+    title: '100% In-House Engineering',
+    description: 'We do not subcontract or outsource client projects to anonymous third parties. Every line of code, pipeline, and model is engineered by our verified Kigali team.',
+    badge: 'Direct Accountability'
+  },
+  {
+    title: 'Direct Senior Partner Access',
+    description: 'Clients work directly alongside senior enterprise architects and practice directors from initial discovery through production deployment and SLA reviews.',
+    badge: 'No Account Managers'
+  },
+  {
+    title: 'Verifiable Credentials & Track Record',
+    description: 'Our consultants hold certified credentials across AWS, Databricks, dbt, and Linux foundations, with verifiable delivery milestones across Africa.',
+    badge: 'Industry Certified'
+  },
+  {
+    title: 'Data Sovereignty & IP Ownership',
+    description: 'Clients retain 100% ownership of source code, schemas, and proprietary trained weights. Complete documentation and knowledge transfer guaranteed.',
+    badge: 'Zero Vendor Lock-in'
+  }
+]
+

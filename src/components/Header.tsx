@@ -7,19 +7,45 @@ import { usePathname } from 'next/navigation'
 import {
   Menu,
   X,
-  ChevronRight
+  ChevronRight,
+  ChevronDown
 } from '@/components/Icons'
 
 interface HeaderProps {
   onOpenProposal?: () => void
 }
 
-const NAV_ITEMS = [
+interface NavItem {
+  href: string
+  label: string
+  children?: {
+    href: string
+    label: string
+    description?: string
+  }[]
+}
+
+const NAV_ITEMS: NavItem[] = [
   { href: '/', label: 'Home' },
   { href: '/services', label: 'Services' },
   { href: '/work', label: 'Our Work' },
   { href: '/insights', label: 'Insights' },
-  { href: '/about', label: 'About Us' },
+  {
+    href: '/about',
+    label: 'About Us',
+    children: [
+      {
+        href: '/about',
+        label: 'About DataSphere',
+        description: 'Institutional advisory & BIGWI HOUSE delivery hub'
+      },
+      {
+        href: '/team',
+        label: 'Our Leadership Team',
+        description: 'Visible, verifiable practice directors & architects'
+      }
+    ]
+  },
   { href: '/contact', label: 'Contact' },
 ]
 
@@ -40,7 +66,12 @@ export default function Header({ onOpenProposal }: HeaderProps) {
     setMenuOpen(false)
   }, [pathname])
 
-  const isDarkHero = pathname === '/' || pathname === '/about' || pathname === '/approach' || pathname === '/contact'
+  const isDarkHero =
+    pathname === '/' ||
+    pathname === '/about' ||
+    pathname === '/approach' ||
+    pathname === '/contact' ||
+    pathname === '/team'
 
   return (
     <header
@@ -70,7 +101,58 @@ export default function Header({ onOpenProposal }: HeaderProps) {
         {/* Center: Desktop Clean Navigation Links */}
         <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
           {NAV_ITEMS.map((item) => {
-            const isActive = pathname === item.href
+            const isActive =
+              pathname === item.href ||
+              (item.children && item.children.some((child) => pathname === child.href))
+
+            if (item.children) {
+              return (
+                <div key={item.label} className="relative group py-2">
+                  <Link
+                    href={item.href}
+                    className={`inline-flex items-center gap-1.5 text-sm font-medium transition-colors duration-200 ${
+                      isActive
+                        ? 'text-white font-semibold border-b-2 border-teal-400 pb-0.5'
+                        : 'text-zinc-300 hover:text-white'
+                    }`}
+                  >
+                    <span>{item.label}</span>
+                    <ChevronDown className="h-3.5 w-3.5 text-zinc-400 group-hover:text-white transition-transform duration-200 group-hover:rotate-180" />
+                  </Link>
+
+                  {/* Dropdown Menu */}
+                  <div className="absolute top-full left-0 pt-2 w-80 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                    <div className="rounded-2xl border border-slate-700/80 bg-[#060911] p-2.5 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.95)] space-y-1">
+                      {item.children.map((child) => {
+                        const isChildActive = pathname === child.href
+                        return (
+                          <Link
+                            key={child.href}
+                            href={child.href}
+                            className={`block p-3 rounded-xl transition-all duration-200 group/item ${
+                              isChildActive
+                                ? 'bg-slate-800/90 text-white border-l-2 border-teal-400 pl-3.5'
+                                : 'hover:bg-slate-800/60 text-slate-200 hover:text-white'
+                            }`}
+                          >
+                            <div className="flex items-center justify-between text-sm font-semibold text-white group-hover/item:text-teal-300">
+                              <span>{child.label}</span>
+                              <ChevronRight className={`h-4 w-4 text-teal-400 transition-transform duration-200 group-hover/item:translate-x-1 ${isChildActive ? 'opacity-100' : 'opacity-0 group-hover/item:opacity-100'}`} />
+                            </div>
+                            {child.description && (
+                              <div className="text-xs text-slate-300 font-normal leading-relaxed mt-1 group-hover/item:text-slate-100">
+                                {child.description}
+                              </div>
+                            )}
+                          </Link>
+                        )
+                      })}
+                    </div>
+                  </div>
+                </div>
+              )
+            }
+
             return (
               <Link
                 key={item.href}
@@ -123,6 +205,42 @@ export default function Header({ onOpenProposal }: HeaderProps) {
             </div>
 
             {NAV_ITEMS.map((item) => {
+              if (item.children) {
+                const isGroupActive =
+                  pathname === item.href ||
+                  item.children.some((child) => pathname === child.href)
+
+                return (
+                  <div key={item.label} className="flex flex-col space-y-1 pt-1">
+                    <div className="flex items-center justify-between px-4 py-2 text-xs font-mono font-bold uppercase tracking-wider text-zinc-400">
+                      <span>{item.label}</span>
+                    </div>
+                    <div className="pl-3 border-l-2 border-zinc-800 ml-4 space-y-1">
+                      {item.children.map((child) => {
+                        const isChildActive = pathname === child.href
+                        return (
+                          <Link
+                            key={child.href}
+                            href={child.href}
+                            onClick={() => setMenuOpen(false)}
+                            className={`flex flex-col rounded-lg px-3 py-2 text-sm transition-colors ${
+                              isChildActive
+                                ? 'bg-zinc-800/80 text-white font-bold border-l-2 border-teal-400'
+                                : 'text-zinc-300 hover:bg-zinc-900/80 hover:text-white'
+                            }`}
+                          >
+                            <span className="font-semibold text-xs text-white">{child.label}</span>
+                            {child.description && (
+                              <span className="text-xs text-slate-300 font-normal leading-snug mt-0.5">{child.description}</span>
+                            )}
+                          </Link>
+                        )
+                      })}
+                    </div>
+                  </div>
+                )
+              }
+
               const isActive = pathname === item.href
               return (
                 <Link

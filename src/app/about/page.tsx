@@ -8,20 +8,16 @@ import {
   Building2,
   ArrowRight,
   CheckCircle2,
-  Compass,
-  Target,
-  ShieldCheck,
-  Cpu,
-  Layers,
-  BarChart3,
   Server
 } from '@/components/Icons'
 import {
   orgStructure,
-  vision,
-  mission,
   companyValues
 } from '@/content/bigwiContent'
+import LeadershipTeamSection from '@/components/about/LeadershipTeamSection'
+import MissionVisionSection from '@/components/about/MissionVisionSection'
+
+
 
 export default function AboutPage() {
   return (
@@ -88,10 +84,10 @@ export default function AboutPage() {
               </Link>
 
               <Link
-                href="/services"
+                href="#team"
                 className="inline-flex items-center justify-center rounded-full border border-stone-700 bg-stone-900/60 backdrop-blur-sm px-7 py-3.5 text-xs sm:text-sm font-semibold text-white transition-all duration-300 hover:border-white hover:bg-white/10"
               >
-                <span>View 4 core practices</span>
+                <span>Leadership &amp; Team</span>
               </Link>
             </motion.div>
 
@@ -237,35 +233,12 @@ export default function AboutPage() {
 
         </div>
       </section>
-      {/* 6. Clean Institutional Consultation CTA */}
-      <section className="bg-[#080a11] text-white py-20 sm:py-24 text-center">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-          <span className="font-mono text-xs uppercase tracking-widest text-blue-400 font-semibold">
-            Institutional Partnership
-          </span>
 
-          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight leading-tight">
-            Ready to structure your enterprise data foundations?
-          </h2>
-
-          <p className="text-stone-300 max-w-xl mx-auto text-sm sm:text-base leading-relaxed">
-            Schedule a strategic discovery session with our senior solution architects to assess your infrastructure and roadmap realistic implementation milestones.
-          </p>
-
-          <div className="pt-3">
-            <Link
-              href="/contact"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-white hover:bg-stone-200 text-slate-950 font-bold px-8 py-3.5 text-xs sm:text-sm tracking-wide shadow-md transition-all duration-300"
-            >
-              <span>Discuss your project</span>
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* 4. LEADERSHIP & TEAM SECTION (id="team") */}
+      <LeadershipTeamSection />
 
 
-      {/* 4. Quantium-Style 4 Core Operating Principles */}
+      {/* 5. Quantium-Style 4 Core Operating Principles */}
       <section className="py-20 sm:py-28 max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 border-b border-slate-200 dark:border-stone-800/80">
         <div className="space-y-12">
 
@@ -304,33 +277,38 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 5. Mission & Vision */}
-      <section className="py-20 sm:py-24 max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 border-b border-slate-200 dark:border-stone-800/80">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {/* 6. Mission & Vision */}
+      <MissionVisionSection />
 
-          <div className="p-8 sm:p-10 border border-slate-200 dark:border-stone-800 bg-slate-50/50 dark:bg-stone-900/30 space-y-4">
-            <div className="flex items-center gap-3">
-              <Compass className="h-5 w-5 text-blue-600 dark:text-blue-400" />
-              <h3 className="font-serif text-xl font-bold text-slate-950 dark:text-white">Our Vision</h3>
-            </div>
-            <p className="text-sm text-slate-700 dark:text-stone-300 leading-relaxed font-normal">
-              {vision}
-            </p>
+
+      {/* 7. Clean Institutional Consultation CTA (At the bottom of the page) */}
+      <section className="bg-[#080a11] text-white py-20 sm:py-24 text-center">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+          <span className="font-mono text-xs uppercase tracking-widest text-blue-400 font-semibold">
+            Institutional Partnership
+          </span>
+
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight leading-tight">
+            Ready to structure your enterprise data foundations?
+          </h2>
+
+          <p className="text-stone-300 max-w-xl mx-auto text-sm sm:text-base leading-relaxed">
+            Schedule a strategic discovery session with our senior solution architects to assess your infrastructure and roadmap realistic implementation milestones.
+          </p>
+
+          <div className="pt-3">
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-white hover:bg-stone-200 text-slate-950 font-bold px-8 py-3.5 text-xs sm:text-sm tracking-wide shadow-md transition-all duration-300"
+            >
+              <span>Discuss your project</span>
+              <ArrowRight className="h-4 w-4" />
+            </Link>
           </div>
-
-          <div className="p-8 sm:p-10 border border-slate-200 dark:border-stone-800 bg-slate-50/50 dark:bg-stone-900/30 space-y-4">
-            <div className="flex items-center gap-3">
-              <Target className="h-5 w-5 text-blue-600 dark:text-blue-400" />
-              <h3 className="font-serif text-xl font-bold text-slate-950 dark:text-white">Our Mission</h3>
-            </div>
-            <p className="text-sm text-slate-700 dark:text-stone-300 leading-relaxed font-normal">
-              {mission}
-            </p>
-          </div>
-
         </div>
       </section>
 
     </div>
   )
 }
+

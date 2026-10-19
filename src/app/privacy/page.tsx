@@ -20,8 +20,8 @@ export default function PrivacyPage() {
         </div>
 
         {/* Header */}
-        <div className="space-y-3 pb-6 border-b border-slate-200 dark:border-slate-800">
-          <div className="inline-flex items-center gap-2 rounded-full border border-teal-500/30 bg-teal-50 dark:bg-teal-950/60 px-3 py-1 text-xs font-mono text-teal-800 dark:text-teal-300">
+        <div className="space-y-3 pb-6">
+          <div className="inline-flex items-center gap-2 rounded-full bg-teal-50 dark:bg-teal-950/60 px-3 py-1 text-xs font-mono text-teal-800 dark:text-teal-300">
             <ShieldCheck className="h-3.5 w-3.5" />
             <span>Data Protection &amp; Confidentiality</span>
           </div>
@@ -42,7 +42,7 @@ export default function PrivacyPage() {
             <p>
               DataSphere Consulting Ltd (&ldquo;DataSphere&rdquo;) and its specialized consultancy hub, BIGWI HOUSE, operate with strict data sovereignty principles. We recognize that our clients—including financial institutions, public entities, international development partners, and commercial enterprises—entrust us with sensitive operational records, databases, and proprietary workflows.
             </p>
-            <div className="rounded-2xl border border-teal-200 dark:border-teal-800 bg-teal-50/50 dark:bg-teal-950/30 p-4 space-y-2">
+            <div className="rounded-2xl bg-teal-50/50 dark:bg-teal-950/30 p-4 space-y-2">
               <strong className="block text-teal-900 dark:text-teal-200 font-semibold">Core Principle:</strong>
               <p className="text-xs text-slate-700 dark:text-slate-300">
                 You retain 100% ownership and intellectual property rights over all raw data, schemas, trained model weights, and custom codebase artifacts created during our engagements. We never pool, resell, or repurpose client data for generic AI training.
@@ -94,7 +94,7 @@ export default function PrivacyPage() {
             <p>
               For questions regarding this policy, data processing agreements, or to request record deletion, please contact our team directly:
             </p>
-            <div className="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 font-mono text-xs text-slate-700 dark:text-slate-300 space-y-1">
+            <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-900 font-mono text-xs text-slate-700 dark:text-slate-300 space-y-1">
               <p className="font-bold text-slate-900 dark:text-white">DataSphere Consulting Ltd &bull; BIGWI HOUSE</p>
               <p>Email: <a href="mailto:contact@datasphere.rw" className="text-teal-700 dark:text-teal-400 hover:underline">contact@datasphere.rw</a></p>
               <p>Location: Kigali, Rwanda</p>
