@@ -392,10 +392,10 @@ export default function WorkPage() {
 
   return (
     <div className="w-full min-h-screen bg-white dark:bg-[#0b0f19] text-slate-900 dark:text-stone-100 transition-colors duration-300">
-      
+
       {/* 1. Header Masthead (Exact McKinsey QuantumBlack Style) */}
       <section className="pt-6 sm:pt-8 md:pt-10 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 max-w-[1240px] mx-auto text-center space-y-5">
-        
+
         {/* Top-Left Back Link */}
         <div className="text-left mb-4">
           <Link
@@ -502,7 +502,7 @@ export default function WorkPage() {
 
               {/* Case Breakdown Grid */}
               <div className="space-y-5 text-sm text-slate-700 dark:text-stone-300 leading-relaxed font-normal">
-                
+
                 {/* Challenge */}
                 <div className="space-y-1.5">
                   <h4 className="font-mono text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white">

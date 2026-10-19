@@ -82,7 +82,7 @@ export default function ApproachPage() {
                 href="/work"
                 className="inline-flex items-center justify-center rounded-full border border-stone-700 bg-stone-900/60 backdrop-blur-sm px-7 py-3.5 text-xs sm:text-sm font-semibold text-white transition-all duration-300 hover:border-white hover:bg-white/10"
               >
-                <span>Explore case studies</span>
+                <span>Explore Our Work</span>
               </Link>
             </motion.div>
 

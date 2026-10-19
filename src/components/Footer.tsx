@@ -61,7 +61,7 @@ export default function Footer() {
                   Approach
                 </Link>
                 <Link href="/work" className="text-zinc-400 hover:text-white transition-colors duration-200">
-                  Case Studies
+                  Our Work
                 </Link>
               </div>
               <div className="flex flex-col space-y-2.5">
