@@ -51,16 +51,13 @@ const WHAT_WE_DELIVER_ITEMS = [
 export default function WhatWeSolveSection() {
   return (
     <div className="w-full transition-colors duration-300">
-      
+
       {/* 1. Quantium 'How We Work' 3-Column Strip */}
       <section className="bg-[#f8f9fb] dark:bg-stone-950 p-8 sm:p-12 lg:p-16 border-b border-slate-200 dark:border-stone-900">
         <div className="max-w-[1240px] mx-auto space-y-12">
           <div className="max-w-3xl space-y-2">
-            <span className="font-mono text-xs font-bold uppercase tracking-wider text-teal-600 dark:text-teal-400">
-              HOW WE WORK
-            </span>
-            <h2 className="font-display font-extrabold text-2xl sm:text-3xl lg:text-4xl text-slate-900 dark:text-white tracking-tight">
-              Engineering real-world decision intelligence
+            <h2 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-slate-900 dark:text-white tracking-tight">
+              How We Work
             </h2>
           </div>
 
@@ -92,7 +89,7 @@ export default function WhatWeSolveSection() {
       {/* 2. Quantium 'What We Deliver' (Exact Layout from Screenshot) */}
       <section id="what-we-deliver" className="bg-[#eae7e1] dark:bg-[#0c0f17] text-slate-950 dark:text-stone-100 border-b border-stone-300 dark:border-stone-900 overflow-hidden">
         <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[580px] items-stretch">
-          
+
           {/* Left Column: Full-Height Team Photo from Screenshot */}
           <div className="lg:col-span-6 relative min-h-[380px] sm:min-h-[480px] lg:min-h-full w-full bg-stone-300 dark:bg-stone-900 overflow-hidden">
             <Image
