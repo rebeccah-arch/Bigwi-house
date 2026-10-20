@@ -78,18 +78,18 @@ const SERVICES_DATA: ServiceItem[] = [
     technologies: ['Apache Superset', 'Power BI', 'Metabase', 'dbt', 'SQL', 'PostgreSQL']
   },
   {
-    id: 'applied-analytics-ai',
+    id: 'applied-analytics',
     number: '03',
-    title: 'Applied analytics and AI',
-    pillar: 'Applied Machine Learning & Advanced Analytics',
+    title: 'Applied analytics',
+    pillar: 'Advanced Analytics & Statistical Modeling',
     image: '/images/insights/neural_helix.jpg',
-    deliverablesSummary: 'Forecasting, segmentation, predictive models, and carefully scoped automation.',
+    deliverablesSummary: 'Forecasting, segmentation, statistical predictive models, and decision intelligence.',
     problemSolves:
-      'Organizations often make critical resource allocation choices—such as medical supply orders, beneficiary prioritization, or seasonal staffing—based on intuition or backward-looking averages. Unnecessary manual workflows slow down operations where practical statistical models could provide clear guidance.',
+      'Organizations often make critical resource allocation choices—such as supply orders, beneficiary prioritization, or seasonal staffing—based on intuition or backward-looking averages. Unnecessary manual workflows slow down operations where practical statistical models and clear decision intelligence can provide reliable guidance.',
     clientReceives: [
       'Custom predictive models tailored to operational realities (e.g. risk scoring, demand forecasting)',
       'Beneficiary, facility, or client segmentation models identifying distinct behavioral clusters',
-      'Carefully scoped workflow automation for routine text classification or document extraction',
+      'Carefully scoped workflow automation for routine data categorization and document extraction',
       'Lightweight, containerized inference endpoints or integrated dashboard scorecards',
       'Full model evaluation benchmarks, error analysis, and operational guidelines'
     ],
@@ -98,8 +98,8 @@ const SERVICES_DATA: ServiceItem[] = [
     successEvaluation:
       'Evaluated by measurable accuracy improvements over baseline heuristics (e.g. fewer supply stock-outs, improved targeting precision), low latency, transparent model explainability, and sustained adoption by front-line staff without workflow disruption.',
     ngoApplication:
-      'Predictive stock-out forecasting for essential medicines and agricultural inputs; vulnerability segmentation to prioritize cash transfer or nutrition interventions; and automated document classification for incoming field incident reports. (Emphasizing robust, interpretable statistical methods rather than unnecessary high-cost AI hype).',
-    technologies: ['Python', 'Scikit-Learn', 'FastAPI', 'PyTorch', 'LangChain', 'Docker']
+      'Predictive stock-out forecasting for essential medicines and agricultural inputs; vulnerability segmentation to prioritize cash transfer or nutrition interventions; and automated categorization for incoming field incident reports. (Emphasizing robust, interpretable statistical methods and actionable decision modeling).',
+    technologies: ['Python', 'Scikit-Learn', 'Pandas', 'FastAPI', 'Docker', 'PostgreSQL']
   },
   {
     id: 'data-strategy-training',
@@ -131,7 +131,7 @@ const TABS = [
   { label: 'All Practices', value: 'All' },
   { label: 'Data management and engineering', value: 'data-management-engineering' },
   { label: 'Dashboards and reporting', value: 'dashboards-reporting' },
-  { label: 'Applied analytics and AI', value: 'applied-analytics-ai' },
+  { label: 'Applied analytics', value: 'applied-analytics' },
   { label: 'Data strategy and training', value: 'data-strategy-training' }
 ]
 
@@ -151,7 +151,7 @@ export default function ServicesPage() {
       <section className="pt-8 sm:pt-12 md:pt-14 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto text-center space-y-6">
 
         {/* Top-Left Back Link */}
-        <div className="text-left mb-2">
+        {/* <div className="text-left mb-2">
           <Link
             href="/"
             className="inline-flex items-center gap-1.5 text-xs font-mono text-slate-500 dark:text-stone-400 hover:text-slate-900 dark:hover:text-white transition-colors"
@@ -159,7 +159,7 @@ export default function ServicesPage() {
             <ArrowLeft className="h-3.5 w-3.5" />
             <span>Return to Overview</span>
           </Link>
-        </div>
+        </div> */}
 
         {/* Centered Page Title & Strategic Description */}
         <motion.div
@@ -172,7 +172,7 @@ export default function ServicesPage() {
             Specialized Practice Areas
           </div> */}
 
-          <h1 className="font-serif text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-slate-950 dark:text-white leading-[1.08]">
+          <h1 className="font-display text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-slate-950 dark:text-white leading-[1.08]">
             Capabilities &amp; Services
           </h1>
 
@@ -200,8 +200,8 @@ export default function ServicesPage() {
               type="button"
               onClick={() => setSelectedTab(tab.value)}
               className={`rounded-full px-4 py-2 text-xs font-semibold transition-all ${selectedTab === tab.value
-                  ? 'bg-slate-950 text-white shadow-sm dark:bg-blue-600 dark:text-white'
-                  : 'bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-stone-900 dark:text-stone-300 dark:hover:bg-stone-800'
+                ? 'bg-slate-950 text-white shadow-sm dark:bg-blue-600 dark:text-white'
+                : 'bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-stone-900 dark:text-stone-300 dark:hover:bg-stone-800'
                 }`}
             >
               {tab.label}
@@ -211,119 +211,45 @@ export default function ServicesPage() {
 
       </section>
 
-      {/* 2. Services Grid (2x2 Balanced Layout) */}
-      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 pb-24">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10">
+      {/* 2. Services Grid (Clean McKinsey Style Matching /work) */}
+      <section className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 pb-32">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12 sm:gap-x-10 sm:gap-y-16">
           {filteredServices.map((service, idx) => (
             <motion.article
               key={service.id}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-30px' }}
-              transition={{ duration: 0.5, delay: idx * 0.08 }}
+              transition={{ duration: 0.5, delay: (idx % 2) * 0.08, ease: [0.16, 1, 0.3, 1] }}
               onClick={() => setActiveService(service)}
-              className="group cursor-pointer flex flex-col justify-between rounded-2xl border border-slate-200 dark:border-stone-800 bg-white dark:bg-stone-900/40 p-6 sm:p-8 shadow-sm hover:border-blue-500/50 dark:hover:border-blue-500/50 hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+              className="group cursor-pointer flex flex-col justify-start"
             >
-              <div className="space-y-5">
-
-                {/* Clean Aspect Image Card with Number Badge */}
-                <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl bg-slate-950">
-                  <Image
-                    src={service.image}
-                    alt={service.title}
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                    className="object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out"
-                  />
-
-                  {/* Floating Number Badge */}
-                  <div className="absolute top-3.5 left-3.5 z-10">
-                    <span className="rounded-full bg-slate-950/80 backdrop-blur-md border border-white/20 px-3 py-1 text-xs font-mono font-bold text-white shadow-sm">
-                      Practice {service.number}
-                    </span>
-                  </div>
-
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
-                </div>
-
-                {/* Pillar Tag */}
-                <div className="flex items-center justify-between text-xs font-mono">
-                  <span className="font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider">
-                    {service.pillar}
-                  </span>
-                  <span className="text-slate-400 dark:text-stone-500">
-                    Kigali &bull; BIGWI HOUSE
-                  </span>
-                </div>
-
-                {/* Title with Blue Chevron */}
-                <h3 className="font-serif font-bold text-2xl sm:text-3xl text-slate-950 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors leading-snug">
-                  <span>{service.title}</span>
-                  <span className="text-[#1A56DB] dark:text-[#3B82F6] font-bold ml-2 inline-block text-[22px] leading-none">&rsaquo;</span>
-                </h3>
-
-                {/* Core Deliverables Summary Callout */}
-                <div className="rounded-xl bg-slate-50 dark:bg-stone-900 border border-slate-200 dark:border-stone-800 p-3.5 space-y-1">
-                  <span className="text-[10px] font-mono uppercase tracking-wider text-blue-600 dark:text-teal-400 font-bold block">
-                    Deliverables Summary:
-                  </span>
-                  <p className="text-xs sm:text-sm font-semibold text-slate-900 dark:text-white leading-snug">
-                    {service.deliverablesSummary}
-                  </p>
-                </div>
-
-                {/* 1. What problem does it solve? */}
-                <div className="space-y-1.5">
-                  <span className="text-[11px] font-mono font-bold text-slate-900 dark:text-white uppercase tracking-wider block">
-                    What Problem Does It Solve?
-                  </span>
-                  <p className="text-xs sm:text-sm text-slate-600 dark:text-stone-300 leading-relaxed font-normal">
-                    {service.problemSolves}
-                  </p>
-                </div>
-
-                {/* 2. What will the client receive? */}
-                <div className="pt-3 border-t border-slate-100 dark:border-stone-800 space-y-2">
-                  <span className="text-[11px] font-mono font-bold text-slate-900 dark:text-white uppercase tracking-wider block">
-                    What Will The Client Receive?
-                  </span>
-                  <ul className="space-y-1.5">
-                    {service.clientReceives.slice(0, 3).map((item, dIdx) => (
-                      <li key={dIdx} className="flex items-start gap-2 text-xs sm:text-sm text-slate-600 dark:text-stone-300">
-                        <CheckCircle2 className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400 shrink-0 mt-0.5" />
-                        <span className="leading-snug">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  {service.clientReceives.length > 3 && (
-                    <span className="text-[11px] font-mono text-blue-600 dark:text-blue-400 block pt-0.5">
-                      +{service.clientReceives.length - 3} additional deliverable components
-                    </span>
-                  )}
-                </div>
-
-                {/* 3. NGO & Development Program Applications */}
-                <div className="rounded-xl bg-blue-50/50 dark:bg-stone-900/60 border border-blue-100 dark:border-stone-800 p-3.5 space-y-1">
-                  <span className="text-[10px] font-mono uppercase tracking-wider text-blue-700 dark:text-teal-400 font-bold block">
-                    NGO &amp; Development Program Focus:
-                  </span>
-                  <p className="text-xs text-slate-700 dark:text-stone-300 leading-relaxed font-normal">
-                    {service.ngoApplication}
-                  </p>
-                </div>
-
+              {/* Image Card: Clean 16:10 aspect ratio, no borders, natural photo, exact work style */}
+              <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-100 dark:bg-stone-900 mb-3.5">
+                <Image
+                  src={service.image}
+                  alt={service.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover object-center group-hover:scale-[1.03] transition-transform duration-500 ease-out"
+                />
               </div>
 
-              {/* Action Link at Bottom */}
-              <div className="pt-6 mt-6 border-t border-slate-100 dark:border-stone-800 flex items-center justify-between">
-                <span className="text-xs font-bold text-blue-600 dark:text-blue-400 group-hover:underline flex items-center gap-1">
-                  <span>View Full Scope, Inputs &amp; Success Criteria</span>
-                  <ArrowRight className="h-3.5 w-3.5" />
-                </span>
-                <span className="text-[11px] font-mono text-slate-400 dark:text-stone-500">
-                  Full Briefing
-                </span>
+              {/* Eyebrow / Pillar Tag */}
+              <div className="text-xs font-mono text-blue-600 dark:text-blue-400 font-bold uppercase tracking-wider mb-1.5">
+                Practice {service.number} &bull; {service.pillar}
               </div>
+
+              {/* Title with Blue Angle Bracket (Exact /work Style) */}
+              <h3 className="font-sans font-bold text-[17px] sm:text-[19px] text-slate-950 dark:text-stone-100 leading-[1.35] group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                <span>{service.title}</span>
+                <span className="text-[#1A56DB] dark:text-[#3B82F6] font-bold ml-1.5 inline-block text-[19px] leading-none">&rsaquo;</span>
+              </h3>
+
+              {/* Deliverables Summary */}
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-stone-400 leading-relaxed mt-2 font-normal">
+                {service.deliverablesSummary}
+              </p>
             </motion.article>
           ))}
         </div>
@@ -332,11 +258,7 @@ export default function ServicesPage() {
       {/* 3. Bottom Consultation Section */}
       <section className="bg-[#080a11] text-white py-20 sm:py-24 text-center border-t border-stone-800/80">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-          <span className="font-mono text-xs uppercase tracking-widest text-blue-400 font-semibold">
-            Institutional Technical Engagement
-          </span>
-
-          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight leading-tight">
+          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
             Ready to structure your enterprise data foundations?
           </h2>
 
@@ -385,7 +307,7 @@ export default function ServicesPage() {
                   <span>{activeService.pillar}</span>
                 </div>
 
-                <h2 className="font-serif text-2xl sm:text-3xl font-bold text-slate-950 dark:text-white leading-tight">
+                <h2 className="font-display text-2xl sm:text-3xl font-bold text-slate-950 dark:text-white leading-tight">
                   {activeService.title}
                 </h2>
 
@@ -463,7 +385,7 @@ export default function ServicesPage() {
                     {activeService.ngoApplication}
                   </p>
                   <p className="text-[11px] font-mono text-slate-500 dark:text-stone-400 pt-1">
-                    *Practical, robust data foundations prioritized—avoiding unnecessary high-cost AI where simple, maintainable tools deliver better long-term reliability.
+                    *Practical, robust data foundations prioritized—ensuring simple, maintainable tools deliver better long-term reliability.
                   </p>
                 </div>
 

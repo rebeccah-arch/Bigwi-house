@@ -8,9 +8,6 @@ import {
   CheckCircle2,
   AlertCircle,
   Loader2,
-  Mail,
-  MapPin,
-  Clock,
   ArrowRight
 } from '@/components/Icons'
 
@@ -201,27 +198,6 @@ export default function ContactPage() {
                     </span>
                   </div>
                 ))}
-              </div>
-
-              {/* Direct Office & Hub Card */}
-              <div className="p-6 rounded-2xl border border-slate-200 dark:border-stone-800 bg-white dark:bg-stone-900 shadow-sm space-y-4 text-xs text-slate-600 dark:text-stone-400">
-                <div className="flex items-center gap-2.5 text-slate-950 dark:text-white font-semibold text-sm">
-                  <MapPin className="h-4 w-4 text-teal-600 dark:text-teal-400" />
-                  <span>DataSphere Consulting Ltd &bull; BIGWI HOUSE</span>
-                </div>
-                <p className="text-slate-600 dark:text-stone-400 leading-relaxed">
-                  Kigali, Rwanda &bull; Serving international organizations, governments, and commercial enterprises globally.
-                </p>
-                <div className="pt-2 border-t border-slate-100 dark:border-stone-800 flex flex-col gap-2 font-mono text-[11px]">
-                  <div className="flex items-center gap-2 text-slate-800 dark:text-stone-300">
-                    <Mail className="h-3.5 w-3.5 text-teal-600 dark:text-teal-400" />
-                    <span>contact@datasphere.rw</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-slate-500 dark:text-stone-400">
-                    <Clock className="h-3.5 w-3.5 text-teal-600 dark:text-teal-400" />
-                    <span>Mon &ndash; Fri, 8:00 AM &ndash; 6:00 PM CAT</span>
-                  </div>
-                </div>
               </div>
             </motion.div>
 

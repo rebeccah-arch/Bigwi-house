@@ -397,7 +397,7 @@ export default function WorkPage() {
       <section className="pt-6 sm:pt-8 md:pt-10 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 max-w-[1240px] mx-auto text-center space-y-5">
 
         {/* Top-Left Back Link */}
-        <div className="text-left mb-4">
+        {/* <div className="text-left mb-4">
           <Link
             href="/"
             className="inline-flex items-center gap-1.5 text-xs text-slate-500 dark:text-stone-400 hover:text-slate-900 dark:hover:text-white transition-colors"
@@ -405,7 +405,7 @@ export default function WorkPage() {
             <ArrowLeft className="h-3 w-3" />
             <span>Back to Overview</span>
           </Link>
-        </div>
+        </div> */}
 
         {/* Centered Page Title */}
         <motion.div
@@ -415,7 +415,7 @@ export default function WorkPage() {
           className="space-y-4 max-w-3xl mx-auto text-center"
         >
           <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-bold tracking-tight text-slate-950 dark:text-white leading-[1.15]">
-            Case Studies
+            Our Works
           </h1>
 
           <p className="text-sm sm:text-base text-slate-600 dark:text-stone-300 max-w-2xl mx-auto leading-relaxed font-normal">
@@ -428,7 +428,7 @@ export default function WorkPage() {
               href="/contact"
               className="inline-flex items-center justify-center gap-2 rounded-full bg-slate-950 dark:bg-white hover:bg-slate-800 dark:hover:bg-stone-200 text-white dark:text-slate-950 font-bold px-7 py-3 text-xs sm:text-sm tracking-wide shadow-sm transition-all duration-300"
             >
-              <span>Discuss your project</span>
+              <span>Initiate AI stategy</span>
             </Link>
           </div>
         </motion.div>
