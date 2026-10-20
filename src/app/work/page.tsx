@@ -423,14 +423,14 @@ export default function WorkPage() {
           </p>
 
           {/* Centered Blue CTA Button */}
-          <div className="pt-2">
+          {/* <div className="pt-2">
             <Link
               href="/contact"
               className="inline-flex items-center justify-center gap-2 rounded-full bg-slate-950 dark:bg-white hover:bg-slate-800 dark:hover:bg-stone-200 text-white dark:text-slate-950 font-bold px-7 py-3 text-xs sm:text-sm tracking-wide shadow-sm transition-all duration-300"
             >
               <span>Initiate AI stategy</span>
             </Link>
-          </div>
+          </div> */}
         </motion.div>
       </section>
 

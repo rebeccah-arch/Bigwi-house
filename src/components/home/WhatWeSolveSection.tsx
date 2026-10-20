@@ -3,22 +3,23 @@
 import React from 'react'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
+import { Target, Cpu, ShieldCheck } from '@/components/Icons'
 
 const HOW_WE_WORK_STEPS = [
   {
-    dots: '•',
+    icon: Target,
     title: 'Built for business impact',
     description:
       'We align data architectures and predictive models directly with strategic priorities, defining measurable operational KPIs and payback milestones before writing code.'
   },
   {
-    dots: '••',
+    icon: Cpu,
     title: 'Systems embedded in your operations',
     description:
       'Our senior data engineers and machine learning scientists embed real-time decisioning and automated data pipelines directly into your operational software and field apps.'
   },
   {
-    dots: '•••',
+    icon: ShieldCheck,
     title: 'Capability built to last',
     description:
       'We upskill your internal teams and establish comprehensive data governance, continuous drift telemetry, and documentation to ensure long-term independence.'
@@ -53,35 +54,49 @@ export default function WhatWeSolveSection() {
     <div className="w-full transition-colors duration-300">
 
       {/* 1. Quantium 'How We Work' 3-Column Strip */}
-      <section className="bg-[#f8f9fb] dark:bg-stone-950 p-8 sm:p-12 lg:p-16 border-b border-slate-200 dark:border-stone-900">
+      <section className="bg-[#f8f9fb] dark:bg-stone-950 py-16 sm:py-20 px-4 sm:px-6 lg:px-8 border-b border-slate-200 dark:border-stone-900">
         <div className="max-w-[1240px] mx-auto space-y-12">
           <div className="max-w-3xl space-y-2">
-            <h2 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-slate-900 dark:text-white tracking-tight">
+            <h2 className="font-sans font-extrabold text-3xl sm:text-4xl md:text-5xl lg:text-[46px] text-slate-950 dark:text-white tracking-tight leading-tight">
               How We Work
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {HOW_WE_WORK_STEPS.map((step, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 25 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-40px' }}
-                transition={{ duration: 0.6, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className="rounded-3xl border border-slate-200/80 dark:border-stone-800 bg-white dark:bg-stone-900/60 p-7 sm:p-8 space-y-4 shadow-sm"
-              >
-                <div className="font-mono text-2xl font-bold text-teal-600 dark:text-teal-400">
-                  {step.dots}
-                </div>
-                <h3 className="font-display text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
-                  {step.title}
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-600 dark:text-stone-300 leading-relaxed font-normal">
-                  {step.description}
-                </p>
-              </motion.div>
-            ))}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            {HOW_WE_WORK_STEPS.map((step, idx) => {
+              const Icon = step.icon
+
+              return (
+                <motion.div
+                  key={step.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-40px' }}
+                  transition={{ duration: 0.55, delay: idx * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                  className="group relative border border-slate-200 dark:border-stone-800 bg-white dark:bg-stone-900/50 p-7 sm:p-8 flex flex-col justify-between shadow-sm hover:border-blue-500/50 dark:hover:border-blue-500/50 hover:shadow-md transition-all duration-300"
+                >
+                  <div className="space-y-4">
+                    {/* Top Icon Badge & Index */}
+                    <div className="flex items-center justify-between gap-4">
+                      <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-slate-100 dark:bg-stone-800 text-slate-900 dark:text-blue-400 border border-slate-200 dark:border-stone-700 shadow-sm transition-all duration-300 group-hover:scale-105 group-hover:bg-blue-600 group-hover:text-white dark:group-hover:bg-blue-600 dark:group-hover:text-white">
+                        <Icon className="h-5 w-5" />
+                      </div>
+                      <span className="font-mono text-xs font-bold text-slate-400 dark:text-stone-500">
+                        0{idx + 1}
+                      </span>
+                    </div>
+
+                    <h3 className="font-sans font-bold text-lg sm:text-xl text-slate-950 dark:text-white tracking-normal group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                      {step.title}
+                    </h3>
+
+                    <p className="text-sm sm:text-[15px] text-slate-600 dark:text-[#A6ADB9] font-normal leading-relaxed">
+                      {step.description}
+                    </p>
+                  </div>
+                </motion.div>
+              )
+            })}
           </div>
         </div>
       </section>

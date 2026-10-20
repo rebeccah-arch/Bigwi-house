@@ -172,16 +172,16 @@ export default function ServicesPage() {
             Specialized Practice Areas
           </div> */}
 
-          <h1 className="font-display text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-slate-950 dark:text-white leading-[1.08]">
+          <h1 className="font-display text-2xl sm:text-4xl md:text-[42px] font-extrabold tracking-tight text-slate-950 dark:text-white leading-tight">
             Capabilities &amp; Services
           </h1>
 
-          <p className="text-sm sm:text-base md:text-lg text-slate-600 dark:text-stone-300 max-w-2xl mx-auto leading-relaxed font-normal">
+          <p className="text-xs sm:text-sm md:text-base text-slate-600 dark:text-stone-300 max-w-2xl mx-auto leading-relaxed font-normal">
             Four specialized practices delivering practical, end-to-end data capability for commercial enterprises, NGOs, and development programs across Africa: from solid data foundations and indicator reporting to applied analytics and institutional strategy.
           </p>
 
           {/* Primary Action Button */}
-          <div className="pt-2">
+          {/* <div className="pt-2">
             <Link
               href="/contact"
               className="inline-flex items-center justify-center gap-2 rounded-full bg-slate-950 dark:bg-teal-500 hover:bg-slate-800 dark:hover:bg-teal-400 text-white dark:text-slate-950 font-bold px-7 py-3 text-xs sm:text-sm tracking-wide shadow-md transition-all duration-300"
@@ -189,7 +189,7 @@ export default function ServicesPage() {
               <span>Discuss your project</span>
               <ArrowRight className="h-4 w-4" />
             </Link>
-          </div>
+          </div> */}
         </motion.div>
 
         {/* Filter Navigation Tabs */}
@@ -384,26 +384,6 @@ export default function ServicesPage() {
                   <p className="text-xs sm:text-sm text-slate-700 dark:text-stone-300 leading-relaxed font-normal">
                     {activeService.ngoApplication}
                   </p>
-                  <p className="text-[11px] font-mono text-slate-500 dark:text-stone-400 pt-1">
-                    *Practical, robust data foundations prioritized—ensuring simple, maintainable tools deliver better long-term reliability.
-                  </p>
-                </div>
-
-                {/* Technologies */}
-                <div className="space-y-2 pt-1">
-                  <span className="font-mono text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white block">
-                    Supported Architecture &amp; Technology Stack:
-                  </span>
-                  <div className="flex flex-wrap gap-2">
-                    {activeService.technologies.map((t) => (
-                      <span
-                        key={t}
-                        className="rounded-full bg-slate-100 dark:bg-stone-800 border border-slate-200 dark:border-stone-700 px-3 py-1 font-mono text-xs font-medium text-slate-800 dark:text-stone-200"
-                      >
-                        {t}
-                      </span>
-                    ))}
-                  </div>
                 </div>
 
                 <div className="pt-2 flex items-center gap-2 text-xs font-mono text-slate-500 dark:text-stone-400">

@@ -37,7 +37,12 @@
     font-family: var(--font-sans), 'Poppins', 'Manrope', 'Roboto', system-ui, -apple-system, sans-serif;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-display tracking-tight text-slate-900 font-bold dark:text-white;
     font-family: var(--font-display), 'Montserrat', 'Poppins', sans-serif;
   }
@@ -116,13 +121,13 @@
 
   .bg-grid-pattern {
     background-size: 32px 32px;
-    background-image: 
+    background-image:
       linear-gradient(to right, rgba(226, 232, 240, 0.6) 1px, transparent 1px),
       linear-gradient(to bottom, rgba(226, 232, 240, 0.6) 1px, transparent 1px);
   }
 
   .dark .bg-grid-pattern {
-    background-image: 
+    background-image:
       linear-gradient(to right, rgba(51, 65, 85, 0.25) 1px, transparent 1px),
       linear-gradient(to bottom, rgba(51, 65, 85, 0.25) 1px, transparent 1px);
   }
@@ -141,6 +146,7 @@
   0% {
     transform: translateX(0%);
   }
+
   100% {
     transform: translateX(-50%);
   }
@@ -161,27 +167,34 @@
   width: 8px;
   height: 8px;
 }
+
 ::-webkit-scrollbar-track {
   background: #F8FAFC;
 }
+
 .dark ::-webkit-scrollbar-track {
   background: #0B0F19;
 }
+
 ::-webkit-scrollbar-thumb {
   background: #CBD5E1;
   border-radius: 4px;
 }
+
 .dark ::-webkit-scrollbar-thumb {
   background: #1E293B;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: #94A3B8;
 }
+
 .dark ::-webkit-scrollbar-thumb:hover {
   background: #334155;
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
