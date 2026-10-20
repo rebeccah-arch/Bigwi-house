@@ -135,10 +135,8 @@ export default function WhatWeSolveSection() {
               </div>
             </motion.div>
           </div>
-
         </div>
       </section>
-
     </div>
   )
 }
