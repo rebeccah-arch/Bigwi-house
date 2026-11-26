@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, FormEvent } from 'react'
+import React, { useEffect, useState, FormEvent } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
@@ -10,6 +10,13 @@ import {
   Loader2,
   ArrowRight
 } from '@/components/Icons'
+
+const AUDIENCE_OPTIONS = [
+  { value: 'international-companies', label: 'International company' },
+  { value: 'government-public-institutions', label: 'Government or public institution' },
+  { value: 'financial-institutions', label: 'Financial institution' },
+  { value: 'businesses', label: 'Business' },
+]
 
 export default function ContactPage() {
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
@@ -21,9 +28,17 @@ export default function ContactPage() {
     email: '',
     company: '',
     jobTitle: '',
+    sector: '',
     message: '',
     referralSource: ''
   })
+
+  useEffect(() => {
+    const sector = new URLSearchParams(window.location.search).get('sector')
+    if (AUDIENCE_OPTIONS.some((audience) => audience.value === sector)) {
+      setFormData((current) => ({ ...current, sector: sector || '' }))
+    }
+  }, [])
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -39,6 +54,7 @@ export default function ContactPage() {
           email: formData.email,
           organization: formData.company,
           jobTitle: formData.jobTitle,
+          sector: formData.sector,
           message: formData.message,
           referralSource: formData.referralSource
         }),
@@ -54,6 +70,7 @@ export default function ContactPage() {
           email: '',
           company: '',
           jobTitle: '',
+          sector: '',
           message: '',
           referralSource: ''
         })
@@ -68,11 +85,9 @@ export default function ContactPage() {
   }
 
   const benefits = [
-    'Direct consultation with senior data architects and practitioners',
-    'Integrated solutions spanning lakehouses, MLOps, and decision portals',
-    '100% intellectual property ownership of code, models, and schemas',
-    'Bank-grade confidentiality backed by mutual enterprise NDAs',
-    'Rapid 2-week pilot sprint scoping with defined commercial ROI'
+    'Describe the data or AI challenge you are exploring',
+    'Identify which part of the data lifecycle may be relevant',
+    'Share only the information needed to start the conversation'
   ]
 
   return (
@@ -110,7 +125,7 @@ export default function ContactPage() {
               transition={{ duration: 0.7, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
               className="font-sans font-extrabold text-3xl sm:text-5xl md:text-6xl lg:text-[52px] xl:text-[56px] tracking-tight leading-[1.08] text-white"
             >
-              Get in touch with an expert practitioner
+              Start a conversation about data and AI
             </motion.h1>
 
             {/* Subtitle */}
@@ -120,7 +135,7 @@ export default function ContactPage() {
               transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
               className="text-base sm:text-lg md:text-xl text-[#A6ADB9] leading-relaxed font-normal max-w-2xl"
             >
-              An elite team of data architects and engineers built to design, deploy, and scale high-throughput lakehouses and predictive intelligence systems.
+              Tell us about your organization and what you want to understand, improve, or build. Please do not include sensitive personal or confidential information in this form.
             </motion.p>
 
             {/* Action Buttons */}
@@ -172,7 +187,11 @@ export default function ContactPage() {
                 </h2>
 
                 <p className="text-sm sm:text-base text-slate-600 dark:text-stone-400 font-normal leading-relaxed">
-                  We start with a technical scoping conversation to understand your data infrastructure, existing bottlenecks, and commercial objectives.
+                  The form currently records submissions in application logs and is not connected to a team inbox. For a direct response, email{' '}
+                  <a className="font-semibold text-teal-700 dark:text-teal-400 hover:underline" href="mailto:contact@datasphere.rw">
+                    contact@datasphere.rw
+                  </a>
+                  .
                 </p>
               </div>
 
@@ -215,7 +234,7 @@ export default function ContactPage() {
                     Start the Conversation
                   </h3>
                   <p className="text-xs sm:text-sm text-slate-500 dark:text-stone-400">
-                    Fill in your project details below and an architect will reach out within 24 business hours.
+                    Fields marked with an asterisk are required. Please keep your message free of sensitive or confidential information.
                   </p>
                 </div>
 
@@ -289,18 +308,35 @@ export default function ContactPage() {
 
                     <div className="space-y-1.5">
                       <label htmlFor="jobTitle" className="block text-xs font-semibold text-slate-800 dark:text-stone-200">
-                        Job Title <span className="text-teal-600 dark:text-teal-400">*</span>
+                        Job Title (optional)
                       </label>
                       <input
                         id="jobTitle"
                         type="text"
-                        required
                         value={formData.jobTitle}
                         onChange={(e) => setFormData({ ...formData, jobTitle: e.target.value })}
                         placeholder="e.g. VP of Data, CTO, Lead Architect"
                         className="w-full rounded-xl border border-slate-200 dark:border-stone-700 bg-slate-50 dark:bg-stone-800 px-4 py-3 text-xs sm:text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:bg-white dark:focus:bg-stone-800 focus:border-teal-500 focus:outline-none transition-colors"
                       />
                     </div>
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label htmlFor="sector" className="block text-xs font-semibold text-slate-800 dark:text-stone-200">
+                      Organization type <span className="text-teal-600 dark:text-teal-400">*</span>
+                    </label>
+                    <select
+                      id="sector"
+                      required
+                      value={formData.sector}
+                      onChange={(e) => setFormData({ ...formData, sector: e.target.value })}
+                      className="w-full rounded-xl border border-slate-200 dark:border-stone-700 bg-slate-50 dark:bg-stone-800 px-4 py-3 text-xs sm:text-sm text-slate-900 dark:text-white focus:bg-white dark:focus:bg-stone-800 focus:border-teal-500 focus:outline-none transition-colors"
+                    >
+                      <option value="">Select your organization type</option>
+                      {AUDIENCE_OPTIONS.map((audience) => (
+                        <option key={audience.value} value={audience.value}>{audience.label}</option>
+                      ))}
+                    </select>
                   </div>
 
                   {/* Row 4: How can we help? */}
@@ -322,11 +358,10 @@ export default function ContactPage() {
                   {/* Row 5: How did you hear about us? */}
                   <div className="space-y-1.5">
                     <label htmlFor="referralSource" className="block text-xs font-semibold text-slate-800 dark:text-stone-200">
-                      How did you hear about us? <span className="text-teal-600 dark:text-teal-400">*</span>
+                      How did you hear about us? (optional)
                     </label>
                     <textarea
                       id="referralSource"
-                      required
                       rows={2}
                       value={formData.referralSource}
                       onChange={(e) => setFormData({ ...formData, referralSource: e.target.value })}
@@ -346,7 +381,10 @@ export default function ContactPage() {
                   {status === 'success' && (
                     <div className="flex items-center gap-2 rounded-xl border border-emerald-200 bg-emerald-50 p-3.5 text-xs text-emerald-800">
                       <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-600" />
-                      <span>Thank you! Your message has been received. A solutions architect will reach out within 24 business hours.</span>
+                      <span>
+                        Your inquiry was recorded by the website, but it is not routed to a team inbox. For a direct response, email{' '}
+                        <a className="font-semibold underline" href="mailto:contact@datasphere.rw">contact@datasphere.rw</a>.
+                      </span>
                     </div>
                   )}
 
@@ -375,7 +413,7 @@ export default function ContactPage() {
                     <Link href="/privacy" className="text-teal-700 dark:text-teal-400 underline font-medium hover:text-teal-900">
                       Privacy Policy
                     </Link>
-                    . All information is protected under standard enterprise mutual NDA.
+                    . Please do not submit confidential or sensitive personal information.
                   </p>
 
                 </form>

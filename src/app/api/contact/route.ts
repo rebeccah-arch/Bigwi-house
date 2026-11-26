@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server'
 export async function POST(request: Request) {
   try {
     const body = await request.json()
-    const { name, email, organization, sector, service, message, budget } = body
+    const { name, email, organization, jobTitle, sector, service, message, referralSource } = body
 
     // Validation
     if (!name || !email || !message) {
@@ -27,10 +27,11 @@ export async function POST(request: Request) {
       name,
       email,
       organization: organization || 'Not specified',
-      sector: sector || 'General Enterprise',
-      service: service || 'Enterprise Software Development',
-      budget: budget || 'To be determined',
+      jobTitle: jobTitle || 'Not specified',
+      sector: sector || 'Not specified',
+      service: service || 'Not specified',
       message,
+      referralSource: referralSource || 'Not specified',
       source: 'DataSphere Web Portal',
       division: 'DataSphere Consulting Ltd'
     }
@@ -40,7 +41,7 @@ export async function POST(request: Request) {
     return NextResponse.json(
       {
         success: true,
-        message: 'Your project inquiry has been logged with DataSphere Consulting solutions architects. We will follow up shortly.',
+        message: 'Your inquiry was submitted successfully.',
         inquiryId: inquiryPayload.id
       },
       { status: 200 }

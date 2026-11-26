@@ -2,7 +2,7 @@
 
 import React from 'react'
 import Link from 'next/link'
-import { ArrowLeft, ShieldCheck, Lock, CheckCircle2 } from '@/components/Icons'
+import { ArrowLeft, ShieldCheck, CheckCircle2 } from '@/components/Icons'
 
 export default function PrivacyPage() {
   return (
@@ -29,7 +29,7 @@ export default function PrivacyPage() {
             Privacy Policy &amp; Data Governance
           </h1>
           <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-mono">
-            Last Updated: August 2026 &bull; DataSphere Consulting Ltd &amp; BIGWI HOUSE
+            Last Updated: November 2026 &bull; DataSphere Consulting Ltd &amp; BIGWI HOUSE
           </p>
         </div>
 
@@ -37,15 +37,15 @@ export default function PrivacyPage() {
         <div className="prose prose-slate dark:prose-invert max-w-none space-y-8 text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
           <section className="space-y-3">
             <h2 className="text-lg sm:text-xl font-display font-bold text-slate-900 dark:text-white">
-              1. Institutional Commitment to Data Sovereignty
+              1. Scope of this notice
             </h2>
             <p>
-              DataSphere Consulting Ltd (&ldquo;DataSphere&rdquo;) and its specialized consultancy hub, BIGWI HOUSE, operate with strict data sovereignty principles. We recognize that our clients—including financial institutions, public entities, international development partners, and commercial enterprises—entrust us with sensitive operational records, databases, and proprietary workflows.
+              This notice describes information submitted through the contact form on this website. It is not a substitute for project-specific data-processing, confidentiality, or intellectual-property terms, which should be reviewed and agreed separately before any engagement.
             </p>
             <div className="rounded-2xl bg-teal-50/50 dark:bg-teal-950/30 p-4 space-y-2">
-              <strong className="block text-teal-900 dark:text-teal-200 font-semibold">Core Principle:</strong>
+              <strong className="block text-teal-900 dark:text-teal-200 font-semibold">Please do not submit sensitive information:</strong>
               <p className="text-xs text-slate-700 dark:text-slate-300">
-                You retain 100% ownership and intellectual property rights over all raw data, schemas, trained model weights, and custom codebase artifacts created during our engagements. We never pool, resell, or repurpose client data for generic AI training.
+                Use the form for a brief introduction to your organization and inquiry. Do not include confidential business information, credentials, or sensitive personal data.
               </p>
             </div>
           </section>
@@ -55,44 +55,44 @@ export default function PrivacyPage() {
               2. Information Collected via the Website
             </h2>
             <p>
-              When you interact with our public web portal (datasphere.rw), we collect minimal information necessary to respond to technical inquiries:
+              The contact form asks for your name, email address, organization, job title, organization type, project message, and referral source. The proposal form asks for your name, email address, organization, organization type, area of interest, timeline, budget range, and project context. When submitted, the website sends these fields to its API routes. The current routes write inquiry details to application logs; this code does not configure a database, CRM, or email delivery service. Hosting-provider log access and retention depend on the deployment configuration.
             </p>
             <ul className="space-y-2 list-none pl-0">
               <li className="flex items-start gap-2">
                 <CheckCircle2 className="h-4 w-4 text-teal-600 dark:text-teal-400 mt-0.5 flex-shrink-0" />
-                <span><strong>Contact Inquiries:</strong> Full name, professional work email, organization name, project scope, and target timelines submitted through inquiry forms.</span>
+                <span><strong>Contact and proposal inquiries:</strong> The fields listed above, submitted voluntarily through either form.</span>
               </li>
               <li className="flex items-start gap-2">
                 <CheckCircle2 className="h-4 w-4 text-teal-600 dark:text-teal-400 mt-0.5 flex-shrink-0" />
-                <span><strong>Technical Diagnostics:</strong> Standard anonymized HTTP server logs and performance telemetry to detect broken routes and maintain platform availability.</span>
+                <span><strong>Application logs:</strong> The API routes currently log inquiry details to the server runtime. Do not submit confidential or sensitive information through either form.</span>
               </li>
             </ul>
           </section>
 
           <section className="space-y-3">
             <h2 className="text-lg sm:text-xl font-display font-bold text-slate-900 dark:text-white">
-              3. Non-Disclosure &amp; Engagement Confidentiality
+              3. Engagement information
             </h2>
             <p>
-              Prior to accessing client databases, field surveys, or API keys, DataSphere executes comprehensive mutual Non-Disclosure Agreements (NDAs). All consulting staff and engineers are bound by strict contractual confidentiality clauses and receive regular training on regional data privacy frameworks (including Rwanda Data Protection Law No. 058/2021 and international standards).
+              Do not send project datasets, credentials, or confidential material through this website. If an engagement proceeds, agree in writing on applicable confidentiality, data access, processing, ownership, retention, and security terms before sharing project information.
             </p>
           </section>
 
           <section className="space-y-3">
             <h2 className="text-lg sm:text-xl font-display font-bold text-slate-900 dark:text-white">
-              4. Security Measures &amp; Infrastructure
+              4. Retention and service providers
             </h2>
             <p>
-              We implement industry-standard encryption protocols (TLS 1.3 in transit and AES-256 at rest) across all API endpoints, cloud environments, and database deployments. We enforce principle-of-least-privilege role-based access control (RBAC) and conduct periodic vulnerability scans.
+              This application does not define a retention period for server logs. The website is hosted by a third-party deployment provider; its processing and log-retention practices are governed by that provider&apos;s terms and configuration. Confirm the current provider and retention settings before relying on this notice for compliance decisions.
             </p>
           </section>
 
           <section className="space-y-3">
             <h2 className="text-lg sm:text-xl font-display font-bold text-slate-900 dark:text-white">
-              5. Contacting the Data Protection Officer
+              5. Questions
             </h2>
             <p>
-              For questions regarding this policy, data processing agreements, or to request record deletion, please contact our team directly:
+              For questions about this notice or a contact-form submission, please contact:
             </p>
             <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-900 font-mono text-xs text-slate-700 dark:text-slate-300 space-y-1">
               <p className="font-bold text-slate-900 dark:text-white">DataSphere Consulting Ltd &bull; BIGWI HOUSE</p>

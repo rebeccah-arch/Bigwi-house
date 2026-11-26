@@ -12,21 +12,21 @@ interface WhyChooseItem {
 const WHY_CHOOSE_US: WhyChooseItem[] = [
   {
     number: '01',
-    title: 'Commercial outcomes first',
+    title: 'One lifecycle, from collection to decisions',
     description:
-      'We start with your strategic priorities: profitability, cost pressures, market position. We combine AI with your proprietary data and existing systems, getting more value from your technology investments and moving fast to commercial value.'
+      'Explore support across data collection, analysis, model development and evaluation, deployment, monitoring, and advisory. The right scope depends on your data, users, and goals.'
   },
   {
     number: '02',
-    title: 'Senior practitioner-led delivery at scale',
+    title: 'DataSphere and BIGWI HOUSE',
     description:
-      'Our senior data architects and machine learning engineers deploy production-grade pipelines, processing millions of operational events, telemetry records, and transactions across critical enterprise workflows.'
+      'DataSphere Consulting Ltd is the consultancy; BIGWI HOUSE is its dedicated delivery unit for building data and AI solutions.'
   },
   {
     number: '03',
-    title: 'Proven approaches across industries',
+    title: 'Evidence before outcomes',
     description:
-      "We've solved problems across retail, financial services, healthcare, telecommunications, government, and beyond. This breadth means we bring approaches already tested at scale, adapted to your specific challenges."
+      'We distinguish proposed benefits from measured results. Any public project outcome should be tied to a defined measure and approved supporting evidence.'
   }
 ]
 

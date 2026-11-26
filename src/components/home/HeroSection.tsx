@@ -6,7 +6,6 @@ import Image from 'next/image'
 import { motion } from 'framer-motion'
 import {
   ArrowRight,
-  MapPin,
 } from '@/components/Icons'
 
 
@@ -19,7 +18,7 @@ export default function HeroSection() {
         <div className="relative w-full h-full overflow-hidden lg:rounded-l-[100px] xl:rounded-l-[160px]">
           <Image
             src="/images/data-engineer.jpg"
-            alt="DataSphere Data Architects and AI Engineers in Kigali"
+            alt="DataSphere team working on data and AI"
             fill
             priority
             className="object-cover object-center scale-105"
@@ -42,7 +41,7 @@ export default function HeroSection() {
             transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             className="font-sans font-extrabold text-3xl sm:text-5xl md:text-6xl lg:text-[50px] xl:text-[56px] tracking-tight leading-[1.08] text-white"
           >
-            Enterprise data architecture &amp; applied AI for complex business challenges
+            Data &amp; AI consulting across the full data lifecycle
           </motion.h1>
 
           {/* Company Introduction: What DataSphere Does & Kigali Base */}
@@ -53,21 +52,22 @@ export default function HeroSection() {
             className="space-y-2 text-base sm:text-lg text-[#A6ADB9] leading-relaxed font-normal max-w-2xl"
           >
             <p>
-              Headquartered in <strong className="text-white font-semibold">Kigali, Rwanda</strong>, <strong className="text-white font-semibold">DataSphere Consulting Ltd</strong> is an independent data advisory and engineering firm. We architect scalable modern data lakehouses, deploy custom predictive machine learning algorithms, and build executive decision intelligence platforms to solve high-stakes challenges and unlock measurable commercial value.
+              <strong className="text-white font-semibold">DataSphere Consulting Ltd</strong> is a Data &amp; AI consultancy, with <strong className="text-white font-semibold">BIGWI HOUSE</strong> as its delivery unit. We support the journey from data collection and analysis to model building, evaluation, deployment, monitoring, and strategic advice.
             </p>
           </motion.div>
 
-          {/* Clients It Serves Highlight */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             className="pt-2 border-t border-white/10 space-y-3"
           >
-            <div className="flex items-center justify-between">
-              <span className="text-[11px] font-mono uppercase tracking-widest text-teal-400 font-semibold">
-                Clients &amp; Sectors We Serve
-              </span>
+            <div className="flex flex-col gap-3 pt-3">
+              <p className="text-xs sm:text-sm text-stone-300 leading-relaxed">
+                Collect <span className="text-teal-300">→</span> Analyze <span className="text-teal-300">→</span> Build &amp; evaluate models <span className="text-teal-300">→</span> Deploy &amp; monitor <span className="text-teal-300">→</span> Advise
+              </p>
+            </div>
+            <div className="flex items-center justify-end">
               <Link
                 href="/services"
                 className="text-xs text-stone-400 hover:text-white transition-colors inline-flex items-center gap-1"

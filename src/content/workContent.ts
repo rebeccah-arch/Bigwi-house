@@ -393,3 +393,7 @@ export const WORK_PROJECTS: WorkProject[] = [
     }
   }
 ]
+
+export const PUBLIC_WORK_PROJECTS = WORK_PROJECTS.filter(
+  (project) => project.status !== 'Client Engagement'
+)

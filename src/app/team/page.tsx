@@ -43,7 +43,7 @@ export default function TeamPage() {
               transition={{ duration: 0.7, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
               className="font-sans font-extrabold text-3xl sm:text-5xl md:text-6xl lg:text-[52px] xl:text-[56px] tracking-tight leading-[1.08] text-white"
             >
-              Our Leadership &amp; Engineering Faculty
+              Meet the people behind our work
             </motion.h1>
 
             {/* Subtitle */}
@@ -53,7 +53,7 @@ export default function TeamPage() {
               transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
               className="text-base sm:text-lg md:text-xl text-[#A6ADB9] leading-relaxed font-normal max-w-2xl"
             >
-              <strong className="text-white font-semibold">DataSphere Consulting Ltd</strong> and our dedicated delivery hub, <strong className="text-white font-semibold">BIGWI HOUSE</strong>, are led by seasoned enterprise architects, machine learning scientists, and institutional technology directors steering high-impact data systems across Africa.
+              <strong className="text-white font-semibold">DataSphere Consulting Ltd</strong> is a Data &amp; AI consultancy, with <strong className="text-white font-semibold">BIGWI HOUSE</strong> as its delivery unit. We are preparing practitioner profiles for publication after roles, biographies, credentials, and permissions have been reviewed.
             </motion.p>
 
             {/* Action Buttons */}

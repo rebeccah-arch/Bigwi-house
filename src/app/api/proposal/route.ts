@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server'
 export async function POST(request: Request) {
   try {
     const body = await request.json()
-    const { name, email, organization, need, budgetRange, timeline, projectScope } = body
+    const { name, email, organization, sector, need, budgetRange, timeline, projectScope } = body
 
     if (!name || !email || !projectScope) {
       return NextResponse.json(
@@ -26,7 +26,8 @@ export async function POST(request: Request) {
       name,
       email,
       organization: organization || 'Enterprise / Private',
-      need: need || 'Enterprise Software Development',
+      sector: sector || 'Not specified',
+      need: need || 'Not specified',
       budgetRange: budgetRange || 'Flexible',
       timeline: timeline || 'Standard',
       projectScope,
@@ -38,7 +39,7 @@ export async function POST(request: Request) {
     return NextResponse.json(
       {
         success: true,
-        message: 'Proposal request logged successfully. A solutions architect will reach out shortly.',
+        message: 'Your inquiry was recorded by the website.',
         proposalId: proposalPayload.id
       },
       { status: 200 }

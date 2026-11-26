@@ -218,20 +218,20 @@ export const mission =
 
 export const companyValues = [
   {
-    title: 'Evidence Over Buzzwords',
-    description: 'We focus on measurable outcomes, clean code, and working systems rather than exaggerated promises or AI hype.'
+    title: 'Evidence before outcomes',
+    description: 'Define how work will be assessed, and distinguish measured results from estimates or goals.'
   },
   {
     title: 'Human-Centered Design',
-    description: 'We build technology that matches how teams actually work in the real world, prioritizing usability and offline reliability.'
+    description: 'Consider the people, workflows, and operating conditions a proposed solution needs to support.'
   },
   {
-    title: 'Data Integrity & Sovereignty',
-    description: 'Our clients retain 100% ownership of their data, algorithms, and intellectual property without vendor lock-in.'
+    title: 'Data responsibilities',
+    description: 'Clarify data access, hosting, security responsibilities, and intellectual-property terms for each engagement.'
   },
   {
-    title: 'Long-Term Partnership',
-    description: 'We support our deployments with transparent governance, ongoing monitoring, and disciplined SLA commitments.'
+    title: 'Clear working agreements',
+    description: 'Agree scope, responsibilities, review points, support expectations, and handover before delivery begins.'
   }
 ]
 
@@ -565,7 +565,7 @@ export const deliveryProcess: ProcessStep[] = [
     number: '01',
     title: 'Discover & Diagnose',
     tagline: 'Problem Diagnosis',
-    description: 'We conduct discovery sessions with your operational leads to understand data sources, reporting bottlenecks, and institutional objectives.',
+    description: 'Discovery can clarify data sources, reporting needs, operating constraints, and organizational objectives.',
     outputs: ['Data source audit', 'Requirement specification', 'Feasibility analysis', 'Security & compliance plan'],
     icon: 'Search'
   },
@@ -573,7 +573,7 @@ export const deliveryProcess: ProcessStep[] = [
     number: '02',
     title: 'Strategize & Blueprint',
     tagline: 'System Architecture',
-    description: 'We map the database models, API contracts, model validation parameters, and cloud hosting plan before writing code.',
+    description: 'Architecture planning may cover data models, interfaces, evaluation criteria, and hosting options before implementation.',
     outputs: ['Architecture blueprint', 'Data schema & API spec', 'Toolchain selection', 'Sprint delivery roadmap'],
     icon: 'Compass'
   },
@@ -581,7 +581,7 @@ export const deliveryProcess: ProcessStep[] = [
     number: '03',
     title: 'Design & Prototype',
     tagline: 'Interactive UX',
-    description: 'We design intuitive executive dashboards, reporting interfaces, and field app screens tailored to operational speed.',
+    description: 'Design work may include dashboard, reporting, or field-data interfaces shaped around intended users and workflows.',
     outputs: ['Interactive wireframes', 'UI design system', 'Usability review', 'Field survey forms'],
     icon: 'Palette'
   },
@@ -589,7 +589,7 @@ export const deliveryProcess: ProcessStep[] = [
     number: '04',
     title: 'Build & Train',
     tagline: 'Data & Model Delivery',
-    description: 'Our team builds automated ingestion pipelines, trains machine learning models, and develops custom software with automated testing.',
+    description: 'Depending on scope, implementation may include data pipelines, model development, software, and automated tests.',
     outputs: ['Data ingestion pipelines', 'Model weights & training code', 'Automated test suite', 'Technical documentation'],
     icon: 'Code2'
   },
@@ -597,7 +597,7 @@ export const deliveryProcess: ProcessStep[] = [
     number: '05',
     title: 'Evaluate & Deploy',
     tagline: 'Production Verification',
-    description: 'We conduct rigorous model evaluation, test inference latency under load, and deploy containerized services to secure infrastructure.',
+    description: 'Evaluation and deployment planning can use agreed test criteria, operating requirements, and infrastructure constraints.',
     outputs: ['Model evaluation report', 'Cloud infrastructure setup', 'Telemetry & alerting setup', 'User onboarding & training'],
     icon: 'Rocket'
   },
@@ -605,8 +605,8 @@ export const deliveryProcess: ProcessStep[] = [
     number: '06',
     title: 'Monitor & Support',
     tagline: 'Long-Term Reliability',
-    description: 'We track live accuracy, detect data drift, provide 24/7 SLA uptime maintenance, and support periodic model retraining.',
-    outputs: ['24/7 SLA monitoring', 'Model drift alerts', 'Quarterly data reviews', 'Scheduled retraining pipelines'],
+    description: 'Monitoring and support requirements, including ownership and service levels, are agreed for each engagement.',
+    outputs: ['Monitoring requirements', 'Model review criteria', 'Data-quality checks', 'Support and handover plan'],
     icon: 'TrendingUp'
   }
 ]
@@ -869,4 +869,3 @@ export const verifiableGovernancePoints = [
     badge: 'Zero Vendor Lock-in'
   }
 ]
-

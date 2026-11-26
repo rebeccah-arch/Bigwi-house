@@ -12,7 +12,7 @@ import {
   Cpu,
   BarChart3
 } from '@/components/Icons'
-import { growthPhases, deliveryProcess } from '@/content/bigwiContent'
+import { deliveryProcess } from '@/content/bigwiContent'
 
 export default function ApproachPage() {
   return (
@@ -50,7 +50,7 @@ export default function ApproachPage() {
               transition={{ duration: 0.7, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
               className="font-sans font-extrabold text-3xl sm:text-5xl md:text-6xl lg:text-[54px] xl:text-[58px] tracking-tight leading-[1.08] text-white"
             >
-              A disciplined, transparent delivery framework
+              A clear process from data needs to operation
             </motion.h1>
 
             {/* Subtitle */}
@@ -60,7 +60,7 @@ export default function ApproachPage() {
               transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
               className="text-base sm:text-lg md:text-xl text-[#A6ADB9] leading-relaxed font-normal max-w-2xl"
             >
-              We publish our delivery process so enterprise partners, governments, and commercial clients know exactly what to expect from initial discovery to live production monitoring and continuous SLA support.
+              Engagements can cover data collection, analysis, model evaluation, deployment, monitoring, and advisory. The exact stages and outputs are agreed around your organization&apos;s needs.
             </motion.p>
 
             {/* Action Buttons */}
@@ -90,70 +90,7 @@ export default function ApproachPage() {
         </div>
       </section>
 
-      {/* 2. 3-Phase Implementation Methodology */}
-      <section className="py-20 sm:py-28 max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 border-b border-slate-200 dark:border-stone-800/80">
-        <div className="space-y-12">
-
-          <div className="max-w-2xl space-y-2">
-            <span className="font-mono text-xs font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400">
-              Phase Progression
-            </span>
-            <h2 className="font-serif text-3xl sm:text-4xl font-bold text-slate-950 dark:text-white leading-tight">
-              Phased Implementation Methodology
-            </h2>
-            <p className="text-sm sm:text-base text-slate-600 dark:text-stone-300 font-normal leading-relaxed pt-1">
-              How we de-risk deployments and validate performance before enterprise production rollout.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {growthPhases.map((phase, idx) => (
-              <div
-                key={phase.name}
-                className="p-8 border border-slate-200 dark:border-stone-800 bg-slate-50/50 dark:bg-stone-900/40 flex flex-col justify-between space-y-6"
-              >
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <div className="w-10 h-10 rounded-full border border-slate-400 dark:border-stone-600 flex items-center justify-center font-sans text-xs font-normal text-slate-700 dark:text-stone-300">
-                      0{idx + 1}
-                    </div>
-                    <span className="font-mono text-xs text-slate-600 dark:text-stone-300 bg-white dark:bg-stone-800 border border-slate-200 dark:border-stone-700 px-2.5 py-1 font-medium">
-                      {phase.step}
-                    </span>
-                  </div>
-
-                  <div>
-                    <h3 className="font-serif text-xl font-bold text-slate-950 dark:text-white">
-                      {phase.name}
-                    </h3>
-                    <p className="text-xs font-semibold text-blue-600 dark:text-blue-400 mt-1">
-                      {phase.subtitle}
-                    </p>
-                  </div>
-
-                  <ul className="space-y-2.5 pt-3 border-t border-slate-200 dark:border-stone-800">
-                    {phase.items.map((item) => (
-                      <li key={item} className="flex items-start gap-2.5 text-xs text-slate-700 dark:text-stone-300">
-                        <CheckCircle2 className="h-4 w-4 text-blue-600 dark:text-blue-400 shrink-0 mt-0.5" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div className="pt-4 border-t border-slate-200 dark:border-stone-800">
-                  <span className="font-mono text-xs text-slate-500 dark:text-stone-400 block">
-                    Core Outcome: {idx === 0 ? 'Diagnostic & Feasibility Blueprint' : idx === 1 ? 'Validated Architecture & Prototype' : 'Monitored Production SLA'}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-
-        </div>
-      </section>
-
-      {/* 3. 6-Stage Engineering Lifecycle */}
+      {/* 2. Engagement lifecycle */}
       <section className="py-20 sm:py-28 max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 border-b border-slate-200 dark:border-stone-800/80">
         <div className="space-y-12">
 
@@ -162,10 +99,10 @@ export default function ApproachPage() {
               Execution Lifecycle
             </span>
             <h2 className="font-serif text-3xl sm:text-4xl font-bold text-slate-950 dark:text-white leading-tight">
-              Structured sprint lifecycle from diagnosis to SLA
+              A practical engagement lifecycle
             </h2>
             <p className="text-sm sm:text-base text-slate-600 dark:text-stone-300 font-normal leading-relaxed pt-1">
-              Every client initiative follows our 6-stage engineering process with strict review gates.
+              These are common stages, not a fixed sequence. Scope, review points, and outputs are agreed for each engagement.
             </p>
           </div>
 
@@ -195,7 +132,7 @@ export default function ApproachPage() {
 
                   <div className="pt-3 border-t border-slate-100 dark:border-stone-800 space-y-1.5">
                     <span className="font-mono text-[11px] font-bold text-slate-900 dark:text-white block uppercase tracking-wider">
-                      Key Outputs:
+                      Possible outputs:
                     </span>
                     {step.outputs.map((out) => (
                       <div key={out} className="flex items-center gap-2 text-xs text-slate-700 dark:text-stone-300">
@@ -212,7 +149,7 @@ export default function ApproachPage() {
         </div>
       </section>
 
-      {/* 4. Technology Stack & Open Standards */}
+      {/* 3. Technology Stack & Open Standards */}
       <section className="py-20 sm:py-28 max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 border-b border-slate-200 dark:border-stone-800/80">
         <div className="space-y-12">
 
@@ -221,10 +158,10 @@ export default function ApproachPage() {
               Toolchains &amp; Architecture
             </span>
             <h2 className="font-serif text-3xl sm:text-4xl font-bold text-slate-950 dark:text-white leading-tight">
-              Production-hardened technology standards
+              Tools selected for the work
             </h2>
             <p className="text-sm sm:text-base text-slate-600 dark:text-stone-300 font-normal leading-relaxed pt-1">
-              We build with open, portable frameworks to eliminate vendor lock-in and guarantee long-term maintainability.
+              The technologies below are examples of tools relevant to our work. Selection depends on requirements, existing systems, and operating constraints.
             </p>
           </div>
 
@@ -258,7 +195,7 @@ export default function ApproachPage() {
               <ShieldCheck className="h-6 w-6 text-blue-600 dark:text-blue-400" />
               <h3 className="font-serif text-base font-bold text-slate-950 dark:text-white">Cloud &amp; Security</h3>
               <p className="text-xs text-slate-600 dark:text-stone-400 leading-relaxed">
-                AWS, Google Cloud, Terraform Infrastructure-as-Code, automated backups, and encrypted column-level RBAC.
+                Cloud infrastructure, infrastructure-as-code, backups, encryption, and access controls are selected and reviewed against project requirements.
               </p>
             </div>
 
@@ -267,7 +204,7 @@ export default function ApproachPage() {
         </div>
       </section>
 
-      {/* 5. Consultation CTA */}
+      {/* 4. Consultation CTA */}
       <section className="bg-[#080a11] text-white py-20 sm:py-24 text-center">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
           <span className="font-mono text-xs uppercase tracking-widest text-blue-400 font-semibold">

@@ -8,21 +8,21 @@ import { Target, Cpu, ShieldCheck } from '@/components/Icons'
 const HOW_WE_WORK_STEPS = [
   {
     icon: Target,
-    title: 'Built for business impact',
+    title: 'Start with the decision or service need',
     description:
-      'We align data architectures and predictive models directly with strategic priorities, defining measurable operational KPIs and payback milestones before writing code.'
+      'Clarify the people, decisions, and workflows the work needs to support before choosing tools or defining a solution.'
   },
   {
     icon: Cpu,
-    title: 'Systems embedded in your operations',
+    title: 'Build and evaluate with real constraints',
     description:
-      'Our senior data engineers and machine learning scientists embed real-time decisioning and automated data pipelines directly into your operational software and field apps.'
+      'Shape collection, analytics, and model work around available data, operating conditions, and evaluation criteria agreed for the project.'
   },
   {
     icon: ShieldCheck,
-    title: 'Capability built to last',
+    title: 'Plan for deployment and monitoring',
     description:
-      'We upskill your internal teams and establish comprehensive data governance, continuous drift telemetry, and documentation to ensure long-term independence.'
+      'Consider how a solution will be deployed, monitored, documented, and handed over as part of its design.'
   }
 ]
 
@@ -30,22 +30,22 @@ const WHAT_WE_DELIVER_ITEMS = [
   {
     title: 'Customer intelligence',
     description:
-      'Segmentation, personalised experiences, and AI-powered customer platforms that build loyalty and deepen relationships.'
+      'Explore customer segmentation, reporting, and personalization questions in relation to available data and intended use.'
   },
   {
     title: 'Smarter operations',
     description:
-      'Systems that forecast demand, manage inventory, automate processes, and allocate resources better.'
+      'Consider forecasting, inventory analysis, and workflow data as inputs to operational planning.'
   },
   {
-    title: 'GenAI in production',
+    title: 'Generative AI opportunities',
     description:
-      'Custom applications that connect AI to your proprietary data, delivering commercial value within weeks. We choose the right tools for your organisation and develop capability across your teams.'
+      'Explore whether generative AI fits a specific workflow, what data and safeguards it would require, and how its output could be evaluated before deployment.'
   },
   {
     title: 'Risk management',
     description:
-      'Models that detect fraud, assess lending risk, ensure compliance, and spot emerging threats. Make faster decisions with more confidence while protecting critical assets.'
+      'Explore risk-analysis use cases such as anomaly review or model-assisted assessment. These require suitable data, validation, and human oversight.'
   }
 ]
 
@@ -126,7 +126,7 @@ export default function WhatWeSolveSection() {
               className="space-y-8 max-w-xl"
             >
               <h2 className="font-sans font-extrabold text-3xl sm:text-4xl lg:text-[46px] text-slate-950 dark:text-white tracking-tight leading-tight">
-                What we deliver
+                Problems we can explore
               </h2>
 
               <div className="space-y-7">

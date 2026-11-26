@@ -65,7 +65,7 @@ export default function AboutPage() {
               transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
               className="text-base sm:text-lg md:text-xl text-[#A6ADB9] leading-relaxed font-normal max-w-2xl"
             >
-              <strong className="text-white font-semibold">DataSphere Consulting Ltd</strong> is an independent data advisory and technology firm operating from Kigali. Through our dedicated delivery unit, <strong className="text-white font-semibold">BIGWI HOUSE</strong>, we architect high-throughput lakehouses, predictive modeling engines, executive decision portals, and mission-critical enterprise systems.
+              <strong className="text-white font-semibold">DataSphere Consulting Ltd</strong> is a Data &amp; AI consultancy. <strong className="text-white font-semibold">BIGWI HOUSE</strong> is its delivery unit, focused on turning data and AI requirements into scoped engineering work.
             </motion.p>
 
             {/* Action Buttons */}
@@ -104,10 +104,10 @@ export default function AboutPage() {
               Corporate Structure
             </span>
             <h2 className="font-serif text-3xl sm:text-4xl font-bold text-slate-950 dark:text-white leading-tight">
-              Institutional governance with specialized engineering execution
+              Consultancy and delivery, connected
             </h2>
             <p className="text-sm sm:text-base text-slate-600 dark:text-stone-300 font-normal leading-relaxed pt-1">
-              A structured operating model separating strategic board-level advisory from deep, technical in-house data system delivery.
+              DataSphere Consulting Ltd leads the consultancy relationship; BIGWI HOUSE is the delivery unit for data and AI engineering.
             </p>
           </div>
 
@@ -203,21 +203,21 @@ export default function AboutPage() {
             </h2>
 
             <p className="text-sm sm:text-base text-slate-600 dark:text-stone-300 leading-relaxed font-normal">
-              Our delivery teams comprise senior data architects, systems engineers, analytics specialists, and business analysts. We do not operate as an opaque offshore black box; we embed directly alongside your technical and operational staff, transferring skills and leaving your internal teams self-sufficient.
+              A project can combine advisory and technical delivery. The team, responsibilities, documentation, and knowledge-transfer expectations should be agreed for each engagement.
             </p>
 
             <div className="space-y-3 pt-2">
               <div className="flex items-start gap-3 text-xs sm:text-sm text-slate-700 dark:text-stone-300">
                 <CheckCircle2 className="h-4 w-4 text-blue-600 dark:text-blue-400 mt-0.5 shrink-0" />
-                <span>Senior solution architects lead discovery, schema definition, and system design</span>
+                <span>Agree the discovery and design roles with your organization</span>
               </div>
               <div className="flex items-start gap-3 text-xs sm:text-sm text-slate-700 dark:text-stone-300">
                 <CheckCircle2 className="h-4 w-4 text-blue-600 dark:text-blue-400 mt-0.5 shrink-0" />
-                <span>Direct daily communication with the engineers building your pipelines and analytical tools</span>
+                <span>Set communication and review points with the people responsible for delivery</span>
               </div>
               <div className="flex items-start gap-3 text-xs sm:text-sm text-slate-700 dark:text-stone-300">
                 <CheckCircle2 className="h-4 w-4 text-blue-600 dark:text-blue-400 mt-0.5 shrink-0" />
-                <span>Rigorous documentation, reproducible code repositories, and structured knowledge handover</span>
+                <span>Define documentation, repository access, and handover expectations in the project scope</span>
               </div>
             </div>
           </div>
@@ -311,4 +311,3 @@ export default function AboutPage() {
     </div>
   )
 }
-

@@ -18,6 +18,7 @@ export default function ProposalModal({ isOpen, onClose }: ProposalModalProps) {
     name: '',
     email: '',
     organization: '',
+    sector: '',
     need: 'Model Building & Predictive Analytics',
     timeline: '1-3 Months',
     projectScope: ''
@@ -77,10 +78,6 @@ export default function ProposalModal({ isOpen, onClose }: ProposalModalProps) {
 
       if (response.ok && data.success) {
         setStatus('success')
-        setTimeout(() => {
-          setStatus('idle')
-          onClose()
-        }, 2200)
       } else {
         setStatus('error')
         setErrorMessage(data.message || 'Failed to submit proposal request. Please try again.')
@@ -124,7 +121,7 @@ export default function ProposalModal({ isOpen, onClose }: ProposalModalProps) {
             Discuss Your Project Scope
           </h2>
           <p className="mt-1 text-xs md:text-sm text-slate-600 dark:text-slate-400">
-            Share your organizational parameters with DataSphere &amp; BIGWI HOUSE. Our solutions architects will review your requirements and provide a structured plan.
+            Share a brief overview of your organization and data challenge. Do not include confidential or sensitive personal information.
           </p>
         </div>
 
@@ -182,7 +179,7 @@ export default function ProposalModal({ isOpen, onClose }: ProposalModalProps) {
 
             <div>
               <label htmlFor="pm-need" className="mb-1.5 block text-xs font-semibold text-slate-700 dark:text-slate-300">
-                Primary Solution Needed *
+                Area to discuss *
               </label>
               <select
                 id="pm-need"
@@ -200,6 +197,26 @@ export default function ProposalModal({ isOpen, onClose }: ProposalModalProps) {
                 <option value="Technical Support & SLA Maintenance">Technical Support &amp; SLA Maintenance</option>
               </select>
             </div>
+          </div>
+
+          <div>
+            <label htmlFor="pm-sector" className="mb-1.5 block text-xs font-semibold text-slate-700 dark:text-slate-300">
+              Organization type *
+            </label>
+            <select
+              id="pm-sector"
+              name="sector"
+              required
+              value={formData.sector}
+              onChange={(e) => setFormData({ ...formData, sector: e.target.value })}
+              className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-3.5 py-2.5 text-xs sm:text-sm text-slate-900 dark:text-white focus:border-teal-500 focus:bg-white dark:focus:bg-slate-800 focus:outline-none transition-colors"
+            >
+              <option value="">Select organization type</option>
+              <option value="international-companies">International company</option>
+              <option value="government-public-institutions">Government or public institution</option>
+              <option value="financial-institutions">Financial institution</option>
+              <option value="businesses">Business</option>
+            </select>
           </div>
 
           <div>
@@ -223,8 +240,11 @@ export default function ProposalModal({ isOpen, onClose }: ProposalModalProps) {
             <div className="flex items-center gap-3 rounded-xl border border-emerald-200 dark:border-emerald-800 bg-emerald-50 dark:bg-emerald-950/40 p-3.5 text-xs text-emerald-800 dark:text-emerald-300">
               <CheckCircle2 className="h-5 w-5 flex-shrink-0 text-emerald-600 dark:text-emerald-400" />
               <div>
-                <p className="font-semibold">Consultation Request Received</p>
-                <p className="text-slate-600 dark:text-slate-400">A senior consultant from DataSphere will follow up within 24 business hours.</p>
+                <p className="font-semibold">Inquiry recorded by the website</p>
+                <p className="text-slate-600 dark:text-slate-400">
+                  It is not routed to a team inbox. For a direct response, email{' '}
+                  <a className="font-semibold underline" href="mailto:contact@datasphere.rw">contact@datasphere.rw</a>.
+                </p>
               </div>
             </div>
           )}
@@ -240,9 +260,13 @@ export default function ProposalModal({ isOpen, onClose }: ProposalModalProps) {
           )}
 
           <div className="pt-2">
+            <p className="mb-3 text-center text-[11px] leading-relaxed text-slate-500 dark:text-slate-400">
+              Submissions are written to application logs. Do not include confidential or sensitive information. See our{' '}
+              <a className="underline" href="/privacy">Privacy Policy</a>.
+            </p>
             <button
               type="submit"
-              disabled={status === 'loading'}
+              disabled={status === 'loading' || status === 'success'}
               className="btn btn-primary w-full py-3 justify-center text-xs sm:text-sm font-semibold dark:bg-teal-500 dark:text-slate-950 dark:hover:bg-teal-400"
             >
               {status === 'loading' ? (

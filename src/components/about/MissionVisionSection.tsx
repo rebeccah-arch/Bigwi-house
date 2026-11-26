@@ -65,15 +65,15 @@ export default function MissionVisionSection({ className = '' }: MissionVisionSe
                 <div className="pt-2 border-t border-slate-100 dark:border-stone-800/80 space-y-2.5 text-xs text-slate-600 dark:text-stone-300">
                   <div className="flex items-start gap-2.5">
                     <CheckCircle2 className="h-4 w-4 text-[#00A896] shrink-0 mt-0.5" />
-                    <span>Eliminate pipeline fragility and manual reporting debt</span>
+                    <span>Understand data quality, collection, and reporting challenges</span>
                   </div>
                   <div className="flex items-start gap-2.5">
                     <CheckCircle2 className="h-4 w-4 text-[#00A896] shrink-0 mt-0.5" />
-                    <span>Deploy explainable ML algorithms with deterministic accuracy</span>
+                    <span>Evaluate model performance against agreed criteria</span>
                   </div>
                   <div className="flex items-start gap-2.5">
                     <CheckCircle2 className="h-4 w-4 text-[#00A896] shrink-0 mt-0.5" />
-                    <span>Transfer in-house capability with 100% IP ownership</span>
+                    <span>Agree documentation, handover, and intellectual-property terms</span>
                   </div>
                 </div>
               </div>

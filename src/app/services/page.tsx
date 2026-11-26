@@ -48,7 +48,7 @@ const SERVICES_DATA: ServiceItem[] = [
     clientProvides:
       'Read-only access or exports of raw data sources (databases, spreadsheets, survey platforms), field definitions or data dictionaries where available, and access to program or technical staff to clarify workflow rules.',
     successEvaluation:
-      'Evaluated by the elimination of manual data preparation hours (e.g. cutting 2–3 days of monthly spreadsheet collation to automated zero-touch runs), zero undetected schema or pipeline errors, and verifiable data integrity audits.',
+      'Agree baseline measures for preparation effort, data quality, and pipeline reliability; compare results after delivery when the required evidence is available.',
     ngoApplication:
       'Integrating remote field surveys (ODK, KoboToolbox, CommCare) from distributed community workers into an automated, central database; deduplicating beneficiary registries; and enforcing automated data quality checks required for strict donor compliance (e.g. USAID, Global Fund, FCDO).',
     technologies: ['PostgreSQL', 'ClickHouse', 'Apache Kafka', 'dbt', 'Python', 'Docker']
@@ -72,7 +72,7 @@ const SERVICES_DATA: ServiceItem[] = [
     clientProvides:
       'Existing reporting templates, donor indicator guidelines (e.g. PIRS or logframes), access to verified underlying datasets, and feedback from key users on decision priorities during initial layout reviews.',
     successEvaluation:
-      'Evaluated by dramatic reduction in reporting cycle turnaround (e.g. from 2 weeks of manual assembly to instant, automated delivery), consistent indicator values across all organizational units, and high weekly active usage by program leaders.',
+      'Agree measures for reporting effort, indicator consistency, and user needs before delivery; report changes only when supported by project data.',
     ngoApplication:
       'Real-time tracking of indicators against logframe targets (e.g. health facility stock levels, training completion rates, water point uptime); automated monthly donor briefs; and regional/district performance maps that enable coordinators to redirect resources to underperforming sites.',
     technologies: ['Apache Superset', 'Power BI', 'Metabase', 'dbt', 'SQL', 'PostgreSQL']
@@ -96,7 +96,7 @@ const SERVICES_DATA: ServiceItem[] = [
     clientProvides:
       'Historical operational records with documented outcomes, clear business criteria or threshold guidelines, and access to subject-matter experts to validate whether model predictions align with operational realities.',
     successEvaluation:
-      'Evaluated by measurable accuracy improvements over baseline heuristics (e.g. fewer supply stock-outs, improved targeting precision), low latency, transparent model explainability, and sustained adoption by front-line staff without workflow disruption.',
+      'Evaluate against an agreed baseline and criteria using suitable test data; document limitations and operational monitoring needs before deployment.',
     ngoApplication:
       'Predictive stock-out forecasting for essential medicines and agricultural inputs; vulnerability segmentation to prioritize cash transfer or nutrition interventions; and automated categorization for incoming field incident reports. (Emphasizing robust, interpretable statistical methods and actionable decision modeling).',
     technologies: ['Python', 'Scikit-Learn', 'Pandas', 'FastAPI', 'Docker', 'PostgreSQL']
@@ -120,10 +120,34 @@ const SERVICES_DATA: ServiceItem[] = [
     clientProvides:
       'Organizational charts, current software and tool inventories, strategic program goals, and dedicated time for leadership and technical staff to participate in capability assessments and training workshops.',
     successEvaluation:
-      'Evaluated by successful completion of prioritized roadmap milestones on time and within budget, verified compliance with national data privacy statutes, and demonstrated independent execution of data tasks by internal staff.',
+      'Agree advisory scope and milestones with stakeholders; document recommendations, decisions, and follow-up actions for review.',
     ngoApplication:
       'Designing institutional data governance policies for sensitive beneficiary records (e.g. child protection, health status); building sustainable in-house capacity so country-office M&E teams can manage data pipelines independently; and aligning data platforms with national digital health or statistical strategies.',
     technologies: ['Data Governance', 'Rwanda Law 058/2021', 'dbt Semantic Layer', 'Open Policy Agent']
+  },
+  {
+    id: 'model-deployment-monitoring',
+    number: '05',
+    title: 'Model deployment and monitoring',
+    pillar: 'From Evaluation to Operation',
+    image: '/images/work/agentic-rag-portal.jpg',
+    deliverablesSummary: 'Deployment planning, model-serving interfaces, monitoring requirements, and operational handover.',
+    problemSolves:
+      'A model that performs well in evaluation still needs a suitable operating environment, clear ownership, and a plan for monitoring its behavior after release.',
+    clientReceives: [
+      'Deployment options aligned with infrastructure and data-handling constraints',
+      'Model-serving interface and integration specifications',
+      'Monitoring requirements for inputs, outputs, service health, and model behavior',
+      'Operational documentation, escalation paths, and handover materials',
+      'A review plan for reassessing performance against agreed criteria'
+    ],
+    clientProvides:
+      'Evaluation results, deployment constraints, integration details, service ownership, and the operational criteria that should trigger review or intervention.',
+    successEvaluation:
+      'Review deployment against agreed functional and operational criteria; document monitoring coverage, limitations, and follow-up responsibilities.',
+    ngoApplication:
+      'For public institutions, financial organizations, companies, and development programs, deployment and monitoring scope should reflect the intended users, operating context, and applicable requirements.',
+    technologies: ['Python', 'FastAPI', 'Docker', 'MLflow', 'Monitoring & Observability']
   }
 ]
 
@@ -132,7 +156,8 @@ const TABS = [
   { label: 'Data management and engineering', value: 'data-management-engineering' },
   { label: 'Dashboards and reporting', value: 'dashboards-reporting' },
   { label: 'Applied analytics', value: 'applied-analytics' },
-  { label: 'Data strategy and training', value: 'data-strategy-training' }
+  { label: 'Data strategy and training', value: 'data-strategy-training' },
+  { label: 'Model deployment and monitoring', value: 'model-deployment-monitoring' }
 ]
 
 export default function ServicesPage() {
@@ -177,7 +202,7 @@ export default function ServicesPage() {
           </h1>
 
           <p className="text-xs sm:text-sm md:text-base text-slate-600 dark:text-stone-300 max-w-2xl mx-auto leading-relaxed font-normal">
-            Four specialized practices delivering practical, end-to-end data capability for commercial enterprises, NGOs, and development programs across Africa: from solid data foundations and indicator reporting to applied analytics and institutional strategy.
+            Explore the full data lifecycle: collection and foundations, analysis and reporting, model building and evaluation, deployment and monitoring, and strategic advice. Scope depends on your organization&apos;s needs and evidence.
           </p>
 
           {/* Primary Action Button */}
@@ -259,11 +284,11 @@ export default function ServicesPage() {
       <section className="bg-[#080a11] text-white py-20 sm:py-24 text-center border-t border-stone-800/80">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
           <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
-            Ready to structure your enterprise data foundations?
+            Find the right starting point for your organization
           </h2>
 
           <p className="text-stone-300 max-w-xl mx-auto text-sm sm:text-base leading-relaxed">
-            Schedule a strategic discovery session with our senior solution architects in Kigali to assess your infrastructure, M&amp;E workflows, data sovereignty, and roadmap realistic implementation milestones.
+            Tell us whether you represent an international company, public institution, financial institution, or business, and what data challenge you are working through.
           </p>
 
           <div className="pt-3">

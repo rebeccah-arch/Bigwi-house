@@ -8,20 +8,42 @@ import {
   Landmark,
   Building2,
   Globe2,
-  Sprout,
-  Truck,
   Briefcase,
 } from '@/components/Icons'
-import { targetClientsDetailed } from '@/content/bigwiContent'
 
 const SECTOR_ICONS: Record<string, React.ElementType> = {
   Landmark,
   Building2,
   Globe2,
-  Sprout,
-  Truck,
   Briefcase,
 }
+
+const PRIORITY_AUDIENCES = [
+  {
+    name: 'International companies',
+    description: 'Explore data foundations, analytics, and AI opportunities across teams, systems, and markets.',
+    icon: 'Globe2',
+    sector: 'international-companies',
+  },
+  {
+    name: 'Government & public institutions',
+    description: 'Explore data collection, analysis, reporting, and advisory needs in public services.',
+    icon: 'Building2',
+    sector: 'government-public-institutions',
+  },
+  {
+    name: 'Financial institutions',
+    description: 'Discuss data quality, reporting, model evaluation, and deployment considerations.',
+    icon: 'Landmark',
+    sector: 'financial-institutions',
+  },
+  {
+    name: 'Businesses',
+    description: 'Identify practical ways to collect, understand, and use data in your operations.',
+    icon: 'Briefcase',
+    sector: 'businesses',
+  },
+]
 
 export default function WhoWeServeSection() {
   return (
@@ -37,14 +59,11 @@ export default function WhoWeServeSection() {
           className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b border-slate-200 dark:border-stone-800"
         >
           <div className="space-y-3 max-w-2xl">
-            <span className="font-mono text-xs font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400">
-              Target Sectors
-            </span>
             <h2 className="font-serif font-bold text-3xl sm:text-4xl lg:text-5xl text-slate-950 dark:text-white tracking-tight leading-tight">
               Who We Work With
             </h2>
             <p className="text-sm sm:text-base text-slate-600 dark:text-stone-300 leading-relaxed font-normal">
-              We partner with financial institutions, government authorities, international organizations, and enterprise leaders to architect, deploy, and scale production data infrastructure and analytical systems.
+              Choose a starting point for a conversation about your organization&apos;s data and AI needs.
             </p>
           </div>
 
@@ -57,9 +76,8 @@ export default function WhoWeServeSection() {
           </Link>
         </motion.div>
 
-        {/* Interactive Sector Cards Grid (Clean layout without focusAreas tags) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          {targetClientsDetailed.map((sector, idx) => {
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+          {PRIORITY_AUDIENCES.map((sector, idx) => {
             const Icon = SECTOR_ICONS[sector.icon] || Landmark
 
             return (
@@ -94,10 +112,10 @@ export default function WhoWeServeSection() {
                 {/* Direct CTA Link */}
                 <div className="pt-6 mt-6 border-t border-slate-100 dark:border-stone-800/80 flex items-center justify-between">
                   <Link
-                    href="/services"
+                    href={`/contact?sector=${sector.sector}#contact-form`}
                     className="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-600 dark:text-blue-400 hover:underline transition-transform group-hover:translate-x-1"
                   >
-                    <span>View practice solutions</span>
+                    <span>Discuss your data needs</span>
                     <ArrowRight className="h-3 w-3" />
                   </Link>
                 </div>

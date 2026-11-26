@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     template: '%s | DataSphere & BIGWI HOUSE',
   },
   description:
-    'DataSphere Consulting Ltd and BIGWI HOUSE deliver data pipelines, machine learning model building, model evaluation, analytics dashboards, and strategic advisory for international organizations and enterprises.',
+    'DataSphere Consulting Ltd is a Data & AI consultancy, with BIGWI HOUSE as its delivery unit. Explore support across data collection, analysis, model development and evaluation, deployment, monitoring, and advisory.',
   keywords: [
     'DataSphere Consulting',
     'BIGWI HOUSE',
@@ -63,7 +63,7 @@ export const metadata: Metadata = {
     url: 'https://datasphere.rw',
     title: 'DataSphere & BIGWI HOUSE — Data & AI Consultancy',
     description:
-      'Data collection, machine learning models, model evaluation, analytics dashboards, and strategic advisory.',
+      'DataSphere Consulting Ltd and its BIGWI HOUSE delivery unit support organizations across the data and AI lifecycle.',
     siteName: 'DataSphere Consulting Ltd',
     images: [
       {
@@ -77,7 +77,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'DataSphere & BIGWI HOUSE — Data & AI Consultancy',
-    description: 'Data pipelines, applied machine learning, and business analytics.',
+    description: 'Data collection, analytics, model building and evaluation, deployment, monitoring, and advisory.',
     images: ['/logo-datasphere.jpeg'],
   },
   robots: {
