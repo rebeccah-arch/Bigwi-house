@@ -28,7 +28,7 @@ export default function Footer() {
                 src="/logo-datasphere-light.png"
                 alt="DataSphere Consulting Ltd"
                 fill
-                className="object-contain object-left brightness-0 invert"
+                className="object-contain object-left"
               />
             </div>
           </Link>
