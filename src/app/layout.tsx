@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import { Poppins, Montserrat, Manrope, Roboto, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 import ClientShell from '@/components/ClientShell'
-import { ThemeProvider } from '@/context/ThemeContext'
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -116,7 +115,6 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      suppressHydrationWarning
       className={`${poppins.variable} ${montserrat.variable} ${manrope.variable} ${roboto.variable} ${jetbrainsMono.variable} scroll-smooth`}
     >
       <head>
@@ -124,24 +122,9 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              try {
-                if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                  document.documentElement.classList.add('dark');
-                } else {
-                  document.documentElement.classList.remove('dark');
-                }
-              } catch (_) {}
-            `,
-          }}
-        />
       </head>
-      <body className="min-h-screen bg-white dark:bg-[#07090E] text-slate-900 dark:text-slate-100 font-sans antialiased overflow-x-hidden selection:bg-teal-100 dark:selection:bg-teal-900/40 selection:text-teal-900 dark:selection:text-teal-200 transition-colors duration-200">
-        <ThemeProvider>
-          <ClientShell>{children}</ClientShell>
-        </ThemeProvider>
+      <body className="min-h-screen bg-white text-slate-900 font-sans antialiased overflow-x-hidden selection:bg-teal-100 selection:text-teal-900">
+        <ClientShell>{children}</ClientShell>
       </body>
     </html>
   )

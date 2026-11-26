@@ -8,7 +8,12 @@ import {
   Menu,
   X,
   ChevronRight,
-  ChevronDown
+  ChevronDown,
+  Database,
+  Brain,
+  Code2,
+  Sparkles,
+  ArrowRight
 } from '@/components/Icons'
 
 interface HeaderProps {
@@ -51,6 +56,7 @@ const NAV_ITEMS: NavItem[] = [
 
 export default function Header({ onOpenProposal }: HeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [capabilitiesOpen, setCapabilitiesOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const pathname = usePathname()
 
@@ -64,6 +70,7 @@ export default function Header({ onOpenProposal }: HeaderProps) {
 
   useEffect(() => {
     setMenuOpen(false)
+    setCapabilitiesOpen(false)
   }, [pathname])
 
   const isDarkHero =
@@ -72,6 +79,18 @@ export default function Header({ onOpenProposal }: HeaderProps) {
     pathname === '/approach' ||
     pathname === '/contact' ||
     pathname === '/team'
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setCapabilitiesOpen(false)
+        setMenuOpen(false)
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [])
 
   return (
     <header
@@ -98,8 +117,39 @@ export default function Header({ onOpenProposal }: HeaderProps) {
           </div>
         </Link>
 
-        {/* Center: Desktop Clean Navigation Links */}
-        <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
+        <nav aria-label="Primary navigation" className="hidden lg:flex items-center gap-6 xl:gap-8">
+          <div className="relative">
+            <button
+              type="button"
+              onClick={() => setCapabilitiesOpen((open) => !open)}
+              aria-expanded={capabilitiesOpen}
+              aria-controls="capabilities-menu"
+              className="flex items-center gap-1.5 text-sm font-medium text-zinc-300 transition-colors hover:text-white"
+            >
+              <span>Capabilities</span>
+              <ChevronRight className={`h-3.5 w-3.5 transition-transform ${capabilitiesOpen ? 'rotate-90' : ''}`} />
+            </button>
+
+            {capabilitiesOpen && (
+              <div id="capabilities-menu" className="absolute left-1/2 top-[calc(100%+12px)] grid w-[620px] -translate-x-1/2 grid-cols-3 gap-2 rounded-2xl border border-slate-700/80 bg-[#060911] p-3 shadow-xl">
+                <Link href="/services#ai-ml-solutions" onClick={() => setCapabilitiesOpen(false)} className="group rounded-xl p-4 transition-colors hover:bg-slate-800/60">
+                  <Brain className="h-5 w-5 text-teal-400" />
+                  <span className="mt-3 block text-sm font-bold text-white">AI &amp; ML</span>
+                  <span className="mt-1 block text-xs leading-relaxed text-slate-300">Build, evaluate, deploy, and monitor intelligent models.</span>
+                </Link>
+                <Link href="/services#data-analytics-bi" onClick={() => setCapabilitiesOpen(false)} className="group rounded-xl p-4 transition-colors hover:bg-slate-800/60">
+                  <Database className="h-5 w-5 text-teal-400" />
+                  <span className="mt-3 block text-sm font-bold text-white">Data Analytics</span>
+                  <span className="mt-1 block text-xs leading-relaxed text-slate-300">Turn collected data into reporting and decisions.</span>
+                </Link>
+                <Link href="/services#enterprise-software" onClick={() => setCapabilitiesOpen(false)} className="group rounded-xl p-4 transition-colors hover:bg-slate-800/60">
+                  <Code2 className="h-5 w-5 text-teal-400" />
+                  <span className="mt-3 block text-sm font-bold text-white">Software Development</span>
+                  <span className="mt-1 block text-xs leading-relaxed text-slate-300">Create reliable websites, platforms, and tools.</span>
+                </Link>
+              </div>
+            )}
+          </div>
           {NAV_ITEMS.map((item) => {
             const isActive =
               pathname === item.href ||
@@ -169,14 +219,15 @@ export default function Header({ onOpenProposal }: HeaderProps) {
           })}
         </nav>
 
-        {/* Right: "Discuss your project" Button */}
-        <div className="flex items-center gap-3">
-          <Link
-            href="/contact"
-            className="hidden sm:inline-flex items-center justify-center rounded-full border border-zinc-700 bg-white/5 text-white px-5 py-2 text-xs sm:text-sm font-medium tracking-wide hover:bg-white hover:text-zinc-950 transition-all duration-200 backdrop-blur-sm"
+        <div className="flex items-center gap-2.5 sm:gap-3">
+          <button
+            type="button"
+            onClick={onOpenProposal}
+            className="btn btn-primary text-xs sm:text-sm py-2.5 px-4 sm:px-5 font-semibold dark:bg-teal-500 dark:text-slate-950 dark:hover:bg-teal-400"
           >
-            Discuss your project
-          </Link>
+            <span>Start a conversation</span>
+            <ArrowRight className="h-3.5 w-3.5" />
+          </button>
 
           {/* Mobile Menu Toggle */}
           <button
@@ -202,6 +253,21 @@ export default function Header({ onOpenProposal }: HeaderProps) {
               <span className="font-mono text-[11px] text-teal-400 font-semibold">
                 DataSphere &bull; BIGWI HOUSE
               </span>
+            </div>
+
+            <div className="rounded-xl border border-zinc-800 bg-zinc-900/80 p-3">
+              <span className="px-1 text-xs font-semibold uppercase tracking-wider text-zinc-400">Capabilities</span>
+              <div className="mt-2 grid gap-1">
+                <Link href="/services#ai-ml-solutions" onClick={() => setMenuOpen(false)} className="flex items-center gap-3 rounded-lg px-2 py-2 text-sm font-semibold text-zinc-200 hover:bg-zinc-800">
+                  <Brain className="h-4 w-4 text-teal-400" /> AI &amp; ML
+                </Link>
+                <Link href="/services#data-analytics-bi" onClick={() => setMenuOpen(false)} className="flex items-center gap-3 rounded-lg px-2 py-2 text-sm font-semibold text-zinc-200 hover:bg-zinc-800">
+                  <Database className="h-4 w-4 text-teal-400" /> Data Analytics
+                </Link>
+                <Link href="/services#enterprise-software" onClick={() => setMenuOpen(false)} className="flex items-center gap-3 rounded-lg px-2 py-2 text-sm font-semibold text-zinc-200 hover:bg-zinc-800">
+                  <Code2 className="h-4 w-4 text-teal-400" /> Software Development
+                </Link>
+              </div>
             </div>
 
             {NAV_ITEMS.map((item) => {
@@ -260,13 +326,17 @@ export default function Header({ onOpenProposal }: HeaderProps) {
             })}
 
             <div className="mt-4 pt-4 border-t border-zinc-800 flex flex-col gap-3">
-              <Link
-                href="/contact"
-                onClick={() => setMenuOpen(false)}
+              <button
+                type="button"
+                onClick={() => {
+                  setMenuOpen(false)
+                  onOpenProposal?.()
+                }}
                 className="w-full rounded-full bg-white text-zinc-950 py-2.5 text-center text-sm font-medium hover:bg-zinc-200 transition-all block"
               >
-                Discuss your project
-              </Link>
+                <Sparkles className="h-4 w-4 text-teal-400 dark:text-slate-900" />
+                <span>Start a conversation</span>
+              </button>
 
               <div className="flex items-center justify-between px-2 pt-2 text-xs text-zinc-500 font-mono">
                 <span>DataSphere Consulting Ltd</span>
