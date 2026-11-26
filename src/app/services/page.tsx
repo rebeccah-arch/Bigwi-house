@@ -32,10 +32,10 @@ const SERVICES_DATA: ServiceItem[] = [
   {
     id: 'data-management-engineering',
     number: '01',
-    title: 'Data management and engineering',
-    pillar: 'Data Foundations & Modern Data Stack',
+    title: 'Data collection and foundations',
+    pillar: 'Collect & prepare',
     image: '/images/data-engineer.jpg',
-    deliverablesSummary: 'Data cleaning, integrated datasets, pipelines, and quality checks.',
+    deliverablesSummary: 'Data collection workflows, integrated datasets, pipelines, and quality checks, including supporting data applications.',
     problemSolves:
       'Organizations and development programs frequently struggle with data scattered across fragmented spreadsheets, mobile field tools, paper surveys, and legacy databases. Inconsistent schemas, duplicated beneficiary records, and missing validation checks lead to compromised reporting, audit vulnerabilities, and slow decision cycles.',
     clientReceives: [
@@ -43,21 +43,22 @@ const SERVICES_DATA: ServiceItem[] = [
       'Harmonized master datasets with deduplicated records and consistent schemas',
       'Automated data quality checks, schema validation, and drift anomaly alerts',
       'Offline-first synchronization pipelines for remote field data collection',
-      'Secure, centralized storage (database, warehouse, or lakehouse) with access controls'
+      'Specifications or applications supporting data collection and data entry workflows',
+      'Storage design with access controls mapped to agreed requirements'
     ],
     clientProvides:
       'Read-only access or exports of raw data sources (databases, spreadsheets, survey platforms), field definitions or data dictionaries where available, and access to program or technical staff to clarify workflow rules.',
     successEvaluation:
       'Agree baseline measures for preparation effort, data quality, and pipeline reliability; compare results after delivery when the required evidence is available.',
     ngoApplication:
-      'Integrating remote field surveys (ODK, KoboToolbox, CommCare) from distributed community workers into an automated, central database; deduplicating beneficiary registries; and enforcing automated data quality checks required for strict donor compliance (e.g. USAID, Global Fund, FCDO).',
+      'A scoped example is integrating field-survey sources into a central dataset, with agreed validation and data-quality checks.',
     technologies: ['PostgreSQL', 'ClickHouse', 'Apache Kafka', 'dbt', 'Python', 'Docker']
   },
   {
     id: 'dashboards-reporting',
     number: '02',
-    title: 'Dashboards and reporting',
-    pillar: 'Decision Intelligence & Monitoring',
+    title: 'Data analysis and reporting',
+    pillar: 'Analyze & communicate',
     image: '/images/executive-strategy.jpg',
     deliverablesSummary: 'KPI definitions, management dashboards, automated reporting, and user training.',
     problemSolves:
@@ -80,8 +81,8 @@ const SERVICES_DATA: ServiceItem[] = [
   {
     id: 'applied-analytics',
     number: '03',
-    title: 'Applied analytics',
-    pillar: 'Advanced Analytics & Statistical Modeling',
+    title: 'Model building and evaluation',
+    pillar: 'Build & evaluate',
     image: '/images/insights/neural_helix.jpg',
     deliverablesSummary: 'Forecasting, segmentation, statistical predictive models, and decision intelligence.',
     problemSolves:
@@ -98,36 +99,12 @@ const SERVICES_DATA: ServiceItem[] = [
     successEvaluation:
       'Evaluate against an agreed baseline and criteria using suitable test data; document limitations and operational monitoring needs before deployment.',
     ngoApplication:
-      'Predictive stock-out forecasting for essential medicines and agricultural inputs; vulnerability segmentation to prioritize cash transfer or nutrition interventions; and automated categorization for incoming field incident reports. (Emphasizing robust, interpretable statistical methods and actionable decision modeling).',
+      'A scoped example is evaluating a forecasting or prioritization model against agreed baselines and operational criteria.',
     technologies: ['Python', 'Scikit-Learn', 'Pandas', 'FastAPI', 'Docker', 'PostgreSQL']
   },
   {
-    id: 'data-strategy-training',
-    number: '04',
-    title: 'Data strategy and training',
-    pillar: 'Strategic Advisory & Institutional Capability',
-    image: '/images/hero-team.jpg',
-    deliverablesSummary: 'Readiness assessments, implementation roadmaps, governance guidance, and staff development.',
-    problemSolves:
-      'Organizations frequently purchase expensive software licenses, cloud services, or one-off tools without an overarching data architecture, resulting in shelfware, security liabilities, skill bottlenecks, and perpetual dependence on external contractors.',
-    clientReceives: [
-      'Institutional data maturity audits identifying architectural bottlenecks and immediate quick wins',
-      'Actionable, phased 12-month technology and implementation roadmaps with clear cost projections',
-      'Data governance and data protection frameworks (compliant with Rwanda Law No. 058/2021 & GDPR)',
-      'Structured, hands-on training bootcamps customized for technical and program staff',
-      'Standard operating procedures (SOPs) enabling long-term internal technical independence'
-    ],
-    clientProvides:
-      'Organizational charts, current software and tool inventories, strategic program goals, and dedicated time for leadership and technical staff to participate in capability assessments and training workshops.',
-    successEvaluation:
-      'Agree advisory scope and milestones with stakeholders; document recommendations, decisions, and follow-up actions for review.',
-    ngoApplication:
-      'Designing institutional data governance policies for sensitive beneficiary records (e.g. child protection, health status); building sustainable in-house capacity so country-office M&E teams can manage data pipelines independently; and aligning data platforms with national digital health or statistical strategies.',
-    technologies: ['Data Governance', 'Rwanda Law 058/2021', 'dbt Semantic Layer', 'Open Policy Agent']
-  },
-  {
     id: 'model-deployment-monitoring',
-    number: '05',
+    number: '04',
     title: 'Model deployment and monitoring',
     pillar: 'From Evaluation to Operation',
     image: '/images/work/agentic-rag-portal.jpg',
@@ -148,16 +125,40 @@ const SERVICES_DATA: ServiceItem[] = [
     ngoApplication:
       'For public institutions, financial organizations, companies, and development programs, deployment and monitoring scope should reflect the intended users, operating context, and applicable requirements.',
     technologies: ['Python', 'FastAPI', 'Docker', 'MLflow', 'Monitoring & Observability']
+  },
+  {
+    id: 'data-strategy-training',
+    number: 'AD',
+    title: 'Data and AI advisory',
+    pillar: 'Plan & advise',
+    image: '/images/hero-team.jpg',
+    deliverablesSummary: 'Readiness assessments, implementation roadmaps, governance guidance, and staff development.',
+    problemSolves:
+      'Technology choices, operating responsibilities, and staff capability should fit the organization, its goals, and current systems.',
+    clientReceives: [
+      'Readiness assessments and recommendations for data architecture and operations',
+      'Phased technology and implementation roadmaps aligned to an agreed planning horizon',
+      'Data governance and protection guidance scoped to the organization and applicable requirements',
+      'Training and knowledge-transfer plans for technical and program teams',
+      'Operating procedures and recommendations for internal ownership'
+    ],
+    clientProvides:
+      'Current system and tool inventories, strategic goals, and time for relevant leaders and staff to participate in assessment and planning.',
+    successEvaluation:
+      'Agree advisory scope and milestones with stakeholders; document recommendations, decisions, and follow-up actions for review.',
+    ngoApplication:
+      'A scoped example is reviewing data roles, governance needs, and staff capabilities to inform an implementation roadmap.',
+    technologies: ['Data Governance', 'dbt Semantic Layer', 'Open Policy Agent']
   }
 ]
 
 const TABS = [
-  { label: 'All Practices', value: 'All' },
-  { label: 'Data management and engineering', value: 'data-management-engineering' },
-  { label: 'Dashboards and reporting', value: 'dashboards-reporting' },
-  { label: 'Applied analytics', value: 'applied-analytics' },
-  { label: 'Data strategy and training', value: 'data-strategy-training' },
-  { label: 'Model deployment and monitoring', value: 'model-deployment-monitoring' }
+  { label: 'Full lifecycle', value: 'All' },
+  { label: 'Collection & foundations', value: 'data-management-engineering' },
+  { label: 'Analysis & reporting', value: 'dashboards-reporting' },
+  { label: 'Model building & evaluation', value: 'applied-analytics' },
+  { label: 'Deployment & monitoring', value: 'model-deployment-monitoring' },
+  { label: 'Advisory', value: 'data-strategy-training' }
 ]
 
 export default function ServicesPage() {
@@ -202,7 +203,7 @@ export default function ServicesPage() {
           </h1>
 
           <p className="text-xs sm:text-sm md:text-base text-slate-600 dark:text-stone-300 max-w-2xl mx-auto leading-relaxed font-normal">
-            Explore the full data lifecycle: collection and foundations, analysis and reporting, model building and evaluation, deployment and monitoring, and strategic advice. Scope depends on your organization&apos;s needs and evidence.
+            Work through the stages your organization needs—from collecting and preparing data to analysis, model evaluation, deployment, monitoring, and advisory. Software and applications are included when they support data work.
           </p>
 
           {/* Primary Action Button */}
@@ -224,6 +225,7 @@ export default function ServicesPage() {
               key={tab.value}
               type="button"
               onClick={() => setSelectedTab(tab.value)}
+              aria-pressed={selectedTab === tab.value}
               className={`rounded-full px-4 py-2 text-xs font-semibold transition-all ${selectedTab === tab.value
                 ? 'bg-slate-950 text-white shadow-sm dark:bg-blue-600 dark:text-white'
                 : 'bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-stone-900 dark:text-stone-300 dark:hover:bg-stone-800'
@@ -246,10 +248,9 @@ export default function ServicesPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-30px' }}
               transition={{ duration: 0.5, delay: (idx % 2) * 0.08, ease: [0.16, 1, 0.3, 1] }}
-              onClick={() => setActiveService(service)}
-              className="group cursor-pointer flex flex-col justify-start"
+              id={service.id}
+              className="scroll-mt-28 group flex flex-col justify-start"
             >
-              {/* Image Card: Clean 16:10 aspect ratio, no borders, natural photo, exact work style */}
               <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-100 dark:bg-stone-900 mb-3.5">
                 <Image
                   src={service.image}
@@ -262,7 +263,9 @@ export default function ServicesPage() {
 
               {/* Eyebrow / Pillar Tag */}
               <div className="text-xs font-mono text-blue-600 dark:text-blue-400 font-bold uppercase tracking-wider mb-1.5">
-                Practice {service.number} &bull; {service.pillar}
+                {service.id === 'data-strategy-training'
+                  ? 'Consultancy across the lifecycle'
+                  : `Lifecycle stage ${service.number}`} &bull; {service.pillar}
               </div>
 
               {/* Title with Blue Angle Bracket (Exact /work Style) */}
@@ -275,6 +278,14 @@ export default function ServicesPage() {
               <p className="text-xs sm:text-sm text-slate-600 dark:text-stone-400 leading-relaxed mt-2 font-normal">
                 {service.deliverablesSummary}
               </p>
+              <button
+                type="button"
+                onClick={() => setActiveService(service)}
+                className="mt-4 inline-flex items-center gap-2 self-start text-sm font-semibold text-blue-700 hover:underline dark:text-teal-300"
+              >
+                Explore this stage
+                <ArrowRight className="h-4 w-4" />
+              </button>
             </motion.article>
           ))}
         </div>
@@ -293,7 +304,7 @@ export default function ServicesPage() {
 
           <div className="pt-3">
             <Link
-              href="/contact"
+              href="/contact#contact-form"
               className="inline-flex items-center justify-center gap-2 rounded-full bg-white hover:bg-stone-200 text-slate-950 font-bold px-8 py-3.5 text-xs sm:text-sm tracking-wide shadow-md transition-all duration-300"
             >
               <span>Discuss your project</span>
@@ -327,7 +338,11 @@ export default function ServicesPage() {
               {/* Header */}
               <div className="space-y-3 pr-10 border-b border-slate-200 dark:border-stone-800 pb-5">
                 <div className="flex items-center gap-2 text-xs font-mono text-blue-600 dark:text-blue-400 font-bold uppercase tracking-wider">
-                  <span>Practice {activeService.number}</span>
+                  <span>
+                    {activeService.id === 'data-strategy-training'
+                      ? 'Consultancy across the lifecycle'
+                      : `Lifecycle stage ${activeService.number}`}
+                  </span>
                   <span>&bull;</span>
                   <span>{activeService.pillar}</span>
                 </div>
@@ -338,7 +353,7 @@ export default function ServicesPage() {
 
                 <div className="p-3 rounded-lg bg-slate-50 dark:bg-stone-900 border border-slate-200 dark:border-stone-800">
                   <span className="text-[10px] font-mono uppercase text-blue-600 dark:text-teal-400 font-bold block">
-                    Core Deliverables Summary:
+                    Possible deliverables:
                   </span>
                   <p className="text-sm font-semibold text-slate-900 dark:text-white">
                     {activeService.deliverablesSummary}
@@ -364,7 +379,7 @@ export default function ServicesPage() {
                 <div className="space-y-2">
                   <h4 className="font-mono text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white flex items-center gap-2">
                     <span className="h-2 w-2 rounded-full bg-emerald-600 dark:bg-emerald-400" />
-                    <span>What Will The Client Receive?</span>
+                    <span>Possible deliverables</span>
                   </h4>
                   <div className="bg-slate-50/50 dark:bg-stone-900/40 p-4 rounded-xl border border-slate-200/60 dark:border-stone-800/60 space-y-2">
                     <ul className="space-y-2">
@@ -400,11 +415,11 @@ export default function ServicesPage() {
                   </p>
                 </div>
 
-                {/* 5. NGO & Development Program Application Spotlight */}
+                {/* Example application */}
                 <div className="rounded-xl border border-teal-500/30 bg-teal-50/40 dark:bg-teal-950/20 p-5 space-y-2">
                   <h4 className="font-mono text-xs font-bold uppercase tracking-wider text-teal-800 dark:text-teal-300 flex items-center gap-2">
                     <FileText className="h-4 w-4 text-teal-600 dark:text-teal-400" />
-                    <span>NGO, Donor &amp; Development Program Application:</span>
+                    <span>Example application:</span>
                   </h4>
                   <p className="text-xs sm:text-sm text-slate-700 dark:text-stone-300 leading-relaxed font-normal">
                     {activeService.ngoApplication}
@@ -413,7 +428,7 @@ export default function ServicesPage() {
 
                 <div className="pt-2 flex items-center gap-2 text-xs font-mono text-slate-500 dark:text-stone-400">
                   <ShieldCheck className="h-4 w-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
-                  <span>Delivered in-house from Kigali Engineering Hub &bull; Rwanda Law No. 058/2021 Compliant</span>
+                  <span>Scope, responsibilities, and applicable requirements are agreed for each engagement.</span>
                 </div>
 
               </div>
@@ -429,7 +444,7 @@ export default function ServicesPage() {
                 </button>
 
                 <Link
-                  href="/contact"
+                  href={`/contact?service=${activeService.id}#contact-form`}
                   onClick={() => setActiveService(null)}
                   className="inline-flex items-center gap-2 rounded-full bg-slate-950 dark:bg-white hover:bg-slate-800 dark:hover:bg-stone-200 text-white dark:text-slate-950 font-bold px-6 py-2.5 text-xs shadow transition-all duration-300"
                 >

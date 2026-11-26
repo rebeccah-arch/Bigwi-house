@@ -16,7 +16,7 @@ export default function WorkPage() {
             Data and AI work, with context
           </h1>
           <p className="max-w-2xl text-base leading-relaxed text-stone-300 sm:text-lg">
-            Explore internal prototypes and applied research from DataSphere Consulting Ltd and BIGWI HOUSE. Client case studies are not published until engagement details, results, and permissions have been reviewed.
+            Work profiles will be published after their scope, supporting evidence, and permissions have been reviewed. Client case studies remain unpublished until the engagement details and results can be substantiated.
           </p>
         </div>
       </section>
@@ -29,7 +29,7 @@ export default function WorkPage() {
               const label = isPrototype ? 'Internal prototype' : 'Applied research'
 
               return (
-                <article key={project.id} className="group border border-slate-200 bg-white dark:border-stone-800 dark:bg-stone-900/50">
+                <article key={project.slug} className="group border border-slate-200 bg-white dark:border-stone-800 dark:bg-stone-900/50">
                   <Link href={`/work/${project.slug}`} className="block">
                     <div className="relative aspect-[16/10] overflow-hidden bg-slate-100 dark:bg-stone-900">
                       <Image
@@ -61,13 +61,13 @@ export default function WorkPage() {
           </div>
         ) : (
           <p className="border border-slate-200 p-6 text-slate-600 dark:border-stone-800 dark:text-stone-300">
-            Project profiles are being prepared for publication.
+            No project profiles are approved for publication yet.
           </p>
         )}
 
         <div className="mt-14 border-t border-slate-200 pt-8 dark:border-stone-800">
           <p className="max-w-3xl text-sm leading-relaxed text-slate-600 dark:text-stone-300">
-            These profiles describe prototypes or research, not client deployments. No customer outcomes or performance figures are presented here. Any future case study should identify its evidence, measurement context, and publication approval.
+            Client outcomes and performance figures will be published only with supporting evidence, measurement context, and approval.
           </p>
           <Link
             href="/services"

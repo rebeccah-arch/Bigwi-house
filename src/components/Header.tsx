@@ -11,7 +11,8 @@ import {
   ChevronDown,
   Database,
   Brain,
-  Code2,
+  BarChart3,
+  Rocket,
   Sparkles,
   ArrowRight
 } from '@/components/Icons'
@@ -29,6 +30,39 @@ interface NavItem {
     description?: string
   }[]
 }
+
+const CAPABILITY_LINKS = [
+  {
+    href: '/services#data-management-engineering',
+    label: 'Data collection & foundations',
+    description: 'Collect, integrate, and prepare data.',
+    icon: Database
+  },
+  {
+    href: '/services#dashboards-reporting',
+    label: 'Analysis & reporting',
+    description: 'Analyze data and communicate findings.',
+    icon: BarChart3
+  },
+  {
+    href: '/services#applied-analytics',
+    label: 'Model building & evaluation',
+    description: 'Build and evaluate models against agreed criteria.',
+    icon: Brain
+  },
+  {
+    href: '/services#model-deployment-monitoring',
+    label: 'Deployment & monitoring',
+    description: 'Plan how models operate and are monitored.',
+    icon: Rocket
+  },
+  {
+    href: '/services#data-strategy-training',
+    label: 'Data & AI advisory',
+    description: 'Plan, govern, and build organizational capability.',
+    icon: Sparkles
+  }
+]
 
 const NAV_ITEMS: NavItem[] = [
   { href: '/', label: 'Home' },
@@ -131,22 +165,17 @@ export default function Header({ onOpenProposal }: HeaderProps) {
             </button>
 
             {capabilitiesOpen && (
-              <div id="capabilities-menu" className="absolute left-1/2 top-[calc(100%+12px)] grid w-[620px] -translate-x-1/2 grid-cols-3 gap-2 rounded-2xl border border-slate-700/80 bg-[#060911] p-3 shadow-xl">
-                <Link href="/services#ai-ml-solutions" onClick={() => setCapabilitiesOpen(false)} className="group rounded-xl p-4 transition-colors hover:bg-slate-800/60">
-                  <Brain className="h-5 w-5 text-teal-400" />
-                  <span className="mt-3 block text-sm font-bold text-white">AI &amp; ML</span>
-                  <span className="mt-1 block text-xs leading-relaxed text-slate-300">Build, evaluate, deploy, and monitor intelligent models.</span>
-                </Link>
-                <Link href="/services#data-analytics-bi" onClick={() => setCapabilitiesOpen(false)} className="group rounded-xl p-4 transition-colors hover:bg-slate-800/60">
-                  <Database className="h-5 w-5 text-teal-400" />
-                  <span className="mt-3 block text-sm font-bold text-white">Data Analytics</span>
-                  <span className="mt-1 block text-xs leading-relaxed text-slate-300">Turn collected data into reporting and decisions.</span>
-                </Link>
-                <Link href="/services#enterprise-software" onClick={() => setCapabilitiesOpen(false)} className="group rounded-xl p-4 transition-colors hover:bg-slate-800/60">
-                  <Code2 className="h-5 w-5 text-teal-400" />
-                  <span className="mt-3 block text-sm font-bold text-white">Software Development</span>
-                  <span className="mt-1 block text-xs leading-relaxed text-slate-300">Create reliable websites, platforms, and tools.</span>
-                </Link>
+              <div id="capabilities-menu" className="absolute left-1/2 top-[calc(100%+12px)] grid w-[760px] -translate-x-1/2 grid-cols-3 gap-2 rounded-2xl border border-slate-700/80 bg-[#060911] p-3 shadow-xl">
+                {CAPABILITY_LINKS.map((item) => {
+                  const Icon = item.icon
+                  return (
+                    <Link key={item.href} href={item.href} onClick={() => setCapabilitiesOpen(false)} className="group rounded-xl p-4 transition-colors hover:bg-slate-800/60">
+                      <Icon className="h-5 w-5 text-teal-400" />
+                      <span className="mt-3 block text-sm font-bold text-white">{item.label}</span>
+                      <span className="mt-1 block text-xs leading-relaxed text-slate-300">{item.description}</span>
+                    </Link>
+                  )
+                })}
               </div>
             )}
           </div>
@@ -258,15 +287,14 @@ export default function Header({ onOpenProposal }: HeaderProps) {
             <div className="rounded-xl border border-zinc-800 bg-zinc-900/80 p-3">
               <span className="px-1 text-xs font-semibold uppercase tracking-wider text-zinc-400">Capabilities</span>
               <div className="mt-2 grid gap-1">
-                <Link href="/services#ai-ml-solutions" onClick={() => setMenuOpen(false)} className="flex items-center gap-3 rounded-lg px-2 py-2 text-sm font-semibold text-zinc-200 hover:bg-zinc-800">
-                  <Brain className="h-4 w-4 text-teal-400" /> AI &amp; ML
-                </Link>
-                <Link href="/services#data-analytics-bi" onClick={() => setMenuOpen(false)} className="flex items-center gap-3 rounded-lg px-2 py-2 text-sm font-semibold text-zinc-200 hover:bg-zinc-800">
-                  <Database className="h-4 w-4 text-teal-400" /> Data Analytics
-                </Link>
-                <Link href="/services#enterprise-software" onClick={() => setMenuOpen(false)} className="flex items-center gap-3 rounded-lg px-2 py-2 text-sm font-semibold text-zinc-200 hover:bg-zinc-800">
-                  <Code2 className="h-4 w-4 text-teal-400" /> Software Development
-                </Link>
+                {CAPABILITY_LINKS.map((item) => {
+                  const Icon = item.icon
+                  return (
+                    <Link key={item.href} href={item.href} onClick={() => setMenuOpen(false)} className="flex items-center gap-3 rounded-lg px-2 py-2 text-sm font-semibold text-zinc-200 hover:bg-zinc-800">
+                      <Icon className="h-4 w-4 text-teal-400" /> {item.label}
+                    </Link>
+                  )
+                })}
               </div>
             </div>
 

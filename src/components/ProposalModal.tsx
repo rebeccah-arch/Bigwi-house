@@ -283,9 +283,6 @@ export default function ProposalModal({ isOpen, onClose }: ProposalModalProps) {
             </button>
           </div>
 
-          <p className="text-center font-sans text-[11px] text-slate-500 dark:text-slate-400">
-            Strict Non-Disclosure &bull; DataSphere Consulting Ltd &bull; BIGWI HOUSE
-          </p>
         </form>
       </div>
     </div>

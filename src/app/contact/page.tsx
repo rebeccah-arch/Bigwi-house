@@ -18,6 +18,14 @@ const AUDIENCE_OPTIONS = [
   { value: 'businesses', label: 'Business' },
 ]
 
+const SERVICE_OPTIONS = [
+  { value: 'data-management-engineering', label: 'Data collection and foundations' },
+  { value: 'dashboards-reporting', label: 'Data analysis and reporting' },
+  { value: 'applied-analytics', label: 'Model building and evaluation' },
+  { value: 'model-deployment-monitoring', label: 'Model deployment and monitoring' },
+  { value: 'data-strategy-training', label: 'Data and AI advisory' },
+]
+
 export default function ContactPage() {
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [errorMessage, setErrorMessage] = useState('')
@@ -29,14 +37,20 @@ export default function ContactPage() {
     company: '',
     jobTitle: '',
     sector: '',
+    service: '',
     message: '',
     referralSource: ''
   })
 
   useEffect(() => {
-    const sector = new URLSearchParams(window.location.search).get('sector')
+    const params = new URLSearchParams(window.location.search)
+    const sector = params.get('sector')
+    const service = params.get('service')
     if (AUDIENCE_OPTIONS.some((audience) => audience.value === sector)) {
       setFormData((current) => ({ ...current, sector: sector || '' }))
+    }
+    if (SERVICE_OPTIONS.some((option) => option.value === service)) {
+      setFormData((current) => ({ ...current, service: service || '' }))
     }
   }, [])
 
@@ -55,6 +69,7 @@ export default function ContactPage() {
           organization: formData.company,
           jobTitle: formData.jobTitle,
           sector: formData.sector,
+          service: formData.service,
           message: formData.message,
           referralSource: formData.referralSource
         }),
@@ -71,6 +86,7 @@ export default function ContactPage() {
           company: '',
           jobTitle: '',
           sector: '',
+          service: '',
           message: '',
           referralSource: ''
         })
@@ -335,6 +351,23 @@ export default function ContactPage() {
                       <option value="">Select your organization type</option>
                       {AUDIENCE_OPTIONS.map((audience) => (
                         <option key={audience.value} value={audience.value}>{audience.label}</option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label htmlFor="service" className="block text-xs font-semibold text-slate-800 dark:text-stone-200">
+                      Area of interest (optional)
+                    </label>
+                    <select
+                      id="service"
+                      value={formData.service}
+                      onChange={(e) => setFormData({ ...formData, service: e.target.value })}
+                      className="w-full rounded-xl border border-slate-200 dark:border-stone-700 bg-slate-50 dark:bg-stone-800 px-4 py-3 text-xs sm:text-sm text-slate-900 dark:text-white focus:bg-white dark:focus:bg-stone-800 focus:border-teal-500 focus:outline-none transition-colors"
+                    >
+                      <option value="">Not sure yet</option>
+                      {SERVICE_OPTIONS.map((option) => (
+                        <option key={option.value} value={option.value}>{option.label}</option>
                       ))}
                     </select>
                   </div>
