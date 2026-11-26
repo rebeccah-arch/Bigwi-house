@@ -102,6 +102,17 @@ export default function Footer() {
               >
                 <Linkedin className="h-4 w-4" />
               </a>
+              <a
+                href="https://x.com/NiyigenaEric_"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Follow on X"
+                className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-slate-600 bg-slate-800/70 text-slate-200 transition-colors hover:border-teal-400 hover:text-teal-300"
+              >
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4">
+                  <path d="M18.9 2H22l-6.78 7.75L23.2 22h-6.25l-4.9-7.45L5.53 22H2.4l7.25-8.29L1.8 2h6.4l4.43 6.78L18.9 2Zm-1.1 18h1.73L7.28 3.9H5.42L17.8 20Z" />
+                </svg>
+              </a>
             </div>
           </div>
         </section>
