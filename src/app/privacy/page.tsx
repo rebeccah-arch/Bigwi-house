@@ -96,8 +96,8 @@ export default function PrivacyPage() {
             </p>
             <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-900 font-mono text-xs text-slate-700 dark:text-slate-300 space-y-1">
               <p className="font-bold text-slate-900 dark:text-white">DataSphere Consulting Ltd &bull; BIGWI HOUSE</p>
-              <p>Email: <a href="mailto:contact@datasphere.rw" className="text-teal-700 dark:text-teal-400 hover:underline">contact@datasphere.rw</a></p>
-              <p>Location: Kigali, Rwanda</p>
+              <p>Email: <a href="mailto:datasphere250@gmail.com" className="text-teal-700 dark:text-teal-400 hover:underline">datasphere250@gmail.com</a></p>
+              <p>Location: NM 155, Musanze, Rwanda</p>
             </div>
           </section>
         </div>

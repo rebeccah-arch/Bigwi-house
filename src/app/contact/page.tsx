@@ -204,8 +204,8 @@ export default function ContactPage() {
 
                 <p className="text-sm sm:text-base text-slate-600 dark:text-stone-400 font-normal leading-relaxed">
                   The form currently records submissions in application logs and is not connected to a team inbox. For a direct response, email{' '}
-                  <a className="font-semibold text-teal-700 dark:text-teal-400 hover:underline" href="mailto:contact@datasphere.rw">
-                    contact@datasphere.rw
+                  <a className="font-semibold text-teal-700 dark:text-teal-400 hover:underline" href="mailto:datasphere250@gmail.com">
+                    datasphere250@gmail.com
                   </a>
                   .
                 </p>
@@ -416,7 +416,7 @@ export default function ContactPage() {
                       <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-600" />
                       <span>
                         Your inquiry was recorded by the website, but it is not routed to a team inbox. For a direct response, email{' '}
-                        <a className="font-semibold underline" href="mailto:contact@datasphere.rw">contact@datasphere.rw</a>.
+                        <a className="font-semibold underline" href="mailto:datasphere250@gmail.com">datasphere250@gmail.com</a>.
                       </span>
                     </div>
                   )}

@@ -102,14 +102,27 @@ export default function RootLayout({
       'Data & AI consultancy delivering data collection pipelines, machine learning models, model evaluation, and analytics dashboards.',
     address: {
       '@type': 'PostalAddress',
-      addressLocality: 'Kigali',
+      streetAddress: 'NM 155',
+      addressLocality: 'Musanze',
       addressCountry: 'Rwanda',
     },
-    contactPoint: {
-      '@type': 'ContactPoint',
-      email: 'contact@datasphere.rw',
-      contactType: 'technical support and sales',
-    },
+    contactPoint: [
+      {
+        '@type': 'ContactPoint',
+        email: 'datasphere250@gmail.com',
+        contactType: 'general inquiries',
+      },
+      {
+        '@type': 'ContactPoint',
+        telephone: '+250 780 492 224',
+        contactType: 'general inquiries',
+      },
+      {
+        '@type': 'ContactPoint',
+        telephone: '+1 (404) 720 4547',
+        contactType: 'general inquiries',
+      },
+    ],
   }
 
   return (

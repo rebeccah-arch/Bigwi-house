@@ -243,7 +243,7 @@ export default function ProposalModal({ isOpen, onClose }: ProposalModalProps) {
                 <p className="font-semibold">Inquiry recorded by the website</p>
                 <p className="text-slate-600 dark:text-slate-400">
                   It is not routed to a team inbox. For a direct response, email{' '}
-                  <a className="font-semibold underline" href="mailto:contact@datasphere.rw">contact@datasphere.rw</a>.
+                  <a className="font-semibold underline" href="mailto:datasphere250@gmail.com">datasphere250@gmail.com</a>.
                 </p>
               </div>
             </div>

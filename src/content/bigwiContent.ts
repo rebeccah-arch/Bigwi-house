@@ -544,9 +544,9 @@ export const insightArticles: InsightArticle[] = [
 export const contactDetails = {
   company: 'DataSphere Consulting Ltd',
   division: 'BIGWI HOUSE — Data & AI Consultancy Hub',
-  address: 'Kigali, Rwanda',
-  email: 'contact@datasphere.rw',
-  inquiriesEmail: 'info@datasphere.rw',
+  address: 'NM 155, Musanze, Rwanda',
+  email: 'datasphere250@gmail.com',
+  inquiriesEmail: 'datasphere250@gmail.com',
   hours: 'Monday – Friday, 8:30 AM – 5:30 PM (CAT)',
   responseSLA: 'Inquiries answered within 24 business hours'
 }
